@@ -1,0 +1,238 @@
+.tags {
+  h1.title {
+    font-weight: 300;
+    font-size: 22px;
+    color: #c84563;
+    border-bottom: 1px solid #f1849d;
+    padding: 12px 0 10px 10px;
+    margin-bottom: 14px;
+  }
+}
+
+.colored-tags {
+  #colored-tag-name,
+  #colored-tag-color
+  {
+    margin: 0px;
+    margin-right: 3px;
+    border: solid 1px #CCC;
+    font: 14px sans-serif;
+    width: 150px;
+    height: 20px;
+    border-radius: 0;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+    padding: 2px;
+  }
+
+  #colored-tag-color {
+    width: 125px;
+  }
+
+  #colored-tag-form .minicolors-swatch {
+    height: 24px;
+    width: 24px;
+  }
+
+  .va-middle {
+    vertical-align: middle;
+  }
+
+  .colored-tag {
+    position: relative;
+    display: inline-block;
+    padding: 5px;
+
+    &:first-child {
+      padding-left: 0px;
+    }
+
+    &:last-child {
+      padding-right: 0px;
+    }
+
+    .tag-label{
+      width: 20px;
+      height: 20px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+    }
+
+    .tooltip {
+      position: absolute;
+      z-index: 500;
+      display: block;
+      visibility: hidden;
+      font-size: 16px;
+      line-height: 1.4;
+      top: -20px;
+      background-color: #fff;
+    }
+
+    &:hover .tooltip {
+      visibility: visible;
+    }
+
+    .destroy-tag {
+      display: block;
+      padding: 0;
+      text-align: center;
+      height: 20px;
+      height: 20px;
+      margin: 0;
+    }
+  }
+}
+
+.text-tags {
+  .usual-tags {
+    width: 45%;
+    margin: 0;
+    display: inline-block;
+    float: left;
+  }
+
+  .accepted-tags {
+    width: 45%;
+    margin: 0;
+    display: inline-block;
+    float: right;
+  }
+
+  .arrow-left {
+    background-image: image-url('sorted/arrow-left-right.png');
+    background-position: 0px -48px;
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    float: left;
+    margin: 8px 0 0 0;
+
+    &:hover {
+      background-position: 0px -24px;
+    }
+  }
+
+  .arrow-right {
+    background-image: image-url('sorted/arrow-left-right.png');
+    background-position: 20px -48px;
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    float: right;
+    margin: 8px 0 0 0;
+
+    &:hover {
+      background-position: 20px -24px;
+    }
+  }
+
+  .usual-tag {
+    border: 1px solid #ddd;
+    line-height: 2;
+
+    .tag-name {
+      display: inline-block;
+      font-size: 18px;
+      width: 280px;
+      margin: 0 10px;
+    }
+
+    .tag-count {
+      display: inline-block;
+      font-size: 18px;
+      width: 100px;
+      color: #f1849d;
+      text-align: right;
+    }
+  }
+
+  .accepted-tag {
+    border: 1px solid #ddd;
+    line-height: 2;
+
+    .tag-name {
+      display: inline-block;
+      font-size: 18px;
+      width: 280px;
+      margin: 0 10px;
+    }
+
+    .tag-count {
+      display: inline-block;
+      font-size: 18px;
+      width: 100px;
+      color: #f1849d;
+      text-align: right;
+    }
+
+    .destroy-tag {
+      margin: 0 0 0 5px;
+    }
+  }
+
+  .search-form {
+    .search-tag-name {
+      margin: 25px 0 15px 0;
+      width: 100%;
+      height: 26px;
+      font-size: 16px;
+      line-height: 20px;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    .search-tag-count {
+      margin: 0 5px;
+      width: 40px;
+      height: 16px;
+      font-size: 16px;
+      line-height: 20px;
+    }
+
+    .count-tags {
+      color: #777;
+      display: inline-block;
+    }
+  }
+}
+
+h2.title {
+  font-size: 18px;
+  background: #c84563;
+  color: #fff;
+  line-height: 50px;
+  padding: 0 15px;
+  margin: 0;
+
+  .add-tag {
+    width: 50px;
+    height: 50px;
+    text-indent: 999999999px;
+    float: right;
+    margin: 0px -15px 0px 0px;
+    background-color: #f1849d;
+    display: inline-block;
+    &:hover {
+      background-color: #a00;
+    }
+    a {
+      width: 20px;
+      height: 20px;
+      margin: 15px 15px 0 0;
+      background: image-url('sv-icon-categories.png');
+      overflow: hidden;
+      background-position: -20px -220px;
+      float: right;
+    }
+  }
+}
+
+.combosex_input_span {
+  input[type="text"].combosex_input.combosex_input_tag {
+    border: none !important;
+    -webkit-box-shadow: 0 0 0;
+    -moz-box-shadow: 0 0 0;
+    box-shadow: 0 0 0;
+  }
+}

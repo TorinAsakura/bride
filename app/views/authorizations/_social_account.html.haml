@@ -1,0 +1,10 @@
+- account = user.authorization_for(provider)
+- provider_str = provider.to_s.downcase
+.sv-social-list{class: "#{provider_str} #{'sv-soc-active' if account}"}
+  %i.icon.icon-social{class: 'icon-'+provider_str}
+  - if account
+    = link_to authorization_path(account), method: :delete, remote: true do
+      = "Отключить #{t("social_accounts.providers.#{provider_str}")}"
+      %button.sv-r.close-button
+  - else
+    =  link_to "Подключить #{t("social_accounts.providers.#{provider_str}")}", "/auth/#{provider_str}"

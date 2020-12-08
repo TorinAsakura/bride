@@ -1,0 +1,21 @@
+- if defined?(user_idea) && !user_idea.blank?
+  = link_to 'Добавлено в «Мои идеи»',
+            remove_idea_idea_url(idea, category_id: @category.id),
+            class: 'sv-idea-popup__sidebar-add-button sv-idea-popup__sidebar-add-button_active',
+            'data-js' => 'idea-remove-button',
+            method: :delete,
+            remote: true
+- else
+  = link_to 'Добавить в «Мои идеи»',
+            add_idea_idea_url(idea, category_id: @category.id),
+            class: 'sv-idea-popup__sidebar-add-button',
+            'data-js' => 'idea-add-button',
+            method: :post,
+            remote: true
+.sv-idea-popup__sidebar-popup
+  .sv-idea-popup__sidebar-popup-line
+    Идея добавлена в «Свадебные Идеи» на вашем свадебном сайте. Вы можете найти ее в разделе:
+  .sv-idea-popup__sidebar-popup-line.sv-idea-popup__sidebar-popup-line_center
+    = @category.name
+  .sv-idea-popup__sidebar-popup-line.sv-idea-popup__sidebar-popup-line_center
+    = minisite_ideas_path(current_client.site)

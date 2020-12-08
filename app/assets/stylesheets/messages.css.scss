@@ -1,0 +1,440 @@
+.sv-message-contacts-title {
+  .title {
+    padding: 0px !important;
+
+    .sv-a-back i {
+      background: #5e0b0b !important;
+    }
+
+    span {
+      padding-left: 20px;
+    }
+  }
+}
+
+.sv-message-contacts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sv-message-contact {
+
+}
+
+.sv-message-contact_list {
+  display: block;
+  height: 50px;
+  padding: 10px;
+  border-style: solid;
+  border-width: 0 1px 1px;
+  border-color: #ccc;
+
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
+
+.sv-message-contact_list.sv-message-contact_client {
+  background: transparent;
+}
+
+.sv-message-contact_list.sv-message-contact_firm {
+  background: #f9e1e8;
+}
+
+.sv-message-contact_list.sv-message-contact_active {
+  background: #b82e50;
+  position: relative;
+
+  .sv-message-contact__name,
+  .sv-message-contact__date,
+  .sv-message-contact__excerpt {
+    color: #fff;
+  }
+  
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: -16px;
+    top: 50%;
+    margin-top: -4px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent transparent #b82e50;
+  }
+}
+
+.sv-message-contact_form {
+  margin: 15px;
+}
+
+.sv-message-contact_empty {
+  text-align: center;
+  line-height: 20px;
+  height: 40px;
+  padding: 15px;
+}
+
+.sv-message-contact__avatar {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  float: left;
+}
+
+.sv-message-contact__avatar-border {
+  display: block;
+}
+
+.sv-message-contact_firm .sv-message-contact__avatar-border {
+  border: 2px solid #fff;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.sv-message-contact__avatar-image {
+  width: 50px;
+  height: 50px;
+}
+
+.sv-message-contact__count {
+  position: absolute;
+  right: 0;
+  bottom: -5px;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  text-align: center;
+  font-size: 12px;
+  color: #fff;
+  background: #b82e50;
+  border-radius: 9px;
+}
+
+.sv-message-contact__message {
+  float: right;
+  width: 215px;
+  margin-top: 5px;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.sv-message-contact__name {
+  font-style: italic;
+  float: left;
+}
+
+.sv-message-contact__date {
+  float: right;
+  color: #ccc;
+  font-size: 12px;
+}
+
+.sv-message-contact__excerpt {
+  font-size: 12px;
+  margin-top: 5px;
+  color: #000;
+}
+
+.sv-messages-title {
+  height: 50px;
+  line-height: 50px;
+}
+
+.sv-messages-begin-with {
+  margin: 10px;
+}
+
+.sv-messages {
+  margin-bottom: 25px;
+}
+
+.sv-message {
+  margin-top: 25px;
+
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
+
+.sv-message__avatar {
+  float: left;
+  width: 50px;
+  height: 50px;
+}
+
+.sv-message__avatar-border {
+  display: block;
+}
+
+.sv-message_firm .sv-message__avatar-border {
+  border: 2px solid #fff;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.sv-message__avatar-image {
+  width: 50px;
+  height: 50px;
+}
+
+.sv-message__title {
+  margin-left: 65px;
+  height: 25px;
+  position: relative;
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    margin-top: -4px;
+    border: 4px solid transparent;
+  }
+}
+
+.sv-message__title-name {
+  line-height: 25px;
+  color: #c84563;
+  padding-left: 10px;
+  font-weight: bold;
+}
+
+.sv-message__title-date {
+  float: right;
+  font-size: 12px;
+  line-height: 25px;
+  color: #ccc;
+  padding-right: 10px;
+}
+
+.sv-message__title-cross {
+  line-height: 25px;
+  font-size: 22px;
+  color: #4c4c4c;
+  text-decoration: none;
+  float: right;
+  padding-right: 10px;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.sv-message__body {
+  margin-left: 65px;
+  padding: 10px;
+}
+
+.sv-message-form {
+  display: block;
+  margin: 60px;
+  padding: 15px 12px 0px;
+  position: relative;
+}
+
+#message_form {
+  textarea {
+    resize: vertical;
+    height: 100px;
+    max-height: 100px;
+  }
+
+  abbr {
+    display: none;
+  }
+
+  button {
+    display: inline;
+  }
+
+  .sv-message-form-close {
+    background: #fff;
+    color: #c84563;
+    border: 1px solid #c84563;
+    padding: 2px 21px;
+
+    &:hover {
+      background: #c84563;
+      color: #fff;
+      border: 1px solid #c84563;
+      padding: 2px 21px;
+    }
+  }
+}
+
+.sv-info-message {
+  padding: 20px;
+  width: 630px;
+
+  .sv-info-message-title {
+    color: #C84563;
+    font-size: 22px;
+  }
+
+  .sv-info-message-body {
+    margin: 20px 0 0 0;
+
+    p {
+      margin: 0 0 20px 0;
+      line-height: 1.6em;
+    }
+    .sv-user-email {
+     color: #C84563;
+    }
+  }
+}
+.sv-first-visit {
+  padding: 10px 20px;
+  width: 750px;
+}
+
+#sv-first-visit__form-step2 {
+  label {
+    margin: 2px 0 0 0;
+  }
+  .create-wedding {
+    width: 150px;
+    #wedding_date {
+      width: 135px;
+    }
+  } 
+  .wedding-city-style {
+    padding: 4px 0 0 0;
+    display: block;
+  }
+  .sv-dont-know-the-date {
+    width: 150px;
+    label {
+      width: initial;
+      span {
+        margin: 4px 0 0 0;
+      }
+      &.checkbox {
+        margin: 0 0 0 20px;
+      }
+    }
+  }
+}
+
+#sv-first-visit__form-step3 {
+  margin: 20px 0 0 0;
+  label {
+    height: 26px;
+    line-height: 26px;
+    padding: 0 20px 0 0;
+    margin-bottom: 0;
+    &.site-name {
+      line-height: 24px;
+      padding: 0 170px 0 20px;
+    }
+  }
+  #site_code {
+    margin: 0 124px 20px 0;
+  }
+  .base-client-settings {
+    input[type=submit] {
+      margin-bottom: 0;
+    }
+    width: 100%;
+    .site_name {
+      width: 480px;
+       .cntrls:before {
+         margin-top: 0;
+       }
+       .help-inline {
+         left: 42px;
+         bottom: 7px;
+       }
+    }
+  }
+  .select2-choice {
+    height: 24px !important;
+    line-height: 24px !important;
+  }
+  .text-center {
+    float: right;
+    input {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.sv-first-visit__title {
+  color: #C84563;
+  font-size: 20px;
+  border-bottom: 1px solid #C84563;
+  padding: 12px 5px 12px 5px;
+  margin: 0 0 15px 0;
+}
+
+.sv-first-visit__body {
+  p {
+    line-height: 1.5em;
+    text-align: justify;
+    text-indent: 35px;
+    width: 100%;
+  }
+  label {
+    display: block;
+    float: left;
+    padding: 2px 10px 0 0;
+    text-align: right;
+    width: 100px;
+    &.right {
+      width: 132px;
+    }
+    &.long {
+      width: 185px;
+      margin: 0 15px 0 0;
+    }
+    [for=checkbox] {
+      width: none;
+    }
+  }
+  .line {
+    width: 100%;
+    margin: 0 0 15px 0;
+    height: 26px;
+  }
+  .footer {
+    margin: 0 0 5px 0;
+    height: 26px;
+  }
+}
+
+#sv-first-visit__form-step1 {
+  margin: 20px 0 0 0;
+  .user-city {
+    width: 274px;
+    text-align: left;
+  }
+  .sv-radio-user {
+    margin: 3px 0 0 0;
+    label {
+      margin: 0 10px 0 0;
+      min-width: 0;
+      padding: 0;
+      text-align: inherit;
+    }
+  }
+}
+#sv-first-visit__form-step2 {
+  margin: 20px 0 0 0;
+}
+
+.sv-skip-step {
+  padding: 3px 0;
+}

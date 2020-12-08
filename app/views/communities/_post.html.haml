@@ -1,0 +1,50 @@
+.sv-community__post-preview{ id: dom_id(post) }
+  .sv-community__post-title
+    = link_to raw(post.title), path_to_post(post)
+  .sv-community__info.clearfix
+    = link_to client_path(post.user.client), class: 'sv-l' do
+      = image_tag post.user.avatar.small, class: 'sv-user-small-avatar'
+    .sv-user-name
+      = link_to post.user.client.full_name, client_path(post.user.client)
+    .sv-post-info
+      %i.date= community_post_date post.created_at
+      %i.comments_count= post.comment_threads.count
+  .clearfix
+  .sv-community__post-content
+    = simple_format truncate(post.body, length: 1500)
+    
+    - if post.body.length > 1500
+      = link_to 'читать далее...', show_post_community_path(post.journal, post), class: 'sv-community__read-more'
+      .clearfix
+
+    .sv-comment__images.sv-community__images_wall{ 'data-js' => 'comment-images-first' }
+    .sv-comment__images.sv-community__images_wall.sv-community__images_second{ 'data-js' => 'comment-images-second' }
+
+    - post.videos.reject(&:new_record?).each do |video|
+      .sv-comment__video.sv-comment__video_wall{ data: { js: 'video-player',
+                                                         title: video.title,
+                                                         youtube: video.content,
+                                                         width: 534,
+                                                         height: 267 } }
+    .clearfix
+  .sv-community__post-actions.clearfix
+    = link_to 'Обсудить', path_to_post(post), class: 'link-style sv-l'
+
+    - for_moderator_of post.user.profileable do
+      .sv-community__post-action.sv-l
+        = link_to 'Редактировать', edit_path_to_post(post), remote: true
+      .sv-community__post-action.sv-l
+        = link_to 'Удалить', path_to_post(post), method: :delete, confirm: 'Вы уверены?'
+    .sv-r{ 'data-vote-management' => "#{post.id}-#{post.class.name}" }
+      = render 'votes/like', resource: post, resource_class_name: post.class.name
+
+  :javascript
+    $(document).ready(function () {
+      var comment = new Comment({
+        'element': '##{dom_id(post)}',
+        'parent': '#sv-posts-search-result',
+        'imageClass': 'sv-comment__image_wall',
+        'images': [#{post.images.reorder(:id).first(6).map { |i| "'#{i.image}'"}.join(',') }],
+        'hrefs': [#{post.images.reorder(:id).first(6).map { |i| "'#{community_post_image_path(post.journal,post,i)}'"}.join(',') }]
+      });
+    });

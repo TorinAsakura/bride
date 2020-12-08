@@ -1,0 +1,17 @@
+.sv-article{'data-js' => @page.name}
+  %h1.title= @page.title
+  .page-content= raw @page.content
+
+  .guestbook_list{'data-partial' => 'guestbook-list'}
+    - @guestbook_notes.each do |entry|
+      .guestbook.clearfix
+        .user-avatar
+          .avatar
+            = link_to main_domain_link user_path(entry.user) do
+              = image_tag entry.user.avatar
+        .content
+          %p.name= entry.user.name
+          %p.content= nl2br entry.content
+          %p.date= I18n.l( entry.created_at, format: :full_comment )
+  %div{'data-partial' => 'guestbook-form'}
+    = render 'guestbooks/form', note: @guestbook_new_note ,url: { controller: :guestbooks, action: :create }

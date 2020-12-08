@@ -1,0 +1,7 @@
+- if @resource.class.name == 'PollImage'
+  $('.sv-poll-vote').hide();
+  $('.sv-poll-x').html("#{j(render @resource.imageable)}");
+  initAccordion();
+- else
+  $("#vote_managment_#{@resource.id}_#{@resource.class.base_class.name.demodulize}").html("#{j(render 'votes/like', resource: @resource, resource_class_name: @resource_class_name)}");
+  $('[data-vote-management=#{@resource.id}-#{@resource.class.base_class.name.demodulize}]').html('#{j(render 'votes/like', resource: @resource, resource_class_name: @resource_class_name)}');

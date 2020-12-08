@@ -1,0 +1,108 @@
+.filter-city {
+  margin: 10px 0;
+
+  .city-name,
+  .region-name,
+  .wedding-city,
+  .submit
+  {
+    display: inline-block;
+    margin: 0 10px;
+  }
+
+  .wedding-city,
+  .submit
+  {
+    vertical-align: text-bottom;
+  }
+}
+
+.sv-admin-cities {
+  margin: 10px;
+
+  .city {
+    margin: 0;
+    border: 1px solid #ddd;
+
+    &:nth-child(even) {
+      background: #eee;
+    }
+  }
+
+  .name,
+  .region,
+  .wedding-city,
+  .count,
+  .action-block
+  {
+    display: inline-block;
+    margin: 5px 10px;
+  }
+
+  .name {
+    width: 250px;
+    letter-spacing: 0.5px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .region {
+    width: 250px;
+    line-height: 20px;
+  }
+
+  .count {
+    width: 175px;
+    span {
+      font-weight: bold;
+    }
+  }
+
+  .wedding-city {
+    width: 100px;
+  }
+
+  .edit a {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: image-url('sorted/glyphicons-halflings.png');
+    background-position: 3px -69px;
+    background-repeat: no-repeat;
+    text-indent: -9999999px;
+    -webkit-transition: all linear 0.5s;
+    -moz-transition:    all linear 0.5s;
+    -o-transition:      all linear 0.5s;
+    transition:         all linear 0.5s;
+
+    &:hover {
+      background-color: #000;
+      background-image: image-url('sorted/glyphicons-halflings-white.png');
+      -webkit-box-shadow: 0px 0px 10px 3px #000;
+      -moz-box-shadow:    0px 0px 10px 3px #000;
+      box-shadow:         0px 0px 10px 3px #000;
+    }
+  }
+}
+
+.page-action {
+  margin: 10px 0 0 0;
+}
+
+.add-city {
+  margin: 0 10px;
+}
+
+#city_form {
+  width: 650px;
+
+  label {
+    margin-top: 10px;
+  }
+  input {
+    margin: 0;
+  }
+  .submit-button {
+    margin-top: 20px;
+  }
+}

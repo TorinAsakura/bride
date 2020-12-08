@@ -1,0 +1,5 @@
+- clients.each do |client|
+  .sv-participants-user
+    =link_to client_path(client) do 
+      = image_tag client.avatar.thumb
+      %span= client.firstname

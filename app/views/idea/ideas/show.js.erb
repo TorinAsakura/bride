@@ -1,0 +1,6 @@
+window.modalViewer = new IdeaViewer(
+  '<%= @path%>',
+  window.modalViewer ? window.modalViewer.baseLocation : window.location.pathname,
+  '<%= j(render 'show', idea: @idea, user_idea: @user_idea)%>'
+);
+window.modalViewer.show();

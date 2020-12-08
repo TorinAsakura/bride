@@ -1,0 +1,12 @@
+.sv-home__sites
+  .sv-home__title
+    = link_to 'Свадебные сайты', clients_path, class: 'sv-home__title-link'
+    - if current_client
+      = link_to 'Создать свой сайт', new_site_url, class: 'sv-home__title-btn'
+  - sites.each do |site|
+    = link_to_minisite(site, nil, class: 'sv-home__site') do
+      = image_tag site.logo
+      - if site.description.present?
+        .sv-home__site-name
+          = site.description
+  .clear

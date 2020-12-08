@@ -1,0 +1,7 @@
+var button = $('#firm-user-email input[type=submit]');
+var popup = $('.sv-firm-email-changed-popup');
+var hidePopup = function() { popup.fadeOut(500); }
+
+button.hide();
+popup.show();
+setTimeout(hidePopup, 1000);

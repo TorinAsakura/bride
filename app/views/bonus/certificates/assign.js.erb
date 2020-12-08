@@ -1,0 +1,10 @@
+var certificateBlock = $('form#new_bonus_certificate');
+certificateBlock.find('p.error').html('');
+<% if @error.blank? %>
+<%- amount = current_firm.purse.available_amount.format(html: true).html_safe%>
+$('.sv-navigation_all').find('span.purse').html('<%= j amount%>');
+$('.firm-settings').find('span.rur').html('<%= j amount%>');
+$('.sv-drop-balance').find('span.cash').html('<%= j amount%>');
+<%- end%>
+certificateBlock.find('p.error').html('<%= @error || @text%>');
+Recaptcha.reload();

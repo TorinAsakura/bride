@@ -1,0 +1,38 @@
+%ol
+  - events.each do |event|
+    - checkbox ||= 'enable'
+    - if @timetable
+      - task_path ||= wedding_timetable_event_path(@timetable,event)
+
+    %li{class: "s#{event.type_id} #{'checked' if event.type_id == 5} #{'active' if event == @event }", id: "e-open-#{event.id}"}
+      .borders
+        .vis
+          .check.sv-event__active
+            - unless event.advice?
+              %label.active{'data-js' => 'scheduler-event-checked'}
+                = check_box_tag 'sv-event__active', event.id, false
+
+          .check.sv-event__unhide.hidden
+            %label.unhide{'data-js' => 'scheduler-event-unhide'}
+              = check_box_tag 'sv-event__unhide', event.id, false
+              .sv-event__block-hide-info
+                Буду выполнять
+
+          = link_to event.name, task_path, remote: true, class: 'name'
+
+          .check.sv-event__hide{ class: "#{'hidden' if event.completed?}" }
+            - if event.user_event?
+              %label.hide
+                = check_box_tag 'sv-event__hide', event.id, false
+                .sv-event__block-hide-info.destroy
+                  %p Вы уверены?
+                  = link_to 'Удалить', wedding_timetable_event_path(@timetable,event),
+                    class: 'link-style',
+                    'data-js' => 'scheduler-event-destroy',
+                    'data-id' => event.id
+
+            - elsif !event.advice?
+              %label.hide{'data-js' => 'scheduler-event-hide' }
+                = check_box_tag 'sv-event__hide', event.id, false
+                .sv-event__block-hide-info
+                  Не буду выполнять

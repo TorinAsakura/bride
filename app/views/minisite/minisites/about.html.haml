@@ -1,0 +1,11 @@
+.page-block
+  %h1.title= t('.title')
+  .page-content
+    .logo= image_tag(@site.logo.about, class: 'img-responsive')
+    = sanitize @page.content
+
+  - if user_signed_in? && minisite_access?(@site)
+    .sv-minisite-like.clearfix
+      .sv-r{data: {'vote-management' => "#{@site.id}-#{@page.site.class.name}" }}
+        = render 'votes/like', resource: @site, resource_class_name: @page.site.class.name
+    = render 'comments/bs3/wall', resource: @page

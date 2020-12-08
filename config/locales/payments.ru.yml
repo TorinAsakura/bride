@@ -1,0 +1,102 @@
+ru:
+  payment:
+    interkassa_deposit:
+      name: 'Пополнение счета Svadba.ORG для пользователя %{payer} - На Сумму: %{amount}'
+      confirm_payment: 'Для завершения этой транзакции Вы будете перенаправлены на сайт Interkassa. Пожалуйста, проверьте детали транзакции и подтвердите ее.<br/><b>Пополнение счета через систему приема платежей Interkassa - Сумма: %{amount}, Плательщик "%{payer}" </b>'
+      payers:
+        privat24: Privat24
+        visa: Visa
+        mastercard: Mastercard
+        webmoney: WebMoney
+        alfaclick: 'Альфаклик (Альфабанк)'
+        w1: Единый кошелек
+        liqpay: LiqPay
+        perfectmoney: PerfectMoney
+        paxum: Paxum
+        telemoney: Telemoney
+        ukrterminal: Терминалы Украины
+        privatterm: Терминалы Приватбанка
+        rusterminal: Терминалы России
+        sbrf: Сбербанк РФ
+        rusbank: Российский банк
+        mobileretails: Салоны связи
+        ruspost: Почта России
+        unistream: Юнистрим
+        anelik: Anelik
+        lider: ЛИДЕР
+        mts: МТС
+        megafon: Мегафон
+        test: Тестовый платеж
+
+    interkassa_deposits:
+      new:
+        title: 'Пополнение счета через систему приема платежей Interkassa'
+      form:
+        title: 'Пополнение счета через систему приема платежей Interkassa'
+        pay: Пополнить
+        sum: К оплате
+
+  purse_payments:
+    'purse_payment/purse_deposit':
+      type: Пополнение счета
+      name: "Пополнение счета (%{payment_system})"
+      description: 'Пополнение счета при помощи "%{payment_system}" TransactionID #%{id}'
+    'purse_payment/system_deposit_fee':
+      type: "СИСТЕМНЫЙ: Комиссия при пополнении счета"
+      name: "Комиссия при пополнении счета (%{payment_system})"
+      description: 'Комиссия за ввод средств при помощи "%{payment_system}" TransactionID #%{id}'
+    'purse_payment/subscription':
+      type: Оплата Услуг
+      name: 'Оплата услуги «%{name}»%{duration}'
+      description: 'Оплата услуги «%{name}» - %{description}%{period} #%{id}'
+    'purse_payment/system_subscription':
+      type: "СИСТЕМНЫЙ: Оплата Услуг"
+
+    'purse_payment/dealer_subscription':
+      type: Оплата Услуг компаний
+      name: 'Оплата услуги «%{name}»%{duration} для компании «%{firm}»'
+      description: 'Оплата услуги «%{name}» для компании «%{firm}»%{period} #%{id}'
+    'purse_payment/dealer_transfer_subscription':
+      type: Перевод от диллера для оплаты услуг
+      name: 'Перевод от диллера для оплаты услуги «%{name}»%{duration}'
+      description: 'Перевод от диллера «%{dealer}» для оплаты услуги «%{name}»%{period} #%{id}'
+    'purse_payment/transfer_subscription':
+      type: Оплата Услуг средствами Диллера
+      name: 'Оплата услуги «%{name}»%{duration} средствами Диллера'
+      description: 'Оплата услуги «%{name}» средствами диллера «%{dealer}»%{period} #%{id}'
+    'purse_payment/system_dealer_subscription':
+      type: "СИСТЕМНЫЙ: Оплата Услуг средствами Диллера"
+      name: 'Оплата услуги «%{name}»%{duration} для компании «%{firm}» диллером «%{dealer}»'
+      description: 'Оплата услуги «%{name}» для компании «%{firm}» диллером «%{dealer}» - %{description}%{period} #%{id}'
+    'purse_payment/transfer_to_system':
+      type: Перевод средств в систему
+      name: Перевод средств в систему
+      description: 'Перевод средств в систему TransactionID #%{id}'
+    'purse_payment/system_transfer_from_firm':
+      type: 'СИСТЕМНЫЙ: Перевод средств от компании в систему'
+      name: Перевод средств в систему компанией "%{firm}"
+    'purse_payment/admin_deposit':
+      type: Пополнение кошелька администратором
+      name: 'Перевод средств администратором'
+      description: 'Перевод средств администратором "%{admin}"'
+    'purse_payment/system_admin_deposit':
+      type: 'СИСТЕМНЫЙ: Перевод средств администратором пользователю'
+
+    'purse_payment/pay_certificate':
+      type: 'Блокировка средств для покупки сертификатов'
+      name: 'Блокировка средств для покупки сертификатов «%{name}» - %{count} шт'
+      description: 'Блокировка средств для покупки сертификатов «%{name}» номер %{number} - %{count} шт %{description}'
+    'purse_payment/certificate':
+      type: 'Покупка сертификата'
+      name: 'Покупка сертификата «%{name}»'
+      description: 'Покупка сертификата «%{name}» номер %{number} %{description}'
+    'purse_payment/certificate_transfer':
+      type: 'Начисление сертификата'
+      name: 'Начисление сертификата «%{name}»'
+      description: 'Начисление сертификата «%{name}» номер %{number} %{description}'
+    'purse_payment/certificate_subscription':
+      type: Оплата Услуг сертификатом
+      name: 'Оплата услуги «%{name}» сертификатом'
+      description: 'Оплата услуги «%{name}» сертификатом «%{certificate}» номер %{number}'
+    'purse_payment/system_certificate_subscription':
+      type: "СИСТЕМНЫЙ: Оплата Услуг сертификатом"

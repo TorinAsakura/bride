@@ -1,0 +1,12 @@
+.sv-firm-catalog-item{id: dom_id(firm_catalog)}
+  .firm-catalog-title
+    %h4= best_in_place firm_catalog, :name, path: admin_firm_catalog_path(firm_catalog)
+  .firm-catalog-logo
+    - if firm_catalog.logo.present?
+      %i.icon-ok.green
+    - else
+      %i.icon-remove.red
+  .firm-catalog-extended-name
+    %p= best_in_place firm_catalog, :extended_name, path: admin_firm_catalog_path(firm_catalog), nil: firm_catalog.class.human_attribute_name(:extended_name)
+  .firm-catalog-category
+    %p= best_in_place firm_catalog, :category, path: admin_firm_catalog_path(firm_catalog), nil: firm_catalog.class.human_attribute_name(:category)

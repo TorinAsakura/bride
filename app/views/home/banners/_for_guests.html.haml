@@ -1,0 +1,24 @@
+.sv-banner-form{'data-js' => 'banner-form', style: 'display:none;'}
+  .sv-banner-form__title.title_nobg
+    Регистрируйся сейчас!
+
+  .sv-banner-form__text.sv-banner-form__text_first
+    Svadba.org — пожалуй, лучшее место, где вы самостоятельно, без каких-либо сложностей сможете спланировать и подготовиться к свадьбе вашей мечты.
+
+  = simple_form_for @client_form, as: reg_resource_name, remote: true, url: registration_path(reg_resource_name, {with_provider: params[:with_provider]}),validate: true, html: {class: 'form-horizontal new_client', id: 'new_client', autocomplete: 'off' } do |f|
+    = hidden_field_tag :profile_type, 'client'
+    .row-left.clearfix
+      .field-block
+        = f.input :email, as: :hidden, input_html: { value: '' }
+        .notification Введите e-mail
+        = f.input :email, placeholder: 'E-mail', autofocus: true, label: false, input_html: { class: 'sv-input input-big', tabindex: 3 }
+      .field-block
+        = f.input :password, as: :hidden, input_html: { value: '' }
+        .notification Введите пароль. Может содержать символы a-Z, 1-9, # $ % &
+        = f.input :password, placeholder: 'Пароль', label: false, required: true, :input_html => { pattern: User.password_format.source, class: 'sv-input input-big register_pass_1', tabindex: 4, 'data-js' => 'register-password' }
+      %div{style: "text-align: center"}
+        %p{style: "margin: 0 0 0;"}
+          Регистрация с помощью соц.сетей
+        = render '/devise/shared/social_login'
+      .sv-banner-form__submit
+        = f.submit 'Зарегистрироваться', class: 'link-style'

@@ -1,0 +1,38 @@
+- clients.try(:each) do |client|
+  .sv-firm-client-block.sv-search-client__block
+    = link_to client_url(client), class: 'sv-l' do
+      = image_tag client.avatar.icon
+    .sv-firm-client-block-info
+      %i.sv-firm-client-block-gender{ class: client.gender ? 'sv-firm-client-block-gender_male' : 'sv-firm-client-block-gender_female' }
+      .sv-firm-client-block-name
+        = link_to client.full_name, client_url(client)
+      %div
+      %ul.sv-firm-client-block-info-left.sv-l
+        - if client.birthday.present?
+          %li День рождения:
+        - if client.city_name.present?
+          %li Город проживания:
+        - if client.has_wedding?
+          %li Дата свадьбы:
+        - if client.site.present?
+          %li Свадебный сайт:
+      %ul.sv-firm-client-block-info-right.sv-l
+        - if client.birthday.present?
+          %li= l(client.birthday, format: :wed_date)
+        - if client.city_name.present?
+          %li= client.city_name
+        - if client.has_wedding?
+          %li= l(client.wedding.wedding_date, format: :wed_date)
+        - if client.site.present?
+          %li= link_to_minisite(client.site)
+    .sv-firm-client-block-buttons
+      - if current_firm.present?
+        = link_to 'Написать сообщение', new_messages_path(client.user.id), remote: true, class: 'link-style'
+      - if current_client.present?
+        - if current_user.friends?(client.user)
+          = link_to 'Написать сообщение', new_messages_path(client.user.id), remote: true, class: 'link-style'
+        = friend_action(client.user)
+    .clear
+
+.sv-clients__nav.hide
+  = paginate clients

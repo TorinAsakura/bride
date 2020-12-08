@@ -1,0 +1,14 @@
+- @cities.each do |city|
+  .city
+    .name= city.name
+    .region= city.region.try :name
+    .count
+      Кол-во фирм:
+      %span= city.firms.count
+    .wedding-city= city.wedding_city ? 'Особый город' : ''
+    .action-block
+      .edit
+        = link_to 'редактировать', edit_admin_city_path(city), remote: true
+
+.page-action
+  .current-page= paginate @cities, :window => 3, :outer_window => 3

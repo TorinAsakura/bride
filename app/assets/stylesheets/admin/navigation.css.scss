@@ -1,0 +1,45 @@
+#sv-admin-navigation {
+  background: #4A0707;
+
+  ul.sv-admin-navigation {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+//    overflow: scroll;
+    white-space: nowrap;
+
+    li {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      float: left;
+
+      &.active a {
+        background: #6D1D1D;
+      }
+
+      &:last-child a {
+        margin-right: 0;
+      }
+
+      a {
+        display: inline-block;
+        margin: 0 5px;
+        padding: 0 5px;
+        height: 49px;
+        color: #feffff;
+        line-height: 49px;
+
+        &:hover,
+        &:active,
+        &.active
+        {
+          background: #6D1D1D;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

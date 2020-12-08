@@ -1,0 +1,14 @@
+- @cities.group_by(&:region).each do |region, cities|
+  %h3= region.name
+  %table.index_table
+    %tbody
+      - cities.in_groups_of(4) do |group|
+        %tr
+          - group.each do |city|
+            %td
+              %b= city.name if city
+            %td
+              - if city
+                - city_dealer_percent = @service.city_dealer_percents.city(city)
+                = best_in_place city_dealer_percent, :percent, path: update_city_dealer_percent_admin_bonus_service_city_dealer_percents_path(@service, city)
+%br

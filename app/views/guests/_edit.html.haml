@@ -1,0 +1,21 @@
+.sv-article
+  .mini-site.clearfix
+    .sv-article.margintopotstp
+      .main-title.clearfix
+        = link_to(minisite_guests_url(subdomain: site.name), class: 'sv-a-back sv-l', title: t('.to_guests')) do
+          %i.icon-chevron-left
+        %span= t('.title')
+
+      - if guests.present?
+        %table.table.table-sortable.margintop-15.guests-table
+          %thead
+            %tr
+              %th= t('.role')
+              %th= t('.name')
+              %th= t('.gender')
+              %th= t('.email')
+              %th.unsortable.center= t('static.actions')
+          %tbody
+            = render guests, site: site
+
+      = link_to(guests.present? ? t('.to_guests') : t('minisite.guests.add.add_guest'), minisite_guests_url(subdomain: site.name), class: 'btn btn-link top-marg')

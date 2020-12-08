@@ -1,0 +1,29 @@
+.select-none {
+  @include user-select(none);
+}
+.box-shadow-none {
+  @include box-shadow(none);
+}
+@for $i from 1 through 15 {
+  .delay-#{$i} {
+    @include animation-delay($i*300ms);
+  }
+}
+
+.margin {
+  padding: 2.5px 0;
+}
+@media (max-width: 767px) {
+  .margin {
+    padding: 5px 0;
+  }
+}
+@media (min-width: 992px) {
+  .transparent {
+    opacity: 0;
+  }
+  .visible {
+    opacity: 1;
+    @include transition(opacity 1s)
+  }
+}

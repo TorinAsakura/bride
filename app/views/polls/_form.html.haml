@@ -1,0 +1,52 @@
+- if current_client
+  = simple_form_for @poll, html: { style: 'margin-bottom:0px;', multipart: true }, remote: true do |f|
+    - if @poll.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@poll.errors.count, 'error')} prohibited this poll from being saved:"
+        %ul
+          - @poll.errors.full_messages.each do |msg|
+            %li= msg
+    .title_nobg
+      Создать новый опрос
+    .sv-poll-error-wrapper
+      .sv-poll-error
+        Пожалуйста, укажите название опроса
+        %i
+    = f.input_field :title, as: :text, class: 'sv-poll-textarea textarea-style', placeholder: 'Введите текст опроса'
+    .title_nobg Загрузить фотографии
+    .sv-polls-upload
+      = f.fields_for :images do |ff|
+        .sv-polls-upload-input.sv-l
+          = ff.input_field :image, as: :file, multiple: true, name: 'poll[images_attributes][][image]'
+          %button.upload-is-comp.input-super-big Загрузить с компьютера
+        .sv-polls-upload-input.sv-l
+          = link_to "javascript:void(0)", remote: true, class: "link-style-active pl-socials socials", data: {link: "/instagram_media", current_user_id: current_user.id}  do
+            .social_names_wrapper
+              %i.sv-icon.icon-instagram
+              %span.social_names Загрузить фото из Instagram
+        .sv-polls-upload-input.sv-l
+          = link_to "javascript:void(0)", remote: true, class: "link-style-active pl-socials socials", data: {link: "/vkontakte_media", current_user_id: current_user.id} do
+            .social_names_wrapper
+              %i.icon-vk
+              %span.social_names Загрузить фото из Вконтакте
+    .sv-polls-previews-wrapper
+      .sv-polls-previews
+        - if @poll_tmp_images
+          = render @poll_tmp_images
+          .tmp_ids
+            = f.hidden_field :tmp_poll_images_ids, value: @tmp_poll_images_ids
+      .clearfix
+      .sv-poll-submit-wrapper
+        = link_to 'Создать опрос', '#', class: 'input-big link-style sv-poll-submit', id: "new_poll_submit_link"
+  :javascript
+     $(document).on('validateToken', function(){
+        var socialAuthorizer = new SocialAuthorizer();
+
+        if(socialAuthorizer.socialButtons){
+          socialAuthorizer.validateToken();
+        }
+     })
+     $(document).trigger("validateToken");
+     $(document).unbind("validateToken");
+
+

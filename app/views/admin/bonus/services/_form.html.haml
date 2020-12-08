@@ -1,0 +1,31 @@
+.row
+  .field.span4
+    = f.input :name, input_html: {class: 'span4'}
+  .field.span4
+    = f.input :identifier, input_html: {class: 'span4', readonly: f.object.has_subscriptions?}
+  .field.span4
+    = f.input :amount
+
+.row
+  .field.span12
+    = f.input :description, input_html: {'data-js' => 'subscription-service-description'}
+.row
+  .field.span4
+    = f.input :discount
+  .field.span4
+    = f.input :dealer_percent
+  .field.span4
+    = f.input :trial_duration, input_html: {class: 'span4'}
+
+.row
+  .field.span4
+    = f.check_box :list, class: 'checkbox'
+    = f.label :list, class: 'checkbox-label'
+  .field.span4
+    = f.check_box :pay_once, class: 'checkbox'
+    = f.label :pay_once, class: 'checkbox-label'
+  .field.span4
+
+.row
+  .field.span12
+    = f.submit 'Сохранить', class: 'btn'

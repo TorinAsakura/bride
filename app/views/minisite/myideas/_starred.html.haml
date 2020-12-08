@@ -1,0 +1,9 @@
+%div{:class => "starred_"+o.id.to_s}
+  - if (starred = current_user.user_ideas.idea(o).category(ic).first).present?
+    = link_to "-", minisite_myidea_path(id: o.id, idea_category_id: ic.id), {:method => :delete, :remote => true, :class => [:btn, "btn-info"], :title => 'Убрать из идей'}
+  - else
+    = form_tag minisite_myideas_path, :remote => true, :method => "post" do |f|
+      = hidden_field_tag :id, o.id, :name => "id"
+      = hidden_field_tag :idea_category_id, ic.id, :name => "idea_category_id"
+
+      %button.btn.btn-success{:title => 'Добавить в свои идеи'} +

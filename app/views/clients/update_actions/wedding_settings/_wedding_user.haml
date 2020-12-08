@@ -1,0 +1,24 @@
+.face_whuman
+  .face_human
+    .customer
+      = link_to client_path(client) do
+        = image_tag client.user.avatar.icon, class: ''
+    .face_tab
+      %i.sv-client-fullname__gender{ class: client.gender ? 'sv-client-fullname__gender_male' : 'sv-client-fullname__gender_female' }
+      = link_to client.full_name, client_path(client)
+    .name_being
+      - if client.birthday.present?
+        .info
+          День рождения:
+        .box
+          #{l(client.birthday, format: '%d %B %Y')}
+          (#{link_to(client.zodiac, '#').html_safe}),
+          #{client.age} #{pluralize client.age, 'год', 'года', 'лет'}
+      - if client.city.present?
+        .info
+          Город проживания:
+        .box
+          = image_tag '/assets/sv-icon-locate.png', alt: 'flag'
+          = link_to client.city.name, '#'
+    .click_its_me
+      = link_to  "Я - #{current_user_gender}", client_path(client), class: 'link-style-inner sv-l'

@@ -1,0 +1,73 @@
+/** GLOBALS **/
+html{
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 50px;
+}
+h1.title {
+  color: white;
+  padding: $main-margin-small * 2;
+  background: $main-color;
+  font-size: 1.8em;
+  font-weight: lighter;
+  margin: 0 0 $main-margin;
+  position: relative;
+  height: $page-title-h;
+  .a-back {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: white;
+    display: block;
+    text-align: center;
+    > i {
+      height: $page-title-h;
+      width: $page-title-h;
+      vertical-align: middle;
+      line-height: $page-title-h;
+    }
+    + span{
+      margin-left: $layout-margin + $main-padding;
+      line-height: 22px;
+    }
+  }
+  .add {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    display: block;
+    a {
+      display: block;
+      background: $main-menu-color;
+      color: white;
+      width: $layout-margin + $main-padding;
+      height: $page-title-h;
+      line-height: $page-title-h;
+      vertical-align: middle;
+      text-align: center;
+      &:hover{
+        background: lighten($main-menu-color, 4);
+      }
+    }
+  }
+}
+h4.sub-title {
+  border-bottom: 1px solid $main-color;
+  line-height: 20px;
+  margin: 6px 0 12px;
+  color: $main-color;
+  a {
+    &:focus, &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+/** PHOTOS **/
+.no-data {
+  color: $sub-gray;
+  text-align: center;
+}

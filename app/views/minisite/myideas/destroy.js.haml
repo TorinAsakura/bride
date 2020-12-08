@@ -1,0 +1,2 @@
+$('.starred_#{@idea.id}').html('#{j(render( :partial => 'starred', :locals => {:o => @idea, :ic => @idea_category }))}');
+$('.cover_#{@idea.id}').html('#{j(render( :partial => 'cover', :locals => { :idea => @idea, :user_idea => nil }))}');

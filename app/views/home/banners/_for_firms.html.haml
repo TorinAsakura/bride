@@ -1,0 +1,20 @@
+.sv-banner-form{'data-js' => 'banner-form', style: 'display:none;'}
+  .sv-banner-form__title.title_nobg
+    Подключи PRO аккаунт!
+
+  .sv-banner-form__text.sv-banner-form__text_first
+    Подключи «PRO аккаунт» прямо сегодня и бесплатно, на целый месяц, получи доступ ко всем возможностям сайта Svadba.org.
+
+  .sv-banner-form__text
+    Большое количество потенциальных клиентов, планирующих свою свадьбу, смогут воспользоваться вашим предложением и станут вашими клиентами.
+
+  .sv-banner-form__text-large
+    Подключи «PRO аккаунт»
+    %br
+    Бесплатно на целый месяц!
+
+  .sv-banner-form__submit
+    = link_to 'Попробовать «PRO аккаунт»',
+              pro.present? ? new_bonus_service_subscription_path(pro) : '#',
+              class: 'link-style',
+              remote: true

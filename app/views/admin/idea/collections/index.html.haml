@@ -1,0 +1,14 @@
+= link_to 'Новая коллекция свадебных идей', new_admin_idea_collection_path, class: 'link-style', remote: true
+
+%div{ style: 'height: 20px;' }
+
+- @collections.each do |collection|
+  %div{ style: 'display: inline-block; width: 200px;' }
+    = link_to admin_idea_collection_path(collection) do
+      %h4= collection.name
+    %div
+      = link_to 'Редактировать', edit_admin_idea_collection_path(collection), remote: true
+    %div
+      = link_to 'Удалить', admin_idea_collection_path(collection), method: :delete, confirm: 'Вы уверены?'
+
+%div{ style: 'height: 100px;' }

@@ -1,0 +1,7 @@
+- admin_flag = current_user.has_role? :admin
+- post_categories.each do |category|
+  .sv-admin-community__post-category
+    - if admin_flag
+      = link_to 'x', remove_post_category_admin_community_path(@community, category), 
+                     class: 'link-style', method: :delete, remote: true, confirm: 'Также будут удалены все сообщения этой категории. Вы уверены?'
+    = best_in_place category, :name, path: update_post_category_admin_community_path(@community, category)

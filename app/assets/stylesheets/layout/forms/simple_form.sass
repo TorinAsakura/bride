@@ -1,0 +1,11 @@
+.simple_form
+  .error
+    .help-inline
+      +notification_light
+      display: block
+
+    input
+      border-color: $error-color
+      box-shadow: $error-box-shadow
+      &:focus + .help-inline
+        display: none

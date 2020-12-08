@@ -1,0 +1,53 @@
+= render 'clients/shared/sidebar'
+
+.sv-article
+  .clearfix
+    .sv-inner-box
+      .title.clearfix
+        = link_to @client, class: 'sv-a-back sv-l' do
+          %i.icon-chevron-left
+          -#= image_tag 'sv-icon-arrow_l.png', alt: 'Назад'
+        %span
+          Фотографии
+        %ul
+          %li.add
+            - for_moderator_of @client do
+              - if @latest_album.present?
+                = link_to new_polymorphic_path([@client, :album], upload_to: @latest_album), remote: true do
+                  %i Загрузить фотографии
+              - else
+                = link_to new_polymorphic_path([@client, :album]), remote: true do
+                  %i Загрузить фотографии
+
+    - if @albums.present?
+      .sv-firm-albums-actions
+        %span.sv-firm-albums-actions__count Всего #{@albums.count} альбомов
+
+      .sv-firm-albums
+        - @albums.reverse.first(4).each_with_index do |album, i|
+          = render 'albums/shared/album', journal: @client, album: album, hidden: false
+        - @albums.reverse.drop(4).each_with_index do |album, i|
+          = render 'albums/shared/album', journal: @client, album: album, hidden: true
+
+      - if @albums.count > 4
+        .sv-firm-albums__show-all
+          = link_to "Показать все альбомы (#{@albums.length})", '#'
+
+      - if @photos.present?
+        .sv-firm-albums-actions
+          %span.sv-firm-albums-actions__count Последние загруженные фотографии
+
+      .sv-firm-albums-photos{ 'data-js' => 'photo-preview-list' }
+        - @photos.each do |photo|
+          = render 'photos/thumbnail', resource: @client, album: photo.album, photo: photo
+
+      .sv-photos-hidden-nav
+        = rel_next_prev_link_tags @photos
+
+      .clearfix
+
+      - if session.delete :new
+        :javascript
+          $(document).ready(function () {
+            $.getScript('#{new_client_album_path(@client)}');
+          });

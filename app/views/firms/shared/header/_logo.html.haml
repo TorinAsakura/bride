@@ -1,0 +1,74 @@
+.sv-firm-logo-wrapper
+  .sv-firm-logo
+    %span.border
+      - if @firm.user.destroyed?
+        = image_tag 'avatar.gif', alt: 'Страница удалена'
+      - else
+        = link_to firm_link(@firm) do
+          = image_tag @firm.logo_url(:usual), alt: "логотип #{@firm.full_name}", 'data-js' => 'firm-logo-image', 'data-image-url' => @firm.logo_url
+  - if @firm.user.is? current_user
+    .sv-firm-edit-logo-wrapper
+      %ul.sv-firm-edit-logo
+        %li.upload
+          = link_to '#', 'data-js' => 'firm-logo-upload' do
+            %i
+            Загрузить аватарку
+        %li.edit{ class: @firm.logo.blank? ? 'no-display' : '' }
+          = link_to '#', 'data-js' => 'firm-logo-edit' do
+            %i
+            Редактировать
+        %li.remove{ class: @firm.logo.blank? ? 'no-display' : '' }
+          = link_to '#', 'data-js' => 'firm-logo-destroy' do
+            %i
+            %span Удалить
+
+- if !@firm.user.destroyed? && @firm.user.is?(current_user)
+  #sv-firm-logo-editor.modal
+    %div
+      %ul.sv-modal-tabs.clearfix
+        %li.active{ 'data-js' => 'firm-logo-upload-tab' }
+          = link_to 'Загрузка новой аватарки', '#tab-upload', 'data-toggle' => 'tab'
+        %li{ style: 'float:right', 'data-js' => 'firm-logo-edit-tab' }
+          = link_to 'Редактирование миниатюры', '#tab-edit', 'data-toggle' => 'tab'
+      .tab-content
+        .tab-pane#tab-upload.active
+          %p Пожалуйста, загрузите свою фотографию, чтобы ваши друзья и гости на свадьбе смогли узнать вас. Им будет легче узнать вас, если Вы загрузите свою настоящую фотографию. Вы можете загрузить изображение в формате JPG, PNG или GIF.
+          = simple_form_for @firm, html: { class: 'sv-firm-logo-editor-form', id: 'fileupload_logo', remote: true } do |f|
+            .sv-firm-logo-editor-input
+              = f.hidden_field :logo_x, value: '0', id: 'logo_x'
+              = f.hidden_field :logo_y, value: '0', id: 'logo_y'
+              = f.hidden_field :logo_x2, value: '250', id: 'logo_x2'
+              = f.hidden_field :logo_y2, value: '250', id: 'logo_y2'
+              = f.hidden_field :logo_scale, value: '1', id: 'logo_scale'
+              = f.input_field :logo, as: :file
+              %button.link-style{ type: 'button' } Выбрать файл фотографии
+          %p Если у вас возникают проблемы с загрузкой, попробуйте выбрать фотографию меньшего размера.
+        .tab-pane#tab-edit
+          %p Пожалуйста, создайте вариант маленьких фотографий. Выбранная миниатюра будет отображаться в новостях, журнале, комментариях, на стене и т.д.
+          .sv-firm-logo-jcrop-wrapper
+            .sv-firm-logo-jcrop
+              %img{ 'data-js' => 'firm-logo-jcrop-image' }
+          .sv-firm-logo-previews
+            .sv-firm-logo-preview.big.sv-l
+              .sv-firm-logo-preview-border.big
+                = image_tag(@firm.logo_url(:usual), class: "sv-firm-logo-preview-img big")
+            .sv-firm-logo-preview.medium.sv-l
+              .sv-firm-logo-preview-border.medium
+                = image_tag(@firm.logo_url(:usual), class: "sv-firm-logo-preview-img medium")
+
+            .sv-firm-logo-preview.small.sv-l
+              .sv-firm-logo-preview-border.small
+                = image_tag(@firm.logo_url(:usual), class: "sv-firm-logo-preview-img small")
+            .clear
+          .clear
+          %button.link-style.sv-firm-logo-editor-save{ 'data-js' => 'firm-logo-save' } Сохранить
+          .clear
+
+  #sv-remove-firm-logo
+    .title_nobg Удаление аватарки
+    %p
+      Вы действительно хотите удалить аватарку?
+      %br
+      После удаления, ее нельзя будет восстановить.
+    .button-line
+      = link_to 'Удалить', firm_destroy_logo_path, class: 'link-style', method: :delete, remote: true

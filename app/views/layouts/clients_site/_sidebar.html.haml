@@ -1,0 +1,4 @@
+- if minisite_access?(site)
+  = render 'layouts/clients_site/sidebar/menu', site: site, pages: pages
+- else
+  = render 'layouts/clients_site/sidebar/access', site: site

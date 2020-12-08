@@ -1,0 +1,4 @@
+.sv-firm-add-city-popup-wrapper{ 'data-js' => 'firm-add-city-popup-wrapper' }= render 'city_firms/add_city', firm: firm
+
+- if !firm.has_pro? || firm.all_city_firms.empty?
+  #change-first-city.sv-wedding-cities-modal.hide= render 'cities/first_city_select', items: wedding_cities, ids: firm.all_cities_ids

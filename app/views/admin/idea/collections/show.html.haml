@@ -1,0 +1,20 @@
+= simple_form_for [:admin, @collection], multipart: true, html: { id: 'upload_photos' }  do |f|
+
+  %div{ style: 'width: 900px; height: 60px; overflow: hidden; position: absolute' }
+    = f.input :pictures, as: :file, label: false, input_html: { class: 'file_input2', multiple: true, style: 'z-index: 100' }
+
+  #add_new
+    Добавить новые идеи
+
+.sv-ideas{data: {'max-page' => @ideas.total_pages}}
+  .sv-ideas__grid
+    - @ideas.each do |idea|
+      .sv-idea.sv-idea_hidden
+        .sv-idea__image
+          = link_to idea, remote: true do
+            = image_tag idea.image.image_url :thumb
+        = link_to 'Редактировать', edit_admin_idea_collection_path(@collection, list: [idea])
+        = link_to 'Удалить', [:admin, idea], method: :delete, remote: true
+
+  .sv-ideas__nav.hide
+    = paginate @ideas

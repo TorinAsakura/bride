@@ -1,0 +1,15 @@
+- new_friends = current_user.friendships_awaiting_acceptance
+- friends = current_user.friends
+- count = new_friends.count
+= link_to('#', data: {toggle: "dropdown"}, id: 'menu-friends', class: 'btn btn-icon rounded') do
+  %i.icon.ion-person-add
+  - if count > 0
+    %span.badge= count
+%ul.dropdown-menu.dropdown-extend(role="menu" aria-labelledby="menu-friends")
+  %li.dropdown-header= t('.clients')
+  %li.notif-media= render partial: 'minisite/firm/client', collection: friends.limit(5).decorate, as: :client, locals: { firm: firm}
+  - if friends.count > 5
+    %li.dropdown-footer
+      = link_to(customers_firm_url(firm, subdomain: ''), class: 'view-all', tabindex: '-1') do
+        %i.ion-ios7-arrow-thin-right.pull-right
+        = t('static.show_all')

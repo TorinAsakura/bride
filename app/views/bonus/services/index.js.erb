@@ -1,0 +1,3 @@
+$('#edit .modal').modal('hide');
+$('#edit').html('<%= j(render 'bonus/services/modal', services: @services, firm: @firm)%>');
+$('#edit .modal').modal('show');

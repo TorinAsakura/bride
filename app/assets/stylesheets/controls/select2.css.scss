@@ -1,0 +1,85 @@
+.select2-container {
+  .select2-choice {
+    height: $input-small-height + $main-margin / 2 - 2 * $border-width !important;
+    line-height: $input-small-height + $main-margin / 2 - 2 * $border-width !important;
+    @include border;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    .select2-arrow {
+      height: $input-small-height + $main-margin / 2 - 2 * $border-width !important;
+      b {
+        background-position: 1px 0px;
+      }
+    }
+    > .select2-chosen {
+      color: $black;
+    }
+    &:focus {
+      border-color: $border-color-focus;
+    }
+  }
+  &.select2-dropdown-open .select2-choice .select2-arrow b {
+    background-position: -18px 0;
+  }
+  &.input-big {
+    &.select2-dropdown-open .select2-choice .select2-arrow b {
+      background-position: -18px 4px;
+    }
+    .select2-choice {
+      height: $input-height + $main-margin / 2 - 2 * $border-width !important;
+      line-height: $input-height + $main-margin / 2 - 2 * $border-width !important;
+    }
+    .select2-arrow {
+      height: $input-height + $main-margin / 2 - 2 * $border-width !important;
+      b {
+        background-position: 1px 4px;
+      }
+    }
+  }
+}
+
+.input-big {
+  .select2-container {
+    &.select2-dropdown-open .select2-choice .select2-arrow b {
+      background-position: -18px 4px;
+    }
+    .select2-choice {
+      height: $input-height + $main-margin / 2 - 2 * $border-width !important;
+      line-height: $input-height + $main-margin / 2 - 2 * $border-width !important;
+    }
+    .select2-arrow {
+      height: $input-height + $main-margin / 2 - 2 * $border-width !important;
+      b {
+        background-position: 1px 4px;
+      }
+    }
+  }
+}
+
+.search {
+  .select2-container {
+    &.select2-dropdown-open .select2-choice .select2-arrow {
+      b {
+        background-position: 1px 0;
+      }
+    }
+  }
+  .select2-container.input-big {
+    &.select2-dropdown-open .select2-choice .select2-arrow {
+      b {
+        background-position: 1px 4px;
+      }
+    }
+  }
+}
+.no-search{
+  .select2-search{
+    display: none;
+  }
+}
+.select2-drop.select2-drop-above.select2-drop-active{
+  border-top: inherit;
+}
+
+#s2id_client_city_id b {
+  background: image-url('magnifier.png') no-repeat scroll -16px center rgba(0, 0, 0, 0);
+}

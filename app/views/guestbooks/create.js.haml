@@ -1,0 +1,2 @@
+$('[data-partial=guestbook-list]').append('#{j(render('show', entry: @entry))}')
+$('[data-partial=guestbook-form]').html('#{j(render('form', note: @guestbook_new_note ,url: { controller: :guestbooks, action: :create }))}');

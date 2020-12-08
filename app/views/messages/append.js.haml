@@ -1,0 +1,6 @@
+- if request.referer.include?('clients') || request.subdomain.present?
+  window.location = '#{messages_url}'
+- else
+  - broadcast '/messages/new' do
+    $('.sv-messages').append('#{j render(@message)}');
+    -#$('.sv-messages').scrollTop($('#chat')[0].scrollHeight);

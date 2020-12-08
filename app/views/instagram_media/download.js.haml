@@ -1,0 +1,6 @@
+var tmp_poll_images_ids = '#{@tmp_poll_images_ids}';
+$.get('#{new_poll_path}',
+{
+tmp_poll_images_ids : tmp_poll_images_ids
+},
+function(data){eval(data)}, 'script');

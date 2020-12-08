@@ -1,0 +1,20 @@
+#client-control-panel-wedding-settings.client-settings.sv-article.margintopotstp
+
+  .sv-article
+    .title_nobg Настройка свадьбы
+    = render 'clients/update_actions/wedding_settings/wedding_user', wedding: wedding, client: client
+
+  .sv-article
+    .title_nobg #{t('wedding_steps.step1')}
+    = render 'clients/update_actions/wedding_settings/wedding_couple', wedding: wedding, client: client
+
+  .sv-article
+    .title_nobg #{t('wedding_steps.step2')}
+    = render 'clients/update_actions/wedding_settings/wedding_date', wedding: wedding, client: client
+
+  .sv-article
+    .title_nobg #{t('wedding_steps.step3')}
+    - if site.blank? || site.new_record?
+      = link_to 'Перейти в настройки свадебного сайта', new_site_path, class: 'link-style'
+    - else
+      = link_to 'Перейти в настройки свадебного сайта', edit_site_path(site), class: 'link-style'

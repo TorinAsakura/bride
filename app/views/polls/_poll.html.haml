@@ -1,0 +1,23 @@
+.sv-poll-accordion
+  .sv-poll-accordion-inner{ animate: "#{!poll.can_view_results?(current_user)}" }
+    - poll.images.order(:id).each_with_index do |img, i|
+      .sv-poll-variant.sv-l{ class: "sv-poll-variant-#{poll.images.count}", style: "background-image:url(#{img.image.url(:poll)});" }
+        - unless i.zero?
+          .sv-or-or.sv-or-or-mov или
+        .sv-poll-variant-fade
+        - unless poll.can_view_results?(current_user)
+          = render 'votes/like', resource: img, resource_class_name: img.class.name
+
+.sv-poll-results
+  - if poll.can_view_results?(current_user)
+    - poll.images.order(:id).each do |img|
+      .sv-l{ class: "sv-poll-variant-#{poll.images.count}" }
+        - if current_user.voted?(img)
+          .sv-poll-result.sv-poll-max-result
+            = img.cached_votes_up
+        -else
+          .sv-poll-result
+            = img.cached_votes_up
+  - else
+    .sv-poll-no-results Для того, чтобы узнать результаты опроса, сделайте свой выбор
+  .clear

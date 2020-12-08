@@ -1,0 +1,8 @@
+= simple_form_for @site, :html => {:id => 'sites_form', :multipart => true,  :class => 'modal hide', :style => 'width: 650px;'} do |f|
+  = f.input :name, label: 'Назвавние минисайта', placeholder: 'Я невеста', autofocus: true, input_html: { class: 'input-big'}
+  = f.input :code, label: 'Пароль', placeholder: 'qwerty', input_html: { class: 'input-big'}
+  = f.input :description, as: :text, label: 'Описание', input_html: { class: 'input-big', row: 5}
+
+  = link_to 'Удалить', site_path(@site.id), :method => 'delete', :confirm => 'Вы уверены?', :class => 'link-style' unless @site.id.blank?
+  = f.submit 'Сохранить', class: 'link-style'
+  = link_to 'Закрыть', '#', class: 'link-style', 'aria-hidden' => true, 'data-dismiss' => 'modal'

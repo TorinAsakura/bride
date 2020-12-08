@@ -1,0 +1,12 @@
+- if photos.any?
+  .row#photos{data: {finish: t('.infinitescroll.finish').html_safe, load: t('.infinitescroll.load').html_safe}}= render photos
+  .clearfix
+  .raw
+    .col-xs-12#photos-nav= rel_next_prev_link_tags photos
+- else
+  %h4.no-data<
+    - if album
+      = t('.no_photos', album: album.name)
+    - else
+      = t('.photos_empty')
+

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="<%= t('.all')%>">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String"><%= t('.fields.id')%></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t('.fields.name')%></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t('.fields.email')%></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t('.fields.gender')%></Data></Cell>
+        <%-Guest::STATUSES.each do |status|%>
+            <Cell><Data ss:Type="String"><%= t(".fields.#{status}")%></Data></Cell>
+        <%- end%>
+      </Row>
+      <%- i=0%>
+      <%- @guests.each do |group, guests|%>
+        <%- guests.each do |guest|%>
+          <Row>
+            <Cell><Data ss:Type="Number"><%= i+1%></Data></Cell>
+            <Cell><Data ss:Type="String"><%= guest.name%></Data></Cell>
+            <Cell><Data ss:Type="String"><%= guest.email%></Data></Cell>
+            <Cell><Data ss:Type="String"><%= t("genders.#{guest.gender ? 'male' : 'female'}")%></Data></Cell>
+            <%-Guest::STATUSES.each do |status|%>
+              <Cell><Data ss:Type="String"><%= t(".statuses.#{guest.send(status) ? 'yes' : 'no'}")%></Data></Cell>
+            <%- end%>
+          </Row>
+          <%- i+=1%>
+        <%- end%>
+      <%-end%>
+    </Table>
+  </Worksheet>
+  <%- @guests.each do |group, guests|%>
+    <Worksheet ss:Name="<%= t(".#{group}_guests")%>">
+      <Table>
+        <Row>
+          <Cell><Data ss:Type="String"><%= t('.fields.id')%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= t('.fields.name')%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= t('.fields.email')%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= t('.fields.gender')%></Data></Cell>
+          <%-Guest::STATUSES.each do |status|%>
+            <Cell><Data ss:Type="String"><%= t(".fields.#{status}")%></Data></Cell>
+          <%- end%>
+        </Row>
+        <%- guests.each_with_index do |guest, i|%>
+          <Row>
+            <Cell><Data ss:Type="Number"><%= i+1%></Data></Cell>
+            <Cell><Data ss:Type="String"><%= guest.name%></Data></Cell>
+            <Cell><Data ss:Type="String"><%= guest.email%></Data></Cell>
+            <Cell><Data ss:Type="String"><%= t("genders.#{guest.gender ? 'male' : 'female'}")%></Data></Cell>
+            <%-Guest::STATUSES.each do |status|%>
+              <Cell><Data ss:Type="String"><%= t(".statuses.#{guest.send(status) ? 'yes' : 'no'}")%></Data></Cell>
+            <%- end%>
+          </Row>
+        <%- end%>
+      </Table>
+    </Worksheet>
+  <%- end%>
+</Workbook>
+

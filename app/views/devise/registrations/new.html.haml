@@ -1,0 +1,11 @@
+#sv-login-page
+  %ul.sv-modal-tabs.clearfix
+    %li= link_to 'Вход', new_user_session_path
+    %li.active= link_to 'Регистрация', new_user_registration_path
+
+  .tab-content
+    .clearfix
+      - if params.has_key?(:with_provider)
+        = render 'no_email', user: @client_form
+      - else
+        = render 'devise/shared/sv-register', client_form: @client_form, firm_form: @firm_form

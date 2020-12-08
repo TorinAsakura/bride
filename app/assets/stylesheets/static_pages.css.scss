@@ -1,0 +1,45 @@
+.static-page {
+  h1.title {
+    font-weight: 300;
+    font-size: 22px;
+    color: #c84563;
+    border-bottom: 1px solid #f1849d;
+    padding: 12px 0 10px 10px;
+    margin-bottom: 14px;
+  }
+  &.page_404 {
+    margin-bottom: -60px !important;
+    .top-block {
+      text-align: center;
+      position: relative;
+      height: 240px;
+      line-height: 240px;
+      .error-text {
+        color: #e5e5e5;
+        font-size: 200px;
+      }
+      .error-logo {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+      }
+    }
+    .bottom-block {
+      background: image-url('404_site.jpg') no-repeat scroll center bottom / contain rgba(0, 0, 0, 0);
+      margin-top: -40px;
+      min-height: 745px;
+      text-align: center;
+      .text {
+        color: #4c4c4c;
+        h3 {
+          font-size: 50px;
+        }
+        p {
+          margin: 0 auto;
+          max-width: 30%;
+        }
+      }
+    }
+  }
+}

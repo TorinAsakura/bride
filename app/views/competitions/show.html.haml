@@ -1,0 +1,63 @@
+.sv-wrapper.competition.show.cf
+  .breadcrumbs
+    = link_to @competition.firm_name, firm_link(@competition.firm)
+    >
+    = link_to 'Конкурсы', firm_index_firm_competitions_path(@competition.firm_id)
+    >
+    = @competition.name
+    .clearfix
+
+  %h1= @competition.name
+
+  .row.left
+    .logo
+      = image_tag(@competition.banner_url, class: "competition-banner")
+
+      - for_moderator_of(@firm) do
+        .field
+          = link_to 'Редактировать конкурс', edit_firm_competition_path(@competition.firm_id, @competition)
+
+  .row.right
+    .field
+      .label Описание конкурса
+      .data= nl2br @competition.about_competition
+
+    .field
+      .label Правила конкурса
+      .data= nl2br @competition.rules
+
+    - @competition.competition_prizes.each do |prize|
+      .competition-prize
+        .row.left
+          .field
+            .prize-picture
+              = image_tag(prize.picture_url, class: "competition-prize-preview")
+        .row.right
+          .field
+            = prize.title
+          .field
+            .label Описание
+            %br
+            = prize.description
+
+    .field
+      .label Дата начала конкурса
+      .data= l(@competition.start_date, format: :full) if @competition.start_date?
+
+    .field
+      .label Дата окончания конкурса
+      .data= l(@competition.deadline_date, format: :full) if @competition.deadline_date?
+
+  .cmpetititon-albums
+    - @albums.each do |album|
+      = link_to polymorphic_path([@firm, @competition, album]), :class => "thumbnail pull-left", :style => "text-decoration:none; height: 250px; width:200px; margin:5px;" do
+        - if album.cover.nil?
+          = image_tag "avatar.gif", :class => "img-rounded"
+        - else
+          = image_tag album.cover.path.preview, :class => "img-rounded"
+        .album_info
+          #{album.photos.length} фото
+        .album_name
+          = album.name
+
+.clear

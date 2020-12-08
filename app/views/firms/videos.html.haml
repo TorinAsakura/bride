@@ -1,0 +1,49 @@
+.sv-wrapper
+  = render 'firms/shared/sidebar'
+
+  .sv-article.left
+    = render 'firms/shared/header'
+
+    #sv-videos-block
+      .title.clearfix
+        = link_to firm_link(@firm), class: 'sv-a-back sv-l' do
+          %i.icon-chevron-left
+          -#= image_tag 'sv-icon-arrow_l.png', alt: 'Назад'
+        %span
+          Видеозаписи
+          %i= "(#{@firm.user.videos.size})"
+        %ul
+          %li.add
+            - if @firm.user.is? current_user
+              = link_to new_video_path, class: 'add sv-videos-form-link', remote: true do
+                %i Добавить
+          %li.search
+            = link_to '#', data: { js: 'videos-search' } do
+              %i поиск
+
+      .sv-videos-search-form{ 'data-js' => 'videos-search-form' }
+        = form_tag firm_videos_path, method: :get do
+          = text_field_tag :videos_search, nil, class: 'inp-style sv-videos-search-form__input sv-videos-search-form__input_large', placeholder: 'Поиск по видео'
+          = button_tag 'Искать', name: nil, class: 'find-button'
+
+    %ul.sv-video-list-wrap.two-columns{ 'data-js' => 'video-list' }
+      - @videos.each do |v|
+        %li.sv-video-list-block{ 'data-js' => 'video' }
+          .youtube[v]
+            = link_to '', video_path(v), class: 'video sv-firm-video-link', data: { title: truncate(v.title, length: 20), youtube: v.content }, remote: true
+            .sv-firm-video-link-bg
+
+    .sv-videos-hidden-nav
+      = rel_next_prev_link_tags @videos
+
+- if session[:video]
+  :javascript
+    $(document).ready(function () {
+      $.getScript('#{session.delete :video}');
+    });
+
+- if session.delete :new
+  :javascript
+    $(document).ready(function () {
+      $.getScript('#{new_polymorphic_path([@firm, :video])}');
+    });

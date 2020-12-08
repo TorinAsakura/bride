@@ -1,0 +1,59 @@
+#sv-firm-customers-block
+  .title.clearfix
+    = link_to user_link_page(resource), class: 'sv-a-back sv-l' do
+      %i.icon-chevron-left
+    %span= title
+    %ul
+      %li.search
+        = link_to '#', class: 'active', data: { js: 'posts-search-link' } do
+          %i поиск
+
+  .sv-client__search-friends-form{ 'data-js' => 'post-search-form' }
+
+    = simple_form_for @search, url: path, html: { method: :get, id: 'client-search-form', remote: true} do |f|
+      .sv-client__search-friends-form__group.clearfix
+        = label_tag :search_name, 'Имя и фамилия'
+        .sv-l
+          = f.input :fullname, required: true, placeholder: '', label: false 
+        .radio-gender.sv-l
+          = f.radio_button :gender, 'people', id: 'people', class: 'radio-style-people', checked: true
+          = label_tag 'people', nil, class: 'gender'
+          = f.radio_button :gender, true, id: 'man', class: 'radio-style-man'
+          = label_tag 'man', nil, class: 'gender'
+          = f.radio_button :gender, false, id: 'girl', class: 'radio-style-girl'
+          = label_tag 'girl', nil, class: 'gender'
+
+      .sv-client__search-friends-form__group.clearfix
+        .sv-l
+          = label_tag :search_city, 'Город'
+          = f.input_field :city_id, id: 'client_city_id', data: { 'select2-disabled' => true, 'autocomplete-path' => city_autocomplete_path }
+          = link_to 'x', clients_path, id: 'sv-reset-city-select'
+        .sv-r{ style: 'width:150px; text-align:center;' }
+          = label_tag :age, 'Возраст', style: 'text-align:left;'
+          = f.input :age_min, placeholder: 'от', label: false, input_html: { class: 'sv-client-age sv-l' }
+          .dash.sv-l -
+          = f.input :age_max, placeholder: 'до', label: false, input_html: { class: 'sv-client-age sv-l' }
+          = hidden_field_tag 'section', 'all', id: 'sv-client_search-section'
+        .clear
+
+      .sv-client__search-friends-form__group.clearfix
+        .sv-l
+          = f.input :without_avatar, as: :hidden, input_html: { value: false }
+          %label.checkbox
+            = f.check_box :without_avatar, {}, true, nil
+            %span
+          %label.sv-l{for: 'checkbox'} Без фото
+        .sv-r
+          = f.button :submit, 'Поиск', class: 'link-style'
+        .clear
+
+- if resource.user.client?
+  .sv-client-friends-sections.title_nobg
+    = link_to 'Все друзья', { section: 'all' }, class: 'sv-client-friends-section', section: 'all'
+    = link_to 'Друзья онлайн', { section: 'online' }, class: 'sv-client-friends-section', section: 'online'
+    = link_to 'Заявки в друзья', { section: 'pending' }, class: 'sv-client-friends-section', section: 'pending'
+
+#sv-search-clients-result.sv-search-result
+  = render 'clients/shared/clients', clients: clients 
+
+

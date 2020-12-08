@@ -1,0 +1,6 @@
+$('#firm-slug').html('#{j(render 'firms/update_actions/main_settings/update_firm_slug', firm: @firm)}');
+$('#firm-slug [type=submit]').hide();
+
+- if @slug_changed
+  $('#firm-slug span.result.updated').show();
+  window.history.pushState('/firms/#{@firm.slug}/edit', '/firms/#{@firm.slug}/edit', '/firms/#{@firm.slug}/edit');

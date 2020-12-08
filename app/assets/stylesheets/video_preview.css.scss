@@ -1,0 +1,66 @@
+.video-container{
+    width: inherit;
+    height: inherit;
+    position: relative;
+
+    .video-info{
+      width: inherit;
+      height: 30px;
+      position: absolute;
+      display: block;
+      background: image-url('sorted/sv-bg-trans-gray.png') repeat scroll 0 0 transparent;
+      left: 0;
+      bottom: 0;
+      margin: 0;
+      padding: 0;
+    }
+
+    &:hover{
+      .video-info{
+        background: black;
+      }
+    }
+    
+  }
+
+  
+
+  .video_link_preview{
+    display: block;
+    width: inherit;
+    height: inherit;
+  }
+
+  .video_image_preview{
+    width: inherit;
+    height: inherit;
+  }
+
+  @mixin video-info-span-elements($padding-rght){
+    display: block;
+    float: right;
+    font-style: normal;
+    margin: 0;
+    padding: 0px;
+    line-height: 30px;
+    height: 30px;
+    text-align: right;
+    overflow: hidden;
+    color: white;
+    padding-right: $padding-rght;
+  }
+
+  .video-duration{
+    @include video-info-span-elements(15px);
+  }
+
+  .video-title{
+    @include video-info-span-elements(15px);
+    float: left;
+  }
+
+  .video-play-icon{
+    @include video-info-span-elements(32px);
+    float: left;
+    background: image-url('sorted/sv-icon-play-white.png') no-repeat scroll 5px 50% transparent;
+  }

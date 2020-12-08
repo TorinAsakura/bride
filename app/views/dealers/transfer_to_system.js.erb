@@ -1,0 +1,12 @@
+var messageForm = $('#message_form');
+messageForm.find('.purse_payment_transfer_to_system_amount').removeClass('error').find('.help-inline').remove();
+<%- if @transfer_to_system.present? && (errors = @transfer_to_system.errors.messages[:amount]).present? %>
+  messageForm.find('.purse_payment_transfer_to_system_amount').addClass('error');
+  messageForm.find('.purse_payment_transfer_to_system_amount').find('.cntrls').append("<div class=\"help-inline\"><%= j errors.join('<br/>')%></div>");
+<%- else %>
+  $('#edit .modal').modal('hide');
+  <%- amount = current_firm.purse.available_amount.format(html: true).html_safe%>
+  $('.sv-navigation_all').find('span.purse').html('<%= j amount%>');
+  $('.firm-settings').find('span.rur').html('<%= j amount%>');
+  $('.sv-drop-balance').find('span.cash').html('<%= j amount%>');
+<%end%>

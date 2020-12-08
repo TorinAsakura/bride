@@ -1,0 +1,10 @@
+- @guestbooks.each do |entry|
+  .guestbook.clearfix
+    .user-avatar
+      .avatar
+        = link_to main_domain_link user_path(entry.user) do
+          = image_tag entry.user.avatar
+    .content
+      %p.name= entry.user.name
+      %p.content= nl2br entry.content
+      %p.date= I18n.l( entry.created_at, format: :full_comment )

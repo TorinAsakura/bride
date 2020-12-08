@@ -1,0 +1,233 @@
+#main-container-wedding-calc {
+  margin: 20px auto;
+  font-family: sans-serif;
+
+  h1.title {
+    font-size: 22px;
+    font-weight: 300;
+    display: block;
+  }
+
+  #calc-top-menu {
+    z-index: 999;
+    &.edit-block{
+      padding: 5px 0;
+      background-color: #fff;
+    }
+  }
+  #calc-top-menu-clone {
+    height: 0;
+  }
+
+  .all-categories-total-price {
+    display: inline-block;
+    float: right;
+    margin: 2px 15px 0 0;
+
+    .total-text {
+      font-size: 20px;
+      line-height: 22px;
+    }
+
+    .price {
+      font-size: 24px;
+      line-height: 26px;
+      font-weight: bold;
+      display: inline-block;
+      margin: 0 5px 0 15px;
+    }
+  }
+
+  .hide {
+    display: none !important;
+  }
+
+ .item {
+  width: 100%;
+  padding: 10px;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  position: relative;
+
+  -webkit-transition: background 1s ease-in-out;
+     -moz-transition: background 1s ease-in-out;
+       -o-transition: background 1s ease-in-out;
+          transition: background 1s ease-in-out;
+
+    div {
+      display: inline-block;
+    }
+
+    .error-message {
+      display: block;
+      color: #ff0000;
+    }
+    &.error-price,
+    &.error-count, {
+      border: 1px solid #ff0000;
+    }
+
+    &.delete-select {
+      background-color: #ffc0cb !important;
+    }
+
+    &:nth-child(2n+1) {
+      background: #eee;
+    }
+  }
+
+  .name {
+    width: 25%;
+  }
+
+  .delete {
+    float: right;
+    cursor: pointer;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    text-indent: -99999px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background: image-url('16x16-close-red.png');
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  input {
+    width: 50px;
+    text-align: right;
+    margin: 1px 5px;
+
+    &[readonly] {
+      background: inherit;
+      border: none;
+      outline: none;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+      cursor: default;
+    }
+  }
+
+  .sign {
+    font-weight: bold;
+    color: #ccc;
+    padding: 0 5px;
+  }
+
+  div.item-count{
+    min-width: 160px;
+    span {
+      display: inline-block;
+    }
+  }
+
+
+  .item-total {
+    width: 20%;
+    text-align: right;
+  }
+
+  .item-total span {
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: bold;
+    text-align: right;
+    width: 30%;
+  }
+
+  .error-count .item-total span,
+  .error-price .item-total span {
+    color: #ff0000;
+  }
+
+  .calc-category > .title {
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-family: sans-serif;
+    border-top: 2px solid #c84563;
+    margin: 10px 0 10px 0;
+    padding: 10px 0 0 30px;
+  }
+
+  .calc-category {
+    position: relative;
+  }
+
+  .category-total-price {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 16px;
+    line-height: 18px;
+
+    .price {
+      font-size: 20px;
+    }
+  }
+  .icon {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    background-image: image-url('icons.png');
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    z-index: 5;
+
+    &.plus {
+      background-position: -432px 0;
+      &:hover {
+        background-position: -112px 0;
+      }
+    }
+
+    &.minus {
+      background-position: -448px 0;
+      &:hover {
+        background-position: -128px 0;
+      }
+    }
+  }
+}
+
+#modal-add-item {
+
+  input {
+    width: 134px;
+    margin: -2px 0 0 0;
+
+    &.long {
+      width: 300px;
+      margin: 0;
+    }
+  }
+
+  select {
+    width: 315px;
+  }
+
+  .label {
+    width: 140px;
+    display: inline-block;
+    margin: 0 15px 0 0;
+  }
+
+  .field {
+    height: 40px;
+    line-height: 40px;
+    margin: 0;
+
+    &.long {
+      height: 80px;
+    }
+  }
+}

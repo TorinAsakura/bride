@@ -1,0 +1,10 @@
+<%- if (errors = @guest.errors).present?%>
+  var form = $('#edit_<%= dom_id(@guest)%>');
+  <%- errors.messages.each do |field, message|%>
+    form.find('#guest_<%= field%>').parents('.form-group').addClass('has-error');
+  <%-end %>
+<%- else%>
+  var guest = $('#<%= dom_id(@guest)%>');
+  guest.after('<%= j(render @guest)%>');
+  guest.remove();
+<%- end%>

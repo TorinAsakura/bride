@@ -1,0 +1,22 @@
+.sv-comments-box{ id: "sv-comments-box-#{resource.class.name}" }
+  - nested_set_options(comments) do |comment|
+    = render 'comments/comment', comment: comment, modal: modal, parent: "sv-comments-box-#{resource.class.name}"
+
+  .sv-comment-edit-form.sv-comment-edit-form_hidden{ 'data-js' => 'comment-edit-form-wrapper' }
+    = simple_form_for Comment.new, remote: true,
+                                   method: :put,
+                                   html: { class: 'sv-comment-edit-form__form',
+                                           'data-js' => 'comment-edit-form' } do |f|
+      = hidden_field_tag :modal, modal
+      = hidden_field_tag :parent, "sv-comments-box-#{resource.class.name}"
+      = f.input_field :body, as: :text,
+                             class: 'sv-comment-edit-form__body textarea-style',
+                             'data-js' => 'comment-edit-body'
+      .sv-comment-edit-form__images{ 'data-js' => 'comment-edit-images' }
+        .sv-comment-edit-form__image-wrapper.sv-comment-edit-form__image-wrapper_template
+          = image_tag 'avatar.gif', class: 'sv-comment-edit-form__image', 'data-js' => 'comment-edit-image'
+          = link_to 'удалить', '#', class: 'sv-comment-edit-form__image-destroy', 'data-js' => 'comment-edit-image-destroy'
+      = button_tag 'Сохранить', class: 'sv-comment-edit-form__btn sv-comment-edit-form__btn_save link-style',
+                                'data-js' => 'comment-edit-save'
+      = link_to 'Отмена', '#', class: 'sv-comment-edit-form__btn sv-comment-edit-form__btn_cancel',
+                               'data-js' => 'comment-edit-cancel'

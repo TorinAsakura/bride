@@ -1,0 +1,6 @@
+%div{class: "#{dom_class(background_property)} #{background_property.image_class}"}><
+  - if background_property.header?
+    .header-demo.data-block{style: background_property.style(true)}
+  - else
+    = image_tag(background_property.image)
+  %span.check{data: {tag: background_property.tag, style: background_property.style, id: background_property.id}}

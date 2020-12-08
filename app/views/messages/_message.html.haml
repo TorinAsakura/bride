@@ -1,0 +1,18 @@
+- profileable = message.user.profileable
+.sv-message{class: (current_user.my_message?(message) ? 'sv-message_my' : 'sv-message_other'), id: dom_id(message)}
+  .sv-message__avatar
+    = link_to user_link_page(profileable), class: 'sv-message__avatar-border' do
+      = image_tag message.user.avatar.thumb, class: 'sv-message__avatar-image'
+
+  .sv-message__title
+    %span.sv-message__title-name #{profileable.try(:full_name) || profileable.name || 'Пользователь'}
+    - if current_user.my_message? message
+      = link_to '&times'.html_safe, message_path(message.id), method: :delete, remote: true, class: 'sv-message__title-cross'
+    %span.sv-message__title-date #{message.created_at.to_date.today? ? I18n.l(message.created_at, format: :long_time) : I18n.l(Date.today)}
+
+  .sv-message__body
+    = message.body
+
+    .sv-message__images
+      - message.images.each do |image|
+        = image_tag image.image, class: 'sv-message__images-image'

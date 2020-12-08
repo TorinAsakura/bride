@@ -1,0 +1,76 @@
+- if video.new_record?
+  - form_url = @owner.user.firm ? firm_videos_url(subdomain: @owner.slug) : polymorphic_url([@owner, :videos])
+- else
+  - form_url = polymorphic_url([@owner, video])
+
+= simple_form_for video, url: form_url, html: { class: 'sv-video-form', 'data-js' => 'video-form' } do |f|
+  - if video.new_record?
+    .title_nobg Добавить видеозапись
+  - else
+    .title_nobg Редактировать видеозапись
+  .sv-r{style: "padding-bottom: 5px;"}
+    = image_tag 'sorted/sv-icom-vk.png'
+    = image_tag 'sorted/sv-icon-video-sources.png'
+    = image_tag 'sorted/sv-icon-vimeo.png'
+
+  = f.input :content, as: :string,
+                      input_html: { class: 'input-xxlarge', autocomplete: 'off', 'data-js' => 'video-url-input', value: !@video_link.nil? ? @video_link : video.content},
+                      label: 'Ссылка на ролик или код видео'
+
+  = f.input :title, input_html: { class: 'input-xxlarge', autocomplete: 'off' }, label: 'Название'
+  = f.input :description, input_html: { class: 'input-xxlarge', rows: 5 }, label: 'Описание'
+
+  .tags-field
+    %label Введите теги
+    = render "tags/input",  f: f, tags: video.tags
+
+  .sv-video-form-status
+    = check_box_tag 'video[status]', true,
+                                     @video.status > 0,
+                                     class: 'sv-video-form-status__checkbox'
+    = label_tag 'video[status]', 'Сделать видео «Рекомендованным»', class: 'sv-video-form-status__label'
+
+    .sv-video-form-status-popup
+      %ul
+        %li
+          После проверки администратором
+          %br
+          ваше видео будет доступно в
+          %br
+          разделе «Интересно смотреть»
+
+  .sv-r
+    = f.submit 'Сохранить', class: 'link-style'
+  .clear
+
+.hide{ 'data-js' => 'video-form-error' }
+  .sv-video-form-error
+    .title_nobg Ошибка при загрузке видео
+    %p{style: "padding-bottom: 5px;"}
+      Загрузка видео возможна только с сайтов Вконтакте, Youtube и Vimeo. При добавлении видео на наш сайт,
+      %br
+      используйте ссылки на видео следующего вида:
+    %p
+      %p
+        .sv-l
+          = image_tag 'sorted/sv-icom-vk.png'
+        %span{style: "padding-left: 5px;"} http://vk.com/videos236658699
+        %br
+        %br
+        .sv-l
+          = image_tag 'sorted/sv-icon-video-sources.png'
+        %span{style: "padding-left: 5px;"}
+          http://www.youtube.com/watch?v=OKol3mCFhHM
+        %br
+        %br
+        .sv-l
+          = image_tag 'sorted/sv-icon-vimeo.png'
+        %span{style: "padding-left: 5px;"}
+          https://vimeo.com/100024795
+      %p{style: "margin-top: 25px; text-align: center;"}
+        = link_to "Вернуться и исправить", "javascript:void()", class: "link-style", id: "error-box-control"
+
+  :javascript
+    $("#error-box-control").on("click", function(){
+      $.fancybox.close();
+    })

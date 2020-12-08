@@ -1,0 +1,57 @@
+.sv-article.wish-edit-form
+  .mini-site.margintopotstp
+    .title_nobg
+      Желаемые подарки
+    %section.sv-content
+
+      %ul.wish-list
+        - white_list.each do |w|
+          %li
+            .preview.sv-l
+              - if w.image.present?
+                - if w.url.blank?
+                  = image_tag w.image.image.thumb
+                - else
+                  = link_to w.url_with_protocol, target: '_blank' do
+                    = image_tag w.image.image.thumb if w.image
+
+            .wish-content.sv-l
+              .present-name
+                - if w.url.blank?
+                  = w.name
+                - else
+                  = link_to w.name, w.url_with_protocol, target: '_blank'
+
+              .text= nl2br w.description
+              .actions
+                = link_to 'Редактировать', edit_site_wishlist_path(site, w), class: 'link-style', remote: true
+                = link_to 'Удалить', site_wishlist_path(site, w),  class: 'link-style-inner', method: :delete
+
+      .add-new-item
+        = link_to new_site_wishlist_path(site), remote: true do
+          .text
+            Добавить подарок
+          .plus
+            +
+
+    .title_nobg
+      Черный список подарков
+
+
+    = form_tag update_all_site_wishlists_path(site), method: :put, class: 'wish-edit-form' do
+      %section.sv-content
+        %ul.un-wish-list
+          - black_list.each_with_index do |w, index|
+            %li
+              .sv-l= "#{index + 1}."
+              .sv-l= text_field_tag "wishlists[#{w.id}]name", w.name
+              .sv-l
+                = link_to site_wishlist_path(site, w), method: :delete do
+                  %i.icon-remove
+      .add-new-item
+        = link_to new_site_wishlist_path(site, black: true), remote: true do
+          .text Добавить подарок
+          .plus +
+
+      = submit_tag 'Сохранить', class: 'link-style'
+

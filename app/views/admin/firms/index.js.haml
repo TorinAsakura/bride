@@ -1,0 +1,2 @@
+$('#firms-list').html('#{j(render @firms)}');
+$('#firms-paginate').html('#{j(paginate @firms, window: 3, outer_window: 3)}');

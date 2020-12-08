@@ -1,0 +1,15 @@
+.sv-l.mini-filtr_text Показывать по:
+%ul.sv-mini-pegnav.sv-l
+  - [20, 50, 100].each do |p|
+    - active = p.eql?(per)
+    %li{class: ('active' if active)}
+      - if active
+        %span= p
+      - else
+        = link_to(p, purse_payments_path(per: p, scope: scope), remote: true)
+  - all = per.eql?('all')
+  %li{class: ('active' if all )}
+    - if all
+      %span Все
+    - else
+      = link_to('Все', purse_payments_path(per: 'all', scope: scope), remote: true)

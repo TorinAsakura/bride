@@ -1,0 +1,45 @@
+= render :partial => 'layouts/admin_tab_menu',  :locals => { :select => "question" }
+%ul.nav.nav-tabs
+  %li.active
+    = link_to "Вопросы", admin_questions_path
+  %li
+    = link_to "Категории", admin_question_categories_path
+%ul.nav.nav-pills
+  %li{:class => params.has_key?(:search) ? "" : "active"}
+    %a{:href => admin_questions_path} Все вопросы
+  %li{:class => params.has_key?(:search) ? "active" : ""}
+    %a{:href => admin_questions_path({:search => {:recommended_is_true => true} })} Рекоммендованные
+- @questions.each do |question|
+  %div{:style => "padding:10px;"}
+    .pull-left
+      = link_to user_path(question.user) do
+        = image_tag question.user.avatar.thumb
+    .pull-left{:style => "margin-left: 30px; width: 500px;"}
+      %div
+        .pull-left
+          %span
+            = link_to question.user.client.full_name, user_path(question.user)
+          %span
+            %small
+              = question.user.city.name if question.user.city
+        .pull-right
+          %span
+            %small
+              = question.created_at
+        .clearfix
+      %div
+        - if question.user.client.wedding
+          %b Текущая неделя пользователя:
+          = question.user.client.wedding.current_weddk_number
+      %div
+        = link_to question.title, admin_question_path(question)
+      %div
+        = question.body
+      %div
+        .pull-right
+          = link_to question.question_category.name, "#" if question.question_category
+    .clearfix
+    = link_to_unless question.recommended?, "Рекомендовать", recommend_admin_question_path(question), :method => "POST" do
+      = link_to "Не рекомендовать", unrecommend_admin_question_path(question), :method => "POST"
+    %hr
+= paginate @questions

@@ -1,0 +1,35 @@
+.sv-community__posts
+  .main-title.clearfix
+    %span Обсуждения
+    %ul
+      %li.add
+        -# - for_member_of @community do
+        = link_to new_polymorphic_path([community, :post]), remote: true, class: 'add' do
+          %i добавить
+      %li.search
+        = link_to '#' do
+          %i найти
+
+  .sv-community__search-posts.clearfix
+    = simple_form_for @search, url: community_path(@community), html: { method: :get, id: 'client-search-form', remote: true} do |f|
+      .block-sv-find-user
+        .sv-l
+          = f.input :fragment, required: true, placeholder: 'Поиск', label: false
+
+          = f.input :post_category_ids, as: :hidden, input_html: { id: 'sv-community_post-category-ids' }
+
+          = hidden_field_tag 'sort', 'created_at', id: 'sv-search-sort-type'
+          = hidden_field_tag 'order', 'DESC', id: 'sv-search-order-type'
+
+        .sv-end-find-us.sv-r
+          = f.button :submit, 'Найти', class: 'link-style sv-l'
+
+  .title_nobg
+    = link_to 'По дате создания', community_path(@community), class: "sv-search-sort #{params[:order]}", sort: 'created_at'
+    = link_to 'По дате комментария', community_path(@community), class: "active sv-search-sort #{params[:order]}", sort: 'last_comment_at'
+
+  #sv-posts-search-result.sv-article-list-wrap.clearfix.sv-search-result
+    = render partial: 'communities/post', collection: posts, as: :post
+
+  .sv-community__posts-nav
+    = paginate @posts

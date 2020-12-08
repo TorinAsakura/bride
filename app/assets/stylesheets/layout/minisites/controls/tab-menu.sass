@@ -1,0 +1,35 @@
+.tab-menu
+  .dropdown-menu-activate
+    .active
+      display: block
+      background-color: $main-color
+      &:before
+        border-left-color: transparent
+        border-top-color: $main-color
+        margin-top: 0
+        bottom: 100%
+        left: 10%
+        z-index: 2
+        top: 100%
+        width: $main-margin/6
+        height: $main-margin/6
+  .dropdown-menu-active
+    position: static
+    display: none
+    li
+      font-size: $main-margin
+      border-left: $border-width*3 solid $main-color!important
+      border-top: 1px solid $gray
+      a
+        background-color: $tab-menu-gray
+      .active
+        display: block
+        background-color: $a-hover
+        &:before
+          height: 0
+          width: 0
+          left: 100%
+          top: 50%
+          margin-top: -$main-margin/2
+          border-left-color: $a-hover
+          border-top-color: transparent

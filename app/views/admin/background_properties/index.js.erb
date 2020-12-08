@@ -1,0 +1,2 @@
+$('#styles-list').html('<%= j(render @styles)%>');
+$('#styles-paginate').html('<%= j(paginate @styles, window: 3, outer_window: 3, remote: true)%>');

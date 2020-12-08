@@ -1,0 +1,12 @@
+- form_url = task_category.new_record? ? admin_task_categories_path : admin_task_category_path(task_category)
+
+= simple_form_for task_category, url: form_url, html: {id: 'task_category_form', class: 'modal hide'}  do |f|
+  .modal-header
+    %h3= task_category.new_record? ? 'Новая категория' : 'Редактировать категорию'
+  .modal-body
+    %p
+      = f.input :name
+  .modal-footer
+    = link_to 'Удалить', admin_task_category_path(task_category), method: 'delete', confirm: 'Вы уверены?', class: 'link-style' unless task_category.new_record?
+    %button.link-style Сохранить
+    = link_to 'Закрыть', admin_task_categories_path, class: 'link-style sv-r', 'data-js' => 'illustration-popup-close'

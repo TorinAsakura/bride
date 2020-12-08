@@ -1,0 +1,5 @@
+$('#client-phone').html('#{j(render 'clients/update_actions/main_settings/update_client_phone', client: @client)}');
+$('#client-phone [type=submit]').hide();
+
+- if @phone_changed
+  $('#client-phone span.result.updated').show();

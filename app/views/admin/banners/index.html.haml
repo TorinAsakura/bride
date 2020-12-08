@@ -1,0 +1,10 @@
+= link_to 'Добавить баннер', new_admin_banner_path, class: 'link-style'
+
+%ul.sv-admin-banner-list
+  - @banners.each do |banner|
+    %li.sv-admin-banner
+      %div= banner.title
+      = image_tag banner.image.thumb
+      .sv-admin-banner__links
+        = link_to 'Редактировать', edit_admin_banner_path(banner)
+        = link_to 'Удалить', admin_banner_path(banner), method: :delete, confirm: 'Вы действительно хотите удалить этот баннер?'

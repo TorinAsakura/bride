@@ -1,0 +1,40 @@
+- friends = current_user.friendships_awaiting_acceptance
+- invited = client.invited.includes(:client)
+- count = friends.count + invited.count
+%li.m1
+  = link_to(friends_client_url(client), title: t('.title'), class: 'm1') do
+    %i.sv-icon.people
+    - if count > 0
+      .notification= count
+  - if count > 0
+    %i.arr
+    .drop.sv-drop-friends
+      - unless friends.count.zero?
+        .title= t('.friends')
+        %ul
+          - friends.decorate.each do |friend|
+            %li.clearfix
+              = friend.small_avatar_image
+              .content
+                = friend.link_to_first_name
+                .common-friend
+                  = t('.common_friends')
+                  %br
+                  = current_user.common_friends(friend.user).size
+              .buttons
+                = friend_action((friend.user), 'link-style')
+      - unless invited.count.zero?
+        .title= t('.invited')
+        %ul
+          - invited.decorate.each do |invite|
+            %li.clearfix
+              = invite.small_avatar_image
+              .content
+                = invited.client.decorate.link_to_first_name
+                .common-friend
+                  = t('.common_friends')
+                  %br
+                  = current_user.common_friends(invite.client.user).size
+              .buttons
+                = link_to(t('static.confirm'), confirm_client_invite_url(client, invite), method: :post)
+                = link_to(t('static.reject'),  reject_client_invite_url(client, invite),  method: :put)

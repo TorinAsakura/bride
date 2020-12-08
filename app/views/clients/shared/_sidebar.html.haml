@@ -1,0 +1,123 @@
+.sv-aside
+  .sv-client-avatar
+    - if @client.user.destroyed? || @avatar.blank?
+      .sv-client-avatar__image
+        = image_tag @client.avatar,
+                    alt: '',
+                    'data-js' => 'client-avatar-image',
+                    'data-image-url' => @client.avatar_url,
+                    'data-loading' => asset_path('loading.gif')
+    - else
+      = link_to avatar_client_path(@client), remote: true, class: 'sv-client-avatar__image' do
+        = image_tag @client.avatar.usual,
+                    alt: '',
+                    'data-js' => 'client-avatar-image',
+                    'data-image-url' => @client.avatar_url,
+                    'data-loading' => asset_path('loading.gif')
+    - for_moderator_of @client do
+      .sv-client-avatar__actions-wrapper
+        %ul.sv-client-avatar__actions
+          %li.sv-client-avatar__action.sv-client-avatar__action_upload
+            %i
+            = link_to 'Загрузить аватарку', '#', 'data-js' => 'client-avatar-upload'
+          %li.sv-client-avatar__action.sv-client-avatar__action_edit{ class: @client.avatar.blank? ? 'sv-client-avatar__action_hidden' : ''}
+            %i
+            = link_to 'Редактировать', '#', 'data-js' => 'client-avatar-edit'
+          %li.sv-client-avatar__action.sv-client-avatar__action_destroy{ class: @client.avatar.blank? ? 'sv-client-avatar__action_hidden' : '' }
+            %i
+            = link_to 'Удалить', '#', 'data-js' => 'client-avatar-destroy'
+
+  = render 'clients/shared/avatar_editor'
+
+  %h2.sv-client-fullname
+    %i.sv-client-fullname__gender{ class: @client.gender ? 'sv-client-fullname__gender_male' : 'sv-client-fullname__gender_female' }
+    = link_to @client.full_name, @client, class: 'sv-client-fullname__link'
+
+
+  - unless @client.user.destroyed?
+    .sv-client-status-wrapper
+      = render 'clients/update_actions/update_status', client: @client
+
+    = render 'clients/shared/navigation'
+
+    - if for_moderator_of(@client) || @friends_slidebar.present?
+      .sv-side-box
+        .title.clearfix
+          = link_to friends_client_path(@client) do
+            %span
+              Друзья
+        - if @friends_sidebar.present?
+          %ul.sv-firm-client-list.clearfix
+            - @friends_sidebar.each do |friend|
+              %li.sv-firm-client
+                = link_to '', friend, class: 'sv-firm-client-link'
+                = image_tag friend.avatar.thumb, class: 'sv-firm-client-avatar-thumb'
+                .sv-firm-client-box-name
+                  = friend.full_name
+        - else
+          .sv-empty-section
+            .sv-empty-section__inner
+              У вас еще нет друзей
+
+    - if for_moderator_of(@client) || @videos_sidebar.present?
+      #sv-firm-side-videos
+        .title.clearfix
+          = link_to client_videos_path(@client) do
+            %span
+              Видеозаписи
+          - if @client.user == current_user
+            = link_to new_polymorphic_path([@client, :video]), class: 'add sv-videos-form-link', remote: true do
+              %i Добавить
+        - if @videos_sidebar.present?
+          %ul.sv-video-list-wrap.one-column
+            - @videos_sidebar.each do |v|
+              %li.sv-video-list-block
+                - if v.content.match(/vk/) || v.content.match(/vimeo/)
+                  = link_to polymorphic_path([v.multimedia.profileable, v]), remote: true, class: 'video_link_preview' do
+                    .video-container
+                      %img.video_image_preview{src: "#{v.media_preview}"}
+                      %span.video-info
+                        %span.video-play
+                          %span.video-play-icon
+                          %span.video-title #{v.title}
+                        %span.video-duration 
+                          #{v.duration.present? ? v.duration : "??:??:??"}
+                - else
+                  .youtube[v]
+                    = link_to '', polymorphic_path([v.multimedia.profileable, v]), class: 'video sv-firm-video-link', data: { title: truncate(v.title, length: 20), youtube: v.content }, remote: true
+                    .sv-firm-video-link-bg
+        - else
+          .sv-empty-section
+            .sv-empty-section__inner
+              У вас еще нет ни одного видео, хотите
+              = link_to 'добавить видео?', new_client_video_path(@client), remote: true, class: 'sv-empty-section__link'
+
+    - if for_moderator_of(@client) || @albums.present?
+      #sv-firm-side-videos
+        .title.clearfix
+          = link_to client_albums_path(@client) do
+            %span
+              Фотографии
+          - for_moderator_of @client do
+            - if @latest_album.present?
+              = link_to 'Загрузить фотографии', new_polymorphic_path([@client, :album], upload_to: @latest_album), class: 'add sv-videos-form-link', remote: true
+            - else
+              = link_to 'Загрузить фотографии', new_polymorphic_path([@client, :album]), class: 'add sv-videos-form-link', remote: true
+        - if @albums_sidebar.present?
+          %ul#sv-side-photos
+            - @albums_sidebar.each do |album|
+              %li
+                .sv-firm-album.sv-firm-album_mini
+                  = link_to polymorphic_path([@client, album]) do
+                    = image_tag((path = album.cover.try(:path)).present? ? path.url(:cover) : 'placeholders/stub_for_album.jpg')
+                  .sv-firm-album__info.sv-firm-album__info_mini
+                    = link_to polymorphic_path([@client, album]), class: 'sv-firm-album__info-name sv-firm-album__info-name_mini' do
+                      = album.name
+                      .sv-firm-album__info-icon
+                      .sv-firm-album__info-count
+                        = album.photos.count
+        - else
+          .sv-empty-section
+            .sv-empty-section__inner
+              У вас еще нет ни одной фотографии, хотите
+              = link_to 'добавить фотографию?', new_client_album_path(@client), remote: true, class: 'sv-empty-section__link'

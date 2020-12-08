@@ -1,0 +1,12 @@
+$.fancybox.close();
+$('.add-sphere').html('<%= j(render 'spheres/add_firm_catalog', firm: @firm)%>');
+'<%= form_for @firm do |f| %>'
+$('.spheres-list').html('<%= j render 'firms/control_panel/firm_spheres_form', f: f%>');
+'<%-end%>'
+$('.spheres-list').find('select').select2();
+<%-%w(vip pro base).each do |cutaway|%>
+    $('#cutaway-<%= cutaway%>').html('<%= j render "firms/cutaways/#{cutaway}", firm: @firm.decorate, cutaway: cutaway%>');
+<%-end%>
+
+<%- class_name =  "c_#{dom_id(@sphere)}"%>
+new FirmCatalogSelector({ sphere: '.<%= class_name%> .firm_sphere_id', catalog: '.<%= class_name%> .firm_catalog_id', catalogList: '.<%= class_name%> select.firm_catalog_ids'});

@@ -1,0 +1,24 @@
+= simple_form_for subscription, url: bonus_service_subscriptions_path(subscription.service), html: { remote: true, id: 'add_city_form', class: 'modal hide' } do |f|
+  = hidden_field_tag :list, params[:list]
+  .modal-header
+    %h3= subscription.signing_service.decorate.title
+  .modal-body
+    %p Выберите город
+    = f.input :signing_object_id, as: :hidden, input_html: {data: {'autocomplete-path' => city_autocomplete_path }, class: 'input-big', style: 'width: 274px;'}, label: 'Дополнительный город:'
+    %br
+    - if subscription.target.has_cities?
+      .balance.row
+        %p.span3
+          Ваш баланс:
+          %span.btn-link= current_firm.purse.available_amount.format(html: true).html_safe
+        = link_to 'Пополнить', edit_firm_url(current_firm, anchor: 'monetize-purse'), class: "btn"
+    .price.hidden
+      %p
+        Стоимость вибраного города:
+        %span.btn-link
+      %p
+        %em Оплачивается один раз и навсегда
+    %p.error.main-color-text
+
+  .modal-footer
+    %button.link-style.hidden Оплатить

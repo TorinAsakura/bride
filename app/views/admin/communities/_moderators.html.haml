@@ -1,0 +1,7 @@
+- admin_flag = current_user.has_role? :admin
+- moderators.each do |moderator|
+  .sv-admin-community__moderator 
+    - if admin_flag
+      = link_to '&times;'.html_safe, remove_moderator_admin_community_path(@community, moderator),
+                     class: 'link-style', method: :delete, remote: true, confirm: 'Вы уверены?'
+    = link_to moderator.email, user_path(moderator)

@@ -1,0 +1,42 @@
+#create_couple.modal.fade{:style => "width:800px; margin-left:-435px;"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3
+      Пригласить
+      -#= invite_of_current_user_gender
+  .modal-body
+    = simple_form_for User.new, :url => invitation_path(User.new), :defaults => { :input_html => { :class => 'input-xlarge' } }, :html => {:method => :post} do |f|
+      -#= devise_error_messages!
+      %p
+        .row
+          .span4
+            %label.radio
+              = radio_button_tag 'user[existed]', '1', false, :class => 'existed_user'
+              Является пользователем системы
+        .row
+
+          .form-search
+            .span4
+              .input-prepend
+                %button.btn{ :type => 'submit', :disabled => 'disabled'}
+                %i.icon-search
+              = hidden_field_tag :couple_id, '', :class => 'input-large search-query', :placeholder => 'найти половинку'
+
+      %br/
+      .row
+        .span4
+          %label.radio
+            = radio_button_tag 'user[existed]', '0', true, :class => 'existed_user'
+            Не является пользователем системы
+
+      .row
+        .span4
+          = f.input :name
+        .span4
+          %label.string
+            %abbr{}*
+            Укажите e-mail для отправки приглашеня:
+          = f.input :email, :label => false, :required => false
+      %br/
+      %div
+        =f.submit "Пригласить", :class => 'btn btn-large btn-success'

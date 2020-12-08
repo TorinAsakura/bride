@@ -1,0 +1,86 @@
+/*
+  *= require fontello/css/fontello-fonts
+  *= require fontello/css/fontello-codes
+*/
+@import "bourbon";
+//@import "neat";
+
+@import 'mixins';
+@import 'values';
+
+@import "sorted/bootstrap";
+@import "main/jquery.mCustomScrollbar";
+@import "main/fancybox/jquery.fancybox";
+@import "sorted/template_styles";
+@import "sorted/gift-style";
+@import "sorted/new-style";
+@import "main/fancybox/helpers/jquery.fancybox-buttons";
+@import "main/fancybox/helpers/jquery.fancybox-thumbs";
+@import "main/chosen/chosen";
+@import "main/general";
+@import "main/ui_elements";
+
+@import 'jquery-ui-1.9.1';
+@import 'jquery-ui-custom';
+@import 'redactor-rails/css/redactor';
+@import 'jquery.fileupload-ui';
+@import 'sorted/select2';
+@import 'pages';
+@import 'jquery-minicolors';
+
+@import 'video_preview';
+@import 'styles';
+@import 'events';
+@import 'firms';
+@import 'clients';
+@import 'sites';
+@import 'user_photo';
+@import 'videos';
+@import 'seating_plan';
+@import 'wedding_calcs';
+@import 'programs';
+@import 'wishlists';
+@import 'competitions';
+@import 'polls';
+@import 'posts';
+@import 'firm_pages';
+@import 'firm_catalogs';
+@import 'wedding_cities_modal';
+@import 'bonus_subscriptions';
+@import "social_login";
+@import 'messages';
+@import 'photos';
+@import 'ideas';
+@import 'general';
+@import 'comments';
+@import 'complaints';
+@import 'like';
+@import 'static_pages';
+
+@import 'admin/index';
+
+@import 'layout/base';
+@import 'controls/base';
+@import 'jquery.Jcrop.min';
+@import 'token-input-facebook';
+@import 'jquery-clockpicker';
+
+@import 'sorted/addon';
+
+@import 'jquery.combosex-0.1/jquery.combosex';
+@import 'colorpicker/colorpicker';
+@import 'BeatPicker';
+@import 'tags';
+
+@import 'dealer';
+@import 'vkontakte_media';
+@import 'instagram_media';
+@import 'home';
+@import 'footer';
+@import 'banner';
+
+:focus{
+  outline: none!important;
+  outline: 0!important;
+}
+

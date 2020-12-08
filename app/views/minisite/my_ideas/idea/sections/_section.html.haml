@@ -1,0 +1,4 @@
+.btn-group(data-toggle="buttons")
+  %label.btn.btn-xs.btn-danger
+    = check_box_tag("section-filter-#{section.filter_name}", section.filter_name, false)
+    = section.name

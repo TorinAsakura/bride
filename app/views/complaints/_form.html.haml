@@ -1,0 +1,10 @@
+.sv-complaint
+  = simple_form_for @pretension.complaints.new, remote: true, html: { class: 'sv-complaint__form' } do |f|
+    .title_nobg Написать жалобу
+    %p Если вы заметили какое-либо нарушение на сайте, вы можете написать жалобу и администрация сайта примет меры
+    = f.hidden_field :resource_type, name: "resource_type", value: @pretension.class.to_s
+    = f.hidden_field :resource_id,   name: "resource_id",   value: @pretension.id
+    = f.input :content, label: false,
+                        wrapper: false,
+                        input_html: { class: 'textarea-style sv-complaint__content', maxlength: 500 }
+    = f.submit 'Отправить', class: 'link-style'

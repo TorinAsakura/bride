@@ -1,0 +1,24 @@
+.albums-photos
+  $photo-height: 206px
+  +clearfix
+  > li
+    display: block
+    float: left
+    margin-right: $main-margin
+    margin-bottom: $main-margin
+    &:hover
+      box-shadow: 0 0 $main-margin/2 $border-color
+    &:nth-child(3n+3)
+      margin-right: 0
+
+    a
+      display: block
+      box-shadow: none
+      width: $photo-height
+      height: $photo-height
+      overflow: hidden
+    img
+
+      display: block
+      min-width: 100%
+      min-height: 100%

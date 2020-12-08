@@ -1,0 +1,13 @@
+= simple_form_for [:admin, @collection], html: { multipart: true, class: 'modal' } do |f|
+  .title_nobg
+    = @collection.new_record? ? 'Новая коллекция свадебных идей' : 'Редактирование коллекции свадебных идей'
+  = f.input :name, label: 'Название'
+
+  %div
+    %button.link-style Сохранить
+    - if @collection.persisted?
+      = link_to 'Удалить',
+                admin_idea_collection_path(@collection),
+                class: 'link-style-active',
+                method: :delete,
+                confirm: 'Вы уверены?'

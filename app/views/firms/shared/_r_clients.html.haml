@@ -1,0 +1,24 @@
+#sv-firm-side-clients.sv-firm-client-box.block
+  .title
+    = link_to firm_customers_path do
+      %span Наши клиенты
+    - if clients_requests && firm.user == current_user
+      = link_to "+#{clients_requests.count}", '#friendship', html_options = {'data-toggle' => 'modal'}
+  %ul.sv-firm-client-list.clearfix
+    - if clients
+      - clients.each do |client|
+        %li.sv-firm-client
+          = link_to '', client_url(client), class: 'sv-firm-client-link'
+          = image_tag client.avatar.thumb, class: 'sv-firm-client-avatar-thumb'
+          .sv-firm-client-box-name
+            = client.full_name
+          .sv-firm-client-info-popup
+            %b= client.full_name
+            %ul
+              - if client.city
+                %li= client.city.name
+              - if client.wedding
+                %li Дата свадьбы:
+                %li= client.wedding.wedding_date
+              - if client.site.present?
+                %li= link_to_minisite(client.site)

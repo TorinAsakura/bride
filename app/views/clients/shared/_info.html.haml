@@ -1,0 +1,66 @@
+.sv-client-photos-block
+  .sv-client-photos.sv-client-photos_left
+    - array_photos_block(@photos).each_with_index do |photo, i|
+      - if photo.present? && (path = photo.path).present?
+        = link_to polymorphic_path([@client, photo.album, photo]), remote: true do
+          = image_tag(path.preview, class: 'sv-client-photo sv-client-photo_small')
+      - else
+        = image_tag "placeholders/photo0#{i}.png", class: 'sv-client-photo sv-client-photo_small'
+  .sv-client-photos
+    .sv-client-photos_right
+    - large_photo = @photos.first if @photos.count == CLIENT_PHOTO_PREVIEWS
+    - if large_photo.present?
+      = link_to polymorphic_path([@client, large_photo.album, large_photo]), remote: true do
+        = image_tag large_photo.path.large_preview, class: 'sv-client-photo sv-client-photo_big'
+      = link_to client_albums_path(@client), class: 'sv-client-photos__view-all' do
+        %span Все фотографии
+        %i.icon-chevron-right
+    - else
+      = image_tag "placeholders/photo04#{current_client.present? && current_client.is?(@client) ? 'b' : 'a'}.png", class: 'sv-client-photo sv-client-photo_big'
+      - for_moderator_of @client do
+        - if @latest_album.present?
+          = link_to 'Загрузить фотографии', new_polymorphic_path([@client, :album], upload_to: @latest_album), remote: true, class: 'input-big link-style sv-client-photos__upload-first-btn'
+        - else
+          = link_to 'Загрузить фотографии', new_polymorphic_path([@client, :album]), remote: true, class: 'input-big link-style sv-client-photos__upload-first-btn'
+.clear
+
+.sv-client-info.sv-client-info_primary
+  .sv-client-friendship
+    - if current_user.is? @client.user
+      = link_to 'Редактировать профиль', edit_client_path(@client), class: 'link-style'
+    - else
+      = link_to 'Написать сообщение', new_messages_path(@client.user.id), remote: true, class: 'link-style'
+      = friend_action(@client.user)
+      -# раскомментировать, когда будут идеи для кнопки «еще»
+      =# link_to 'Еще', '#', class: 'link-style link-with-arrow'
+    .sv-r{ 'data-vote-management' => "#{@client.id}-#{@client.class.name}" }
+      = render 'votes/like', resource: @client, resource_class_name: @client.class.name
+
+  %ul.sv-client-info__list
+    - if @client.birthday.present?
+      %li.sv-client-info__list-item
+        %span.sv-client-info__item-title День рождения
+        %span= "#{l(@client.birthday, format: :wed_date)} (#{@client.zodiac}), #{@client.age} #{pluralize(@client.age, 'год', 'года', 'лет')}"
+    - if @client.city_name.present?
+      %li.sv-client-info__list-item
+        %span.sv-client-info__item-title Город проживания
+        %span= @client.city_name
+    - if @client.site.present?
+      %li.sv-client-info__list-item
+        %span.sv-client-info__item-title Свадебный сайт
+        %span= link_to_minisite(@client.site)
+
+.sv-client-info.sv-client-info_secondary
+  %ul.sv-client-info__list.sv-client-info__list_hidden{ 'data-js' => 'client-info' }
+    - if @client.has_wedding?
+      %li.sv-client-info__list-item.sv-client-info__list-item_group
+        %span.sv-client-info__item-title Дата свадьбы:
+        %span= l(@client.wedding.wedding_date, format: :wed_date)
+    - [:marital_status, :children, :alcohol_attitude, :smoking_attitude, :thing_in_life, :thing_in_humans, :favorite_music, :favorite_films, :favorite_shows, :favorite_books, :favorite_games, :about].each do |info|
+      - if @client.send(info).present?
+        %li.sv-client-info__list-item
+          %span.sv-client-info__item-title= t("client_info.#{info}")
+          %span= @client.send(info)
+
+= link_to 'анкета', '#', class: 'sv-client-info-btn icon-chevron-down', 'data-js' => 'client-info-link'
+.clear

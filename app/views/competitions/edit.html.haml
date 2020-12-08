@@ -1,0 +1,12 @@
+.sv-wrapper.competition.edit
+  .breadcrumbs
+    = link_to @competition.firm_name, firm_link(@competition.firm)
+    >
+    = link_to 'Конкурсы', firm_index_firm_competitions_path(@competition.firm_id)
+    >
+    = @competition.name
+    .clearfix
+
+  %h1 Редактировать конкурс
+
+  = render 'form'

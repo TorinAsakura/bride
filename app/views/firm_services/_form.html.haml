@@ -1,0 +1,2 @@
+= simple_fields_for "firm[firm_services_attributes][#{service.id || rand(99999)}]", service do |sf|
+  = render 'firm_services/firm_service', sf: sf, last: false

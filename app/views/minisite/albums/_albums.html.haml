@@ -1,0 +1,24 @@
+.page-block
+  %h1.title
+    =t('.title')
+    - for_moderator_of @site do
+      .add
+        = link_to new_minisite_album_path, remote: true do
+          %i.icon-doc-alt
+  .row#albums
+    = render @albums
+
+  - if @albums.count > 4
+    .row
+      .col-xs-12
+        = link_to(t('.show_all', albums: t('.albums', count: @albums.count)), '#', id: 'show-all-albums')
+
+  %h4.sub-title= t('.last_photos')
+  = render 'minisite/albums/photos', photos: @photos, album: @album
+
+- if session.delete :new
+  - content_for :javascript do
+    :javascript
+      $(document).ready(function () {
+        $.getScript('#{new_minisite_album_path}');
+      });

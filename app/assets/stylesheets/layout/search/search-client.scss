@@ -1,0 +1,39 @@
+.sv-search-client__block {
+  border-bottom: 1px solid #c84564;
+  margin: 0 0 15px;
+  padding: 0 0 15px;
+  .sv-firm-client-block-buttons {
+    position: relative;
+    margin: auto 25%;
+
+    a, span {
+      margin-right: 5px;
+    }
+  }
+  .sv-client-fullname {
+    margin: 0 0 10px 0;
+  }
+  .sv-client-info__list {
+    margin: 0 0 0 20px;
+  }
+  .sv-client-info__list-item {
+    margin: 0 0 5px 0;
+  }
+}
+
+.sv-search-client__avatar {
+  width: 150px;
+  height: 150px;
+}
+
+.sv-search-client__info {
+  margin: 0 0 0 20px;
+}
+
+.sv-search-client__buttons {
+  margin: 15px 0 0 0;
+}
+
+.sv-search-client__button {
+  margin: 0 0 15px 0;
+}

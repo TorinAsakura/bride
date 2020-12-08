@@ -1,0 +1,22 @@
+.sv-wrapper
+  = render 'firms/shared/sidebar'
+
+  .sv-article.left
+    = render 'firms/shared/header'
+
+    #sv-firm-detail-text
+      .title.clearfix
+        = link_to firm_link(@firm), class: 'sv-a-back sv-l' do
+          %i.icon-chevron-left
+          -#= image_tag 'sv-icon-arrow_l.png', alt: 'Назад'
+        %span= @firm_page_title || @firm_page.title
+      %p= auto_link_text @firm_page.body
+
+      .sv-firm-page-images
+        - @firm_page.images.each do |img|
+          = image_tag img.image
+      %ul.sv-video-list-wrap.no-info
+        - @firm_page.videos.each do |video|
+          = render 'videos/player', video: video
+
+= render 'firms/shared/add_friends_modal'

@@ -1,0 +1,73 @@
+.sv-footer
+  .sv-footer__left
+    = image_tag 'sorted/sv-logo-footer.png', class: 'sv-footer__logo'
+    .sv-footer__copyright
+      © #{Date.today.year} Свадебный портал Svadba.org
+      %br
+      Все права защищены
+
+  .sv-footer__center
+    %div
+      %ul.sv-footer-nav.sv-footer-nav_column
+        %li.sv-footer-nav__item
+          = link_to 'Главная страница', root_path, class: 'sv-footer-nav__item-link'
+        %li.sv-footer-nav__item
+          = link_to 'Компании', firms_path, class: 'sv-footer-nav__item-link'
+        %li.sv-footer-nav__item
+          = link_to 'Пользователи', clients_path, class: 'sv-footer-nav__item-link'
+        %li.sv-footer-nav__item
+          = link_to 'Свадебные сайты', clients_path, class: 'sv-footer-nav__item-link'
+
+      - if current_client.present? && current_client.site.present?
+        %ul.sv-footer-nav.sv-footer-nav_column
+          %li.sv-footer-nav__item
+            = link_to_minisite current_client.site, 'Мой мини-сайт', class: 'sv-footer-nav__item-link'
+          %li.sv-footer-nav__item
+            = link_to_minisite current_client.site, 'Список гостей', class: 'sv-footer-nav__item-link'
+          %li.sv-footer-nav__item
+            = link_to_minisite current_client.site, 'Рассадка гостей', class: 'sv-footer-nav__item-link'
+          %li.sv-footer-nav__item
+            = link_to_minisite current_client.site, 'Список подарков', class: 'sv-footer-nav__item-link'
+          %li.sv-footer-nav__item
+            = link_to_minisite current_client.site, 'Калькулятор', class: 'sv-footer-nav__item-link'
+
+      %ul.sv-footer-nav.sv-footer-nav_column
+        %li.sv-footer-nav__item
+          = link_to 'Свадебные идеи', idea_sections_path, class: 'sv-footer-nav__item-link'
+        %li.sv-footer-nav__item
+          = link_to 'Планировщик', wedding_path, class: 'sv-footer-nav__item-link'
+        %li.sv-footer-nav__item
+          = link_to 'Опросы', polls_path, class: 'sv-footer-nav__item-link'
+        %li.sv-footer-nav__item
+          = link_to 'Интересное', interesting_path, class: 'sv-footer-nav__item-link'
+
+    .sv-footer-systems
+      .sv-footer-systems__item.sv-footer-systems__item_mastercard
+      .sv-footer-systems__item.sv-footer-systems__item_visa
+      .sv-footer-systems__item.sv-footer-systems__item_webmoney
+      .sv-footer-systems__item.sv-footer-systems__item_yandex-money
+      .sv-footer-systems__item.sv-footer-systems__item_qiwi
+    - if Rails.env.production?
+      = render '/layouts/analytics/yandex_metrika_informer'
+
+  .sv-footer__right
+    %ul.sv-footer-nav
+      %li.sv-footer-nav__item
+        = link_to 'О проекте', main_domain_link('/about'), class: 'sv-footer-nav__item-link'
+      %li.sv-footer-nav__item
+        = link_to 'Помощь', main_domain_link('/faq'), class: 'sv-footer-nav__item-link'
+      %li.sv-footer-nav__item
+        = link_to 'Платежи', main_domain_link('/payment'), class: 'sv-footer-nav__item-link'
+      %li.sv-footer-nav__item
+        = link_to 'Правила использования', main_domain_link('/rules'), class: 'sv-footer-nav__item-link'
+      %li.sv-footer-nav__item
+        = link_to 'Конфиденциальность', main_domain_link('/private'), class: 'sv-footer-nav__item-link'
+
+    %ul.sv-footer-nav
+      %li.sv-footer-nav__item
+        %li.sv-footer-nav__item
+          = link_to 'Рекламодателям', main_domain_link('/reklama'), class: 'sv-footer-nav__item-link'
+        %li.sv-footer-nav__item
+          = link_to 'Представителям', main_domain_link('/dealers'), class: 'sv-footer-nav__item-link'
+        %li.sv-footer-nav__item
+          = link_to 'Контакты', main_domain_link('/contacts'), class: 'sv-footer-nav__item-link'

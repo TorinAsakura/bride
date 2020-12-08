@@ -1,0 +1,29 @@
+.sv-wrapper.sv-community.margintopotstp
+  .main-title.clearfix
+    = link_to communities_path, class: 'sv-a-back sv-l', alt: 'Назад' do
+      %i.icon-chevron-left
+    %span= @community.community_category.try(:title)
+
+  = render 'communities/shared/sidebar', community: @community
+  .sv-article
+    .sv-community__title
+      = @community.name
+    .sv-community__description
+      = @community.description
+
+    = render 'communities/posts', community: @community, posts: @posts
+
+  .sv-community__posts-nav
+    = rel_next_prev_link_tags @posts
+
+- if session[:post]
+  :javascript
+    $(document).ready(function () {
+      $.getScript('#{session.delete :post}');
+    });
+
+- if session.delete :new
+  :javascript
+    $(document).ready(function () {
+      $.getScript('#{new_polymorphic_path([@community, :post])}');
+    });

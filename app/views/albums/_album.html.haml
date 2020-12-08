@@ -1,0 +1,11 @@
+.col-lg-4.col-md-6.col-xs-6.album{id: dom_id(album), class: ('hidden' if album_counter > 3)}
+  = link_to minisite_album_path(album) do
+    = image_tag(album.cover_url, class: 'img-responsive')
+  .descr
+    = link_to minisite_album_path(album) do
+      = album.name
+      %span
+        %span
+          = album.photos.count
+        %span
+          %i.icon-picture

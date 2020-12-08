@@ -1,0 +1,179 @@
+footer
+  +clearfix
+  -webkit-transform: translateZ(0)
+  position: fixed
+  width: 100%
+  bottom: 0
+  height: $footer-height
+  background-color: $main-color
+  z-index: 100
+  box-shadow: 0 0 $main-margin/4 rgba(0, 0, 0, 0.15)
+  .footer-block
+    width: $max-width
+    margin: auto
+    +clearfix
+    > a
+      margin-top: $main-padding/5
+      box-shadow: none
+      float: left
+      background-image: image-url('sorted/sv-logo-footer.png')
+      display: inline-block
+      width: $footer-logo-width
+      height: $footer-logo-height
+
+  .footer-search
+    display: inline-block
+    float: left
+    padding-left: $main-padding*1.25
+    ul
+      color: #FFFFFF
+      position: relative
+      display: block
+      margin: 0
+      padding: $main-margin/4 0 0 0
+      list-style: none
+      text-align: center
+    li
+      display: inline-block
+      padding: 0
+      vertical-align: top
+      input
+        display: none
+      label
+        font-size: $main-margin
+        display: block
+        margin: 0
+        padding: 0 $main-margin/3 0 0
+        color: #fff
+      &.active label
+        color: $a-hover
+
+    .footer-search-field
+      position: relative
+      width: $main-padding*10
+      input.search-field
+        height: 18px!important
+        font-size: $main-padding/2
+        display: block
+        width: $main-padding*10
+        padding-right: $main-padding*1.5!important
+        line-height: $main-padding/2
+        float: left
+        border: 0!important
+        border-radius: $main-margin + $border-width*2
+
+      input[type="submit"], .icon-search
+        position: absolute
+        background-color: transparent
+        top: 0
+        right: 0
+        z-index: +1
+        display: block
+        margin-top: -$main-margin/6
+        padding: 0
+        width: $main-padding
+        height: $main-padding - $border-width*2!important
+        border: 0
+      
+      input[type="submit"]
+        z-index: 10
+
+    .colors
+      display: inline-block
+      float: left
+      .up-colors, .down-colors
+        overflow: hidden
+        margin: $main-padding/2 0 0 $main-padding/2
+      .circle
+        width: $main-padding/2
+        height: $main-padding/2
+        display: block
+        background-color: #fff
+        float: left
+        margin: 0 $main-margin/6 0 $main-padding/6
+        border-radius: $main-padding/2
+        cursor: pointer
+      .red
+        background-color: $circle-red
+      .orange
+        background-color: $circle-orange
+      .yellow
+        background-color: $circle-yellow
+      .green
+        background-color: $circle-green
+      .blue
+        background-color: $circle-blue
+      .sapfire
+        background-color: $circle-sapfire
+      .violet
+        background-color: $circle-violet
+      .pink
+        background-color: $circle-pink
+      .burlywood
+        background-color: $circle-burlywood
+      .beige
+        background-color: $circle-beige
+      .black
+        background-color: $circle-black
+
+  .footer-client-settings
+    display: inline-block
+    float: left
+    img
+      float: left
+      margin: $main-margin/4*3 $main-margin/2 0 $main-padding*1.5
+      width: 32px
+      height: 32px
+    ul
+      color: white
+      width: $main-padding*9
+      font-size: $main-padding/2
+      padding-top: $main-margin/4*3
+      li
+        display: block
+        text-align: left
+        line-height: $main-padding*0.75
+  .settings
+    display: inline-block
+    padding: $main-padding/2 0 0 $main-padding*3.75
+    [class^="icon-"]
+      margin: 0 0 0 $main-padding/2
+      display: inline-block
+      font-size: $main-padding
+      text-align: center
+      width: $main-padding*1.5
+      height: $main-padding*1.5
+      color: $gray
+      background-color: #FFFFFF
+      border-radius: $main-padding*5
+      box-shadow: 0px 2px 10px -4px rgba(0,0,0,0.5) inset
+      &:before
+        margin: 0
+        text-align: center
+        line-height: $main-padding*1.5
+
+      &:hover
+        cursor: pointer
+        background-color: $main-color
+        color: white
+      &:active
+        cursor: pointer
+        background-color: $main-color
+        color: white
+      //&:first-child
+      //  margin: 0
+    //.icon-chat, .icon-users-1
+    //  font-size: $main-margin*2 + $border-width*2
+    b
+      color: white
+      font-size: $main-padding/2
+      position: absolute
+      top: $main-padding*1.4
+      line-height: $main-padding
+      height: $main-padding
+      width: $main-padding
+      text-align: center
+      background-color: $main-color
+      margin-left: $main-padding*1.25
+      border-radius: $main-padding*5
+      box-shadow: 0px 2px 10px -4px rgba(0,0,0,0.5) inset

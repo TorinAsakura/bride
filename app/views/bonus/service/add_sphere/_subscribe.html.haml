@@ -1,0 +1,27 @@
+= simple_form_for subscription, url: bonus_service_subscriptions_path(subscription.service), html: { remote: true, id: 'add_sphere_form', class: 'modal hide' } do |f|
+  = hidden_field_tag :list, params[:list]
+  .modal-header
+    %h3= subscription.signing_service.decorate.title
+  .modal-body
+    %p Выберите к какой категории в каталоге относится ваша компания.
+    = f.input :parent_catalog_id, collection: FirmCatalog.by_firm(subscription.target).map{ |fc| [fc.name, fc.id] }, label: false, input_html: { class: 'firm_catalog_id', style: 'width: 340px'}
+    .sv-firm-services-arrow
+    = f.input :signing_object_id, collection: [], label: false, input_html: { class: 'firm_catalog_ids', style: 'float: left; width: 302px;margin-top: 20px;'}
+    .clear
+      %br
+    - if subscription.target.has_spheres?
+      .balance.row
+        %p.span3
+          Ваш баланс:
+          %span.btn-link= current_firm.purse.available_amount.format(html: true).html_safe
+        = link_to 'Пополнить', edit_firm_url(current_firm, anchor: 'monetize-purse'), class: "btn"
+    .price.hidden
+      %p
+        Стоимость вибраной категории:
+        %span.btn-link
+      %p
+        %em Оплачивается один раз и навсегда
+    %p.error.main-color-text
+
+  .modal-footer
+    %button.link-style.hidden Оплатить

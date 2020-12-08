@@ -1,0 +1,15 @@
+= simple_form_for [:admin, @page], html: {id: 'page_form', class: 'static-page-form', 'data-js' => 'static-page-form'} do |f|
+
+  .field
+    = f.input :link, input_html: {class: 'w400', placeholder: 'Адрес страницы'}, label: false
+  .field
+    = f.input :title, input_html: {class: 'w400', placeholder: 'Заголовок страницы'}, label: false
+  .field
+    = f.input :content, input_html: {placeholder: 'Напишите здесь контент страницы', 'data-js' => 'static-page-content'}, label: false
+  .field.clearfix
+    = f.check_box :is_active, class: 'checkbox'
+    = f.label :is_active, class: 'checkbox-label'
+
+  = f.submit 'Сохранить', class: 'link-style'
+  - unless @page.new_record?
+    = link_to 'Удалить', admin_static_page_path(@page), method: :delete, confirm: 'Вы уверенны?', class: 'link-style'

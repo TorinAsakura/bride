@@ -1,0 +1,8 @@
+.album-vote
+  %p.votes-count
+    Количество голосов
+    %span= album.likes.count
+  - if current_user.voted_as_when_voted_for album
+    %p.unlike-album.btn{album_id: album.id} Забрать свой голос
+  - else
+    %p.like-album.btn{album_id: album.id} Проголосовать "ЗА"

@@ -1,0 +1,6 @@
+window.modalViewer = new VideoViewer(
+'<%= @video_page%>',
+window.modalViewer ? window.modalViewer.baseLocation : window.location.pathname,
+'<%= j(render 'show') %>'
+);
+window.modalViewer.show();

@@ -1,0 +1,9 @@
+= simple_form_for @section, url: add_category_admin_idea_section_path,
+                                 remote: true,
+                                 method: :post,
+                                 html: { id: 'form', multipart: true,  class: 'modal hide', style: 'width: 650px;' } do |f|
+  .title_nobg Добавить подкатегорию
+
+  = f.input :categories, text: 'Выберите подкатегорию' , collection: @categories
+
+  %button.link-style Сохранить

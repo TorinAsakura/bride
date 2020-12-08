@@ -1,0 +1,41 @@
+!!!
+%html{xmlns: 'http://www.w3.org/1999/xhtml'}
+  %head
+    %meta{content: 'width=980, initial-scale=1.0', name: 'viewport'}/
+    %meta{content: 'telephone=no', name: 'format-detection'}/
+    %meta{content: 'text/html; charset=utf-8', 'http-equiv' => 'content-type'}/
+    %title= content_for?(:title) ? yield(:title) : 'ChelnySvadba'
+    = csrf_meta_tags
+    = favicon_link_tag '/favicon.ico', rel: 'icon', type: 'image/x-icon'
+    = favicon_link_tag '/favicon.ico', rel: 'shortcut icon', type: 'image/x-icon'
+    = stylesheet_link_tag 'application', :media => 'all'
+    = javascript_include_tag '//api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU'
+    = javascript_include_tag 'application'
+    = stylesheet_link_tag '//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css'
+
+  %body.sv-admin-body{'data-env' => Rails.env}
+    .sv-outer-wrapper
+      %header= render 'layouts/header/header'
+
+      = render 'layouts/admin/admin_navigation'
+
+      .main-content.sv-admin-wrapper.clearfix{'data-js' => 'main-content', class: sv_wrapper_class}
+        = bootstrap_flash
+        = yield
+        .clear
+
+    #sv-footer{'data-js' => 'footer'}
+      © Svadba.org #{Date.today.year}
+
+    #edit
+    #popup.modal.hide.fade.span8{'data-replace' => 'true', tabindex: '-1'}
+      .sv-close{'data-dismiss' => 'modal'} close
+      .content
+    = render 'posts/template_upload'
+
+    = yield :javascripts
+    = javascript_include_tag '//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js'
+    - if Rails.env.production?
+      = javascript_include_tag 'http://mysvadba.org:9292/faye.js'
+    - else
+      = javascript_include_tag 'http://localhost:9292/faye.js'

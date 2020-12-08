@@ -1,0 +1,52 @@
+#sv-admin-navigation{'data-js' => 'admin-navigation'}
+  .sv-wrapper.sv-admin-wrapper
+    %ul.sv-admin-navigation.clearfix{'data-js' => 'admin-menu'}
+      %li{class: ('active' if 'complaints' === controller_name)}
+        = link_to 'Жалобы', admin_complaints_path
+
+      %li{class: ('active' if 'posts' === controller_name)}
+        = link_to 'Статьи', admin_posts_path
+      %li{class: ('active' if 'videos' === controller_name)}
+        = link_to 'Видео', admin_videos_path
+
+      %li{class: ('active' if 'tags' === controller_name)}
+        = link_to 'Тэги', admin_tags_path
+
+      %li{class: ('active' if controller_name.eql?('firms'))}
+        = link_to 'Компании', admin_firms_path
+      %li{class: ('active' if controller_name.eql?('services'))}
+        = link_to 'Подключаемые услуги', admin_bonus_services_path
+      %li{class: ('active' if controller_name.eql?('certificates'))}
+        = link_to 'Подарочные сертификаты', admin_bonus_certificates_path
+      %li{class: ('active' if controller_name.eql?('purse_payments'))}
+        = link_to 'Платежи', admin_purse_payments_path
+
+      %li{class: ('active' if %w(task_categories scripts).include?(controller_name))}
+        = link_to 'Планировщик', admin_task_categories_path
+
+      %li= link_to 'Свадебные идеи', admin_idea_sections_path
+      %li= link_to 'Коллекции свадебных идей', admin_idea_collections_path
+      %li{class: ('active' if controller_name.eql?('community_categories'))}
+        = link_to 'Клубы', admin_community_categories_path
+      %li= link_to 'Вопрос-Ответ', admin_questions_path
+      %li= link_to 'Каталог категорий', admin_firm_catalogs_path
+
+      %li{class: ('active' if controller_name.eql?('photos'))}
+        = link_to 'Фотоальбом', admin_photos_path
+
+      %li= link_to 'Статические страницы', admin_static_pages_path
+      %li{class: ('active' if controller_name.eql?('background_properties'))}
+        = link_to 'Настройка фона', admin_background_properties_path
+      %li{class: ('active' if 'user_admins' === controller_name)}
+        = link_to 'Админы', admin_user_admins_path
+      %li{class: ('active' if 'mail_templates' === controller_name)}
+        = link_to 'Рассылка', admin_mail_templates_path
+
+      %li{class: ('active' if 'cities' === controller_name)}
+        = link_to 'Города', admin_cities_path
+
+      %li{class: ('active' if controller_name.eql?('banners'))}
+        = link_to 'Баннеры', admin_banners_path
+
+      %li{class: ('active' if controller_name.eql?('t_firms'))}
+        = link_to 'Временные компании', admin_t_firms_path

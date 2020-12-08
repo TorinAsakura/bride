@@ -1,0 +1,293 @@
+.tab-content > .tab-pane,
+.pill-content > .pill-pane {
+  display: none;
+}
+
+.tab-content > .active,
+.pill-content > .active {
+  display: block;
+}
+
+.sv-album-form {
+  width: 620px;
+  padding: 20px;
+  textarea, input[type=text] {
+    width: 598px;
+    background: #f2f2f2 !important;
+  }
+  textarea {
+    width: 598px;
+    resize: none;
+  }
+  .tab-content {
+    overflow: hidden;
+    width: 100%;
+  }
+  .album_description {
+    width: 100%;
+  }
+  .cntrls {
+    width: 100%;
+    input, textarea {
+      margin-bottom: $main-margin-small;
+      box-sizing: border-box;
+      width: 100% !important;
+    }
+  }
+}
+
+.sv-album-form_hidden {
+  display: none;
+}
+
+.sv-album-form__title {
+  border: none;
+  padding: 0px;
+  margin-bottom: 24px;
+}
+
+.sv-album-form__select {
+  width: 100%;
+}
+
+.sv-album-form__buttons {
+  margin: 40px 0px;
+}
+
+.sv-album-form__button-computer {
+  position: relative;
+  margin-bottom: 10px;
+  input[type=file] {
+    font-size: 0px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 50px;
+    width: 100%;
+    opacity: 0;
+    filter: alpha(opacity = 0);
+    cursor: pointer;
+  }
+  a {
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    text-align: center;
+    background: #f0849b;
+    color: white;
+  }
+  &:hover {
+    .sv-album-form__button-computer__icon {
+      text-decoration: underline;
+    }
+  }
+}
+
+.sv-album-form__button-computer__icon {
+  display: inline-block;
+  height: 50px;
+  padding-left: 50px;
+  background: image-url('sv-icon-camera-big.png') no-repeat 0px 50%;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.sv-album-form__button-social {
+  float: left;
+  width: 50%;
+  height: 50px;
+  line-height: 50px;
+}
+
+.sv-album-form__button-social-icon {
+  display: block;
+  float: left;
+  margin: 15px 3px 0px 45px;
+  width: 23px;
+  height: 23px;
+  background: image-url('icons/social_networks.png') no-repeat;
+}
+
+.sv-album-form__button-social-icon_vk {
+  background-position: (-3px) -4px;
+}
+
+.sv-album-form__button-social-icon_twitter {
+  background-position: (-28px) -52px;
+}
+
+.sv-album-form__button-social-icon_instagram {
+  background-position: (-3px) -52px;
+}
+
+.sv-album-form__button-social-icon_facebook {
+  background-position: (-28px) -28px;
+}
+
+.sv-album-form-warning {
+  padding: 40px 20px 30px;
+}
+
+.sv-album-form-warning__text {
+  margin-bottom: 20px;
+}
+
+.sv-album-form-warning__button_ok {
+  margin-right: 10px;
+}
+
+.sv-album-photos-form {
+  width: 660px;
+  padding: 20px;
+  box-sizing: border-box;
+  margin: 0px;
+  position: relative;
+  textarea, input[type=text] {
+    width: 100%;
+    box-sizing: border-box;
+    background: #f2f2f2 !important;
+  }
+  textarea {
+    resize: none;
+  }
+  #album_name {
+    margin-bottom: 20px;
+  }
+  #album_description {
+    margin-bottom: 30px;
+  }
+  .sv-album-privacy {
+    margin-top: 10px;
+  }
+  .sel-style-compact-mini {
+    margin-top: 7px;
+  }
+  .album_photos_album {
+    margin-top: 8px;
+  }
+  label.select {
+    margin: 0px 0px -5px 0px;
+  }
+}
+
+.sv-album-photos-form__btn {
+  @include inline-block;
+  text-decoration: none;
+  height: 25px;
+  line-height: 25px;
+  padding: 0px 21px;
+  margin: 0px;
+  border: none;
+  outline: 1px solid #c84563;
+  &:hover {
+    text-decoration: none;
+    border: none;
+    outline: 1px solid #c84563;
+  }
+}
+
+.sv-album-photos-form__btn_save {
+  margin: 10px 0 0 10px;
+  background: #c84563;
+  color: white;
+  &:hover {
+    background: white;
+    color: #c84563;
+  }
+}
+
+.sv-album-photos-form__btn_destroy {
+  background: white;
+  color: #c84563;
+  &:hover {
+    background: #c84563;
+    color: white;
+  }
+}
+
+.sv-album-photos-form__photo-wrapper {
+  padding: 10px 20px;
+
+  .sv-album-photos-form__photo-btn_save {
+    bottom: 10px;
+    right: 0px;
+  }
+}
+
+.sv-album-photos-form__photo {
+  margin-top: 20px;
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+.sv-album-photos-form__photo-left {
+  float: left;
+  width: 200px;
+  box-sizing: border-box;
+  img {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.sv-album-photos-form__photo-right {
+  box-sizing: border-box;
+  float: right;
+  position: relative;
+  width: 400px;
+  height: 220px;
+  margin-left: 10px;
+  textarea {
+    width: 386px;
+  }
+}
+
+.sv-album-photos-form__photo-select {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+
+.sv-album-photos-form__photo-btn_save {
+  position: absolute;
+  bottom: 0px;
+  right: 25px;
+}
+
+.sv-album-photos-form__photo-btn_remove {
+  text-indent: -9999px;
+  position: absolute;
+  bottom: 10px;
+  right: 0px;
+  display: block;
+  width: 9px;
+  height: 9px;
+  background: image-url('sorted/sv-icon-small-close.png') no-repeat;
+}
+
+.sv-album-photos-form__progress {
+  background: white;
+  height: 10px;
+  border: 1px solid #c25369;
+  margin-top: 20px;
+}
+
+.sv-album-photos-form__progress_template {
+  display: none;
+}
+
+.sv-album-photos-form__progress-inner {
+  background: #c25369;
+  height: 10px;
+  width: 0%;
+}
+
+.sv-album-photos-form__separator {
+  margin: 20px 0px;
+  border-top: 1px solid #c84563;
+}

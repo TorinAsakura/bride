@@ -1,0 +1,7 @@
+#firm-status.sv-article
+  .title_nobg Статус аккаунта
+  .ovflhid
+    .sv-l.rows-form
+      %legend.tel_number= t "activerecord.symbolizes.firm.status.#{firm_before_change.try(:status) || firm.status}"
+    .sv-profile-site.sv-r.rows-form-tel
+      = link_to 'Изменить статус', '#adding-services', class: 'link-style sv-l', 'data-js' => 'firm-change-status-link'

@@ -1,0 +1,14 @@
+%li{class: tab_active?(url)}
+  - js = js || nil
+  - cl = cl || nil
+  / раскоментировать после добвления соответсвующего функционала
+  / .sv-l.sv-firm-pages-order
+  /   = link_to '', '#', class: 'firm-page-up sv-top'
+  /   = link_to '', '#', class: 'firm-page-down sv-bottom'
+  = link_to url, class: cl, 'data-js' => js do
+    = title
+  / %span.sv-r
+  /   - klass = "checkbox#{rand(99999)}"
+  /   = check_box_tag 'boy-check', klass, false, id: klass, class: 'check-style-quadra', data: { js: 'firm-page-switcher' }
+  /   %label{ for: klass }
+  /     %span

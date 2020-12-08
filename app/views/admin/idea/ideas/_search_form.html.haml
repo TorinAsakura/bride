@@ -1,0 +1,8 @@
+/ DRY it with ideas/_searc_form
+= simple_form_for Idea::Idea.new, url: idea_ideas_path, method: :get, :class => "form-search", :id => "form-search" do |f|
+  = render "tags/input", tags: @tags, f: f
+  = submit_tag "Искать", :class => "btn"
+  = render "tags/color_input", color_ids: @color_ids, f:f
+
+
+

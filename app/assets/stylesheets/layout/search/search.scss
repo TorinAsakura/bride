@@ -1,0 +1,36 @@
+.sv-search .title {
+  @include title_line;
+  ul li.search a {
+    background: $form-background-color;
+    display: block;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    i {
+      margin: 15px;
+      display: block;
+      width: 20px;
+      height: 20px;
+      overflow: hidden;
+      background: image_url("magnifier.png") no-repeat scroll 0 1px;
+      text-indent: -9999px;
+    }
+  }
+}
+
+.sv-search .title_nobg div {
+  margin: 0 20px 0 0;
+}
+
+.sv-search-sort {
+  margin: 0 20px 0 0;
+  padding: 0 0 0 20px;
+  &.active {
+    &.DESC {
+      background: image-url("sv-icon-sort-desc.png") no-repeat scroll 0 15px;
+    }
+    &.ASC {
+      background: image-url("sv-icon-sort-asc.png") no-repeat scroll 0 15px;
+    }
+  }
+}

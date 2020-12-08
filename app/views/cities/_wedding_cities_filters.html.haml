@@ -1,0 +1,9 @@
+.sv-city-countries<
+  - if (countries = items.map(&:country).uniq).many?
+    .country-index.active(data-id='0')= t('.all_countries')
+    - countries.each do |country|
+      .country-index{data: {id: country.id}}= country.name
+
+.sv-city-indexes
+  - items.group_by(&:name_index).keys.uniq.sort.each do |i|
+    .city-index{data: {id: i}}= i

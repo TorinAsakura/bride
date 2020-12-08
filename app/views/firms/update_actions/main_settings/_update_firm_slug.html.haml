@@ -1,0 +1,12 @@
+#firm-slug.sv-article
+  .title_nobg Адрес сайта
+  = simple_form_for(firm, url: update_slug_firm_path(firm), html: { method: :put, class: 'sv-profile-site', remote: false }) do |f|
+    = f.label :slug, 'Адрес сайта:', class: 'sv-l individual-melodi'
+    .sv-l.inp-a-description
+      = f.text_field :slug, class: 'sv-l inp-style inp-style-mini-compact', placeholder: 'company'
+      %span.yes-green.slug-avaliable{style: 'display: none'}  адрес доступен
+      %span.yes-green.result.updated{style: 'display: none'}  адрес успешно изменен
+      %span.no-red.slug-dont-avaliable{style: 'display: none'}  адрес не доступен
+      %span.no-red.not-valid{style: 'display: none'} Используйте только цифры, латиницу и знаки &laquo;-&raquo; и &laquo;_&raquo;
+    = f.label :slug, '.svadba.org', class: 'sv-l'
+    = f.submit class: 'link-style sv-l', value: 'Изменить', style: 'display: none'

@@ -1,0 +1,27 @@
+= render 'firms/shared/header/poster'
+= render 'firms/shared/header/logo'
+
+#sv-firm-detail-title.clearfix
+  - if @firm.user.destroyed?
+    .title
+      = link_to @firm.name, firm_link(@firm)
+    .extended-name
+      Страница удалена, информация недоступна
+  - else
+    - resource_class_name = @firm.decorated? ? dom_class(@firm.object).capitalize : @firm.class.name
+    %div{ id: "vote_managment_#{@firm.id}_#{resource_class_name}" }
+      = render 'votes/like', resource: @firm, resource_class_name: resource_class_name
+    .title
+      = link_to @firm.name, firm_link(@firm)
+    .extended-name
+      = @firm.extended_name
+    .slogan
+      = @firm.text_status
+    .sv-firm-friendship
+      - unless @firm.user.is? current_user
+        = link_to 'Написать сообщение', new_messages_path(@firm.user.id), remote: true, class: 'link-style'
+        - if current_client.present?
+          = friend_action(@firm.user)
+        - if current_firm.try(:dealer?) && current_firm!=@firm && ((dealer = @firm.dealer).blank? || dealer.eql?(current_firm)) #TODO add roles
+          = link_to 'Подключить услугу', bonus_services_path, remote: true, class: 'link-style success'
+

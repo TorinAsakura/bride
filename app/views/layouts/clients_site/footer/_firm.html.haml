@@ -1,0 +1,9 @@
+.btn-group.dropup
+  = render 'layouts/clients_site/footer/messages'
+.btn-group.dropup
+  = render 'layouts/clients_site/footer/firm/clients', firm: current_firm
+.btn-group.dropup
+  = render 'layouts/clients_site/footer/firm/money', firm: current_firm.decorate
+.btn-group.dropup
+  = render 'layouts/clients_site/footer/firm/settings', firm: current_firm
+= render 'layouts/clients_site/footer/user'

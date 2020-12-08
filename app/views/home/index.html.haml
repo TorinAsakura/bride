@@ -1,0 +1,14 @@
+.sv-home
+  = render 'home/banner', banners: @banners
+
+  = render 'home/ideas', ideas: @ideas
+
+  #sv-read-it.sv-home__posts
+    = render 'home/posts', posts: @posts
+
+  #sv-videos-block.sv-home__videos
+    = render 'home/videos', videos: @videos
+
+  = render 'home/clients', clients: @clients
+
+  = render 'home/sites', sites: @sites

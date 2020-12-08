@@ -1,0 +1,10 @@
+- content_for :javascripts do
+  :javascript
+    FirstFirmCatalogList.init('#change-first-firm-catalog');
+#firm-catalog-items.items
+  - items.each do |item|
+    = div_for(item, class: 'item') do
+      %h5= item.name
+      %ul
+        - item.children.each do |firm_catalog|
+          %li{id: dom_id(firm_catalog)}= link_to(firm_catalog.name, '#', data: {id: firm_catalog.id})

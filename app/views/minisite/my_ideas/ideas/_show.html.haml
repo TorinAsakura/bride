@@ -1,0 +1,52 @@
+.sv-idea-popup.sv-my-ideas-popup
+  %h4.sub-title= link_to @category.name, minisite_my_ideas_category_path(@category), class: 'sv-idea-popup__link'
+  .sv-idea-popup__image-wrapper
+    = link_to minisite_my_ideas_category_idea_path(@category, @next_idea), remote: true do
+      = image_tag @idea.image.image, class: 'sv-idea-popup__image', data: { js: 'idea-fullsize' }
+      = image_tag 'loading.gif', class: 'sv-idea-popup__loading', data: { js: 'idea-loading' }
+
+    = link_to minisite_my_ideas_category_idea_path(@category, @prev_idea), class: 'sv-idea-popup__arrow sv-idea-popup__arrow_left', remote: true do
+      .sv-idea-popup__arrow-inner.sv-idea-popup__arrow-inner_left
+    = link_to minisite_my_ideas_category_idea_path(@category, @next_idea), class: 'sv-idea-popup__arrow sv-idea-popup__arrow_right', remote: true do
+      .sv-idea-popup__arrow-inner.sv-idea-popup__arrow-inner_right
+
+  .sv-idea-popup__sidebar
+    .sv-idea-popup__sidebar-name.sub-title
+      = @idea.name
+    .sv-idea-popup__sidebar-description
+      = @idea.description
+
+    .sv-idea-popup__sidebar-tags
+      - if @idea.tags.present?
+        = render 'tags/tags', tags: @idea.tags,
+                              prefix: 'Тэги:',
+                              wrap_name: Proc.new { |name| link_to(name + ', ', idea_ideas_url(tags: name)) },
+                              wrap_last_name: Proc.new { |name| link_to(name, idea_ideas_url(tags: name)) }
+
+    .sv-idea-popup__sidebar-tags
+      - if @idea.colors.present?
+        .sv-color-tags-prefix Цвет:
+        - @idea.colors.uniq.each do |color|
+          = link_to idea_ideas_url(colors: color.id,
+                                      section_id: @section.try(:slug),
+                                      category_id: @category.try(:slug)),
+                    class: 'sv-color-tag' do
+            .sv-color-tag__circle_large{ style: "background: #{color.color};" }
+            .sv-color-tag__popup
+              = color.name
+        .clearfix
+
+    .sv-idea-popup__sidebar-likes
+      %div{ id: "vote_managment_#{@idea.id}_#{@idea.class.base_class.name.demodulize}" }
+        = render 'votes/like', resource: @idea, resource_class_name: @idea.class.base_class.name
+
+    - if current_client.present?
+      .sv-idea-popup__sidebar-add
+        = render 'idea/ideas/button', idea: idea, user_idea: user_idea
+
+    - for_admin do
+      .sv-idea-admin-panel
+        = link_to 'Редактировать', edit_idea_idea_url(@idea), remote: true, class: 'link-style'
+  .clearfix
+
+  = render 'comments/comments_section', resource: @idea, comments: @comments, modal: true

@@ -1,0 +1,18 @@
+#sv-read-it.sv-admin-posts
+  .title.clearfix
+    = link_to 'Все', admin_posts_path, class: 'm10'
+    |
+    = link_to 'Рекомендованые', admin_posts_path(:status => 1), class: 'm10'
+    |
+    = link_to 'Принятые', admin_posts_path(:status => 2), class: 'm10'
+    %ul
+      %li.one
+        %a.sv-view-tab.active{ href: '#', rel: '' }
+          %i крупно
+      %li.two
+        %a.sv-view-tab{ href: '#', rel: 'small' }
+          %i компактно
+  = render 'posts/posts', posts: @posts if @posts
+
+  .sv-posts-hidden-nav
+    = rel_next_prev_link_tags @posts

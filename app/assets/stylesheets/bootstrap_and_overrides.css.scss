@@ -1,0 +1,90 @@
+/*
+@import "bootstrap";
+@import "bootstrap-responsive";
+@import "bootstrap_datepicker";
+
+
+body {
+  //padding-top: 45px;
+  pre {
+    margin: 0 0 4px;
+    padding: 3.5px;
+  }
+
+  .container {
+    .content {
+      min-height: 600px;
+    }
+    footer {
+      padding-top: 10px;
+      border-top: 1px solid #0480BE;
+      text-align: center;
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+*/
+  .simple_form .field_with_errors input {
+    border: 1px solid red;
+  }
+  .simple_form .error {
+    clear: left;
+    font-size: 12px;
+    color: #D00;
+    display: block;
+  }
+
+  .simple_form .hint {
+    clear: left;
+    font-size: 12px;
+    color: #555;
+    display: block;
+    font-style: italic;
+  }
+
+  .simple_form {
+    .span3 {
+      .check_boxes, .radio_buttons {
+        margin-left: 0;
+        margin-right: 10px;
+      }
+    }
+    .check_boxes, .radio_buttons {
+      .radio, .checkbox {
+        padding: 0;
+      }
+    }
+  }
+  /*
+  .select2-container {
+    margin-left: -3px;
+
+    .select2-choice div {
+      display: none;
+    }
+
+    .select2-choice {
+      width: 230px;
+      height: 28px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+
+  .select2-drop-active {
+    width: 240px !important;
+  }
+
+  .modal {
+    width: 600px;
+  }
+  #avatar_wedding {
+    width: 200px;
+  }
+
+  .form-horizontal label{
+    float: left;
+  }
+}
+*/

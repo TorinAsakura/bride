@@ -1,0 +1,6 @@
+= simple_form_for @message, url: messages_path, html: { method: :post, id: 'message_form', class: 'modal' } do |f|
+  .title_nobg Новое сообщение
+  = f.input :recipient_id, as: :hidden
+  = f.input :body, input_html: { class: 'textarea-style', rows: 5 }
+  %button.link-style Отправить
+  %button.link-style.sv-message-form-close{ type: 'button' } Отменить

@@ -1,0 +1,45 @@
+- if block == :nothing
+  .sv-firm-card-nothing
+- if block == :videos
+  %ul.sv-video-list-wrap.one-column
+    %li.sv-video-list-block
+      - video = firm.user.videos.last
+      - if video
+        .youtube[video]
+          = link_to firm_video_path(firm, video), class: 'video sv-firm-video-link', data: { title: truncate(video.title, length: 20), youtube: video.content }, remote: true do
+            %span{ style: 'display:none;' } Последнее видео
+          .sv-firm-video-link-bg
+- elsif block == :albums
+  .sv-side-box
+    %ul.sv-firm-card-photos.clearfix
+      - firm.user.photos.last(2).each do |photo|
+        %li
+          = link_to polymorphic_url([photo.album, photo], subdomain: firm.slug), remote: true do
+            = image_tag photo.usual_path.url(:card)
+- elsif block == :journal
+  %ul.sv-article-list-wrap.small
+    %li.sv-article-list-block.clearfix
+      - post = firm.posts.first
+      - if post
+        .img
+          = link_to polymorphic_path([post.journal.firm, post]), remote: true do
+            = image_tag (post.illustration.image.medium) if post.illustration
+          %div{ id: "vote_managment_#{post.id}_#{post.class.name}" }
+            = render 'votes/like', resource: post, resource_class_name: post.class.name
+        .txt
+          .p
+            = link_to raw(post.title), polymorphic_path([post.journal.firm, post]), remote: true
+            %p
+              = simple_format post.body.first(140)
+            .h
+          .i
+- elsif block == :services
+  #sv-firm-side-services.block
+    %ul
+      - firm.firm_services.visible.first(3).each do |firm_service|
+        %li
+          .clearfix
+            = firm_service.name
+            %span<
+              #{firm_service.cost}#{'<br />'.html_safe}
+              %i= firm_service.unit

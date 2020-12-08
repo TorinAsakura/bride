@@ -1,0 +1,39 @@
+.main-right-content
+  %article
+    %section
+      %h1.page-title
+        %span
+          Список подарков
+
+    - unless @white_list.blank?
+      %h2.page-sub
+        Желаемые подарки
+      %ul.wish-list
+        - @white_list.each do |w|
+          %li
+            .preview.sv-l
+              - if w.image.present?
+                - if w.url.blank?
+                  = image_tag w.image.image.thumb
+                - else
+                  = link_to w.url_with_protocol, target: '_blank' do
+                    = image_tag w.image.image.thumb if w.image
+
+            .wish-content.sv-l
+              .present-name
+                - if w.url.blank?
+                  = w.name
+                - else
+                  = link_to w.name, w.url_with_protocol, target: '_blank'
+              .text= nl2br w.description
+
+    - unless @black_list.blank?
+      %h2.page-sub
+        Черный список подарков
+
+      %ul.un-wish-list
+        - @black_list.each_with_index do |w, index|
+          %li
+            %span.num= "#{index + 1}."
+            %span= w.name
+

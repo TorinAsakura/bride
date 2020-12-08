@@ -1,0 +1,6 @@
+window.modalViewer = new PostViewer(
+'<%= path_to_post(@post)%>',
+window.modalViewer ? window.modalViewer.baseLocation : window.location.pathname,
+'<%= j(render 'show', journal: @journal, post: @post)%>'
+);
+window.modalViewer.show();

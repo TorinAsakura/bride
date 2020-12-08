@@ -1,0 +1,22 @@
+.sv-ideas{data: {'max-page' => @ideas.total_pages}}
+  .sv-ideas__search
+    .sv-ideas__search-title
+      Свадебные идеи
+      .sv-ideas__search-magnifier
+        .sv-ideas__search-magnifier-icon
+    = render 'idea/search_form'
+
+  - if @ideas.present?
+    = render @ideas
+  - else
+    .sv-ideas-excuse
+      Извините, по данному запросу не найдено ни одной свадебной идеи
+
+  .sv-ideas__nav.hide
+    = paginate @ideas
+
+- if session[:idea]
+  :javascript
+    $(document).ready(function () {
+      $.getScript('#{session.delete :idea}');
+    });

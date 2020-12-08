@@ -1,0 +1,19 @@
+.main-right-content
+  %article
+    %section
+      .back-link
+        = link_to 'Назад', ''
+
+      %h1.page-title= @idea_section.name
+
+      .page-content.sv-minisite-idea-categories
+        .sv-minisite-idea-categories__grid
+          - @idea_categories.each do |category|
+            .sv-minisite-idea-category
+              .sv-minisite-idea-category__image
+                = link_to minisite_myidea_ideas_path(@idea_section, category) do
+                  - if @user_map[category.id]
+                    = image_tag @user_map[category.id]
+                  - else
+                    = image_tag category.image.url(:gray_thumb)
+              .sv-minisite-idea-category__title= category.name

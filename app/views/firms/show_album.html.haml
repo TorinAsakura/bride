@@ -1,0 +1,45 @@
+.sv-wrapper
+  = render 'firms/shared/sidebar'
+
+  .sv-article.left
+    = render 'firms/shared/header'
+
+    #sv-photo-gallery-block
+      .title.clearfix
+        = link_to albums_path, class: 'sv-a-back sv-l' do
+          %i.icon-chevron-left
+          -#= image_tag 'sv-icon-arrow_l.png', alt: 'Назад'
+        %span
+          Фотографии
+          %i= "(#{@album.photos.count})"
+        %ul
+          %li.add
+            - for_moderator_of @firm do
+              = link_to new_album_path(upload_to: @album), remote: true, class: 'add sv-photo-gallery-form-link' do
+                %i Загрузить фотографии
+
+    .sv-photo-gallery-form
+
+    .title_nobg.sv-album-title
+      = @album.name || raw('&nbsp;')
+      = link_to edit_album_path(@album), remote: true, class: 'sv-firm-album-edit-link' do
+        %i
+
+    - for_moderator_of @album do
+      = link_to new_polymorphic_path([@firm, @album], upload_to: @album.id), remote: true, class: 'sv-firm-album-upload-link' do
+        .sv-firm-album-upload-link__icon Добавить фотографии в альбом
+
+    %div{ 'data-js' => 'photo-preview-list' }
+      - @album_photos.each do |photo|
+        = render 'photos/thumbnail', resource: @firm, album: @album, photo: photo
+
+    .sv-photos-hidden-nav
+      = rel_next_prev_link_tags @album_photos
+
+    .clearfix
+
+- if session[:photo]
+  :javascript
+    $(document).ready(function () {
+      $.getScript('#{session.delete :photo}');
+    });

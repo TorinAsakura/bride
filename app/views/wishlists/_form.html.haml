@@ -1,0 +1,32 @@
+- form_url = @wishlist.new_record? ? site_wishlists_path(@site) : site_wishlist_path(@site, @wishlist)
+
+= simple_form_for @wishlist, url: form_url, html: {class: 'sv-wishlist__wish-form'}  do |f|
+  .title_nobg
+    = @wishlist.new_record? ? 'Добавить подарок' : 'Редактировать подарок'
+
+  - unless params[:black]
+    = f.simple_fields_for :image do |i|
+      = i.label :image, 'Фотография'
+      = image_tag i.object.image.thumb, class: 'sv-wishlist__wish-image' if i.object.image.present?
+      .actions
+        %label.upload-poster
+          %span.link-style Выберите файл
+          = i.input :image, as: :file,
+                    label: false,
+                    wrapper: :none,
+                    input_html: {class: 'pseudo-btn-input-file hidden', id: 'poster-img-input', 'data-js' => 'poster-img-input'}
+
+  = f.input :name
+  - unless params[:black]
+    = f.input :description, input_html: {rows: 4}
+    = f.input :url 
+  
+  - wish_type = params[:black] ? 0 : 1
+  = f.hidden_field :wish, value: wish_type
+
+  = f.submit 'Сохранить', class: 'link-style'
+
+  = link_to 'Удалить', site_wishlist_path(@site, @wishlist),
+            method: :delete, 
+            confirm: 'Вы уверены?', 
+            class: 'link-style-inner sv-r' unless @wishlist.new_record?

@@ -1,0 +1,23 @@
+#client-phone
+  .title_nobg.top-marg Мобильный телефон
+  = simple_form_for(@user, url: update_phone_user_path(@user), html: { method: :put, remote: true }) do |f|
+    = render 'errors', user: @user
+    .sv-l.rows-form
+      = label_tag 'user_phone', 'Текущий номер:'
+      %legend.tel_number= format_phone client.phone
+    .sv-profile-site.sv-r.rows-form-tel
+      = f.label :phone, 'Новый номер:'
+      .sv-l
+        = f.input :phone_prefix, label: false, input_html: {value: nil, class: 'sv-l inp-style input-big inp-style-compact small-number', value: '+7'}
+        = f.input :phone_body, label: false, input_html: {value: nil, class: 'sv-l inp-style input-big inp-style-compact full-number', placeholder: '___-___-__-__'}
+        .cntrl-group.tel.optional.client_phone
+          .cntrls
+            -# .field-block
+            -#   .notification
+            -#     На ваш номер отправлено SMS
+            -#     с кодом подтверждения.
+            -#     Введите код:
+            -#     %input
+            -#     .link-style.sv-l.input-big OK
+            = f.submit class: 'link-style sv-l input-big', value: 'Сохранить', style: 'display: none'
+        -# %span.result.updated.yes-green{style: 'display: none'} Номер телефона подтверждён

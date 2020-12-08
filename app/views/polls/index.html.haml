@@ -1,0 +1,33 @@
+.sv-wrapper.sv-polls.margintopotstp
+  .title.clearfix
+    %span
+      Опросы
+    - if current_client
+      %ul
+        %li.add
+          = link_to new_poll_path, class: 'sv-poll-form-link', remote: true do
+            %i добавить
+
+  .ovflhid.sv-poll-form
+
+  .sv-polls-list.clear
+    = render 'polls'
+
+.sv-polls-hidden-nav
+  = rel_next_prev_link_tags @polls
+
+.clear
+
+- if session.delete :new_poll
+  :javascript
+    $(document).ready(function () {
+      $.getScript("#{new_poll_path}");
+    });
+
+- if session[:poll]
+  :javascript
+    $(document).ready(function () {
+      $.getScript('#{session.delete :poll}');
+    });
+
+= render 'polls/template_upload'

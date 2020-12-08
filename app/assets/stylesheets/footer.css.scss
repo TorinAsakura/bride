@@ -1,0 +1,95 @@
+.sv-footer {
+  width: 960px;
+  margin: 0px auto;
+  font-size: 12px;
+  padding: 20px 0px;
+  color: #fff;
+}
+
+.sv-footer__left {
+  margin-left: 50px;
+  float: left;
+  width: 230px;
+}
+
+.sv-footer__center {
+  float: left;
+  width: 440px;
+}
+
+.sv-footer__right {
+  float: left;
+  padding-left: 25px;
+  border-left: 1px solid #c74863;
+}
+
+.sv-footer__logo {
+  margin: 30px 0px;
+}
+
+.sv-footer__copyright {
+
+}
+
+.sv-footer-nav {
+  list-style: none;
+  margin: 0px 0px 10px 0px;
+}
+
+.sv-footer-nav_column {
+  float: left;
+  margin-right: 50px;
+
+  &:last-child {
+    margin-right: 25px;
+  }
+}
+
+.sv-footer-nav__item {
+
+}
+
+.sv-footer-nav__item-link {
+  color: #fff;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.sv-footer-systems {
+  float: left;
+  overflow: hidden;
+  margin: 15px 0px 0px 20px;
+}
+
+.sv-footer-systems__item {
+  float: left;
+  margin-right: 10px;
+  width: 72px;
+  height: 33px;
+}
+
+.sv-footer-systems__item_mastercard {
+  background: image-url('payment-systems/mastercard.png') no-repeat;
+
+}
+
+.sv-footer-systems__item_visa {
+  background: image-url('payment-systems/visa.png') no-repeat;
+
+}
+
+.sv-footer-systems__item_webmoney {
+  background: image-url('payment-systems/webmoney.png') no-repeat;
+
+}
+
+.sv-footer-systems__item_yandex-money {
+  background: image-url('payment-systems/yandex-money.png') no-repeat;
+}
+
+.sv-footer-systems__item_qiwi {
+  background: image-url('payment-systems/qiwi.png') no-repeat;
+
+}

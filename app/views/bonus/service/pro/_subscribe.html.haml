@@ -1,0 +1,32 @@
+- if subscription.package.present?
+  = simple_form_for subscription, url: bonus_service_subscriptions_path(subscription.service), html: { remote: true, id: 'message_form', class: 'modal hide' } do |f|
+    .modal-header
+      .title_nobg= subscription.signing_service.decorate.title
+    .modal-body
+      = simple_format(subscription.decorate.description, class: 'text-justify')
+      .balance.row
+        %p.span3
+          Ваш баланс:
+          %span.btn-link= current_firm.purse.available_amount.format(html: true).html_safe
+        = link_to 'Пополнить', edit_firm_url(current_firm, anchor: 'monetize-purse'), class: "btn"
+      %p= "Для подключения &laquo;PRO-аккаунта&raquo; выберите удобный для вас способ оплаты".html_safe
+      %table.table.table-condensed.simple_form
+        %tbody
+          %tr
+            %th.sv-table-service.sv-table-th
+            %th.sv-table-service.sv-table-th Период
+            %th.sv-table-service.sv-table-th Сумма
+          - subscription.service.packages.each do |package|
+            %tr{class: cycle('success', nil)}
+              %td
+                = f.radio_button :package_id, package.id, class: 'radio-style-circle'
+                = label_tag "bonus_subscription_package_id_#{package.id}" do
+                  %span(style='width: 20px')
+              %td= "#{package.months_count} мес"
+              %td= (subscription.amount*package.months_count*package.coefficient/12).format(html:true).html_safe
+      %p.error.main-color-text
+
+    .modal-footer.text-center
+      %button.link-style Подтвердить
+- else
+  = render 'bonus/service/subscribe', subscription: subscription

@@ -1,0 +1,31 @@
+%h5 #{@question.title}
+
+= render 'question', :question => @question
+
+- unless @question.answer.nil?
+  %h5 Лучший ответ
+  = render 'question', :question => @question.answer
+
+%h5 Ответы (#{@question.answers.length})
+- @question.answers.each do |answer|
+  %div{:style => "padding-bottom: 10px;"}
+    %hr
+    .pull-left
+      = user_avatar(answer.user)
+    .pull-left{:style => "padding-left:10px;"}
+      %div{:style => "width: 410px;"}
+        %div{:style => "min-height: 63px;"}
+          %div #{link_to_user(answer.user)}
+          %div #{answer.body}
+        %div
+          .pull-left
+            %small #{l answer.created_at, :format => :comment}
+          .pull-left{:style => "padding-left:10px;"}
+            = link_to "Удалить", community_question_answer_path(params[:community_id], @question, answer), :method => "DELETE"
+          .pull-left{:style => "padding-left:10px;"}
+            = link_to "Лучший ответ", best_answer_community_question_answer_path(params[:community_id], @question, answer), :method => "POST"
+          .clearfix
+    .clearfix
+
+- if @question.answer.nil?
+  = render 'community_question_answers/form', :answer => @question.answers.new, :community_id => params[:community_id], :question_id => @question.id

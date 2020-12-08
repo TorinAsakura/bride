@@ -1,0 +1,30 @@
+= simple_form_for Album.new, url: albums_form_url(@resource),
+                             html: { class: 'sv-firm-album-upload', data: { js: 'album-photos-form', albums: albums_form_url(@resource) } },
+                             multipart: true do |f|
+  = f.input :id, label: 'Выберите альбом',
+                 collection: @albums.reject { |a| a.id.nil? },
+                 label_method: :name,
+                 value_method: :id,
+                 selected: @album.id || params[:upload_to],
+                 include_blank: false,
+                 input_html: { class: 'sv-album-form__select', 'data-js' => 'album-select' }
+  .sv-album-form__buttons
+    .sv-album-form__button-computer
+      = f.input_field :pictures, as: :file, name: 'album[pictures][][usual_path]', multiple: true
+      = link_to 'javascript:void(0);' do
+        .sv-album-form__button-computer__icon Загрузить фото с компьютера
+    .sv-album-form__button-social
+      %i.sv-album-form__button-social-icon.sv-album-form__button-social-icon_vk
+      = link_to "Загрузить фото из ВКонтакте", "javascript:void(0)", remote: true, class: "socials", data: {link: "/vkontakte_media", current_user_id: current_user.id}
+    .sv-album-form__button-social
+      %i.sv-album-form__button-social-icon.sv-album-form__button-social-icon_instagram
+      = link_to "Загрузить фото из Instagram", "javascript:void(0)", remote: true, class: "socials", data: {link: "/instagram_media", current_user_id: current_user.id}
+:javascript
+   $(document).on('validateToken', function(){
+      var socialAuthorizer = new SocialAuthorizer();
+
+      socialAuthorizer.validateToken();
+   })
+
+   $(document).trigger("validateToken");
+   $(document).unbind("validateToken");

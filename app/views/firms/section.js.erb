@@ -1,0 +1,9 @@
+var catalogs = $('#sv-firm-catalogs');
+catalogs.find('.sv-firm-catalog-item.active').removeClass('active');
+catalogs.find('#<%= dom_id @firm_catalog.try(:parent) || @firm_catalog || FirmCatalog.new%>').addClass('active');
+$('#catalog_info').html('<%= j(render 'firms', firms: @firms, firm_catalog: @firm_catalog) %>');
+FirmCatalog.reset('#sv-firm-catalogs');
+$.fancybox.close();
+if (historySupport()) {history.pushState(null, '', '<%= request.fullpath%>')}
+$('#sv-firms-list').infinitescroll('destroy');
+initFirmsListIS('#sv-firms-list');

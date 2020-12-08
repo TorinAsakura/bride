@@ -1,0 +1,12 @@
+%table
+  %td
+    = image_tag(firm.logo_url, :size => "100x100", :alt => "логотип #{firm.name}")
+  %td
+    %p
+      = link_to firm.name, firm_link(firm)
+    %p
+      %span
+        = firm.base_city.name if firm.base_city
+    %p
+      = friend_action(firm.user)
+      = link_to "Редактировать", edit_firm_path(firm)

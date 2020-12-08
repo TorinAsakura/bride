@@ -1,0 +1,7 @@
+#sv-login-page
+  %ul.sv-modal-tabs.clearfix
+    %li.active= link_to "Вход", new_user_session_path
+    %li= link_to "Регистрация", new_user_registration_path
+
+  .tab-content
+    #login-page.clearfix= render 'devise/shared/sv-login', data_view: :page

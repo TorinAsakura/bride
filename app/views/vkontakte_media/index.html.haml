@@ -1,0 +1,13 @@
+.sv-album-form__buttons{style: "margin: 0px 0"}
+  %p.choose_photos
+    #{t 'socials.fromVkontakte'}
+
+  - @albums.each do |album|
+    .album_preview
+      = link_to vkontakte_medium_path(album.aid), remote: true do
+        %p
+          = album.title
+        = image_tag album.thumb_url
+    %p
+      = album.description
+  %div{style: "clear: both"}

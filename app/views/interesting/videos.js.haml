@@ -1,0 +1,3 @@
+$('[data-js=interesting-videos]').html("#{j(render 'interesting/videos', videos: @videos)}");
+$('.sv-posts-order').html("#{j(render 'interesting/videos_order', path: videos_interesting_path)}");
+initVideoPreviews();

@@ -1,0 +1,171 @@
+// Place all the styles related to the competitions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.sv-wrapper.competition {
+  textarea {
+    height: 40px;
+  }
+
+  .string,
+  .text {
+    width: 80%;
+    max-width: 80%;
+  }
+
+  [type=checkbox] {
+    margin: -4px 0 0 0;
+  }
+
+  input[type="file"] {
+    height: 20px;
+    line-height: 20px;
+  }
+
+  .label-check-box {
+    display: inline-block;
+    margin: 0 0 0 10px;
+  }
+
+  .competition-banner-preview {
+    width: 300px;
+    height: 200px;
+  }
+
+  .competition-banner {
+    width: 300px;
+    height: 200px;
+  }
+
+  .error-date {
+    border-bottom: 1px #e9322d solid;
+    display: inline-block;
+    margin: 0 10px 5px 10px;
+  }
+
+  .datepicker.error {
+    border: 1px #e9322d solid;
+  }
+
+  fieldset.form {
+    border: 1px #eee solid;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    width: 80%;
+    padding: 4px 6px;
+
+    legend {
+      width: auto;
+      display: inline-block;
+      font-weight: none;
+      font-size: 14px;
+      line-height: 16px;
+      border: none;
+      margin: 5px 10px;
+    }
+
+    .field {
+      display: inline-block;
+      margin: 0 5%;
+      width: 39%;
+    }
+  }
+
+  .row {
+    display: inline-block;
+    margin: 0;
+
+    &.left {
+      width: 350px;
+      vertical-align: top;
+      text-align: center;
+    }
+    &.right {
+      margin: 0;
+      width: 450px;
+    }
+
+    .label {
+      font-weight: bold;
+    }
+    .data {
+      margin: 0 0 0 15px;
+    }
+  }
+  .cmpetititon-albums {
+    margin: 10px 0;
+  }
+
+  .cmpetititon-album {
+    height: 250px;
+    width:200px;
+    margin:5px 0 50px 0;
+    display: inline-block;
+  }
+
+  .add_fields {
+    margin: 15px;
+  }
+
+  .competition-prize {
+    .row.left {
+      width: 250px;
+    }
+
+    .row.right {
+      width: 370px;
+    }
+
+    input, textarea {
+      width: 350px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 73px;
+    }
+
+    .logo {
+      width: 200px;
+      margin: 5px 15px;
+    }
+
+    .competition-prize-preview {
+      height: 200px;
+      width: 200px;
+    }
+  }
+
+  &.show,
+  &.index,
+  &.firm-index {
+    .competition-prize {
+      margin: 5px 0 15px 0;
+
+      .row.left {
+        width: 120px;
+      }
+
+      .row.right {
+        width: 325px;
+      }
+
+      .logo {
+        width: 100px;
+        margin: 5px 15px;
+      }
+
+      .competition-prize-preview {
+        height: 100px;
+        width: 100px;
+      }
+    }
+  }
+
+}
+
+.control-group.string.optional.album_name {
+  height: auto;
+  text-align: left;
+}

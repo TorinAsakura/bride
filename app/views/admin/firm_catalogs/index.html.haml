@@ -1,0 +1,18 @@
+.add-resource
+  = link_to(new_admin_firm_catalog_path, class: 'link-style', remote: true) do
+    %i.icon-plus
+    Добавить
+
+.row
+  .span12
+    %h4 Каталог категорий
+    .row
+      .span12
+        %ol.sortable_tree.expandable#sv-firm-catalogs{ data: { rebuild_url: rebuild_admin_firm_catalogs_url, expand_node_url: expand_node_admin_firm_catalogs_url, cookie_store: :true, cookie_scope: @form_catalogs.first.class } }
+          = expandable_tree(@form_catalogs, {namespace: :admin, title: :name, render_module: RenderSortableTreeFirmCatalogHelper})
+
+- if @form_catalogs.count > 5
+  .add-resource
+    = link_to(new_admin_firm_catalog_path, class: 'link-style', remote: true) do
+      %i.icon-plus
+      Добавить

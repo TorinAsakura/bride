@@ -1,0 +1,11 @@
+%table.index_table
+  %thead
+    %tr
+      - %w(years_count discount).each do |attr|
+        %th= Bonus::Loyalty.human_attribute_name(attr)
+  %tbody
+    - @loyalties.each do |loyalty|
+      %tr
+        %td= loyalty.years_count
+        %td= best_in_place loyalty, :discount, path: admin_bonus_service_loyalty_path(@service, loyalty)
+%br

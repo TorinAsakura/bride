@@ -1,0 +1,106 @@
+.sv-comment-form-wrapper{ class: random_class = "c#{rand(99999)}" }
+  = simple_form_for Comment.new, remote: true,
+                                 url: comments_path(commentable_type: resource.class.name,
+                                                    commentable_id: resource.id),
+                                 html: { multipart: true,
+                                         id: "form_comment_#{resource.class.name}_#{resource.id}",
+                                         class: 'sv-comment-form',
+                                         'data-js' => 'comment-form',
+                                         'data-type' => 'json',
+                                         'data-url' => comments_path(commentable_type: resource.class.name,
+                                                                     commentable_id: resource.id) } do |f|
+    = hidden_field_tag :sort_order, 'desc', 'data-js' => 'sv-comments-order'
+    = hidden_field_tag :modal, modal
+    = hidden_field_tag :parent, "sv-comments-box-#{resource.class.name}"
+    = hidden_field_tag 'comment[images_count]', 0, 'data-js' => 'comment-images-count'
+    .hide{ 'data-js' => 'comment-form-file-wrapper' }
+      = file_field_tag :image, multiple: true, 'data-js' => 'comment-images-field'
+
+    .sv-comment-form__body-wrapper
+      = f.input :body, label: false, input_html: { placeholder: 'Что вы хотите написать?',
+                                                   maxlength: 1300,
+                                                   class: 'sv-comment-form__body',
+                                                   'data-js' => 'comment-body' }
+
+    .clearfix
+      %button.sv-comment-form__submit{ type: 'submut' } Отправить
+      .sv-comment-form__buttons
+        = link_to 'Фото', '#', class: 'sv-comment-form__button sv-comment-form__button_photo',
+                               'data-js' => 'comment-photo-button'
+        = link_to 'Видео', '#', class: 'sv-comment-form__button sv-comment-form__button_video',
+                                'data-js' => 'comment-video-button'
+        = link_to 'Ссылка', '#', class: 'sv-comment-form__button sv-comment-form__button_link',
+                                'data-js' => 'comment-link-button'
+    = link_to 'Ответить,', '#', class: 'sv-comments-form-rlink'
+
+    .sv-comment-form__images.sv-comment-form__images_empty{ 'data-js' => 'comment-form-images' }
+
+    .sv-comment-form__link.sv-comment-form__link_empty{ 'data-js' => 'comment-form-link' }
+
+    .sv-comment-form__videos.sv-comment-form__videos_empty{ 'data-js' => 'comment-form-videos' }
+      .sv-comment-form__video.sv-comment-form__video_template{ data: { js: 'video-player', width: 300, height: 150 } }
+        = hidden_field_tag 'comment[videos][][content]', nil, 'data-js' => 'comment-video-url'
+
+  .sv-comment-form__video-popover{ 'data-js' => 'comment-form-video-popover' }
+    = form_tag nil, url: '#', remote: true, class: 'sv-comment-form__video-form', 'data-js' => 'comment-form-video-form' do
+      = text_field_tag :url, nil, class: 'inp-style sv-comment-form__video-form-input', 'data-js' => 'comment-form-video-input'
+      = submit_tag 'Прикрепить видео-файл', class: 'link-style sv-comment-form__video-form-button'
+
+  .sv-comment-form__progress.sv-comment-form__progress_template
+    .sv-comment-form__progress-bar{ 'data-js' => 'progress-bar' }
+
+.hide{ 'data-js' => 'comment-form-modal-warning' }
+  .sv-comment-form-warning
+    Вы не можете прикрепить более 2 вложений к одному комментарию
+
+.hide{ 'data-js' => 'comment-form-wall-warning' }
+  .sv-comment-form-warning
+    Вы не можете прикрепить более 6 вложений к одному комментарию
+
+.hide{ 'data-js' => 'comment-form-video-warning' }
+  .sv-comment-form-warning
+    Вы не можете прикрепить более одного видео к одному комментарию
+
+= content_for :javascript do
+  - if !defined?(js_tmpl_hide)
+    %script{ id: 'comment-image-template', type: 'text/x-tmpl' }
+      {% for (var i=0, file; file=o.files[i]; i++) { %}
+      .template-upload.sv-comment-form__image
+        .preview
+          %span.in
+        .cancel.sv-comment-form__image-destroy
+          %button Удалить изображение
+      {% } %}
+
+  :javascript
+    $(document).ready(function () {
+      textArea = $("textarea#comment_body").filter(":visible");
+      textArea.autoResize();
+      window.#{modal ? 'modalCommentPhotoUploader' : 'commentPhotoUploader'} = new AttachmentPhotoUploader({
+        'wrapper': '.#{random_class}',
+        'fileWrapper': '[data-js=comment-form-file-wrapper]',
+        'fileField': '[data-js=comment-images-field]',
+        'button': '[data-js=comment-photo-button]',
+        'images': '[data-js=comment-form-images]',
+        'imagesEmptyClass': 'sv-comment-form__images_empty',
+        'progressTemplate': '.sv-comment-form__progress_template',
+        'progressTemplateClass': 'sv-comment-form__progress_template',
+        'image': '.sv-comment-form__image',
+        'imageTemplate': 'comment-image-template',
+        'imagesCountInput': '[data-js=comment-images-count]'
+      });
+
+      window.#{modal ? 'modalCommentVideoUploader' : 'commentVideoUploader'} = new AttachmentVideoUploader({
+        'wrapper': '.#{random_class}',
+        'popover': '[data-js=comment-form-video-popover]',
+        'popoverInput': '[data-js=comment-form-video-input]',
+        'videoForm': '[data-js=comment-form-video-form]',
+        'videoInput': '[data-js=comment-video-url]',
+        'button': '[data-js=comment-video-button]',
+        'template': '.sv-comment-form__video_template',
+        'templateClass': 'sv-comment-form__video_template',
+        'videos': '[data-js=comment-form-videos]',
+        'videosEmptyClass': 'sv-comment-form__videos_empty',
+        'video': '.sv-comment-form__video'
+      });
+    });

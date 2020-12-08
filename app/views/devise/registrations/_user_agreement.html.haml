@@ -1,0 +1,15 @@
+.row
+  .span4
+    %label
+      Пользовательское соглашение
+    %div{:style => "overflow-y: scroll; with: 100%; height: 150px; border:1px solid #333 "}
+      %div{:style => "height: 200px"}
+        блаблабла
+
+= f.simple_fields_for :user do |u|
+  .row
+    .span4
+      %label.checkbox.required
+        = u.input :read, :as => :boolean, :label => false, :input_html => { :class => 'required' }
+        *
+        = I18n.t :read,  :scope => 'helpers.label.user'

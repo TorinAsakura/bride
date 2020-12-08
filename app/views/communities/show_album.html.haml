@@ -1,0 +1,33 @@
+.sv-wrapper.sv-community.margintopotstp
+  .main-title
+    = link_to community_albums_path(@community), class: 'sv-a-back sv-l', alt: 'Назад' do
+      %i.icon-chevron-left
+    %span= @community.name
+
+  = render 'communities/shared/sidebar', community: @community
+
+  .sv-article
+    .sv-community__title
+      = @album.name
+      - for_moderator_of @community do
+        = link_to edit_polymorphic_path([@community, @album]), remote: true, class: 'sv-firm-album-edit-link' do
+          %i
+
+    - for_moderator_of @community do
+      = link_to new_polymorphic_path([@community, :album], upload_to: @album), remote: true, class: 'sv-album-upload-link' do
+        .sv-album-upload-link__icon Добавить фотографии в альбом
+
+    %div{ 'data-js' => 'photo-preview-list' }
+      - @album_photos.each do |photo|
+        = render 'photos/thumbnail', resource: @community, album: @album, photo: photo
+
+    .sv-photos-hidden-nav
+      = rel_next_prev_link_tags @album_photos
+
+    .clearfix
+
+    - if session[:photo]
+      :javascript
+        $(document).ready(function () {
+          $.getScript('#{session.delete :photo}');
+        });

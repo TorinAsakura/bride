@@ -1,0 +1,23 @@
+%ul.sv-video-list-wrap.three-columns{ 'data-js' => 'video-list' }
+  - videos.each do |video|
+    %li.sv-video-list-block{ 'data-js' => 'video' }
+      - if video.content.match(/vk/) || video.content.match(/vimeo/)
+        = link_to polymorphic_path([video.multimedia.profileable, video]), remote: true, class: 'video_link_preview' do
+          .video-container
+            %img.video_image_preview{src: "#{video.media_preview}"}
+            %span.video-info
+              %span.video-play
+                %span.video-play-icon
+                %span.video-title #{video.title}
+              %span.video-duration 
+                #{video.duration.present? ? video.duration : "??:??:??"}
+      - else
+        .youtube[video]
+          = link_to '', polymorphic_path([:admin, video.multimedia.profileable, video]),
+                        class: 'video sv-firm-video-link',
+                        data: { title: truncate(video.title, length: 20), youtube: video.content },
+                        remote: true
+          .sv-firm-video-link-bg
+
+.sv-videos-hidden-nav
+  = rel_next_prev_link_tags videos

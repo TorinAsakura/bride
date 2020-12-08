@@ -1,0 +1,9 @@
+.sv-block
+  - photos.each_with_index do |photo,i|  
+    .elem
+      %a.fancybox.img
+        = image_tag photo.path.preview
+      .sv-i-favorite
+        %a favorite  
+    - if (i + 1) % column == 0
+      %br

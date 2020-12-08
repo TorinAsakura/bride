@@ -1,0 +1,8 @@
+.sv-article
+  .title_nobg Удаление аккаунта
+  .sv-end-form
+    = link_to 'Удалить аккаунт', '#', class: 'link-style sv-firm-remove-account-link'
+  .sv-firm-remove-account-popup
+    %ul
+      %li Данная процедура необратима! Действительно удалить аккаунт?
+      %li= link_to 'Подтверждаю', firm_path(firm), method: :delete, class: 'link-style'

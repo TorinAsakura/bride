@@ -1,0 +1,42 @@
+.tab-menu {
+  @include border;
+  li > {
+    .gray a.active, a.active, a.active:hover, a.active:focus {
+      background: $main-menu-color;
+      color: white;
+      border-bottom: 0;
+      &:before {
+        content: "";
+        @include triangle(12px, $main-menu-color, right);
+        left: 100%;
+        position: absolute;
+        top: 50%;
+        margin-top: -$main-margin / 2;
+      }
+    }
+    a {
+      line-height: $main-padding + $layout-margin;
+      padding: 0 $main-margin-small * 2;
+      box-shadow: none !important;
+      color: $black;
+      font-size: 1.2em;
+      background: white;
+      display: block;
+      @include border($border-color, 1, bottom);
+      position: relative;
+      &:not(.active):hover {
+        background: $tab-menu-gray;
+      }
+    }
+  }
+  li:last-child a {
+    border: 0;
+  }
+  li.gray a {
+    background: $tab-menu-gray;
+  }
+  span {
+    color: #b2b2b2;
+    font-size: 18px;
+  }
+}

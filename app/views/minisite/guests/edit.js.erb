@@ -1,0 +1,3 @@
+var guest = $('#<%= dom_id(@guest)%>');
+guest.after('<%= j(render 'form', guest: @guest)%>');
+guest.remove();

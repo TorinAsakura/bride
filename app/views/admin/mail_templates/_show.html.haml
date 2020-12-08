@@ -1,0 +1,27 @@
+.sv-admin-mail-template
+  - if mail_template.send_date.present?
+    %p Рассылка была отправлена #{mail_template.send_date}
+  - else 
+    %p Рассылка не отправленна
+  .modal-header
+    %h3= mail_template.title
+  .modal-body
+    %p= mail_template.body.html_safe
+  .modal-footer
+    %h4 Разослать кому?
+    = form_tag(send_mails_admin_mail_template_path(mail_template)) do
+      %p
+        = check_box_tag 'firm', true, nil
+        = label_tag 'firm', 'Фирмы'.html_safe
+      %p
+        = check_box_tag '[gender][male]', true, nil
+        = label_tag 'Client', 'Пользователи мужчины'.html_safe
+      %p
+        = check_box_tag '[gender][female]', true, nil
+        = label_tag 'Client', 'Пользователи женщины'.html_safe
+      %p
+        = check_box_tag '[gender][without]', true, nil
+        = label_tag 'Client', 'Пользователи без пола'.html_safe
+      = submit_tag 'Отправить', class: 'button link-style', data: { confirm: 'Вы уверены?' }
+
+      = link_to 'Закрыть', admin_task_categories_path, class: 'link-style sv-r', 'data-js' => 'illustration-popup-close'

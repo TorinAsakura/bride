@@ -1,0 +1,17 @@
+- if @services.blank?
+  %h3= t('.services_empty')
+- else
+  %table.index_table
+    %thead
+      %tr
+        %th Id
+        - %w(name description identifier amount pay_once discount dealer_percent trial_duration list).each do |attr|
+          %th= Bonus::Service.human_attribute_name(attr.to_sym)
+        %th Действия
+      %tbody#sub-list{data: {url: sort_admin_bonus_services_path}}
+        = render partial: 'service', collection: @services, as: :service
+
+.add-resource
+  = link_to(new_admin_bonus_service_path, class: 'link-style') do
+    %i.icon-plus
+    Добавить

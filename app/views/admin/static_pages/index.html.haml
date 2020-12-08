@@ -1,0 +1,11 @@
+= render partial: 'layouts/admin_tab_menu',  locals: { select: 'static_pages' }
+
+.static-page
+  - @pages.each do |page|
+    .page
+      = link_to substr(page.title, 50), admin_static_page_path(page), class: 'page-show'
+      .page-visible{class: "visible-#{page.is_visible?}"}= page.is_visible? ? 'Показыватся польлзователям' : 'Скрыта от пользователей'
+      = link_to 'редактировать', edit_admin_static_page_path(page), class: 'page-edit link-style'
+      = link_to 'удалить', admin_static_page_path(page), method: :delete, confirm: 'Вы уверенны?', class: 'page-destroy link-style'
+
+= link_to 'Добавить страницу', new_admin_static_page_path, class: 'link-style'

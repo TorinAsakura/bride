@@ -1,0 +1,21 @@
+.sv-banner-wrapper
+  .sv-banner{'data-js' => 'banner-carousel'}
+    - banners.each do |banner|
+      - if banner.system?
+        = image_tag banner.image, class: 'sv-banner__image',
+                                  'data-banner-type' => 'system'
+      - elsif banner.ad? && (banner.for_guests && current_user.blank? || banner.for_users && current_user.client? || banner.for_firms && current_user.firm?)
+        = image_tag banner.image, class: 'sv-banner__image',
+                                  'data-banner-type' => 'ad',
+                                  'data-title' => banner.title,
+                                  'data-description' => banner.description,
+                                  'data-link' => url_with_protocol(banner.link)
+
+  - if current_user.blank?
+    = render 'home/banners/for_guests'
+  - elsif current_user.client? && (current_client.wedding.blank? || current_client.site.blank?)
+    = render 'home/banners/for_users', wedding: @wedding, site: @site
+  - elsif current_user.firm? && !current_firm.has_pro?
+    = render 'home/banners/for_firms', pro: @pro
+
+  = render 'home/banners/ad'

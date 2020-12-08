@@ -1,0 +1,7 @@
+window.modalViewer = new PhotoViewer(
+'<%= @photo_path%>',
+window.modalViewer ? window.modalViewer.baseLocation : window.location.pathname,
+'<%= j(render 'show')%>',
+true
+);
+window.modalViewer.show();

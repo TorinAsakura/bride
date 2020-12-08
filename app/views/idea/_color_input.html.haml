@@ -1,0 +1,18 @@
+-  color_ids ||= nil
+.color-tags
+  = f.input :color_list, label: false do
+    - all_tags_ids = color_ids || f.object.color_ids
+    - Tag.color.each do |color_tag|
+      %li.sv-color-tag
+        = label_tag do
+          .virtual_checkbox.sv-color-tag__circle{ style: "background-color:#{color_tag.color};" }
+          = check_box_tag f.object_name + '[color_ids][]',
+                          color_tag.id,
+                          all_tags_ids.include?(color_tag.id),
+                          class: 'sv-color-tag__checkbox',
+                          'data-color' => color_tag.name,
+                          'data-url' => idea_color_path(color: color_tag.color_slug)
+        .sv-color-tag__popup
+          = color_tag.name
+    = hidden_field_tag f.object_name + '[color_ids][]'
+    .clear

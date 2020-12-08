@@ -1,0 +1,16 @@
+%table.table.table-condensed.simple_form
+  %tr
+    %th.sv-table-service.sv-table-th Услуга
+    %th.sv-table-descript.sv-table-th Описание
+    %th.sv-table-access.sv-table-th Доступ
+  - services.each do |service|
+    - if firm.has_active_pro? || service.pro?
+      %tr{id: dom_id(service), class: ('success' if firm.has_active_service?(service))}
+        %td
+          %span= service.name
+          = service.min_price(firm)
+        %td.sv-table-descript-text
+          = service.description.html_safe
+        %td#service-subscribe.sv-text-centr
+          .sv-table-actions
+            = service.subscribe(firm)

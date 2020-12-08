@@ -1,0 +1,22 @@
+- photo_id = rand(99999)
+= simple_fields_for "album[photos_attributes][#{photo_id}]", @photo do |p|
+  .sv-album-photos-form__photo{ id: photo_id }
+    = p.hidden_field :id, 'data-js' => 'photo-hidden-id'
+    .sv-album-photos-form__photo-left
+      = image_tag @photo.path.large_preview
+    .sv-album-photos-form__photo-right
+      = p.input :description, label: 'Описание фотографии:', input_html: { rows: 5 }
+      .sv-album-photos-form__photo-select
+        = p.association :album, collection: @albums,
+                                selected: @album.id,
+                                label: 'Поместить в альбом:',
+                                input_html: { class: 'sel-style-compact-mini', id: "sel_#{photo_id}" }
+      = link_to 'Сохранить', '#', class: 'link-style sv-album-photos-form__photo-btn_save',
+                                  'data-js' => 'album-photos-form-photo-btn-save'
+      = link_to 'Удалить', minisite_image_path(@photo),
+                           class: 'button-close sv-album-photos-form__photo-btn_remove',
+                           'data-js' => 'album-photos-form-photo-btn-remove',
+                           method: :delete,
+                           remote: true
+      :javascript
+        new PhotoEditForm('##{photo_id}', '#sel_#{photo_id}', '#{minisite_image_path(@photo)}');

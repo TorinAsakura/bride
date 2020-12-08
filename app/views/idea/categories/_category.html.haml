@@ -1,0 +1,5 @@
+.sv-idea.sv-idea_hidden
+  .sv-idea__image
+    = link_to idea_section_category_path(@section, category) do
+      .sv-idea__image-body{data: category.decorate.image_bg}
+      .sv-idea__image-text= category.name

@@ -1,0 +1,43 @@
+- unless firm.city_firms.empty?
+  #sv-firm-side-location
+    .sv-firm-city-location.sv-firm-city-location_loading
+      = select_tag :city, options_from_collection_for_select(firm.cities, :id, :name), class: 'sv-firm-city-select'
+    .sv-firm-side-city-maps
+      - firm.city_firms.each do |city_firm|
+        - if city_firm.addresses.present?
+          .sv-firm-side-city-map.sv-firm-side-city-map_hidden{ id: "firm-side-city-map-#{city_firm.city_id}" }
+
+  #sv-firm-side-contacts
+    - firm.city_firms.each_with_index do |city_firm, i|
+      .sv-firm-side-city-contacts{ class: (i.zero? ? '' : 'sv-firm-side-city-contacts_hidden'), id: "firm-city-contacts-#{city_firm.city_id}" }
+        - if (base_address = city_firm.base_address.try(:decorate)).present?
+          %ul
+            - if base_address.mobile_phone.present?
+              %li
+                %i.sv-icon.mobile
+                .sv-firm-phone-hidden{ data: {js: 'firm-hidden-phone', id: city_firm.id, } }
+                  = format_phone base_address.mobile_phone
+                  = link_to 'Показать', '#', class: 'sv-firm-show-phone-link',
+                                             'data-js' => 'firm-show-phone-link',
+                                             'data-url' => get_phone_firm_url(firm, city_firm)
+            - if base_address.phone.present?
+              %li
+                %i.sv-icon.phone
+                = base_address.phone
+            - if base_address.skype.present?
+              %li
+                %i.sv-icon.skype
+                = base_address.skype
+            - if base_address.email.present?
+              %li
+                %i.sv-icon.mail
+                = link_to base_address.email, "mailto:#{base_address.email}", rel: 'nofollow'
+            - if base_address.site.present?
+              %li
+                %i.sv-icon.url
+                = link_to base_address.site, base_address.site_url, rel: 'nofollow', target: '_blank'
+      - if city_firm.addresses.present?
+        :javascript
+          $(window).load(function() {
+            initMap({ id: 'firm-side-city-map-#{city_firm.city.id}', addresses: '#{j city_firm.addresses_for_map}' });
+          });

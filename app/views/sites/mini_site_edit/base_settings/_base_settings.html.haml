@@ -1,0 +1,22 @@
+/ Адрес электронной почты блок
+#mini-site-base-settings.sv-article
+  .title_nobg Основные настройки сайта
+  .sv-profile-site
+    = form_for site, url: update_base_settings_site_path(site),  method: :put, html: {remote: true} do |f|
+      = render 'errors', site: site
+
+      .row.clearfix
+        .title.sv-l= f.label :description, 'Заголовок:'
+        .input-field= f.text_field :description, class: 'sv-l input w200', placeholder: 'Свадьба Димы и Полины'
+
+      .row.clearfix
+        .title.sv-l Дизайн мини-сайта:
+        .input-field Основной шаблон
+        = link_to 'Изменить', '#', class: 'sv-r link-style mt'
+
+      .row.clearfix
+        .title.sv-l Приватность:
+        .input-field= select_tag :privat_level, options_for_select(['Доступ по паролю', 'Свободный доступ']), class: 'sv-l select-level', include_blank: true, placeholder: 'Уровень доступа'
+
+      %span.yes-green.updated{style: 'display: none'}  данные успешно изменены
+      = f.submit 'Сохранить', class: 'link-style sv-l', style: 'display: none;'

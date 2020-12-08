@@ -1,0 +1,14 @@
+%table{align: 'center', border: '0', cellpadding: '0', cellspacing: '0', 
+  bgcolor: '#ffffff', width: '600'}
+  %tr
+    %td{height: '60', style: 'text-align: justify'}
+      %span{style: 'font-size: 14px'}
+        = link_to 'Добро пожаловать на Svadba.org!', '#', 
+          style: 'text-decoration: none;color: #c74463; font-weight: bold;'
+        Мы рады, что вы присоединились к нам и
+        переживаем вместе с вами за вашу Свадьбу! У нас есть множество решений,
+        чтобы помочь вам спланировать и организовать Свадьбу вашей мечты.
+  %tr
+    %td{height: '90', align: 'center'}
+      = link_to 'НАЖМИТЕ, ЧТОБЫ АКТИВИРОВАТЬ АККАУНТ', confirmation_url(@resource, confirmation_token: @token, subdomain: false), 
+        style: 'padding: 15px 25px; color: #ffffff; background-color: #c74463; text-decoration: none'

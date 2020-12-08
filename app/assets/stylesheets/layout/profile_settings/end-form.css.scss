@@ -1,0 +1,18 @@
+.sv-end-form {
+  position: relative;
+  overflow: visible;
+  .notification {
+    padding: $main-padding $main-padding $main-padding $main-padding;
+    height: auto;
+    width: 225px;
+    margin-left: 160px;
+    bottom: $main-margin / 2;
+    display: none;
+    visibility: visible;
+    .link-style.sv-l {
+      margin-top: $main-padding;
+      margin-right: 5px;
+      float: left;
+    }
+  }
+}

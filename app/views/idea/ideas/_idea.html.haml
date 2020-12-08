@@ -1,0 +1,7 @@
+.sv-idea.sv-idea_hidden
+  .sv-idea__image
+    = link_to @section ? idea_section_category_idea_path(@section, @category, idea) : idea_idea_path(idea), remote: true do
+      = image_tag idea.image.image_url :thumb
+      - unless @section
+        - if (collection = idea.collection).present?
+          .sv-idea__image-text= collection.name

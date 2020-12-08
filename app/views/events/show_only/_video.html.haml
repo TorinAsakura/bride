@@ -1,0 +1,10 @@
+.title.itles.clearfix
+  = link_to wedding_timetable_event_path(@event.timetable,@event), remote: true, class: 'sv-a-back sv-l' do
+    %i.icon-chevron-left
+  %span.sv-l Полезно посмотреть
+
+#sv-video-list
+  = render 'events/shared/video', video: @video
+
+.sv-video-hidden-nav.hide
+  = paginate @video, param_name: 'video_page'

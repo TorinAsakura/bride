@@ -1,0 +1,22 @@
+= simple_form_for [:admin, @category], html: { id: 'firm_catalog_form', class: 'modal' }  do |f|
+  .title_nobg
+    = @category.new_record? ? 'Новая категория' : 'Редактирование категории'
+  = f.input :name
+  = hidden_field_tag  :section_id, @section_id
+  = f.input :description, as: :text, input_html: { rows: 3 }
+  = f.label 'Добавить ко всем'
+  = render 'tags/input', f: f, tags: []
+  = f.label 'Выберите обложку для альбома идей'
+  = f.file_field :image
+
+  = f.input :collection_id, collection: @collections, label: 'Выберите коллекцию идей', include_blank: false
+
+  %div
+    %button.link-style Сохранить
+    - if @category.persisted?
+      = link_to 'Удалить',
+                remove_category_admin_idea_section_path(@section, category_id: @category),
+                class: 'link-style-active',
+                method: :delete,
+                remote: true,
+                confirm: 'Вы уверены?'

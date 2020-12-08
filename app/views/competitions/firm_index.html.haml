@@ -1,0 +1,55 @@
+.sv-wrapper.competition.firm-index
+  .breadcrumbs
+    = link_to @firm.name, firm_link(@firm)
+    > Конкурсы
+    .clearfix
+
+  %hr
+  = link_to 'Добавить новый фотоконкурс', new_firm_competition_path(@firm)
+  %hr
+
+
+  -@competitions.each do |competition|
+    %h1= competition.name
+
+    .row.left
+      .logo
+        = image_tag(competition.banner_url, class: "competition-banner")
+
+      .field
+        = link_to 'Показать', firm_competition_path(@firm, competition)
+      - for_moderator_of(@firm) do
+        .field
+          = link_to 'Редактировать', edit_firm_competition_path(@firm, competition)
+    .row.right
+      .field
+        .label Описание конкурса
+        .data= nl2br competition.about_competition
+
+      .field
+        .label Правила конкурса
+        .data= nl2br competition.rules
+
+      - competition.competition_prizes.each do |prize|
+        .competition-prize
+          .row.left
+            .field
+              .prize-picture
+                = image_tag(prize.picture_url, class: "competition-prize-preview")
+          .row.right
+            .field
+              = prize.title
+            .field
+              .label Описание
+              %br
+              = prize.description
+
+      .field
+        .label Дата начала конкурса
+        .data= l(competition.start_date, format: :full) if competition.start_date?
+
+      .field
+        .label Дата окончания конкурса
+        .data= l(competition.deadline_date, format: :full) if competition.deadline_date?
+
+    %hr

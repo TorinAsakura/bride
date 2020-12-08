@@ -1,0 +1,20 @@
+.sv-wrapper
+  = render 'firms/shared/sidebar'
+  .sv-article.left
+    #sv-firm-detail-text.sv-dealer-details
+      .title.clearfix
+        %span Общая информация
+      %p Ссылка для превлечения компаний
+      = text_field_tag(:invite_link, root_url(ref: @firm.invite_token), onFocus: 'this.select()', class: 'invite-link')
+
+    #sv-firm-payments.firm-settings
+      .sv-article
+        .sv-balance-top.ovflhid
+          .sv-balc-you.sv-l Финансовая информация
+          .sv-balc-amount.sv-l.ovflhid
+            %span.rur= @firm.purse.amount.format(html: true).html_safe
+          .sv-balc-button.sv-r
+            = link_to('Пополнить баланс', edit_firm_path(@firm, anchor: 'monetize-purse'), class: 'link-style sv-l')
+
+      .transfer
+        = link_to('Перевести средства в систему', new_transfer_to_system_dealer_path, remote: true, class: 'link-style')

@@ -1,0 +1,11 @@
+= simple_form_for @package, url: admin_bonus_service_packages_path(@service) do |f|
+  .row
+    .field.span4
+      = f.input :months_count
+    .field.span4
+      = f.input :discount
+    .field.span4
+
+  .row
+    .field.span12
+      = f.submit 'Сохранить', class: 'btn'

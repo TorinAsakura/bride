@@ -1,0 +1,10 @@
+%p= t('.title')
+= simple_form_for payment, remote: true do |f|
+  = f.input :value, label: false, as: :integer, placeholder: f.object.class.human_attribute_name(:value)
+  %i.icon-rouble
+  = f.submit(t('.pay'), class: 'link-style')
+  .clearfix
+  %p.error.main-color-text
+  .course{data: {course: current_user.purse.deposit_course}}
+    %span.title= t('.sum')
+    %span.sum

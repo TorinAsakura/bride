@@ -1,0 +1,49 @@
+#sv-user-box
+  .avatar
+    .border
+      = link_to main_domain_link(user_path(current_user)) do
+        = image_tag current_user.avatar
+
+  .name
+    = link_to main_domain_link(user_path(current_user)) do
+      = current_user.name
+
+  .menu
+    %ul.m1
+      %li.m1
+        = link_to '', title: 'уведомления', class: 'm1' do
+          %i.sv-icon.earth уведомления
+      %li.m1
+        = link_to main_domain_link(messages_path), title: 'сообщения', class: 'm1' do
+          %i.sv-icon.msg сообщения
+      %li.m1
+        = link_to '', title: 'друзья', class: 'm1' do
+          %i.sv-icon.people друзья
+
+      - if current_firm
+        %li.m1
+          = link_to '', title: 'баланс', class: 'm1' do
+            %i.sv-icon.money баланс
+
+      %li.m1
+        = link_to '', title: 'настройки', class: 'm1' do
+          %i.sv-icon.setting настройки
+          %i.arr
+
+        .drop
+          %ul.settings
+            %li= link_to 'Настройки аккаунта', main_domain_link(current_client ? edit_client_path(current_client) : edit_firm_path(current_firm))
+            - if current_firm
+              %li= link_to 'Рекламировать', ''
+            - else
+              - if current_client.site.present?
+                %li= link_to 'Мини-сайт', current_client.site.name.present? ? ['http://', @site.name, '.', ChelnySvadba.config.base_domain, request.port_string].join : site_path(current_client.site)
+              - else
+                %li= link_to 'Создать мини-сайт', main_domain_link(new_site_path)
+
+            %li= link_to 'Конфиденциальность', ''
+            %li= link_to 'Выйти', main_domain_link(destroy_user_session_path), 'data-method' => 'delete'
+            %li.hr
+              %span
+            %li
+              = link_to 'Помощь', ''

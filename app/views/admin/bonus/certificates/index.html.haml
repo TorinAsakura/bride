@@ -1,0 +1,17 @@
+- if @certificates.blank?
+  %h3= t('.certificates_empty')
+- else
+  %table.index_table
+    %thead
+      %tr
+        %th Id
+        - %w(name description number amount service starts_at ends_at quantity used_quantity limit).each do |attr|
+          %th= Bonus::Certificate.human_attribute_name(attr.to_sym)
+        %th Действия
+      %tbody
+        = render partial: 'certificate', collection: @certificates, as: :certificate
+
+.add-resource
+  = link_to(new_admin_bonus_certificate_path, class: 'link-style') do
+    %i.icon-plus
+    Добавить

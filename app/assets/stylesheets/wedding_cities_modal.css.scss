@@ -1,0 +1,74 @@
+.sv-wedding-cities-modal, .subscription-firm-catalog-items {
+  .sv-city-indexes, .sv-city-countries {
+    border-bottom: 1px solid #c84564;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    text-align: center;
+    &:empty{
+      display: none;
+    }
+    .city-index, .country-index {
+      display: inline-block;
+      color: #c84564;
+      cursor: pointer;
+      font-size: 90%;
+      margin: 0 1px;
+      padding: 0 4px;
+    }
+    .city-index {
+      &:hover, &.active{
+        background-color: #c84564;
+        color: #fff;
+      }
+    }
+    .country-index {
+      &:hover, &.active{
+        text-decoration: underline;
+      }
+    }
+  }
+  .items{
+    .item{
+      border-bottom: 1px solid #c84564;
+      margin-bottom: 15px;
+      h5{
+        margin: 0 0 10px 5px;
+      }
+      ul {
+        margin: 0;
+        list-style: none;
+        padding-left: 15px;
+        li{
+          margin-bottom: 5px;
+          .form{
+            display: inline-block;
+            float: right;
+            form{
+              margin: 0;
+            }
+          }
+          .price{
+            margin-left: 10px;
+            color: #C84563;
+            font-size: 90%;
+          }
+          p.error{
+            font-size: 85%;
+          }
+        }
+      }
+    }
+    .firm_catalog{
+      width: 310px;
+    }
+
+  }
+}
+
+#sv-wedding-cities, #side-city-select, #change-first-city {
+  .items{
+    .city-group{
+      width: 190px;
+    }
+  }
+}

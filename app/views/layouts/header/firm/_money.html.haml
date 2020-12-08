@@ -1,0 +1,17 @@
+%li.m1
+  = link_to '', title: t('.money'), class: 'm1' do
+    %i.sv-icon.money
+  %i.arr
+  .drop.sv-drop-balance
+    .title.clearfix
+      = t('.title')
+      %span.cash
+        = firm.money
+    %ul
+      = render 'bonus/services/by_header'
+      %li.clearfix
+        %i.balance
+        %p= link_to(t('.balance'), edit_firm_url(firm, anchor: 'monetize-purse'), class: 'sv-link-big')
+      %li.clearfix
+        %i.statistic
+        %p= link_to(t('.statistic'), edit_firm_url(firm, anchor: 'monetize-payments'), class: 'sv-link-big')

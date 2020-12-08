@@ -1,0 +1,103 @@
+- marital_statuses = client.male? ? MALE_CLIENT_MARITAL_STATUS : FEMALE_CLIENT_MARITAL_STATUS
+#client-control-panel-base-settings.client-settings.sv-article.margintopotstp
+  = render "settings/notice_block"
+  .sv-article
+    .title_nobg Настройки профиля
+
+    .form-ovrfl
+      = simple_form_for @client do |f|
+        .rows-form.base-client-settings
+          = f.input :firstname,
+                    placeholder: 'Введите имя',
+                    input_html: {class: 'input-big user-firstname'}
+          .list-form-seting-lastname
+            = f.input :lastname,
+                    placeholder: 'Введите фамилию',
+                    input_html: {class: 'input-big user-lastname'}
+            = f.input :visibility,
+                    as: :select,
+                    collection: CLIENT_PAGE_VISIBILITY,
+                    placeholder: 'Всем',
+                    input_html: {class: 'input-big',data: {'select2-options' => {minimumResultsForSearch: -1}}}
+          = label_tag 'man', 'Пол'
+          .sv-radio-user.sv-l
+            = f.radio_button :gender, false, id: 'girl', class: 'radio-style-girl'
+            = label_tag 'girl'
+            = f.radio_button :gender, true, id: 'man', class: 'radio-style-man'
+            = label_tag 'man'
+
+          .clear
+          .list-form-seting-birthday
+            = f.input :birthday,
+                       as: :string,
+                       input_html: {class: "input-big birthday-day", value: f.object.try(:birthday).try(:strftime,'%d.%m.%Y'), data: beatpicker('clientBirthdayBeatpickerOptions')}
+
+            = f.input :visibility,
+                       as: :select,
+                       collection: CLIENT_PAGE_VISIBILITY,
+                       placeholder: CLIENT_PAGE_VISIBILITY.first,
+                       input_html: {class: 'input-big',                      data: {'select2-options' => {minimumResultsForSearch: -1}}}
+          .clear
+          = f.input :city_id,
+                    as: :hidden,
+                    label: 'Родной город',
+                    input_html: {class: 'input-big user-city',               data: {'select2-disabled' => true, 'autocomplete-path' => city_autocomplete_path}}
+          .clear
+          = f.input :marital_status,
+                    as: :select,
+                    collection: marital_statuses,
+                    placeholder: CLIENT_MARITAL_STATUS.first,
+                    input_html: {class: 'input-big user-marital_status',      data: {'select2-options' => {minimumResultsForSearch: -1}}}
+          = f.input :children,
+                    as: :select,
+                    collection: CLIENT_CHILDREN,
+                    placeholder: CLIENT_CHILDREN.first,
+                    input_html: {class: 'input-big user-children',            data: {'select2-options' => {minimumResultsForSearch: -1}}}
+          = f.input :alcohol_attitude,
+                    as: :select, collection: LIFE_POSITION,
+                    placeholder: LIFE_POSITION.first,
+                    input_html: {class: 'input-big user-attitude-to-smoking', data: {'select2-options' => {minimumResultsForSearch: -1}}}
+          = f.input :smoking_attitude,
+                    as: :select, collection: LIFE_POSITION,
+                    placeholder: LIFE_POSITION.first,
+                    input_html: {class: 'input-big user-attitude-to-alcohol', data: {'select2-options' => {minimumResultsForSearch: -1}}}
+          = f.input :thing_in_life,
+                    as: :select, collection: THING_IN_LIFE,
+                    placeholder: THING_IN_LIFE.first,
+                    input_html: {class: 'input-big user-attitude-to-alcohol', data: {'select2-options' => {minimumResultsForSearch: -1}}}
+          = f.input :thing_in_humans,
+                    as: :select, collection: THING_IN_HUMANS,
+                    placeholder: THING_IN_HUMANS.first,
+                    input_html: {class: 'input-big user-attitude-to-alcohol', data: {'select2-options' => {minimumResultsForSearch: -1}}}
+          = f.input :interests,
+                    as: :string,
+                    placeholder: 'Укажите ваше хобби',
+                    input_html: {class: 'input-big user-interests'}
+          = f.input :favorite_shows,
+                    as: :string,
+                    placeholder: 'Укажите ваши любимые сериалы',
+                    input_html: {class: 'input-big user-favorite-shows'}
+          = f.input :favorite_films,
+                    as: :string,
+                    placeholder: 'Укажите ваши любимые фильмы',
+                    input_html: {class: 'input-big user-favorite-films'}
+          = f.input :favorite_books,
+                    as: :string,
+                    placeholder: 'Укажите ваши любимые фильмы или жанры',
+                    input_html: {class: 'input-big user-favorite-books'}
+          = f.input :favorite_music,
+                    as: :string,
+                    placeholder: 'Укажите ваши любимые треки или музыкальные направления',
+                    input_html: {class: 'input-big user-favorite-music'}
+          = f.input :about,
+                    placeholder: 'Напишите немного о себе',
+                    input_html: {class: 'input-big sv-l'}
+          .cntrl-group
+            %label &nbsp;
+            .cntrls
+              = f.submit 'Сохранить ', class: 'sv-l link-style'
+:javascript
+  var clientBirthdayBeatpickerOptions = $.extend({
+    startDate: #{date = client.birthday || Date.today - 15.years; date.strftime('[%Y, %m, %d]')},
+    disablingRules: [{from:#{today = Date.today; today.strftime('[%Y, %m, %d]')},to:'>'}]
+  },customBeatpickerOptions)

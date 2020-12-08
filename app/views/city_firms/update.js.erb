@@ -1,0 +1,10 @@
+var form = $('#edit_<%= dom_id(@city_firm) %>');
+form.find('.cntrl-group.error').removeClass('error');
+form.find('.help-inline').remove();
+<%- if (errors = @base_address.errors).present?%>
+    <%- errors.messages.each do |field, error_msg|%>
+        form.find('.address_<%= field%>').addClass('error').find('.cntrls').append("<div class=\"help-inline\"><%= j error_msg.first%></div>");
+    <%-end%>
+<%-else%>
+    location.reload();
+<%-end%>

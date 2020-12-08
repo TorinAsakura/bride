@@ -1,0 +1,52 @@
+#mini-site-base-settings.mini-site-settings.sv-article.margintopotstp
+  .mini-site
+
+    .sv-article
+      .title_nobg Настройки свадебного сайта
+      = render 'clients/update_actions/wedding_settings/wedding_site_settings'
+
+    .title_nobg Внешний вид сайта
+    - if @site.present?
+      = simple_form_for @site, html: { class: 'form-horizontal background-form sv-profile-site clearfix' } do |f|
+        .poster-form><
+          = f.label :logo
+          .poster-preview><
+            - if @site.logo.present?
+              = image_tag(@site.logo_url, class: 'w100p')
+            - else
+              = image_tag('avatar.gif', class: 'w100p')
+          .actions
+            %label.upload-poster
+              %span.link-style Загрузить
+              = f.input :logo, as: :file, label: false, wrapper: :none, input_html: {class: 'pseudo-btn-input-file', id: 'poster-img-input', 'data-js' => 'poster-img-input'}
+            = f.input :remove_logo, label: 'Удалить', as: :boolean, label_html: {class: 'link-style'}
+
+        .form-inline
+          .background-form-row
+            = f.label :header_image
+            = f.input :header_image_id, as: :hidden, label: false
+            = link_to('Выбрать из шаблона', '#', class: 'select-background-image link-style',
+              data: {input: '#site_header_image_id',
+              url: select_background_properties_path(type: 'headers', format: :json),
+              title: 'Выбор фонового изображения шапки сайта',
+              text: 'Выберите один из предложеных шаблонов фона для шапки вашего Свадебного сайта:'})
+          - if (header_image = @site.header_image).present?
+            - data = {tag: 'header', style: header_image.decorate.style}
+          = link_to('#', class: "preview-background#{' hidden' if data.blank?}", data: data.presence) do
+            %i.icon-search
+
+        .form-inline
+          .background-form-row
+            = f.label :background_image
+            = f.input :background_image_id, as: :hidden, label: false
+            = link_to('Выбрать из шаблона', '#', class: 'select-background-image link-style',
+              data: {input: '#site_background_image_id',
+              url: select_background_properties_path(type: 'backgrounds', format: :json),
+              title: 'Выбор основного фонового изображения вашего сайта',
+              text: 'Выберите один из предложеных шаблонов фона для вашего Свадебного сайта:'})
+          - if (background_image = @site.background_image).present?
+            - data = {tag: 'body', style: background_image.decorate.style}
+          = link_to('#', class: "preview-background#{' hidden' if data.blank?}", data: data.presence) do
+            %i.icon-search
+
+        = f.submit 'Сохранить', class: 'link-style'

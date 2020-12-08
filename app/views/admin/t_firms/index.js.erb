@@ -1,0 +1,2 @@
+$('#t-firms-list').html('<%= j(render @t_firms)%>');
+$('.t-firms-paginate').html('<%= j(paginate @t_firms, window: 3, outer_window: 3, remote: true)%>');

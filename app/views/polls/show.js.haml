@@ -1,0 +1,6 @@
+window.modalViewer = new PollViewer(
+'#{poll_path(@poll)}',
+window.modalViewer ? window.modalViewer.baseLocation : window.location.pathname,
+'#{j(render 'show')}'
+);
+window.modalViewer.show();

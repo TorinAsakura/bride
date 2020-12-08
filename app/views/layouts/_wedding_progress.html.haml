@@ -1,0 +1,48 @@
+.row#week_line
+- @wedding = @user.wedding
+
+  - @weeks = @wedding.timetables.week
+  - @days = @wedding.timetables.day
+  - @wedding_day = @wedding.timetables.wedding_day.first
+
+  .span4
+    .row
+      .span3
+        Недели
+    .row
+      .span3
+      - if @weeks.first.date_from > Date.today.at_beginning_of_week
+        = link_to "Полготова", "#", :class => "active_link"
+      - else
+        = link_to "Полготова", "#"
+
+      - @weeks.each_with_index do |week, i|
+        - if week.date_from == Date.today.at_beginning_of_week
+          = link_to week.id, "#", :class => "active_link"
+        - else
+          = link_to week.id, "#"
+
+  .span3
+    .row
+      .span3
+        Дни до свадьбы
+    .row
+      .span3
+      - @days.each_with_index do |day, i|
+        - if day.date_from == Date.today.at_beginning_of_week
+          = link_to day.id, "#", :class => "active_link"
+        - else
+          = link_to day.id, "#"
+
+  .span3
+    .row
+      .span3
+        Свадьба
+    .row
+      .span3
+      - if @wedding_day.date_from == Date.today.at_beginning_of_week
+        = link_to @wedding_day.id, "#", :class => "active_link"
+      - else
+        = link_to @wedding_day.id, "#"
+
+

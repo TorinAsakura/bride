@@ -1,0 +1,29 @@
+%tr.service{ data:{ id:service.id } }
+  %td= service.id
+  %td= service.name
+  %td= service.description.html_safe
+  %td= service.identifier
+  %td= service.amount.format
+  %td.attr
+    %i{class: (service.pay_once ? 'icon-ok text-green' : 'icon-remove text-red')}
+  %td= service.discount
+  %td= service.dealer_percent
+  %td= service.trial_duration
+  %td.attr
+    %i{class: (service.list ? 'icon-ok text-green' : 'icon-remove text-red')}
+  %td
+    = link_to(edit_admin_bonus_service_path(service), title: 'Редактировать') do
+      %i.icon-pencil>
+    - if service.pro?
+      = link_to(admin_bonus_service_prices_path(service), title: 'Цены по категориям') do
+        %i.icon-money>
+      = link_to(admin_bonus_service_city_ratios_path(service), title: 'Скидки по городам') do
+        %i.icon-home>
+      = link_to(admin_bonus_service_seasonal_factors_path(service), title: 'Сезонные скидки') do
+        %i.icon-calendar>
+      = link_to(admin_bonus_service_loyalties_path(service), title: 'Бонусы лояльности') do
+        %i.icon-gift>
+      = link_to(admin_bonus_service_packages_path(service), title: 'Пакеты для постоянных клиентов') do
+        %i.icon-list>
+      = link_to(admin_bonus_service_city_dealer_percents_path(service), title: 'Процентные условия диллеров') do
+        %i.icon-users>

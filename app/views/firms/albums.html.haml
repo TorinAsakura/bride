@@ -1,0 +1,76 @@
+.sv-wrapper
+  = render 'firms/shared/sidebar'
+
+  .sv-article.left
+    = render 'firms/shared/header'
+
+    #sv-photo-gallery-block
+      .title.clearfix
+        = link_to firm_link(@firm), class: 'sv-a-back sv-l' do
+          %i.icon-chevron-left
+          -#= image_tag 'sv-icon-arrow_l.png', alt: 'Назад'
+        %span
+          Фотографии
+          %i= "(#{@firm.user.photos.count})"
+        %ul
+          %li.add
+            - for_moderator_of @firm do
+              - if @latest_album.present?
+                = link_to new_album_path(upload_to: @latest_album), remote: true, class: 'add sv-photo-gallery-form-link' do
+                  %i Загрузить фотографии
+              - else
+                = link_to new_album_path, remote: true, class: 'add sv-photo-gallery-form-link' do
+                  %i Загрузить фотографии
+
+    - if @albums.present?
+      .sv-firm-albums-actions
+        %span.sv-firm-albums-actions__count Всего #{@albums.count} альбомов
+
+    .sv-firm-albums
+      - @albums.reverse.first(4).each_with_index do |album, i|
+        .sv-firm-album{ class: i.odd? ? 'sv-firm-album_odd' : '' }
+          = link_to album_path(album) do
+            - if album.cover.nil?
+              = image_tag 'avatar.gif'
+            - else
+              = image_tag album.cover.path.cover
+          .sv-firm-album__info
+            = link_to album_path(album), class: 'sv-firm-album__info-name' do
+              = album.name
+              .sv-firm-album__info-icon
+              .sv-firm-album__info-count
+                = album.photos.count
+
+      - @albums.reverse.drop(4).each_with_index do |album, i|
+        .sv-firm-album.sv-firm-album_hidden{ class: i.odd? ? 'sv-firm-album_odd' : '' }
+          = link_to polymorphic_url([@firm, album]) do
+            - if album.cover.nil?
+              = image_tag 'avatar.gif'
+            - else
+              = image_tag album.cover.path.cover
+          .sv-firm-album__info
+            = link_to polymorphic_url([@firm, album]), class: 'sv-firm-album__info-name' do
+              = album.name
+              .sv-firm-album__info-count
+                = album.photos.count
+
+    - if @albums.count > 4
+      .sv-firm-albums__show-all
+        = link_to "Показать все альбомы (#{@albums.length})", '#'
+
+    - if @photos.present?
+      .sv-firm-albums-actions
+        %span.sv-firm-albums-actions__count Последние загруженные фотографии
+
+    .sv-firm-albums-photos{ 'data-js' => 'photo-preview-list' }
+      - @photos.each do |photo|
+        = render 'photos/thumbnail', resource: @firm, album: photo.album, photo: photo
+
+    .sv-photos-hidden-nav
+      = rel_next_prev_link_tags @photos
+
+- if session.delete :new
+  :javascript
+    $(document).ready(function () {
+      $.getScript('#{new_firm_album_url(@firm)}');
+    });

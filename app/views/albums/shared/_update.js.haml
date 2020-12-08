@@ -1,0 +1,4 @@
+$('#edit').append('#{j(render 'edit')}');
+
+window.photoUploaderProgress = new PhotoUploaderProgress(window.photoUploader.submit());
+window.albumForm = new AlbumForm('#{@album.id}');

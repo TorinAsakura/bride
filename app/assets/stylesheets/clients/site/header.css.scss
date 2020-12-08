@@ -1,0 +1,114 @@
+header.header {
+  height: 121px;
+  background: image-url('header-backround.jpg') $base-background-color 50% 50% / cover no-repeat;
+  position: relative;
+  z-index: 998;
+  border-bottom: 1px solid $main-color;
+  .container {
+    background-color: rgba(255,255,255,0.6);
+    height: 120px;
+    .wedding_date {
+      color: $main-color;
+      line-height: 40px;
+      font-size: 3em;
+      font-family: 'Marck Script', cursive;
+      padding-top: 15px;
+      text-align: center;
+    }
+    .name-block {
+      height: 100px;
+      margin: 10px 0;
+      padding: 5px 0;
+      text-align: center;
+      h3 {
+        font-size: 42px;
+        margin: 0;
+        font-family: $header-font-family;
+      }
+    }
+    .remained {
+      height: 100px;
+      margin: 10px 0;
+      padding: 5px 0;
+      background: rgba($main-menu-color, 0.93);
+      color: #ffffff;
+      text-align: center;
+      font-size: 18px;
+      font-family: 'Marck Script', cursive;
+      overflow: hidden;
+      p{
+        margin: 0;
+        &.days {
+          font-size: 70px;
+          line-height: 40px;
+        }
+      }
+
+    }
+  }
+}
+@media (max-width: $screen-sm-max) {
+  header.header {
+    .container {
+      .name-block {
+        h3 {
+          font-size: 32px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  header.header {
+    height: 140px;
+    .container {
+      height: 139px;
+      .wedding_date {
+        line-height: 30px;
+        font-size: 30px;
+      }
+      .name-block {
+        margin: 0;
+        padding: 0;
+        height: auto;
+        h3 {
+          font-size: 24px;
+        }
+      }
+      .remained {
+        background: inherit;
+        color: $main-color;
+        margin: 0;
+        height: auto;
+        p {
+          display: inline-block;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+}
+@media (max-width: $screen-xs - 1) {
+  header.header {
+    .container {
+      .wedding_date {
+        font-size: 24px;
+        line-height: 24px;
+      }
+      .name-block {
+        h3 {
+          font-size: 22px;
+        }
+      }
+      .remained {
+        p.days{
+          font-size: 30px;
+          line-height: 30px;
+        }
+
+      }
+    }
+  }
+}
+

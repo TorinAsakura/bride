@@ -1,0 +1,3 @@
+= simple_form_for @album, url: @album.new_record? ? minisite_albums_path : minisite_album_path(@album), remote: true do |f|
+  = f.input :name, input_html: { class: 'form-control', autocomplete: 'off' }
+  = f.submit 'Сохранить', class: 'btn btn-sm btn-success'

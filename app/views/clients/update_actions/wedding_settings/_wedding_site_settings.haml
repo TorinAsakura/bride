@@ -1,0 +1,20 @@
+.wedding-site-settings
+  - @site ||= Site.new
+  = simple_form_for @site, remote: true, html: { class: 'sv-site__create-form' } do |f|
+    .base-client-settings
+      = f.input  :client_id, as: :hidden
+      = f.input :description, input_html: {class: 'user-lastname input-big'}, placeholder: 'Например: Великолепная свадьба Димы и Полины',label: 'Заголовок:'
+      = label_tag :name, '.svadba.org', class: 'site-name input-big'
+      = f.input :name, input_html: {class: 'user-lastname input-big'}, placeholder: 'Придумайте адрес вашего сайта',label: 'Адрес сайта:'
+      .inline-password
+        = f.input :privacy, as: :select, collection: MINISITE_PRIVACY, input_html: {class: 'input-big', data: {'select2-options' => {minimumResultsForSearch: -1}}}, placeholder: MINISITE_PRIVACY.first, label: 'Приватность'
+        .field-block.site-code-block
+          .notification.ha
+            Пароль должен содержать от 6 до 20 символов. Можно использовать латинские буквы, цифры и символы из списка: ! @ # $ % ^ * ( ) _ - +
+          = f.input :code,
+            as: :password, 
+            input_html: {class: 'user-lastname input-big', style: 'display: none;'},
+            placeholder: 'Введите пароль',
+            label: false
+      .text-center
+        = f.submit @site.new_record? ? 'Создать мой Свадебный мини сайт' : 'Сохранить', class: 'link-style'

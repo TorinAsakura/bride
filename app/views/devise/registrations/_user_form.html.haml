@@ -1,0 +1,6 @@
+/ Поля для User
+= f.simple_fields_for :user do |u|  
+  = u.input :email
+  = u.input :password  
+  = u.hidden_field :provider
+  = u.hidden_field :uid

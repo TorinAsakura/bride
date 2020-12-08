@@ -1,0 +1,11 @@
+= render partial: 'layouts/admin_tab_menu',  locals: { select: 'background_properties' }
+
+.background-property
+  .style-links
+    = link_to 'Редактировать', edit_admin_background_property_path(@style), class: 'link-style'
+    .style-finished{class: "finish-#{@style.is_finished?}"}= @style.is_finished? ? 'Готова к показу пользователям' : 'Не готова к показу пользователям'
+
+  %h1.title= @style.title
+
+  = image_tag(@style.image_url, :alt => "фон #{@style.title}")
+  = @style.image_url

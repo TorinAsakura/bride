@@ -1,0 +1,8 @@
+%li.notif-media
+  = link_to(message_url(message), title: t('messages.title'), class: 'notif-item') do
+    .notif-img.pull-left
+      = message.user.small_avatar_image('img-circle')
+    %h3.notif-heading
+      = message.user.name
+      %small= message.created_at
+    %p.notif-text= message.body

@@ -1,0 +1,13 @@
+ru:
+  social_accounts:
+    flash:
+      taken: Этот аккаунт в соцсети уже привязан к другому пользователю.
+      assigned: Сервис прявязан к вашему аккаунту.
+      something_wrong: Не удалось выполнить операцию по техническим причинам. Пожалуйсто, поворите попытку позже или свяжитесь с теходдержкой.
+    providers:
+      facebook: Facebook
+      vkontakte: ВКонтакте
+      twitter: Twitter
+      instagram: Instagram
+      odnoklassniki: Одноклассники
+      mailru: Mail.ru

@@ -1,0 +1,7 @@
+.sv-balance-top.ovflhid
+  .sv-balc-you.sv-l Ваш баланс
+  .sv-balc-amount.sv-l.ovflhid
+    %span.rur= @firm.purse.available_amount.format(html: true).html_safe
+  - unless defined?(without_monetize)
+    .sv-balc-button.sv-r
+      = link_to_unless_current('Пополнить баланс', edit_firm_path(@firm, anchor: 'monetize-purse'),  class: 'link-style sv-l')

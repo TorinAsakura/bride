@@ -1,0 +1,9 @@
+.sv-wrapper.mini-site-edit
+  = render 'clients/shared/edit_client_site_menu', site: @site, pages: @site.pages, client: @client
+
+  #mini-site-base-settings.mini-site-settings.sv-article.margintopotstp
+    .mini-site
+
+      .sv-article
+        .title_nobg Настройки свадебного сайта
+        = render 'clients/update_actions/wedding_settings/wedding_site_settings'

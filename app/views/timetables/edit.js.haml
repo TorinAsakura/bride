@@ -1,0 +1,4 @@
+clearEventContent(); 
+$('.sv-event').html('');
+$('#sv-timetable__setting').html("#{ j render 'form', timetable: @timetable, wedding_timetables: @wedding.timetables.reverse }");
+$('#sv-timetable__setting select').select2();

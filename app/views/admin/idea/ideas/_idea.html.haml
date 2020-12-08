@@ -1,0 +1,4 @@
+- if idea.image
+  %div{:class => "thumbnail pull-left", :style => "text-decoration:none; height: 200px; width:200px; margin:5px;"}
+    = image_tag(idea.image.image_url(:thumb), :class => "img-rounded")
+    = check_box_tag "ideas[#{idea.id}]"

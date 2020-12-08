@@ -1,0 +1,18 @@
+#user-phone
+  .sv-article#sv-firm-confirm-phone.sv-firm-phone-wrapper
+    .title_nobg Мобильный телефон
+    = simple_form_for user, url: update_phone_user_path(user), html: { method: :put, class: '', remote: true } do |f|
+      .ovflhid
+        .sv-l.rows-form
+          %label Текущий номер:
+          %legend.tel_number
+            = format_phone user.phone
+        .sv-profile-site.sv-r.rows-form-tel
+          %label Изменить номер:
+          .sv-l
+            = f.input :phone_prefix, label: false, input_html: {value: nil, class: 'sv-l inp-style input-big inp-style-compact small-number', value: '+7'}
+            = f.input :phone_body, label: false, input_html: {value: nil, class: 'sv-l inp-style input-big inp-style-compact full-number', placeholder: '___-___-__-__'}
+          = f.submit 'Сохранить', class: 'link-style sv-l'
+    .sv-firm-phone-popup
+      %ul
+        %li Номер сохранен

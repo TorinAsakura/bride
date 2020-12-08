@@ -1,0 +1,15 @@
+- @firm_catalogs.each do |firm_catalog|
+  %h3= firm_catalog.name
+  %table.index_table
+    - catalogs = firm_catalog.firm_catalogs
+    %tbody
+      - catalogs.in_groups_of(4) do |group|
+        %tr
+          - group.each do |catalog|
+            %td
+              %b= catalog.name if catalog
+            %td
+              - if catalog
+                - price = @service.prices.firm_catalog(catalog)
+                = best_in_place price, :amount, path: update_price_admin_bonus_service_prices_path(@service, catalog)
+%br

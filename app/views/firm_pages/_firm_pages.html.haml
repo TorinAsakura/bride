@@ -1,0 +1,14 @@
+%ul.sv-firm-pages-list#firm-pages-list{data: {url: change_rating_firm_firm_pages_path(firm)}}
+  - firm_pages.each do |firm_page|
+    %li.firm-page{ data: { js: 'firm-page-line', id: firm_page.id } }
+      = hidden_field_tag :rating, firm_page.rating, data: { js: 'firm-page-rating' }
+      .sv-l.sv-firm-pages-order
+        = link_to '', '#', class: 'firm-page-up sv-top'
+        = link_to '', '#', class: 'firm-page-down sv-bottom'
+      = link_to edit_firm_path(firm, anchor: "#{firm_page.anchor}"), class: "firm-control-panel-link #{firm_page.anchor}", 'data-part' => "firm-control-panel-#{firm_page.anchor}" do
+        = firm_page.name.present? ? t("firm_page_names.#{firm_page.name}") : (firm_page.title.present? ? firm_page.title : 'Дополнительная страница')
+        %span.sv-r
+          - klass = "checkbox#{rand(99999)}"
+          = check_box_tag 'boy-check', klass, firm_page.shown, id: klass, class: 'check-style-quadra', data: { js: 'firm-page-switcher' }
+          %label{ for: klass }
+            %span

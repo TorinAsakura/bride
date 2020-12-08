@@ -1,0 +1,13 @@
+.sv-aside
+  #sv-company-side-categories
+    .sv-company-side-city-select{ 'data-js' => 'side-city-select' }
+      = link_to('#side-city-select', data: {toggle: 'modal', all: 'Все города'}) do
+        %span.city= @city.try(:name) || 'Все города'
+        .sv-company-side-city-arr
+      = hidden_field_tag :city, @city.try(:slug), id: 'city_filter'
+
+    #side-city-select.sv-wedding-cities-modal.hide= render 'cities/side_city_select', items: wedding_cities
+
+    %ul.sv-categories#sv-firm-catalogs{data: {'active-firm-catalog' => @firm_catalog.try(:parent).try(:slug) || @firm_catalog.presence.try(:slug) || 'all', url: city_firm_catalog_firms_path('00','01') }}
+      = render FirmCatalog.new(name: 'Все разделы')
+      = render @root

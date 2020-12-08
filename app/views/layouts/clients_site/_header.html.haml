@@ -1,0 +1,25 @@
+%header.header
+  .container
+    .row
+      - if site.present?
+        .col-sm-3.wedding_date{style: site.header_date_color_style}
+          - if (wedding_date = wedding.try(:wedding_date)).present?
+            %p.hidden-xs= l(wedding_date, format: '%d, %Y<br/>%B').html_safe
+            %p.visible-xs= l(wedding_date, format: '%d %B %Y')
+          - else
+            = t('.wedding_date')
+
+        - if wedding.present?
+          .col-sm-6.name-block{style: site.header_color_style}
+            %h3= site.description
+          .col-sm-3
+            .remained
+              %p= (wedding_days = wedding.time_left) > 0 ? t('.before') : t('.after')
+              %p.days= wedding_days.abs
+              %p= Russian.p(wedding_days.abs, "день", "дня", "дней")
+        - else
+          .col-sm-9.name-block{style: site.header_color_style}
+            %h3= site.description
+      -else
+        .col-sm-12.name-block
+          %h3= t('minisite.minisites.page_404.title')

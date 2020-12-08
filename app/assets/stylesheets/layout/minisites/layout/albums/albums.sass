@@ -1,0 +1,45 @@
+.albums
+  display: block
+  +clearfix
+  .item
+    +span-columns(1 of 2)
+    display: block
+    height: $albums-item-height
+
+    background: $border-color
+    margin-right: 1.4%
+    width: 49.2%
+    margin-bottom: $text-padding
+    overflow: hidden
+    position: relative
+    &.odd
+      margin-right: 0
+    &:hover
+      .descr
+        opacity: .6
+    .descr
+      position: absolute
+      bottom: 0
+      left: 0
+      width: 100%
+      background: #000
+      line-height: $main-padding * 2
+      opacity: 0.4
+      &, a
+        color: white
+      a
+        box-shadow: none
+        display: block
+        padding: 0 $text-padding
+        > span
+          float: right
+          > *:last-child
+            margin-left: $main-margin/2
+
+    > a
+      display: block
+      box-shadow: none
+
+      img
+        min-width: 100%
+        min-height: 100%

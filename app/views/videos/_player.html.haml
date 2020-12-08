@@ -1,0 +1,11 @@
+- if video.content.match(/vk/) || video.content.match(/vimeo/)
+  .sv-video-player-vkontakte{ data: { js: 'video-player', title: video.title} }
+    %iframe{frameborder: "0", src: video.content}
+- else
+  .sv-video-player{ data: { js: 'video-player', title: video.title, youtube: video.content } }
+:javascript
+  var iframe = $("iframe")[0];
+  if(iframe){
+    $(iframe).width(760);
+    $(iframe).height(450);
+  }

@@ -1,0 +1,17 @@
+#sv-client-side-navigation
+  .title.clearfix
+    %span Навигация
+    - if @user.is? current_user
+      = link_to 'Настройки', edit_client_path(@client)
+    %i.arr
+
+  %ul
+    = navigation_link_to(@user.is?(current_user) ? 'Мои друзья' : 'Друзья', friends_client_path(@client))
+    - if @client.albums.any? || @user.is?(current_user)
+      = navigation_link_to(@user.is?(current_user) ? 'Мои фотографии' : 'Фотографии', client_albums_path(@client))
+    - if @client.videos.any? || @user.is?(current_user)
+      = navigation_link_to(@user.is?(current_user) ? 'Мои видео' : 'Видео', client_videos_path(@client))
+    - if @client.posts.any? || @user.is?(current_user)
+      = navigation_link_to(@user.is?(current_user) ? 'Мой журнал' : 'Журнал', client_posts_path(@client))
+    - if @client.friends.only_firms.any?
+      = navigation_link_to(@user.is?(current_user) ? 'Мои компании' : 'Компании', firms_client_path(@client))

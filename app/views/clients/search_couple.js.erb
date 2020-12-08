@@ -1,0 +1,8 @@
+$('.menu_match_personal').html("<%= j render 'search_couple', client: @client %>");
+
+//делаем активным выбранную ранее пару в результате поиска
+if ($('#couple-id').val()) {
+  $('a[user_id=' + $('#couple-id').val() + ']').removeClass('link-style').
+                                                addClass('link-style-inner').
+                                                text('Разорвать отношения');
+}

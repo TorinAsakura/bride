@@ -1,0 +1,5 @@
+- if page.current?
+  %li.active
+    %span= page
+- else
+  %li= link_to(page, purse_payments_path(page: page.to_i, per: params[:per], scope: params[:scope]), remote: remote)

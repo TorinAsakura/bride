@@ -1,0 +1,15 @@
+.sv-friendship-popover{ 'data-js' => "friend-action-#{user.id}" }
+  = link_to 'Вы друзья', '#', class: 'link-style-active', 'data-js' => 'remove-friendship'
+  .hide{ 'data-js' => 'friendship-popover' }
+    Вы действительно хотите перестать дружить?
+    = link_to 'Убрать из друзей', remove_friendship_path(user.id), class: 'link-style', remote: true, method: :post
+:javascript
+  $(document).ready(function () {
+    $('[data-js=remove-friendship]').on('click', function (e) {
+      e.preventDefault();
+    }).popover({
+      'html': true,
+      'placement': 'bottom',
+      'content': $('[data-js=friendship-popover]').html()
+    });
+  });

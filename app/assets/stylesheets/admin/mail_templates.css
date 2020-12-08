@@ -1,0 +1,15 @@
+#sv-admin-edit-mail-template {
+  float:left;
+  max-width: 600px;
+}
+#sv-admin-edit-mail-template input[type="text"], #sv-admin-edit-mail-template textarea {
+  width: 600px;
+}
+
+.sv-admin-mail-template {
+  width: 760px;
+}
+
+.sv-admin-mail-template label { 
+  display: inline;
+ }

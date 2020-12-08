@@ -1,0 +1,12 @@
+= render 'menu'
+
+= simple_form_for @payment, url: cash_deposit_admin_purse_path(@purse) do |f|
+  .field.span12
+    = f.input :amount
+
+  .field.span12
+    %span
+      Валюта:
+      = @payment.currency
+  .field.span12
+    = f.submit 'Сохранить', class: 'btn'

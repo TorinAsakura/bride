@@ -1,0 +1,20 @@
+= render 'clients/shared/sidebar'
+
+.sv-article
+  .clearfix
+    = render 'clients/videos', link_to_back: true
+
+    .sv-videos-hidden-nav
+      = rel_next_prev_link_tags @videos
+
+- if session[:video]
+  :javascript
+    $(document).ready(function () {
+      $.getScript('#{session.delete :video}');
+    });
+
+- if session.delete :new
+  :javascript
+    $(document).ready(function () {
+      $.getScript('#{new_polymorphic_path([@client, :video])}');
+    });

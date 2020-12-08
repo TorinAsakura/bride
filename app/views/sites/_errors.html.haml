@@ -1,0 +1,6 @@
+- if site.errors.any?
+  .error_explanation
+    %h2= t(:error, count: site.errors.count)
+    %ul
+      - site.errors.full_messages.each do |msg|
+        %li= msg.html_safe

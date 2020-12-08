@@ -1,0 +1,99 @@
+.bootstrap-select .input-group-btn {
+    position: static
+}
+.bootstrap-select .dropdown-menu {
+    width: 100%;
+    min-width: 0;
+    overflow-y: auto;
+    outline: 0
+}
+.bootstrap-select .dropdown-menu a {
+    overflow: hidden
+}
+.bootstrap-select .dropdown-menu .disabled a {
+    outline: 0
+}
+.bootstrap-select .input-group-btn .dropdown-menu li a {
+    height: 32px;
+    padding: 6px 20px;
+    line-height: 1.42857
+}
+.bootstrap-select.bootstrap-lg .input-group-btn button {
+    padding: 10px 16px;
+    height: 45px;
+    line-height: 1.33em
+}
+.bootstrap-select.bootstrap-lg .input-group-btn .dropdown-menu li a {
+    height: 45px;
+    line-height: 1.33em;
+    font-size: 18px;
+    padding: 10px 16px
+}
+.bootstrap-select.bootstrap-sm .input-group-btn button {
+    height: 30px;
+    line-height: 1.33em;
+    padding: 5px 10px
+}
+.bootstrap-select.bootstrap-sm .input-group-btn .dropdown-menu li a {
+    font-size: 12px;
+    height: 30px;
+    line-height: 1.6em;
+    padding: 5px 10px
+}
+.bootstrap-select .dropdown-menu>li.active>a:focus,.bootstrap-select .dropdown-menu>li.active>a:hover,.bootstrap-select .dropdown-menu>li>a:focus,.bootstrap-select .dropdown-menu>li>a:hover {
+    background: #fff;
+    filter: none
+}
+.bootstrap-select .dropdown-menu>li.active>a {
+    background: #ebebeb;
+    filter: none
+}
+.bootstrap-select .primary.dropdown-menu>li.active>a:focus,.bootstrap-select .primary.dropdown-menu>li.active>a:hover,.bootstrap-select .primary.dropdown-menu>li>a:focus,.bootstrap-select .primary.dropdown-menu>li>a:hover {
+    background: #428bca;
+    color: #FFF
+}
+.bootstrap-select .primary.dropdown-menu>li.active>a {
+    background: #3276b1;
+    color: #FFF
+}
+.bootstrap-select .info.dropdown-menu>li.active>a:focus,.bootstrap-select .info.dropdown-menu>li.active>a:hover,.bootstrap-select .info.dropdown-menu>li>a:focus,.bootstrap-select .info.dropdown-menu>li>a:hover {
+    background: #5bc0de;
+    color: #FFF
+}
+.bootstrap-select .info.dropdown-menu>li.active>a {
+    background: #39b3d7;
+    color: #FFF
+}
+.bootstrap-select .success.dropdown-menu>li.active>a:focus,.bootstrap-select .success.dropdown-menu>li.active>a:hover,.bootstrap-select .success.dropdown-menu>li>a:focus,.bootstrap-select .success.dropdown-menu>li>a:hover {
+    background: #f1849d;
+    color: #FFF
+}
+.bootstrap-select .success.dropdown-menu>li.active>a {
+    background: #ec5679;
+    color: #FFF
+}
+.bootstrap-select .warning.dropdown-menu>li.active>a:focus,.bootstrap-select .warning.dropdown-menu>li.active>a:hover,.bootstrap-select .warning.dropdown-menu>li>a:focus,.bootstrap-select .warning.dropdown-menu>li>a:hover {
+    background: #f0ad4e;
+    color: #FFF
+}
+.bootstrap-select .warning.dropdown-menu>li.active a {
+    background: #ed9c28;
+    color: #FFF
+}
+.bootstrap-select .danger.dropdown-menu>li.active>a:focus,.bootstrap-select .danger.dropdown-menu>li.active>a:hover,.bootstrap-select .danger.dropdown-menu>li>a:focus,.bootstrap-select .danger.dropdown-menu>li>a:hover {
+    background: #d9534f;
+    color: #FFF;
+    filter: none
+}
+.bootstrap-select .danger.dropdown-menu>li.active>a {
+    background: #d43f3a;
+    color: #FFF;
+    filter: none
+}
+.bootstrap-select .default.dropdown-menu>li.active>a,.bootstrap-select .default.dropdown-menu>li.active>a:focus,.bootstrap-select .default.dropdown-menu>li.active>a:hover,.bootstrap-select .default.dropdown-menu>li>a:focus,.bootstrap-select .default.dropdown-menu>li>a:hover {
+    background: #ebebeb;
+    color: #333
+}
+.my-custom-class,.my-custom-class input {
+    text-transform: uppercase
+}

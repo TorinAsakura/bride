@@ -1,0 +1,5 @@
+%ul.clearfix{ 'data-js' => 'ideas-list' }
+  - ideas.each do |i|
+    %li{ 'data-js' => 'idea' }
+      = link_to i, remote: true do
+        = image_tag i.image.image.preview

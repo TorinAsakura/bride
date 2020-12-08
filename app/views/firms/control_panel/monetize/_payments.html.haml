@@ -1,0 +1,20 @@
+#firm-control-panel-monetize-payments.firm-settings{ style: 'display:none;' }
+  .sv-article
+    = render 'firms/control_panel/monetize/balance_top'
+
+    .title_nobg История операций
+
+    #purse-payments-scopes= render 'purse_payments/scopes', scope: 'all'
+
+    %table.table.table-condensed.history-operations
+      %thead
+        %tr
+          %th.sv-table-th Дата
+          %th.sv-table-th Приход
+          %th.sv-table-th Расход
+          %th.sv-table-th Описание операции
+      %tbody#purse-payments= render partial: 'purse_payments/purse_payment', collection: @purse_payments, as: :purse_payment
+
+    .mini-filtr-and-pagenav
+      .sv-l#purse-payments-paginate= paginate @purse_payments, theme: 'purse-payments-mini', remote: true
+      .mini-filtr.sv-r#purse-payments-per-pages= render 'purse_payments/per_pages', per: PursePayment.default_per_page, scope: nil

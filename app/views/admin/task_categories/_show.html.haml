@@ -1,0 +1,18 @@
+.sv-aside
+  .title-browns
+    .sv-choice.sv-l
+      %ul
+        %li
+          %span.center Список задач
+    =link_to '', tasks_new_admin_task_category_path(@task_category), remote: true, class: 'sv-task-title-new sv-r'
+  .sv-admin-box.sv-tasks-box
+    %ol
+      - tasks.each do |task|
+        %li{ class: "s#{task.type_id}" } 
+          .borders
+            .vis
+              .check
+              = link_to task.name, edit_admin_task_path(task), remote: true, class: 'name'
+
+              = link_to '', admin_task_path(task, category_id: task_category.id), method: 'delete', 
+                confirm: 'Точно удалить?', class: 'sv-r sv-admin-task-remove'

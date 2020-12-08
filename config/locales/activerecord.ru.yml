@@ -1,0 +1,270 @@
+ru:
+  activerecord:
+    models:
+      user:
+        one:   Пользователь
+        few:   Пользователи
+        many:  Пользователей
+        other: Пользователи
+      client:
+        one:   Пользователь
+        few:   Пользователи
+        many:  Пользователей
+        other: Пользователи
+      firm:
+        one:   Компания
+        few:   Компании
+        many:  Компаний
+        other: Компании
+      'bonus/service':
+        one:   Подключаемая услуга
+        few:   Подключаемые услуги
+        many:  Подключаемых услуг
+        other: Подключаемые услуги
+
+    attributes:
+      static_page:
+        title: название страницы
+        content: текст страницы
+        is_active: показывать посетителям
+        link: адрес страницы
+
+      user:
+        email: E-mail
+        current_password: Текущий пароль
+      guest:
+        name: "Имя"
+        role: "Роль"
+        gender: "Пол"
+        drink: "Отношение к спиртному"
+        email: "Электронная почта"
+      'idea/category':
+        name: Название
+        description: Опивание
+
+      client:
+        firstname: Имя
+        lastname: Фамилия
+        visibility: Видна
+        birthday: Дата рождения
+        city_id: Родной город
+        marital_status: Семейное положение
+        children: Дети
+        alcohol_attitude: Отношение к алкоголю
+        smoking_attitude: Отношение к курению
+        thing_in_life: Главное в жизни
+        thing_in_humans: Главное в людях
+        interests: Моё хобби
+        favorite_shows: Любимый сериал
+        favorite_films: Любимое кино
+        favorite_books: Любимые книги
+        favorite_music: Любимая музыка
+        about: О себе
+        slug: url
+      firm_catalog:
+        name: Название раздела
+        extended_name: Расширенное название
+        category: Категория
+        logo: Фон
+      background_property:
+        title: название цветовой схемы
+        color: Фоновый цвет
+        image: Фоновая картинка
+        attachment: Положение фоновой картинки
+        position: Позиция фоновой картинки
+        repeat: Повторение фоновой картинки
+        is_active: показывать посетителям
+        header: фон шапки
+        header_color: Цвет заголовка в шапке
+        header_date_color: Цвет даты свадьбы в шапке
+        general: только основной сайт
+
+      site:
+        name: Адрес сайта
+        logo: Логотип
+        header_image: Фон шапки сайта
+        background_image: Основной фон сайта
+
+      firm:
+        background_image: Фон сайта
+        status: Статус
+        slug: url
+
+      'bonus/service':
+        name: Название
+        identifier: Идентификатор
+        list: Показать в списке услуг
+        description: Описание
+        amount: Базовая стоимость в месяц
+        pay_once: Одноразовый платеж
+        trial_duration: Пробный период
+        discount: Скидка
+        dealer_percent: Процент вознаграждения диллеру
+      'bonus/price':
+        amount: Стоимость
+      'bonus/city_ratio':
+        percent: Процент города
+      'bonus/seasonal_factor':
+        discount: Скидка
+      'bonus/loyalty':
+        years_count: Количество лет
+        discount: Скидка
+      'bonus/package':
+        months_count: Количество месяцев
+        percent: Дополнительная наценка
+      'bonus/certificate':
+        name: Название
+        description: Описание
+        number: Номер
+        amount: Сумма
+        service: Услуга
+        starts_at: Старт акции
+        ends_at: Конец акции
+        quantity: Количество
+        used_quantity: Выдано
+        limit: Лимит для одного
+        code: Введите промо-код
+
+      purse:
+        name: Пользователь
+        amount: Баланс
+        blocked_amount: Заблокировано
+        available_amount: Доступно
+        deposit_course: Курс
+
+      'payment/interkassa_deposit':
+        amount: Сумма
+        value: Введите нужное количество монет
+
+      'purse_payment/transfer_to_system':
+        amount: Сумма
+
+      'purse_payment/admin_deposit':
+        amount: Сумма
+        name: Название
+        description: Описание
+
+    errors:
+      messages:
+        email: "Неправильный e-mail"
+        record_invalid: "Поле заполнено неверно"
+        confirmation: "Не соответствует полю '%{attribute}'"
+        accepted: "Условия должны быть приняты"
+        empty: "Поле не может быть пустым"
+        present: "Поле должно быть пустым"
+        too_long: "Поле слишком большое (максимум %{count} символов)"
+        too_short: "Поле слишком короткое (минимум %{count} символов)"
+        wrong_length: "Поле должно содержать %{count} символов"
+        not_a_number: "Поле '%{attribute}' должно быть числом"
+        not_an_integer: "Поле '%{attribute}' должно быть целым числом"
+        greater_than: "Поле '%{attribute}' должно быть больше %{count}"
+        greater_than_or_equal_to: "Поле '%{attribute}' должно быть больше или равно %{count}"
+        equal_to: "Поле '%{attribute}' должно быть равно %{count}"
+        less_than: "Поле '%{attribute}' должно быть меньше %{count}"
+        less_than_or_equal_to: "Поле '%{attribute}' должно быть меньше или равно %{count}"
+        other_than: "Поле '%{attribute}' должно отличаться от %{count}"
+        blank: "Поле обязательно для заполнения"
+        invalid: "Поле заполнено неверно"
+        taken: "Поле должно быть уникальным"
+        not_allowed_language: "Пароль может содержать a-Z, 0-9 (# $ - %)"
+        sum_size_too_big: "Количество места для файлов под ваш аккаунт исчерпано"
+        extension_white_list_error: "Вы не можете загружать файлы такого формата"
+        too_many_documents: "Максимум добавленных документов: %{count}"
+        size_too_big: "Слишком большой размер файла"
+        is_not_a_date: "Неверный формат даты"
+        wrong_interval: "Дата не входит в нужный интервал"
+      slug_format: Используйте только цифры, латиницу и знаки &laquo;-&raquo; и &laquo;_&raquo;
+      subdomain_format: Используйте только цифры, латиницу и знаки &laquo;-&raquo; и &laquo;_&raquo;
+      static_page_link_format: Используйте только цифры, латиницу и знаки &laquo;-&raquo;, &laquo;_&raquo;, &laquo;/&raquo;
+
+      models:
+        user_sign_in_form:
+          attributes:
+            login:
+              not_present: "Данный е-майл не зарегистрирован"
+            password:
+              wrong: "Не правильно указан пароль"
+        user:
+          attributes:
+            current_password:
+              invalid: 'неправильный пароль'
+              blank: не может быть пустым
+            password:
+              too_short: 'короткий'
+              confirmation: 'не совпадают'
+            name:
+              blank: 'Поле обязательно для заполнения'
+            surname:
+              blank: 'пустое'
+            email:
+              taken: 'уже используется'
+              invalid: 'неверный формат'
+            login:
+              taken: 'уже используется'
+
+        firm:
+          attributes:
+            city_id:
+              blank: "Не выбран город"
+
+            slug:
+              taken: уже используется
+              blank: не может быть пустым
+
+        client:
+          attributes:
+            slug:
+              taken: уже используется
+              blank: не может быть пустым
+
+        site:
+          attributes:
+            name:
+              taken: уже используется
+              blank: не может быть пустым
+
+        'bonus/subscription':
+          attributes:
+            base:
+              no_amount_in_your_purse: Недостаточно средств для оплаты услуги
+              no_amount_in_your_purse_pro: "Недостаточно средств для подключения даного тарифа. "
+
+        'bonus/certificate':
+          attributes:
+            amount:
+              no_amount_in_purse: Недостаточно средств
+            firm:
+              limit_is_exceeded: Промо-код недействителен
+              no_base_pro: Активируйте пробный период на Pro-аккаунт
+
+        'purse_payment/admin_deposit':
+          attributes:
+            base:
+              no_amount_in_system_purse: Недостаточно средств на системном кошельке
+
+        'payment/interkassa_deposit':
+          attributes:
+            amount:
+              not_an_integer: не является целым числом
+    symbolizes:
+      task:
+        type_task:
+          simply: "Простая"
+          with_service: "С сервисом"
+          advice: "Совет"
+          custom: "Пользовательский"
+        service:
+          service_1: "Сервис свадебный калькулятор"
+          service_2: "Сервис список гостей"
+          service_3: "Сервис рассадки гостей"
+          service_4: "Сервис подарков"
+          service_5: "Сервис День свадьбы"
+          service_6: "Сервис День после свадьбы"
+      event:
+        service_1: "Сервис 1"
+        service_2: "Сервис 2"
+      firm:
+        status:
+          usual: "Обычный"
+          average: "Средний"
+          advanced: "Продвинутый"

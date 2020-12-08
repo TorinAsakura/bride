@@ -1,0 +1,21 @@
+#firm-control-panel-monetize-dealer.firm-settings{ style: 'display:none;' }
+  .sv-article
+    = render 'firms/control_panel/monetize/balance_top'
+
+    .title_nobg Общая информация
+
+    #sv-firm-detail-text.sv-dealer-details
+      %p Ссылка для превлечения компаний
+      = text_field_tag(:invite_link, root_url(ref: @firm.invite_token), onFocus: 'this.select()', class: 'invite-link')
+
+  .sv-article
+    .title_nobg Финансовая информация
+    %table.table
+      - @firm.children_firms.in_groups_of(3, false) do |group_firms|
+        %tr
+          - group_firms.each do |f|
+            %td= link_to(f.name, firm_link(f))
+
+
+    #sv-firm-payments
+      .transfer= link_to('Перевести средства в систему', new_transfer_to_system_dealer_path, remote: true, class: 'link-style')

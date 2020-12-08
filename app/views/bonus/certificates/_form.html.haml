@@ -1,0 +1,5 @@
+%p= t('.title')
+= simple_form_for certificate, url: assign_bonus_certificates_path, remote: true do |f|
+  = f.input :number, label: false, placeholder: f.object.class.human_attribute_name(:code), input_html: {style: 'width: 400px'}
+  = f.submit 'Пополнить', class: 'link-style'
+  %p.error.main-color-text

@@ -1,0 +1,3 @@
+= simple_form_for @album, url: album_form_url(@resource, @album), remote: true do |f|
+  = f.input :name, input_html: { class: 'input-xxlarge', autocomplete: 'off' }
+  = f.submit 'Сохранить', class: 'link-style'

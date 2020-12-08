@@ -1,0 +1,16 @@
+.sv-ideas{class: ('sv-ideas_empty' if @sections.empty?)}
+  .sv-ideas__search
+    .sv-ideas__search-title
+      Свадебные идеи
+      .sv-ideas__search-magnifier
+        .sv-ideas__search-magnifier-icon
+    = render 'idea/search_form'
+
+  - if @sections.present?
+    = render @sections
+  - else
+    .sv-ideas-excuse
+      Извините, по данному запросу не найдено ни одной свадебной идеи
+
+  .sv-ideas__nav
+    = rel_next_prev_link_tags @sections

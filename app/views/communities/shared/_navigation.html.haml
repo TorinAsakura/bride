@@ -1,0 +1,36 @@
+.sv-side-box
+  .title.clearfix
+    = link_to members_community_path(community) do
+      %span Состав клуба
+  %ul.sv-firm-client-list.clearfix
+    - @rand_clients.each do |client|
+      .sv-clients-block
+        = link_to client, class: 'sv-clients-block_links' do
+          = image_tag client.avatar.thumb
+        .sv-clients-block_info
+          %b= client.full_name
+          %ul
+            - if client.city
+              %li= client.city.name
+
+.clearfix
+
+.sv-community__navigation
+  .title.clearfix
+    %span Клуб
+    - for_admin do
+      = link_to 'Настройки', edit_admin_community_path(community)
+    %i.arr
+  %ul
+    = navigation_link_to('Правила клуба', rules_community_path(community), 'left')
+    = navigation_link_to('Фотоальбом', community_albums_path(community), 'left')
+    = navigation_link_to('Участники', members_community_path(community), 'left')
+
+- if current_page?(action: :show)
+  .sv-community__navigation
+    .title.clearfix
+      %span Обсуждения
+      %i.arr
+    %ul
+      - community.post_categories.each do |category|
+        %li.sv-post-category{'post-category-id' => category.id }= link_to category.name, community_path(community)

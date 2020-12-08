@@ -1,0 +1,45 @@
+!!!
+%html{xmlns: 'http://www.w3.org/1999/xhtml'}
+  %head
+    %meta{charset: 'utf-8'}
+    %meta{'http-equiv' => 'X-UA-Compatible', content: 'IE=Edge,chrome=1'}
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
+    %meta{content: 'text/html; charset=utf-8', 'http-equiv' => 'content-type'}/
+    %title= content_for?(:title) ? yield(:title) : @site.name
+    = csrf_meta_tags
+    / Le HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+      = javascript_include_tag 'http://html5shim.googlecode.com/svn/trunk/html5.js'
+    = javascript_include_tag 'http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU'
+    - if Rails.env.production?
+      = javascript_include_tag 'http://mysvadba.org:9292/faye.js'
+    - else
+      = javascript_include_tag 'http://localhost:9292/faye.js'
+
+    = stylesheet_link_tag 'minisites', media: 'all'
+    = javascript_include_tag 'application'
+    = yield :javascript
+    = stylesheet_link_tag 'http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css'
+    = stylesheet_link_tag 'http://allfont.net/css/?fonts=heather-script-one'
+    = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Playfair+Display&subset=latin,cyrillic'
+
+    %link{href: '/favicon.ico', rel: 'icon', type: 'image/x-icon'}/
+    %link{href: '/favicon.ico', rel: 'shortcut icon', type: 'image/x-icon'}/
+
+  %body{style: @site.body_bg_style}
+    .wrap
+      = render 'minisite/shared/header'
+
+      %section.main
+        %aside.aside-content<
+          - unless params[:controller] =~ /(minisite\/seating_plans|minisite\/wedding_calcs)/
+            - if minisite_access? @site, session["site_code_#{@site.id}"]
+              = render 'minisite/minisite_menu', site: @site, pages: @pages
+            - else
+              = render 'minisite/code_form', site: @site
+        %section.main-contents
+          = yield
+
+      = render partial: 'minisite/shared/footer'
+
+    #edit

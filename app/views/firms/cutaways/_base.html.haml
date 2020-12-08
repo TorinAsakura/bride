@@ -1,0 +1,12 @@
+.sv-item.sv-item-firm.clearfix
+  %ul.sv-data
+    %li.sv-phone= firm.phone
+    %li.sv-address= firm.address
+  .sv-title
+    - firm_name = text_in_quotes(firm.name)
+    - if firm.object.is_a?(Firm) && (current_user.try(:admin?) || (cf = current_firm).present? && cf.dealer? && firm.dealer.eql?(cf))
+      = link_to(firm_name, firm_link(firm), style: 'color: #C84563;')
+    - else
+      = firm_name
+  .sv-short= firm.extended_name
+  .sv-tags= firm.catalogs

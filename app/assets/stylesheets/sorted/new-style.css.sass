@@ -1,0 +1,1653 @@
+/* UI Elements
+ ****************************
+
+button.link-style, a.link-style
+  background: #c84563
+  border: 1px solid #c84563
+  color: #fff
+  text-decoration: none
+  padding: 2px 20px
+  display: inline-block
+
+button.link-style:hover
+  background: #fff
+  border: 1px solid #c84563
+  color: #c84563
+  padding: 2px 20px
+  text-decoration: none
+  display: inline-block
+
+a
+  &.link-style-active, &.link-style:hover
+    background: #fff
+    border: 1px solid #c84563
+    color: #c84563
+    padding: 2px 20px
+    text-decoration: none
+    display: inline-block
+
+span.link-style-active
+  background: #fff
+  border: 1px solid #c84563
+  color: #c84563
+  padding: 2px 20px
+  text-decoration: none
+  display: inline-block
+
+a.link-style-inner
+  background: #c84563
+  border: 1px solid #c84563
+  color: #fff
+  padding: 2px 21px
+  display: block
+  &:hover
+    background: #f1849d
+    color: #c84563
+    text-decoration: none
+    padding: 2px 21px
+
+.link-style_wide-fix
+  width: 94px
+  text-align: center
+
+.link-style_wide-fix-border
+  width: 92px
+  text-align: center
+
+.sv-l
+  float: left
+
+/* Вставлять куда угодно как дополнительный класс прижатия в лево
+
+.sv-r
+  float: right
+
+/* Вставлять куда угодно как дополнительный класс прижатия в право
+
+.no-red, .yes-green-noclear, .yes-green
+  color: #009944
+  font-size: 12px
+  clear: both
+  display: block
+  padding: 2px 0 0 0
+
+.no-red
+  color: #cf0000
+
+.yes-green-noclear
+  clear: none
+  padding: 3px 0 0 7px
+
+.cfix
+  clear: both
+
+.cfix-blo
+  clear: both
+  display: block
+
+/* Навигация над историей операций можно использовать визде
+
+ul
+  &.width-center-table-nav
+    width: 390px
+    margin: 10px auto 20px
+  &.sv-table-nav
+    list-style: none
+    li
+      list-style: none
+      float: left
+      margin: 0 6px
+      a
+        padding: 4px 35px
+        display: block
+        color: #c84563
+      &.active a, a:hover
+        background: #fff
+        border: 1px solid #c84563
+        padding: 3px 34px
+        text-decoration: none
+
+.sv-wall div.title
+  font-size: 22px
+  color: #fff
+  padding: 11px 0 11px 20px
+  font-weight: 300
+  margin: 15px 0 0 0
+
+/* Article
+ ****************************
+
+.ovflhid
+  overflow: hidden
+
+.title_nobg
+  font-weight: 300
+  font-size: 22px
+  color: #c84563
+  border-bottom: 1px solid #f1849d
+  padding: 12px 0 12px 10px
+  margin-bottom: 24px
+  span.normal-text
+    display: block
+    font-size: 14px
+    margin: 6px 0 0 0
+    color: #808080
+    font-weight: 400
+
+.margintopotstp
+  margin-top: 10px !important
+  .corporations
+    display: none
+
+.margintop28
+  margin-top: 28px !important
+
+.sv-hidden
+  overflow: hidden
+
+.sv-clear
+  float: none
+  clear: both
+
+.sv-plane-block
+  position: relative
+  margin: 0 0 20px 0
+
+/* Блоки касающиеся планировки мероприятий
+
+.sv-repeat-block-plane
+  overflow: hidden
+  font-size: 16px
+  margin: 0 0 10px 0
+  p
+    font-size: 12px
+
+.sv-time
+  width: 64px
+  text-align: center
+  color: #fff
+  span
+    display: block
+    padding: 3px 0
+    margin: 0 auto
+    &.plan-red
+      background: #cb0000
+    &.plan-ellow
+      background: #ff9000
+    &.plan-green
+      background: #359500
+    &.plan-nocolor
+      color: #4c4c4c
+
+/* Красный цвет времени планирования мероприйтия
+
+/* Желтый цвет времени планирования мероприйтия
+
+/* Зеленый цвет времени планирования мероприйтия
+
+.arrow-down
+  width: 0
+  height: 0
+  border-left: 6px solid transparent
+  border-right: 6px solid transparent
+  border-top: 6px solid #cb0000
+
+.arrow-ellow
+  border-top: 6px solid #ff9000
+
+/* Желтый цвет стрелочки под временем
+
+.arrow-green
+  border-top: 6px solid #359500
+
+/* Зеленый цвет стрелочки под временем
+
+.sv-plane-content
+  margin: 0 0 0 17px
+  overflow: hidden
+  width: 569px
+  a
+    color: #c84563
+
+button.close-button
+  border: 0
+  background: image-url('sorted/sv-icon-small-close.png') no-repeat
+  width: 9px
+  height: 9px
+  cursor: pointer
+  margin: 0 6px 0 0
+
+.roster_money button.close-button, .sv-dating-brim button.close-button
+  margin: 8px 0 0 5px
+
+a.sv-add_item
+  background: image-url('sorted/sv-icon-add-big.jpg') no-repeat
+  padding: 3px 0 4px 37px
+  color: #b2b2b2
+  font-size: 14px
+
+/* Блоки касающиеся планировки мероприятий КОНЕЦ
+
+.sv-map
+  position: relative
+  margin: 25px 0 0 0
+
+/* Страница черный список
+
+.find
+  input
+    margin: 0 5px 0 5px
+    width: 512px
+    font-family: 'Open Sans', sans-serif
+    font-style: light
+    font-size: 14px
+    color: #acacac
+    background-color: #f3f3f3
+    border-top: 2px solid #999999
+    -moz-border-radius: 0px
+    -webkit-border-radius: 0px
+    border-radius: 0px
+  overflow: hidden
+  margin: 0 0 38px 0
+  button
+    border: none
+    font-style: light
+    font-size: 16px
+    background-color: #c84563
+    padding: 5px 28px
+    color: #fff
+
+.sv-user
+  float: left
+  width: 321px
+  margin: 0 0 15px
+  display: block
+
+.customer
+  float: left
+  width: 160px
+
+
+.person
+  width: 150px
+  float: left
+  a
+    float: left
+    width: 72px
+    text-decoration: none
+    font-style: Italic
+    font-size: 16px
+    color: #c84563
+  button
+    float: right
+    width: 30px
+    height: 30px
+    background: image-url('sorted/sv_info.png') no-repeat
+    border: none
+    margin: 20px 0 0 0
+    padding: 11px 0
+
+.naymenovanye
+  font-family: 'Open Sans', sans-serif
+  font-style: Italic
+  font-size: 12px
+  color: #555555
+
+.blacklistinnert button:hover, .to_blacklist button
+  width: 137px
+  float: left
+  margin: 45px 0 0 0
+  background: #c84563
+  border: none
+  padding: 4px 0
+  color: #fff
+
+.company
+  float: left
+  width: 340px
+  margin: 0 0 15px 0
+  display: block
+
+.folks
+  margin: 0 10px 0 15px
+  padding: 4px
+  width: 140px
+  height: 140px
+  background-color: #ffffff
+  border: 1px solid #cccccc
+  -moz-border-radius: 100px
+  -webkit-border-radius: 100px
+  border-radius: 100px
+  img
+    -moz-border-radius: 100px
+    -webkit-border-radius: 100px
+    border-radius: 100px
+
+.add_to_blacklist, .corporations.company.all-bklist
+  overflow: hidden
+  .title
+    margin-top: 30px
+
+.to_blacklist button:hover, .blacklistinnert button
+  float: left
+  margin: 45px 0 0 0
+  background: #fff
+  border: 1px solid #c84563
+  padding: 3px 0
+  color: #c84563
+
+.to_blacklist
+  overflow: hidden
+  margin: 65px 0 0 0
+  a
+    font-size: 13px
+.add_company
+  margin-top: 15px
+
+.company
+  overflow: hidden
+
+.vd-blacklist
+  .sv-article
+    margin-top: 0
+/* Страница черный список КОНЕЦ
+
+/* Страница настройки дня мероприятий
+
+.ation_list
+  margin: 0 0 39px 0
+
+.ation-list-team
+  overflow: hidden
+  margin: 0 0 18px 0
+  display: inline-block
+
+.sv-list-name
+  width: 228px
+  padding: 0 0 0 17px
+
+.sv-list-switch
+  width: 57px
+  padding: 0 0 0 17px
+  display: block
+
+.sv-list-guests, .sv-list-guest
+  width: 178px
+  padding: 0 0 0 17px
+  color: #c84563
+
+.sv-list-guests
+  width: 280px
+  button.close-button
+    margin: 7px 0 0 8px
+
+.sv-list-edit
+  min-width: 119px
+  padding: 0 0 0 17px
+
+.sv-list-not-active
+  color: #b2b2b2 !important
+
+/* Даты мероприятий
+
+.sv-dating-list
+  overflow: hidden
+  margin: 0 0 21px 11px
+
+.sv-dating-list-title
+  font-size: 18px
+  float: none
+  clear: both
+  margin-bottom: 18px
+
+.sv-dating-brim
+  margin: 11px 0 0 26px
+  clear: both
+  overflow: hidden
+
+.sv-dating-brim-select
+  margin: 11px 0 0 26px
+  clear: both
+
+.sv-end-form
+  margin: 20px 0 20px 10px
+  overflow: hidden
+
+/* Страница настройки дня мероприятий КОНЕЦ
+
+/* Страница Основных настроек
+
+.form-ovrfl
+  overflow: hidden
+
+.rows-form
+  margin: 0 0 0 10px
+
+.rows-form-2
+  margin: 0 0 0 16px
+
+.list-form-seting
+  margin: 0 0 13px 0
+  overflow: hidden
+  clear: both
+
+.list-form-seting-select
+  margin: 0 0 13px 0
+  clear: both
+
+.sv-block-select
+  .select-text
+    margin-left: 20px
+
+label.individual-melodi
+  background: image-url('sorted/sv-icon-melodi.png') no-repeat
+  font-size: 18px
+  padding: 3px 0 3px 35px
+  margin: 0 2px 0 0
+
+.sv-profile-site
+  overflow: hidden
+  margin: 0 0 0 10px
+  a.link-style
+    margin: 0 0 0 8px
+
+.inp-a-description
+  width: 278px
+
+.inp-a-description-s
+  width: 312px
+  margin: 0 0 0 8px
+  .yes-green
+    margin: 0 0 0 8px
+
+.top-marg
+  margin-top: 30px
+
+.rows-form-tel
+  width: 360px
+  margin: 0 28px 0 0
+  input
+    margin: 0 10px 0 0
+
+/* Социальные сети
+
+.sv-social
+  width: 252px
+  font-size: 16px
+  color: #c84563
+  margin: 0 0 0 10px
+
+.sv-social-list
+  line-height: 24px
+  overflow: hidden
+  clear: both
+  margin-bottom: 8px
+
+.sv-soc-active
+  color: #4c4c4c
+
+.social-login li
+  line-height: 26px
+
+i.sv-icon-social
+  display: block
+  margin: 0 11px 0 0
+
+.sv-social-list button.close-button
+  margin: 6px 0 0 0
+
+/* Страница Основных настроек КОНЕЦ
+
+.end-form
+  margin: 10px 0 0 17px
+  overflow: hidden
+  .sv-end-form
+    overflow: hidden
+    margin: 30px 0
+
+/* Настройка аккаунта компании
+
+.sv-balance-top
+  background: #c84563
+  color: #fff
+  margin: 0 0 20px 0
+
+.sv-balc-you
+  font-size: 22px
+  padding: 16px
+  font-weight: 300
+
+.sv-balc-amount
+  font-size: 36px
+  padding: 13px 16px
+  font-weight: 300
+
+span.rur
+  display: block
+
+.sv-balc-button
+  padding: 13px 16px
+  a.link-style
+    background: #f1849d
+    &:hover
+      background: #fff
+      border: 1px solid #f1849d
+      color: #f1849d
+
+/* Мини постраничная навигация
+
+ul.sv-mini-pegnav
+  list-style: none
+  margin: 0
+  padding: 0
+  li
+    float: left
+    margin: 0 1px
+    a
+      padding: 4px 5px
+      color: #c84563
+      display: block
+    &.active span
+      padding: 3px 10px
+      border: 1px solid #c84563
+      color: #c84563
+      display: block
+    a:hover
+      text-decoration: none
+      color: #E9204E
+
+.mini-filtr-and-pagenav
+  overflow: hidden
+  margin: 0 0 20px 0
+
+.mini-filtr
+  overflow: hidden
+  ul.sv-mini-pegnav li.active span
+    padding: 3px 6px
+
+.mini-filtr_text
+  padding: 4px 5px 0 0
+
+/* Страница сообществ
+
+.title-braun-aside
+  background: #4A0707
+  padding: 0 0 0 20px
+  position: relative
+  span
+    display: block
+    white-space: nowrap
+    float: left
+    font-size: 22px
+    color: #FFF
+    font-weight: 300
+    line-height: 48px
+    height: 50px
+    i
+      font-size: 14px
+      font-style: normal
+
+.sv-participants
+  overflow: hidden
+  margin: 3px 0
+
+.sv-participants-user
+  width: 91px
+  height: 124px
+  float: left
+  padding: 4px
+  text-align: center
+  span
+    display: block
+    margin: 4px 0 0 0
+
+div.sv-participants-user:hover
+  background: #f1849d
+  a
+    color: #fff
+
+.sv-participants-user a
+  color: #c84563
+  font-size: 11px
+  line-height: 14px
+  &:hover
+    color: #fff
+    text-decoration: none
+
+.fotoalbum li
+  a
+    width: 300px !important
+    height: 149px !important
+  span
+    padding: 3px 0 !important
+  a b
+    font-weight: normal
+    padding: 0 0 0 5px
+
+.list-video-useful li.sv-video-list-block a.img span, .videoalbum li.sv-video-list-block a.img span
+  background: image-url('sorted/sv-bg-trans-gray.png')
+  color: #fff
+
+.list-video-useful li.sv-video-list-block a.img:hover span, .videoalbum li.sv-video-list-block a.img:hover span
+  background: #333
+  color: #fff
+
+.list-video-useful li.sv-video-list-block a.img span b, .videoalbum li.sv-video-list-block a.img span b
+  background: image-url('sorted/sv-icon-play-white.png') 5px 50% no-repeat
+
+.sv-choice
+  background: #f1849d
+  overflow: hidden
+  ul
+    list-style: none
+    li
+      float: left
+      &.next, &.prev
+        min-width: 20px
+        height: 50px
+  a
+    &.icon
+      display: block
+    &.prev
+      background-position: 0px -17px
+  .center
+    font-weight: 300
+    margin: 15px 0 0
+    font-size: 18px !important
+  a.next
+    background-position: 0px 0px
+
+/* Мини сайт пользователя
+
+.sv-m-site-user-wrap
+  width: 980px
+  padding: 10px
+  background: image-url('sorted/bg-opticaly.png') repeat
+  margin: 0 auto 50px auto
+
+.sv-article-m-s
+  background: #fff
+  padding: 10px
+  margin: 0 !important
+
+.sv-aside-m-s
+  margin: 0 !important
+
+.sv-article-m-s p
+  text-align: justify
+  text-indent: 20px
+  margin: 13px 0
+
+.sv-m-site-header
+  background: image-url('sorted/bg-m-site-header.jpg') repeat-x
+  overflow: hidden
+  border-bottom: 1px solid #c84563
+
+.sv-head-open
+  margin: 0 auto
+  width: 980px
+
+.sv-time_wedding
+  background: #f1849d
+  font-size: 18px
+  color: #fff
+  text-align: center
+  line-height: 50px
+  padding: 0 26px
+  span
+    display: block
+    font-size: 66.67px
+
+.sv-slogan-m-s
+  font-family: Constantia
+  font-size: 45px
+  display: block
+  width: 475px
+  line-height: 50px
+  margin: 25px 0
+
+.sv-data-weddi
+  font-family: Monotype Corsiva
+  font-size: 41.67px
+  color: #c84563
+  line-height: 50px
+  margin: 25px 0px 0 0
+  width: 310px
+  text-align: center
+
+/* Фиксированый блок
+
+.sv-fixed-block-filtr
+  background: #c84563
+  position: fixed
+  bottom: 0
+  -moz-box-shadow: 0px 0px 2px #000
+  -webkit-box-shadow: 0px 0px 2px #000
+  box-shadow: 0px 0px 2px #000
+  filter: progid:DXImageTransform.Microsoft.Shadow(strength = 0, direction = 0, color = '#000')
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(strength = 0, Direction = 0, Color = '#000')"
+  width: auto
+  overflow: hidden
+  z-index: 500
+  right: 0
+  left: 0
+
+.sv-cantain
+  width: 980px
+  margin: 0 auto
+  #sv-search-box
+    margin: 0px 0 0px 22px
+    width: 423px
+    div.sv-field
+      -moz-border-radius: 12px
+      -webkit-border-radius: 12px
+      border-radius: 12px
+      -moz-box-shadow: inset 0px 1px 2px #565656
+      -webkit-box-shadow: inset 0px 1px 2px #565656
+      box-shadow: inset 0px 1px 2px #565656
+      filter: progid:DXImageTransform.Microsoft.Shadow(strength = 1, direction = 180, color = '#565656')
+      -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(strength = 1, Direction = 180, Color = '#565656')"
+      width: 198px
+      input.sv-text
+        width: 188px
+    ul
+      &.sv-where
+        text-align: left
+        padding: 0 0 0 5px
+      &.sv-color
+        li
+          margin: 0 3px 3px 3px
+          label
+            background-image: image-url('sorted/sv-search-color-shadow-inner.png')
+        margin: 0
+      &.sv-where li
+        &.active label
+          color: #fff
+        label
+          color: #f1849d
+          font-size: 12px
+        margin: 1px 4px 5px 4px
+
+.sv-foot-logo
+  margin: 2px 0
+
+.sv-profile-set-contr
+  overflow: hidden
+  width: 385px
+
+.sv-profile-set-name
+  color: #fff
+  padding: 15px 12px 15px 8px
+
+.sv-prof-set-icon
+  margin: 12px 0
+
+.sv-set-icon
+  background: image-url('sorted/sv-icon-user-menu.png') no-repeat
+  display: block
+  width: 25px
+  height: 25px
+  float: left
+  margin: 0 0 0 10px
+
+a
+  &.set-world
+    background-position: -25px 0px
+    &:hover
+      background-position: 0px 0px
+  &.set-comm
+    background-position: -25px -25px
+    &:hover
+      background-position: 0px -25px
+  &.set-usser
+    background-position: -25px -50px
+    &:hover
+      background-position: 0px -50px
+  &.set-dollar
+    background-position: -25px -75px
+    &:hover
+      background-position: 0px -75px
+  &.set-seting
+    background-position: -25px -100px
+    &:hover
+      background-position: 0px -100px
+
+/* Мини сайт фотоальбом
+
+.title-ms
+  background: #c84563
+  font-size: 22px
+  font-weight: 300
+  overflow: hidden
+  color: #fff
+  span
+    padding: 14px 20px 16px
+    display: block
+
+a.sv-a-back
+  background: #4a0707
+  display: block
+  height: 50px
+  &:hover
+    background: #5E0B0B
+  img
+    height: 17px
+    width: 13px
+    padding: 17px 20px
+
+.sv-album-foto
+  overflow: hidden
+  margin: 0
+  img
+    overflow: hidden
+    margin: 15px 0 0 11px
+    width: 206px
+    height: 206px
+    &.first
+      overflow: hidden
+      margin: 15px 0 0 0px
+
+.sv-albums-galery
+  overflow: hidden
+
+.sv-album-display
+  position: relative
+  float: left
+  margin: 0 0 10px
+  a
+    display: block
+
+.sv-album-opt-black
+  position: absolute
+  bottom: 0
+  right: 0
+  left: 0
+  background: image-url('sorted/bg-opticaly-black.png')
+  color: #fff
+  padding: 8px
+
+a:hover .sv-album-opt-black
+  background: #333
+
+.sv-album-opt-black i.sv-icon, #sv-side-photos i.sv-icon
+  margin: 9px
+
+.sv-alb-first
+  margin: 0 10px 0 0
+
+span.sv-a-open-button, a.sv-a-open-button
+  background: #f1849d
+  color: #fff
+  display: block
+  padding: 10px 0
+  text-align: center
+
+span.sv-a-open-button:hover, a.sv-a-open-button:hover
+  background: #F194AA
+  text-decoration: none
+
+.sv-album-display img
+  width: 320px
+  height: 160px
+
+span.sv-a-open-button
+  margin: 0 14px 10px 14px
+
+/* Список идей для свадьбы
+
+.sv-search-filter
+  background: #e6e6e6
+  overflow: hidden
+  padding: 16px
+  margin: 10px 0 10px 0
+  input
+    background: #fafafa image-url('sorted/sv-fing-icon.png') right no-repeat !important
+    -webkit-border-radius: 0px
+    -moz-border-radius: 0px
+    border-radius: 0px
+    margin: 0
+    height: auto
+    width: 806px
+  .find-button
+    margin: 0 0 0 10px
+    padding: 3px 24px
+
+.find-button
+  background: #c84563
+  border: 0
+  color: #fff
+  padding: 3px 21px
+  &:hover
+    background: #f1849d
+    border: 0
+    color: #fff
+
+/* Кружки фильтра разноцветные
+
+.color-circle
+  margin: 15px 0 0 0
+
+.sv-circle-fil
+  -moz-border-radius: 100px
+  -webkit-border-radius: 100px
+  border-radius: 100px
+  -moz-box-shadow: inset 0px 1px 2px #616061
+  -webkit-box-shadow: inset 0px 1px 2px #616061
+  box-shadow: inset 0px 1px 2px #616061
+  filter: progid:DXImageTransform.Microsoft.Shadow(strength = 1, direction = 180, color = '#616061')
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(strength = 1, Direction = 180, Color = '#616061')"
+  width: 25px
+  height: 25px
+  display: block
+  background-color: #fff
+  float: left
+  margin: 0 6px 0 5px
+  cursor: pointer
+
+.sc-circle-red
+  background-color: #db0000
+
+.sc-circle-orange
+  background-color: #e79523
+
+.sc-circle-ellow
+  background-color: #fefc3b
+
+.sc-circle-green
+  background-color: #76b12a
+
+.sc-circle-blue
+  background-color: #76d1fd
+
+.sc-circle-sapfire
+  background-color: #4071fb
+
+.sc-circle-violet
+  background-color: #7760a8
+
+.sc-circle-pinck
+  background-color: #d9839b
+
+.sc-circle-burlywood
+  background-color: #dacba3
+
+.sc-circle-beige
+  background-color: #f3ebcd
+
+.sc-circle-black
+  background-color: #111
+
+.sv-view-blocks
+  background: image-url('sorted/sv-view-blocks-icon.png')
+  width: 19px
+  height: 19px
+  display: block
+  float: left
+  margin: 18px 3px 0 4px
+
+.view-folio
+  background-position: 0 0
+
+.view-list
+  background-position: 19px 0
+
+/* Стилизация фотографий во всю ширину
+
+.sv-special-foto-block
+  margin: 10px 14px
+
+.sv-like-photo
+  cursor: pointer
+  background: image-url('sorted/sv-loveit.png') 0 0 no-repeat
+  width: 26px
+  height: 26px
+  text-indent: -11146px
+  display: inline-block
+  &:hover
+    background-position: 0 -26px
+  &:active
+    background-position: 0 -52px
+
+.sv-special-foto-block .sv-like-photo
+  position: absolute
+  top: 7px
+  right: 10px
+
+.sv-foto-special
+  position: relative
+  width: 200px
+  height: 200px
+  margin: 6px
+  float: left
+  a
+    display: block
+  span
+    color: #fff
+    display: none
+    background: image-url('sorted/bg-opticaly-black.png')
+    padding: 7px 11px
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+    &:hover
+      background: #333
+  &:hover span
+    display: block
+.sv-icon-brheart-white
+  background: image-url('sorted/sv-icon-brheart-white.png') no-repeat
+  width: 21px
+  height: 20px
+  display: block
+  margin: 14px 10px 0 10px
+
+.title-browns
+  background: #4a0707
+  overflow: hidden
+  color: #fff
+  font-size: 22px
+  font-weight: 300
+  .sv-choice
+    background: #4a0707
+    margin: 0
+    ul
+      margin: 0
+      padding: 16px 16px 34px 16px !important
+      li
+        line-height: 14px !important
+        &.center
+          width: 155px
+          text-align: center
+    span.center
+      font-size: 22px !important
+
+.sv-title-edit
+  display: block
+  float: right
+  background: #6d1d1d image-url('sorted/sv-icon-pen-white.png') 50% 50% no-repeat
+  width: 50px
+  height: 50px
+  overflow: hidden
+  text-indent: 100%
+
+.sv-prezent
+  overflow: hidden
+
+.title-pink-darck
+  font-size: 18px
+  background: #c84563
+  overflow: hidden
+  line-height: 49px
+  padding: 0px 0 0px 17px
+  span.day
+    font-size: 36px
+    padding: 0 0 0 10px
+
+.sv-title-seting
+  display: block
+  float: right
+  background: #6d1d1d image-url('sorted/sv-icon-mech.png') 50% 50% no-repeat
+  width: 50px
+  height: 50px
+  overflow: hidden
+  text-indent: 100%
+
+.sv-title-up
+  background: #6d1d1d image-url('sorted/sv-icon-dropup.png') 50% 50% no-repeat
+
+.sv-title-down
+  background: #6d1d1d image-url('sorted/sv-icon-dropdown.png') 50% 50% no-repeat
+
+.sv-mi_site
+  background: #f1849d
+  margin: 0 0 10px 0
+  a.link-style-white
+    background: #fff
+    padding: 3px 26px
+    color: #c84563
+    &:hover
+      background: #f4f4f4
+      text-decoration: none
+
+.sv_our-website
+  text-align: center
+  width: 215px
+  padding: 15px 17px
+
+.sv-prezent ul
+  margin: 0
+
+.no-cheak
+  padding: 4px 0 4px 46px !important
+
+/* Стилизация формы
+ ****************************
+
+/* Стилизация Checkbox 1
+
+input
+  &.check-style[type="checkbox"]
+    display: none
+    + label span
+      display: inline-block
+      width: 50px
+      height: 26px
+      margin: -1px 4px 0 0
+      vertical-align: middle
+      background: image-url('sorted/sv-checkbox.png') 0 0 no-repeat
+      cursor: pointer
+      font-family: 'Open Sans', sans-serif
+    &:checked + label span
+      background: image-url('sorted/sv-checkbox.png') -50px 0 no-repeat
+  &.radio-style-circle[type="radio"]
+    display: none
+    + label span
+      display: inline-block
+      text-indent: 25px
+      height: 20px
+      margin: -1px 4px 0 0
+      vertical-align: middle
+      background: image-url('sorted/sv-checkbox-standart.png') 0 1px no-repeat
+      cursor: pointer
+      font-family: 'Open Sans', sans-serif
+    &:checked + label span
+      background: image-url('sorted/sv-checkbox-standart.png') 0 -18px no-repeat
+  &.radio-style-man[type="radio"]
+    display: none
+    + label
+      text-indent: -9999999px
+      display: inline-block
+      width: 20px
+      height: 18px
+      margin: -1px 4px 0 0
+      vertical-align: middle
+      background: image-url('sorted/sv-icon-man-or-girl.png') 0px 0 no-repeat
+      cursor: pointer
+      font-family: 'Open Sans', sans-serif
+    &:checked + label
+      background: image-url('sorted/sv-icon-man-or-girl.png') 0px -18px no-repeat
+  &.radio-style-girl[type="radio"]
+    display: none
+    + label
+      text-indent: -9999999px
+      display: inline-block
+      width: 16px
+      height: 18px
+      margin: -1px 4px 0 0
+      vertical-align: middle
+      background: image-url('sorted/sv-icon-man-or-girl.png') -21px 0 no-repeat
+      cursor: pointer
+      font-family: 'Open Sans', sans-serif
+    &:checked + label
+      background: image-url('sorted/sv-icon-man-or-girl.png') -21px -18px no-repeat
+
+/* Стилизация Radio standart
+
+/* Стилизация Radio
+
+.wm .sv-l
+  margin: 0 8px
+
+/* Радио люди
+
+input
+  &.radio-style-people[type="radio"]
+    display: none
+    + label
+      text-indent: -9999999px
+      display: inline-block
+      width: 28px
+      height: 18px
+      margin: -1px 4px 0 0
+      vertical-align: middle
+      background: image-url('sorted/people.png') 0px 0 no-repeat
+      cursor: pointer
+      font-family: 'Open Sans', sans-serif
+    &:checked + label
+      background: image-url('sorted/people.png') 0px -18px no-repeat
+  &.inp-style
+    background: #fafafa
+    color: #4c4c4c
+    font-family: 'Open Sans', sans-serif
+    border-radius: 0px
+
+/* Стилизация полей Input
+
+.sv-select-checkbox
+  width: 520px
+  margin: 10px auto 20px
+  .sv-l
+    margin: 0 14px 0 0
+
+.inp-list-padd
+  margin: 0 0 12px 9px
+  overflow: hidden
+  button.close-button
+    margin: 7px 0 0 0
+  a.sv-add_item
+    margin: 5px 0 0 0
+    display: block
+    clear: both
+
+/* Таблица
+
+table.table-condensed
+  border-top: 1px solid #ccc
+  border-left: 1px solid #ccc
+  font-family: 'Open Sans', sans-serif
+
+.table-condensed
+  td
+    vertical-align: inherit
+    border-bottom: 1px solid #ccc
+    border-right: 1px solid #ccc
+    font-size: 12px
+    color: #4d4d4d
+    padding: 11px
+    a
+      font-size: 14px
+  th
+    font-family: 'Open Sans', sans-serif !important
+    border-bottom: 1px solid #ccc
+    border-right: 1px solid #ccc
+    text-align: center
+    vertical-align: inherit
+  td span
+    font-size: 14px
+    color: #c84563
+    display: block
+
+.sv-table-th
+  font-family: 'Open Sans', sans-serif !important
+  background: #4a0707
+  color: #fff
+  font-size: 14px
+  text-align: center
+  padding: 19px 0 !important
+
+.sv-table-service
+  width: 210px
+
+.sv-table-descript
+  width: 310px
+
+.sv-table-descript-text
+  line-height: 14px !important
+  text-align: left !important
+
+.sv-table-access
+  width: 125px
+
+table.history-operations td
+  font-size: 14px
+
+.sv-text-centr
+  text-align: center !important
+
+.simple_form
+  .sv-table-actions
+    position: relative
+    &.error
+      .help-inline
+        margin-bottom: 5px
+        width: 100%
+        height: auto
+
+/* Попап верстка
+
+.sv-black-opticaly
+  background: image-url('sorted/bg-opticaly-black.png') repeat
+  position: fixed
+  top: 0
+  left: 0
+  bottom: 0
+  right: 0
+  z-index: 2222
+
+.sv-popup-wa
+  background: #fff
+  width: 817px
+  margin: 0 auto
+  position: relative
+  top: 100px
+  padding: 19px
+  z-index: 2222
+
+.sv-top-45
+  top: 45px
+
+.sv-popup-wa .sv-end-form
+  margin: 16px 0 0 0
+
+/* М-Сайт Идея
+
+.ms-s-search-filtr
+  margin: 0 0 10px 0!important
+  input
+    width: 476px
+
+.m-s-special-foto
+  margin: 10px 0 !important
+  .sv-foto-special
+    margin: 8px 8px 12px 8px
+  a.link-style
+    clear: both
+    display: inline
+
+.main-foto-special
+  width: 216px
+  float: left
+  text-align: center
+  margin: 0 0 30px 0
+
+/* Полезно посмотреть
+
+.sv-filter-cheack
+  margin: 19px 0 0
+  label
+    color: #c84563
+  .sv-l
+    margin: 0px 30px
+
+.sv-video-like-wa
+  top: 8px !important
+  right: 8px !important
+
+/* Планировщик задач
+
+.color-rous a
+  color: #c84563
+  padding: 4px 21px
+  &.active, &:hover
+    color: #4d4d4d
+    background: none
+    border: 1px solid #c84563
+    padding: 3px 20px
+
+.itle, .itles
+  padding: 0px !important
+  overflow: hidden
+
+.itle span, .itles span
+  padding: 12px 20px!important
+  display: block
+
+.marg-b-zero
+  margin-bottom: 0
+
+h4.h4-artcl
+  font-weight: 300
+  font-size: 18px
+  margin: 10px 0 20px 0
+
+.co-da .sv-dating-brim-select
+  width: 607px
+
+.sv-dating-brim-select
+  p
+    margin: 10px 9px
+  .sv-end-form
+    margin: 20px 0 30px 0
+
+.sv-popup-optic
+  background: image-url('sorted/bg-opticaly-black.png') repeat
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  z-index: 499
+  display: block
+
+.sv-popup-box
+  z-index: 500
+  width: 909px
+  position: absolute
+  top: 90.5px
+  margin: 0 auto
+  background: #FFF
+  padding: 14px
+  left: 0
+  right: 0
+
+/* Поиск людей
+
+.block-sv-find-user
+  margin: 0 10px
+
+button.button-img-fing
+  border: 0
+  background-color: #c84563
+  background-image: image-url('sorted/search.jpg')
+  text-indent: -9999999px
+  padding: 0
+  margin: 0
+  width: 25px
+  height: 25px
+
+.sv-radio-user .sv-l
+  margin: 30px 15px 5px 6px
+
+.sv-select-year
+  margin: 0 0 0 73px
+
+
+
+.title_nobg a
+  color: #b2b2b2
+  &.active, &:hover
+    color: #dd4769
+    text-decoration: none
+
+.title_nobg  + .sv-social
+  width: auto
+  [class*="icon-"]
+    font-size: 1.4em
+    &:before
+      vertical-align: top
+
+.user-sv-found
+  width: 304px
+  float: left
+  margin: 0 8px 10px 8px
+  .desc
+    margin: 0 0 0 8px
+    float: left
+    width: 145px
+    .sv-i-user
+      margin: 21px 13px 0
+    a
+      &.name
+        font-size: 16px
+        font-weight: 500
+        display: block
+        color: #c84563
+        font-style: italic
+      &.link-style
+        margin: 0 0 9px 0px
+        width: 145px
+        padding: 3px 0
+        text-align: center
+        &:hover
+          padding: 2px 0
+  .linked
+    display: block
+    margin: 26px 0 0
+    overflow: hidden
+
+.sv-location-us
+  background: image-url('sorted/sv-icons-location.png') center left no-repeat
+  display: block
+  clear: both
+  padding: 0 0 0 25px
+  font-size: 12px
+
+.tune-up a, .sv-navigation_all button
+  border: 0
+  text-indent: -22000px
+  width: 11px
+
+.tune-up a.sv-top, .sv-navigation_all button.sv-top
+  background: image-url('sorted/arow-todown.png') -12px 0px no-repeat
+  width: 11px
+  height: 11px
+  display: block
+  margin: 14px 0 3px 6px
+
+.tune-up a.sv-bottom, .sv-navigation_all button.sv-bottom
+  background: image-url('sorted/arow-todown.png') -12px -12px no-repeat
+  width: 11px
+  height: 11px
+  display: block
+  margin: 0px 0 0px 6px
+
+.tune-up a.sv-bottom.sv-active, .sv-navigation_all button.sv-bottom:hover
+  background-position: 0px -12px
+
+.tune-up a.sv-top.sv-active
+  background-position: 0px 0px
+
+.sv-navigation_all
+  font-size: 16px
+  margin: 14px 0 25px 0
+
+  button.sv-top:hover
+    background-position: 0px 0px
+  .sv-add_item
+    margin: 12px 0 0 25px
+    display: block
+  .title
+    background: #4a0707
+    padding: 0 0 0 20px
+    position: relative
+  div.title span
+    display: block
+    white-space: nowrap
+    float: left
+    font-size: 22px
+    color: #fff
+    font-weight: 300
+    line-height: 48px
+    height: 50px
+  i.arr
+    display: block
+    position: absolute
+    border: 9px solid transparent
+    border-top: 9px solid #4a0707
+    z-index: +1
+    width: 0
+    height: 0
+    left: 40px
+    top: 49px
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+    border-right: 1px solid #ccc
+    border-left: 1px solid #ccc
+    &.ui-sortable
+      li
+        a
+          cursor: move
+    li
+      position: relative
+      ul i.arr-down
+        display: block
+        position: absolute
+        border: 9px solid transparent
+        border-top: 9px solid #c84563
+        z-index: +1
+        width: 0
+        height: 0
+        left: 40px
+        top: 49px
+      >a
+        color: #4c4c4c
+        padding: 16px 22px
+        display: block
+        border-bottom: 1px solid #ccc
+        background: #fff
+        &.silver
+          background: #f3f3f3
+      &.active >a, >a:hover
+        color: #fff
+        background: #c84563
+        border-bottom: 1px solid #ccc
+        text-decoration: none
+        span.purse
+          color: #fff
+      &.active
+        border-bottom: 1px solid #ccc
+        >a
+          border: 0
+      a
+        span
+          color: #b2b2b2
+          font-size: 18px
+          &.purse
+            color: #c84563
+            font-size: 100%
+            white-space: nowrap
+      ul
+        /*display:none;
+        &:hover ul
+          display: inherit
+          border: 0 !important
+        ul
+          font-size: 14px
+          border: 0 !important
+          li
+            a
+              border-left: 3px solid #c84563 !important
+              background: #f2f2f2 !important
+              color: #4c4c4c !important
+              border-bottom: 1px solid #ccc !important
+            &.active a, a:hover
+              background: #f1849d !important
+              color: #fff !important
+            i.arr
+              display: none
+              margin: 0
+              padding: 0
+              position: absolute
+              z-index: +1
+              left: 297px
+              top: 18px
+              width: 0
+              height: 0
+              border: 8px solid transparent
+              border-left: 8px solid #fff
+            &.active i.arr
+              display: block
+              border-left-color: #f1849d
+
+/* Выпадающее меню
+
+/* Навигация над историей операций можно использовать визде */
+ul.width-center-table-nav
+  width: 390px
+  margin: 10px auto 20px
+
+ul.sv-table-nav
+  list-style: none
+  li
+    list-style: none
+    float: left
+    margin: 0 6px
+    a
+      padding: 4px 35px
+      display: block
+      color: #c84563
+    &.active a, a:hover
+      background: #fff
+      border: 1px solid #c84563
+      padding: 3px 34px
+      text-decoration: none
+
+.sv-wall div.title
+  font-size: 22px
+  color: #fff
+  padding: 11px 0 11px 20px
+  font-weight: 300
+  margin: 15px 0 0 0
+

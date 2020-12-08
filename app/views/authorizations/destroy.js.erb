@@ -1,0 +1,1 @@
+$('.sv-social-list.<%= @account.provider %>').replaceWith('<%=j render '/authorizations/social_account', :user => current_user, :provider => @account.provider %>');

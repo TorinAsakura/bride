@@ -1,0 +1,28 @@
+.add-new-item {
+  @include clearfix;
+  padding: $main-padding 0;
+  a {
+    text-decoration: none;
+    color: $gray;
+    cursor: pointer;
+    .text {
+      display: inline-block;
+      padding: $main-margin / 6 0 0 $main-margin;
+    }
+    .plus {
+      text-align: center;
+      line-height: $main-padding * 1.25;
+      font-size: $main-padding * 1.25;
+      display: inline-block;
+      width: $main-padding * 1.25;
+      height: $main-padding * 1.25;
+      float: left;
+      color: white;
+      background-color: $main-color;
+      cursor: pointer;
+    }
+  }
+  &:hover {
+    opacity: 0.8;
+  }
+}

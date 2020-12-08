@@ -1,0 +1,14 @@
+- content_for :javascripts do
+  :javascript
+    WeddingCitiesList.init('#side-city-select');
+= render "cities/wedding_cities_filters", items: items
+.sv-select-all-cities
+  = link_to( t('.select_all'), '#', id: 'select-all', data: {id: 'all'})
+.items#city-items
+  - items.group_by(&:name_index).each do |i, items|
+    .city-group.item{data: {item: i}}
+      %h5= i
+      %ul
+        - items.each do |item|
+          %li.city-item{id: dom_id(item), data: {country: item.country.id}}
+            = link_to item.name, '#', title: item.full_name, data: {id: item.slug}

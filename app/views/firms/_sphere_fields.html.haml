@@ -1,0 +1,18 @@
+.sv-firm-catalog-wrapper{ data: { js: 'firm-sphere-wrapper' } }
+  = link_to '', '#', class: 'sv-r close-button', data: { js: 'firm-sphere-remove-link' }
+  .firm_spheres_id
+    = select_tag :firm_catalog_id, options_for_select(FirmCatalog.top.map{ |fc| [fc.name, fc.id] }), class: 'firm_catalog_id', prompt: 'Выберите категорию'
+  .sv-firm-services-arrow.sv-firm-catalog-hidden{ 'data-js' => 'catalog-hidden' }
+  = f.input :firm_catalog_id, collection: [], label: false, input_html: { class: 'firm_catalog_ids sv-firm-catalog-hidden', 'data-js' => 'catalog-hidden' }
+  .clear
+:javascript
+  var className = 'c' + Math.ceil(Math.random() * 99999);
+  $('.sv-firm-catalog-wrapper:last').addClass(className);
+  new FirmCatalogSelector({
+    sphere: '.' + className + ' .firm_sphere_id',
+    catalog: '.' + className + ' .firm_catalog_id',
+    catalogList: '.' + className + ' select.firm_catalog_ids',
+    hiddenElement: '.' + className + ' [data-js=catalog-hidden]',
+    hiddenClass: '.' + className + ' sv-firm-catalog-hidden'
+  });
+  initSphereRemoveLinks();

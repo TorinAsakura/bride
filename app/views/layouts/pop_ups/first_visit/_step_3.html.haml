@@ -1,0 +1,28 @@
+.sv-first-visit__title
+  Свадебный мини-сайт
+  .sv-r Шаг 3 из 3
+.sv-first-visit__body
+  %p
+    Получите свой персональный Свадебный мини-сайт. Здесь Вы найдёте множество полезных сервисов, необходимых для подготовки к Свадьбе.
+
+  .wedding-site-settings
+    - @site ||= Site.new
+    = simple_form_for @site, remote: true, html: { id: 'sv-first-visit__form-step3', class: 'sv-site__create-form' } do |f|
+      .base-client-settings
+        = hidden_field_tag :first_visit, true
+        = f.input :description, input_html: {class: 'user-lastname'}, placeholder: 'Например: Великолепная свадьба Димы и Полины',label: 'Заголовок:'
+        = label_tag :name, '.svadba.org', class: 'site-name'
+        = f.input :name, input_html: {class: 'user-lastname'}, placeholder: 'Придумайте адрес вашего сайта',label: 'Адрес сайта:'
+        .inline-password
+          = f.input :privacy, as: :select, collection: MINISITE_PRIVACY, input_html: {class: '', data: {'select2-options' => {minimumResultsForSearch: -1}}}, placeholder: MINISITE_PRIVACY.first, label: 'Приватность'
+          .field-block.site-code-block
+            .notification.ha
+              Пароль должен содержать от 6 до 20 символов. Можно использовать латинские буквы, цифры и символы из списка: ! @ # $ % ^ * ( ) _ - +
+            = f.input :code, as: :password,
+              input_html: { class: 'user-lastname', style: 'display: none;'},
+              placeholder: 'Введите пароль',
+              label: false
+
+        .footer
+          = f.submit 'Готово', class: 'link-style sv-r otp'
+          = link_to 'Пропустить шаг...', '#', class: 'sv-r sv-skip-step', 'data-js' => 'popup-close' 

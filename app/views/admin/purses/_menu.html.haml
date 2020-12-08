@@ -1,0 +1,8 @@
+.menu.mb
+  = link_to_unless_current('Детали', admin_purse_path(@purse))
+  |
+  = link_to_unless_current('Депозит наличными', new_cash_deposit_admin_purse_path(@purse))
+  |
+  = link_to_unless_current('Депозит с системных средств', new_admin_deposit_admin_purse_path(@purse))
+  |
+  = link_to_unless_current('Платежы', admin_purse_purse_payments_path(@purse))

@@ -1,0 +1,1 @@
+$('#favorite_#{@favoriteable.class.to_s.downcase}_#{@favoriteable.id}').html('#{j(render( :partial => 'favorite', :locals => {:favoriteable => @favoriteable}))}');

@@ -1,0 +1,31 @@
+.sv-aside
+  .sv-navigation_all
+    .title.clearfix
+      %span Панель управления
+      %i.arr
+    %ul
+      %li= link_to 'Настройки компании', edit_firm_path(firm, anchor: 'company-settings'), class: 'firm-control-panel-link company-settings', 'data-part' => 'firm-control-panel-company-settings'
+      %li= link_to 'Настройки аккаунта', edit_firm_path(firm, anchor: 'account-settings'), class: 'firm-control-panel-link account-settings', 'data-part' => 'firm-control-panel-account-settings'
+      %li= link_to 'Настройки визитки', edit_firm_path(firm, anchor: 'business-card-settings'), class: 'firm-control-panel-link business-card-settings', 'data-part' => 'firm-control-panel-business-card-settings'
+
+  .sv-navigation_all.sv-firm-control-panel-navigation
+    .title.clearfix
+      %span Баланс
+      %i.arr
+    %ul
+      %li= link_to 'Больше возможностей', edit_firm_path(firm, anchor: 'monetize-services'), class: 'firm-control-panel-link monetize-services', 'data-part' => 'firm-control-panel-monetize-services'
+      %li
+        = link_to(edit_firm_path(firm, anchor: 'monetize-purse'), class: 'firm-control-panel-link monetize-purse', 'data-part' => 'firm-control-panel-monetize-purse') do
+          Управление счетом
+          %span.purse<= firm.purse.available_amount.format(html: true).html_safe
+      %li= link_to 'История операций', edit_firm_path(firm, anchor: 'monetize-payments'), class: 'firm-control-panel-link monetize-payments', 'data-part' => 'firm-control-panel-monetize-payments'
+      - if @firm.dealer?
+        %li= link_to 'Диллерам', edit_firm_path(firm, anchor: 'monetize-dealer'), class: 'firm-control-panel-link monetize-dealer', 'data-part' => 'firm-control-panel-monetize-dealer'
+
+  .sv-navigation_all
+    .title.clearfix
+      %span Сайт компании
+      %i.arr
+    .sv-firm-pages-wrapper
+      = render 'firm_pages/firm_pages', firm: firm, firm_pages: @firm_pages
+    = link_to 'Добавить страницу', firm_firm_pages_path(@firm), method: :post, class: 'sv-add_item'

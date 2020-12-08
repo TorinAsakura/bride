@@ -1,0 +1,20 @@
+.page-block
+  %h1.title
+    = link_to minisite_page_path('about'), class: 'a-back' do
+      %i.icon-chevron-left
+    %span= t('.title')
+
+  .row
+    .col-xs-12.btn-toolbar#sections-filter
+      .btn-group= link_to( t('static.all'), '#', class: 'btn btn-xs btn-danger', id: 'all-categories')
+      = render @sections
+  .row#idea-categories
+    = render @categories
+
+  - if @ideas.present?
+    %h4.sub-title= t('.all_ideas')
+    .row#ideas
+      .col-xs-12.sv-minisite-ideas__grid{data: {'max-page' => @ideas.total_pages}}= render @ideas
+
+    .row.hidden.sv-ideas__nav
+      = rel_next_prev_link_tags @ideas

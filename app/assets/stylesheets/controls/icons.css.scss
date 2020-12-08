@@ -1,0 +1,18 @@
+.icon-chevron-left, .icon-chevron-right, .icon-chevron-up, .icon-chevron-down {
+  background-color: #4a0707;
+  display: block;
+  height: 50px;
+  text-align: center;
+  width: 50px;
+  line-height: 50px;
+  vertical-align: middle;
+  &:hover {
+    background-color: #5e0b0b;
+    text-decoration: none;
+  }
+  &:before {
+    font-size: 24px;
+    vertical-align: middle;
+    color: white;
+  }
+}

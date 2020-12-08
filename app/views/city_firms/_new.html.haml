@@ -1,0 +1,4 @@
+#sv-wedding-cities
+  .wedding-city-list
+    - wedding_cities.each do |city|
+      .wedding-city-item= link_to city.name, firm_city_firms_url(@firm, city_id: city.id), remote: true, method: :post

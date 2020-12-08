@@ -1,0 +1,7 @@
+= link_to 'Создать подкатегорию', new_admin_idea_category_path(section_id: params[:id]), class: 'link-style', remote: true
+= link_to 'Добавить существующую подкатегорию', new_add_category_admin_idea_section_path, class: 'link-style', remote: true
+
+%div{ style: 'height: 20px;' }
+
+%div{ 'data-js' => 'idea-categories' }
+  = render 'admin/idea/sections/categories'

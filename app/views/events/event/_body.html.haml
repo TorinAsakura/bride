@@ -1,0 +1,36 @@
+= image_tag event.image.thumb if event.image.present? && !event.with_service?
+.sv-event__body
+  .titl
+    %span Задача:
+    = event.name
+  %p
+    - if !event.with_service?
+      = event.description.html_safe
+      .sv-event__load-files
+        - if event.system_event?
+          - event.task.files.each do |file|
+            .sv-event__load-file.full
+              .sv-event__load-file__extension
+                = link_to file.url.url, target: '_blank' do
+                  = image_tag "icon_ext/#{file.url.file.extension}.png", alt: file.url.file.extension
+              .sv-event__load-file__name
+                %p= link_to file.title, file.url.url
+                %p.sv-event__load-file__size= "(#{to_mb(file.url.file.size)})"
+      .clear
+
+    - else
+      = render 'events/elements/service', service: event.service
+
+:javascript
+  $(document).ready(function () {
+    $.getScript('#{posts_page_wedding_timetable_event_path(@timetable, @event, 1)}');
+    $.getScript('#{video_page_wedding_timetable_event_path(@timetable, @event, 1)}');
+  });    
+
+- if @event.system_event?
+  :javascript
+    $(document).ready(function () {
+      $.getScript('#{ideas_page_wedding_timetable_event_path(@timetable, @event, 1)}');
+      $('#client-search-form').attr('action','#{firms_search_wedding_timetable_event_path(@timetable, @event)}').submit();
+    });     
+ 

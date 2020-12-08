@@ -1,0 +1,19 @@
+= simple_form_for [:admin, city], html: {id: 'city_form', class: 'modal hide' } do |f|
+
+  = f.input :name, input_html: { class: 'input-name', placeholder: 'Город' }, label: 'Город'
+
+  = f.association :region, collection: Region.where(true), input_html: { multiple: false, style: 'width: 350px;', class: 'selectable selectable-region' }, label: 'Регион'
+
+  = f.input :wedding_city, priority: [ false ], collection: [['Особый город', true], ['Обычный город', false]], input_html: { style: 'width: 350px', class: 'selectable selectable-wedding-city' }, label: 'Тип города'
+
+  .action-block
+    = f.submit (f.object.new_record? ? 'Сохранить' : 'Обновить'), class: 'link-style submit-button'
+
+:javascript
+  $(".selectable-region").select2({
+  placeholder: "Выберите регион"
+  });
+
+  $(".selectable-wedding-city").select2({
+  placeholder: "Выберите тип города"
+  });

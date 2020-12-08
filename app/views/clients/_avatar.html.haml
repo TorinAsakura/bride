@@ -1,0 +1,13 @@
+.sv-avatar-viewer
+  .sv-avatar-viewer__owner
+    .sv-avatar-viewer__owner-avatar
+      = user_avatar(client.user)
+    .sv-avatar-viewer__owner-info
+      = link_to client.full_name, client
+      %p= client.city.try(:name)
+  .clear
+
+  .sv-avatar-viewer__image
+    = image_tag avatar
+
+  = render 'comments/comments_section', resource: avatar_image, comments: comments, modal: true

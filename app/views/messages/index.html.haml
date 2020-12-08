@@ -1,0 +1,39 @@
+.sv-aside.sv-side-box.sv-message-contacts-title
+  .title.clearfix
+    = link_to :back, class: 'sv-a-back sv-l' do
+      %i.icon-chevron-left
+    %span Сообщения
+
+  %ul.sv-message-contacts
+    - @message_rooms.earned.each do |room|
+      - message = room.messages.first
+      - recipient = room.recipient(current_user)
+      - unless message.nil? || recipient.nil?
+        %li.sv-message-contact.sv-message-contact_list{class: (recipient.firm ? 'sv-message-contact_firm' : 'sv-message-contact_client'),
+                                                       id: "message-recipient-#{recipient.id}",
+                                                       "data-message_room_id" => room.id}
+          .sv-message-contact__avatar
+            = link_to user_link_page(recipient.profileable), class: 'sv-message-contact__avatar-border' do
+              = image_tag recipient.avatar.thumb, class: 'sv-message-contact__avatar-image'
+            - if !room.unread_messages_count.zero?
+              %span.sv-message-contact__count #{room.unread_messages_count}
+          = link_to message_path(message), remote: true, class: 'sv-message-contact__message' do
+            %span.sv-message-contact__name #{recipient.try(:full_name) || recipient.name || 'Пользователь'}
+            %span.sv-message-contact__date #{message.created_at.to_date.today? ? I18n.l(message.created_at, format: :long_time) : I18n.l(Date.today)}
+            .clear
+            .sv-message-contact__excerpt #{truncate(message.body, length: 20)}
+
+    - if @message_rooms.blank?
+      %li.sv-message-contact.sv-message-contact_empty
+        В данный момент у вас нет собеседников
+
+#sv-read-it.sv-article{'data-js' => 'message-list'}
+  .title.clearfix.sv-messages-title
+    %span Выберите собеседника
+
+  .sv-messages-begin-with
+    Для того, чтобы начать переписку, необходимо зайти в профиль
+    = link_to 'Пользователя', clients_path
+    или
+    = link_to 'Компании', firms_path
+    и нажать на кнопку «Написать сообщение»

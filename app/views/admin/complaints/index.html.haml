@@ -1,0 +1,35 @@
+.complaints-menu
+  = link_to "Все", admin_complaints_path
+  |
+  -#= link_to "Видео", admin_complaints_path(:type => 'Video')
+  -#|
+  -#= link_to "Аудио", admin_complaints_path(:type => 'Audio')
+  -#|
+  = link_to "Медиа-Контент", admin_complaints_path(:type => 'MediaContent')
+  |
+  = link_to "Пользователи", admin_complaints_path(:type => 'User')
+  |
+  = link_to "Фирмы", admin_complaints_path(:type => 'Firm')
+  |
+  = link_to "Фото", admin_complaints_path(:type => 'Photo')
+  |
+  = link_to "Статьи", admin_complaints_path(:type => 'Post')
+  |
+  = link_to "Комментарии", admin_complaints_path(:type => 'Comment')
+
+- @complaints.each do |complaint|
+  .complaint
+    %div
+      Предмет жалобы:
+      =t(complaint.pretension_type.to_s)
+    %div
+      Текст жалобы:
+      %br
+      =complaint.content
+    %div
+      = link_to "Посмотреть", admin_complaint_path(complaint)
+  %hr
+
+.page-action
+  .current-page= paginate @complaints, :window => 3, :outer_window => 3
+

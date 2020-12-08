@@ -1,0 +1,8 @@
+- business = firm.business || Pp.new
+= f.simple_fields_for business do |b|
+  = f.hidden_field :business_type, :value => 'Pp'
+  = b.input :surname, :input_html => {:name => "firm[business][surname]"}
+  = b.input :name, :input_html => {:name => "firm[business][name]"}
+  = b.input :middlename, :input_html => {:name => "firm[business][middlename]"}
+  = b.input :passport, :input_html => {:name => "firm[business][passport]"}
+  = b.input :passport_issued, :input_html => {:name => "firm[business][passport_issued]"}

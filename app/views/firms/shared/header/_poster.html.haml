@@ -1,0 +1,106 @@
+#sv-firm-detail-poster
+  .sv-firm-carousel
+    - if @banner.photos.count.zero? || @firm.user.destroyed?
+      .sv-firm-no-poster
+    - else
+      - @banner.photos.first(5).each_with_index do |photo, i|
+        - image = image_tag photo.banner_path.usual,
+          class: "sv-firm-poster-image #{'sv-firm-poster-image-current' if i.zero?}",
+          width: '650', height: '200'
+        - link = photo.link
+        .poster-item{data: {title: truncate(photo.title, length: 33),
+          description: truncate(photo.description, length: 100),
+          link: url_with_protocol(photo.link),
+          'destroy-link' => firm_destroy_banner_path(photo),
+          'image-link' => photo.banner_path,
+          id: photo.id }}
+          - if link.present?
+            = link_to url_with_protocol(link) do
+              = image
+          - else
+            = image
+  .sv-firm-carousel-control-wrapper
+    .sv-firm-carousel-control
+  - unless @banner.photos.blank?
+    .sv-firm-banner-panel{ style: (@banner.photos.first.title.blank? && @banner.photos.first.description.blank?) ? 'display:none;' : '' }
+      - link = @banner.photos.first.link
+      - if link.present?
+        = link_to url_with_protocol(link), class: 'sv-firm-banner-link' do
+          .sv-firm-banner-title
+            = truncate(@banner.photos.first.title, length: 33)
+          .sv-firm-banner-description
+            = truncate(@banner.photos.first.description, length: 100)
+      - else
+        .sv-firm-banner-title
+          = truncate(@banner.photos.first.title, length: 33)
+        .sv-firm-banner-description
+          = truncate(@banner.photos.first.description, length: 100)
+
+  - if @firm.user.is? current_user
+    .sv-firm-edit-poster-wrapper
+      %ul.sv-firm-edit-poster
+        %li.upload
+          = simple_form_for @banner, url: album_path(@banner), html: { id: 'fileupload_banner', multipart: true } do |f|
+            .sv-firm-edit-poster-input
+              = f.hidden_field :banner_x, value: '0', id: 'banner_x', name: 'album[pictures][][banner_x]'
+              = f.hidden_field :banner_y, value: '0', id: 'banner_y', name: 'album[pictures][][banner_y]'
+              = f.hidden_field :banner_x2, value: '650', id: 'banner_x2', name: 'album[pictures][][banner_x2]'
+              = f.hidden_field :banner_y2, value: '200', id: 'banner_y2', name: 'album[pictures][][banner_y2]'
+              = f.hidden_field :banner_scale, value: '1', id: 'banner_scale', name: 'album[pictures][][banner_scale]'
+              = f.input_field :pictures, as: :file, name: 'album[pictures][][banner_path]'
+              = f.hidden_field :pictures, name: 'album[pictures][][title]', 'data-js' => 'banner-title-hidden'
+              = f.hidden_field :pictures, name: 'album[pictures][][link]', 'data-js' => 'banner-link-hidden'
+              = f.hidden_field :pictures, name: 'album[pictures][][description]', 'data-js' => 'banner-description-hidden'
+              = link_to '#' do
+                %i
+                Загрузить постер
+        - unless @banner.photos.blank?
+          %li.edit
+            = link_to '#', 'data-js' => 'firm-banner-edit-link', 'data-image-link' => @banner.photos.first.banner_path do
+              %i
+              Редактировать
+          %li.remove
+            = link_to '#sv-remove-firm-banner', 'data-toggle' => 'modal' do
+              %i
+              Удалить
+
+- if !@firm.user.destroyed? && @firm.user.is?(current_user)
+  #sv-firm-banner-editor
+    .title_nobg Редактировать постер
+    .cap_company Выберите область изображения для обрезки постера. Рекомендуемые размеры 650x200. Изображения меньших размеров будут искажены
+    .sv-firm-banner-jcrop-wrapper
+      .sv-firm-banner-jcrop
+        %img
+    .cap_company
+      .sv-firm-banner-left
+        %div
+          = label_tag :link, 'Ссылка'
+          = text_field_tag :link, nil, class: 'inp-style', 'data-js' => 'banner-link-input'
+          .clear
+        %div
+          = label_tag :title, 'Заголовок постера'
+          = text_field_tag :title, nil, class: 'inp-style', 'data-js' => 'banner-title-input', maxlength: 33
+          .clear
+        %div
+          = label_tag :description, 'Описание постера'
+          = text_area :description, nil, class: 'textarea-style', 'data-js' => 'banner-description-input', maxlength: 100
+          .clear
+      .sv-firm-banner-right
+        Можете оставить данные поля
+        %br
+        пустыми, тогда текстовое сообщение
+        %br
+        для постера не появится
+    .clear
+
+    %button.link-style.sv-firm-banner-editor-save Сохранить
+
+  - unless @banner.photos.blank?
+    #sv-remove-firm-banner
+      .title_nobg Удаление постера
+      %p
+        Вы действительно хотите удалить этот постер?
+        %br
+        После удаления, его нельзя будет восстановить.
+      .button-line
+        = link_to 'Удалить', firm_destroy_banner_path(@banner.photos.first), class: 'link-style', 'data-js' => 'firm-banner-remove-link', method: :delete, remote: true

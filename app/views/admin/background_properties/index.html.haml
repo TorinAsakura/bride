@@ -1,0 +1,9 @@
+= render 'tab_menu'
+
+= link_to 'Добавить новый фон', new_admin_background_property_path(type: @type), class: 'link-style'
+
+.background-properties#styles-list= render @styles
+
+.page-action
+  .current-page#styles-paginate= paginate @styles, window: 3, outer_window: 3, remote: true
+

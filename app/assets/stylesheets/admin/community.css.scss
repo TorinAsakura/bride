@@ -1,0 +1,49 @@
+.sv-admin-community-category__popup {
+  padding: 20px;
+  width: 630px;
+}
+
+.sv-admin-community-category__popup__title {
+  font-size: 22px;
+}
+
+.sv-admin-community-category__popup_body {
+  margin: 20px 0 0 0;
+  p {
+    margin: 0 0 20px 0;
+    line-height: 1.6em;
+  }
+}
+
+.sv-admin-community {
+  float:left;
+  height: auto;
+  width: 650px;
+
+  // .modal-footer a {
+  //   margin: 0 10px 0 0;
+  // }
+  //
+  // #illustration-on-upload img {
+  //   max-width: 1000px;
+  //   max-height: 1000px;
+  // }
+
+}
+
+.sv-admin-community__title {
+  border-bottom: 1px solid #C84563;
+  margin: 20px 0 0 0;
+  padding: 0 0 5px 10px;
+  font-size: 20px;
+  color: #C84563;
+}
+
+.sv-admin-content .sv-admin-community input[type="file"] {
+  display: block;
+}
+
+.sv-admin-community__post-category, .sv-admin-community__moderator {
+  margin: 0 0 10px 0;
+}
+

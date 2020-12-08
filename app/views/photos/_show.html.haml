@@ -1,0 +1,43 @@
+.sv-photo-slider
+  .sv-photo-slider__title= link_to_album @album
+
+  %div{ style: 'font-size:16px;margin-bottom:15px;' }
+    Фотография #{@index + 1} из #{@album.photos.count}
+
+  .sv-photo
+    = link_to @next_path, class: 'sv-photo__link',  remote: true do
+      = image_tag @photo.path, alt: '', class: 'sv-photo__fullsize', data: { js: 'photo-fullsize' }
+      = image_tag 'loading.gif', alt: '', class: 'sv-photo__loading', data: { js: 'photo-loading' }
+    - if @prev_path
+      = link_to @prev_path, class: 'sv-photo-slider__arrow sv-photo-slider__arrow_left', remote: true do
+        .sv-photo-slider__arrow-inner.sv-photo-slider__arrow-inner_left
+    - if @next_path
+      = link_to @next_path, class: 'sv-photo-slider__arrow sv-photo-slider__arrow_right', remote: true do
+        .sv-photo-slider__arrow-inner.sv-photo-slider__arrow-inner_right
+
+  .sv-photo-description{ style: (@photo.description.blank? ? '' : 'margin-top:15px;') }
+    = auto_link_text @photo.description
+
+  .sv-photo-actions
+    %span= l @photo.created_at, format: :comment
+    = image_tag 'sorted/im-bord.png'
+    - if user_signed_in?
+      = render 'complaints/complaint', pretension: @photo
+    - if current_user == @album.resource
+      = image_tag 'sorted/im-bord.png'
+      - if current_firm
+        = link_to 'Редактировать', edit_album_photo_path(@album, @photo), remote: true
+      - elsif current_client
+        = link_to 'Редактировать', edit_client_album_photo_path(current_client, @album, @photo), remote: true
+      = image_tag 'sorted/im-bord.png'
+      - if current_firm
+        = link_to 'Удалить', firm_album_photo_path(@album, @photo), method: :delete, confirm: "Ваше фото удалится безвозвратно"
+      - elsif current_client
+        = link_to 'Удалить', client_album_photo_path(current_client, @album, @photo), method: :delete, confirm: "Ваше фото удалится безвозвратно"
+    - if user_signed_in?
+      .sv-r
+        %div{ id: "vote_managment_#{@photo.id}_#{@photo.class.name}" }
+          = render 'votes/like', resource: @photo, resource_class_name: @photo.class.name
+
+  - if user_signed_in?
+    = render 'comments/comments_section', resource: @photo, comments: @comments, modal: true

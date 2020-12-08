@@ -1,0 +1,7 @@
+%h2 Платежи
+= link_to 'Новый платеж', new_firm_payment_path, class: 'btn btn-success'
+%br/
+- @payments.each do |payment|
+  = payment.inspect
+  = link_to 'Просмотреть', [@firm, payment]
+  %br/

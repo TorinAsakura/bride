@@ -1,0 +1,13 @@
+%div{:style => "padding-bottom: 10px;"}
+  .pull-left
+    = user_avatar(question.user)
+  .pull-left{:style => "padding-left:10px;"}
+    %div{:style => "width: 410px;"}
+      %div{:style => "min-height: 63px;"}
+        %div #{link_to_user(question.user)}
+        %div #{question.body}
+      %div
+        .pull-left
+          %small #{l question.created_at, :format => :comment}
+        .clearfix
+  .clearfix

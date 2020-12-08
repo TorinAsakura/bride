@@ -1,0 +1,30 @@
+.sv-post-wrapper
+  .sv-post-owner
+    - client = image.imageable.user.client
+    .sv-post-owner-logo.sv-l
+      = user_avatar(image.imageable.user)
+    .sv-post-owner-description.sv-l
+      = link_to client.full_name, client
+      %p= client.city.try(:name)
+  .clear
+
+- next_image = params[:post_id] ? image.next_image : image.next_image('by_community') 
+- prev_image = params[:post_id] ? image.prev_image : image.prev_image('by_community') 
+
+.sv-attachment
+  - if prev_image.present?
+    = link_to 'back', path_to_community_image(community, prev_image), class: 'sv-attachment__back', remote: true
+  .sv-attachment__image
+    - if next_image.present?
+      = link_to path_to_community_image(community, next_image), remote: true do
+        = image_tag image.image
+    - else
+      = image_tag image.image
+  .sv-attachment__link
+    - post = image.imageable
+    = link_to post.title, community_post_path(post.journal, post)
+  .sv-attachment__actions
+    .sv-attachment__action.sv-attachment__action_date
+      = I18n.l image.updated_at, format: :comment
+    .sv-attachment__action.sv-attachment__action_like{ id: "vote_managment_#{image.id}_#{image.class.name}" }
+      = render  'votes/like', resource: image, resource_class_name: image.class.name

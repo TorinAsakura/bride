@@ -1,0 +1,7 @@
+var cityFirm = $('#<%= dom_id @city_firm%>');
+var deleteLink = cityFirm.find('a.delete-button');
+<%- if @city_firm.deleted?%>
+deleteLink.addClass('deleted');
+<%else%>
+deleteLink.removeClass('deleted');
+<%end%>

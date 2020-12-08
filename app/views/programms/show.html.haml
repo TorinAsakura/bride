@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @programm.name
+%p
+  %b Time:
+  = @programm.time
+%p
+  %b Description:
+  = @programm.description
+%p
+  %b Wedding:
+  = @programm.wedding_id
+%p
+  %b User:
+  = @programm.user_id
+
+= link_to 'Edit', edit_programm_path(@programm)
+\|
+= link_to 'Back', programms_path

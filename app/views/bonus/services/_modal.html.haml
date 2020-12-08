@@ -1,0 +1,13 @@
+#message_form.modal.hide
+  .modal-header
+    .title_nobg Подключить услугу компании
+  .modal-body
+    %p
+      Вы можете подключить платную услугу компании
+      %span.main-color-text= "\"#{firm.name}\""
+      \, оплатив ее со своего счета.
+    %p
+      Ваш баланс:
+      %span.main-color-text= current_firm.purse.amount.format(html: true).html_safe
+    = render 'bonus/services/services', services: services, firm: firm
+  .modal-footer

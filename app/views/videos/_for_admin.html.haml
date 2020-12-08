@@ -1,0 +1,6 @@
+- if video.accepted?
+  = link_to(t('static.reaccept'), refuse_video_path(video), remote: true, method: :post)
+- else
+  = link_to(t('static.accept'), accept_video_path(video), remote: true, method: :post)
+  = image_tag 'sorted/im-bord.png'
+  = link_to(t('static.resufe'), refuse_video_path(video), remote: true, method: :post)

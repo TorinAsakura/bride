@@ -1,0 +1,18 @@
+.list
+  %ul.sv-article-list-wrap.clearfix{ 'data-js' => 'post-list' }
+    - posts.each do |post|
+      %li.sv-article-list-block.clearfix{ class: post.illustration.present? ? nil : 'sv-article-list-block_no-img', 'data-js' => 'post' }
+        - if post.illustration.present?
+          .img
+            = link_to path_to_post(post), remote: true do
+              = image_tag (post.illustration.image.medium)
+            %div{ id: "vote_managment_#{post.id}_#{post.class.name}" }
+              = render 'votes/like', resource: post, resource_class_name: post.class.name
+        .txt
+          .p
+            = link_to raw(post.title), path_to_post(post), class: 'sv-post-title', remote: true
+            %p
+              = simple_format post.body.first(1000)
+            .h
+          .i
+.clear

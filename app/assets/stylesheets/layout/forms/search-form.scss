@@ -1,0 +1,53 @@
+.sv-search-form {
+  background: $form-background-color;
+  padding: 0 20px 15px 20px;
+  #search_fullname {
+    width: 445px;
+  }
+  #s2id_client_city_id {
+    width: 400px;
+    margin: 0 0 10px;
+  }
+  .sv-search-date {
+    width: 400px;
+    margin: 0 0 0 100px;
+  }
+  .select-day, .select-years {
+    width: 75px;
+  }
+  .select-month {
+    width: 90px;
+  }
+  .sv-end-find-us {
+    margin: 0 14px 0 0;
+  }
+
+  .sv-without-avatar, .sv-radio-user {
+    margin: 2px 0 0 0;
+  }
+}
+
+.sv-community__search-form {
+  background: $form-background-color;
+  padding: 15px 0 0 0;
+  #search_fullname {
+    width: 275px;
+  }
+  #s2id_client_city_id {
+    width: 300px;
+    margin: 0 0 10px;
+  }
+  .sv-search-date {
+    width: 370px;
+    margin: 0 0 0 10px;
+  }
+  .select-day, .select-years {
+    width: 75px;
+  }
+  .select-month {
+    width: 90px;
+  }
+  .sv-end-find-us {
+    margin: 0 14px 0 0;
+  }
+}

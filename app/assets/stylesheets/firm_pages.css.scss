@@ -1,0 +1,88 @@
+.sv-firm-page-form {
+  margin: 0px;
+}
+
+.sv-firm-page-form-body {
+  margin-top: 10px;
+
+  .inp-style {
+    width: 624px;
+    height: 30px;
+    margin-bottom: 10px !important;
+  }
+
+  .textarea-style {
+    width: 624px;
+    height: 600px !important;
+    min-height: 600px !important;
+    max-height: 9999px;
+    resize: vertical;
+    margin: 0px;
+  }
+}
+
+.sv-firm-page-form-images {
+  width: 550px;
+  margin-top: 10px;
+  margin-right: 80px;
+  position: relative;
+
+  .sv-video-list-block {
+    margin-bottom: 10px !important;
+  }
+
+  .image {
+    display: inline-block;
+    margin: 0px 5px 5px 0px;
+    position: relative;
+
+    img {
+      max-height: 150px;
+      max-width: 300px;
+    }
+
+    .image-remove-button {
+      position: absolute;
+      background: #000;
+      opacity: 0.6;
+      top: 0px;
+      right: 0px;
+      width: 20px;
+      height: 20px;
+      border-radius: 3px;
+      cursor: pointer;
+
+      img {
+        margin: 4px 5px 5px 5px;
+      }
+    }
+  }
+}
+
+.sv-firm-page-form-buttons {
+  margin-top: 10px;
+
+  img {
+    cursor: pointer;
+  }
+
+  input[type=text] {
+    margin-bottom: 10px !important;
+  }
+
+  .video {
+    margin-left: 10px;
+  }
+}
+
+.sv-firm-page-images-table {
+  margin: 0px;
+}
+
+.sv-firm-page-images {
+  img {
+    max-width: 100%;
+    display: block;
+    margin: 0px auto 10px;
+  }
+}

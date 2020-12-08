@@ -1,0 +1,54 @@
+- url =  @album.new_record? ? minisite_albums_path : minisite_album_path(@album)
+= simple_form_for @album, url: url,
+                          html: { class: 'sv-album-photos-form', 'data-js' => 'album-photos-form' }  do |f|
+  - if params[:upload].blank?
+    .title_nobg Редактировать альбом
+  - else
+    .title_nobg Загрузка новых фотографий
+  = f.input :name
+  = f.input :description, input_html: { rows: 5 }
+  = f.submit 'Сохранить', class: 'sv-album-photos-form__btn sv-album-photos-form__btn_save'
+  = link_to 'Удалить альбом', url, method: :delete, class: 'sv-album-photos-form__btn sv-album-photos-form__btn_destroy'
+  .clear
+
+  - if params[:upload].present? || @album.photos.present?
+    .sv-album-photos-form__separator
+
+  .sv-album-photos-form__progress.sv-album-photos-form__progress_template
+    .sv-album-photos-form__progress-inner
+
+  .sv-album-photos-form__uploads
+
+  - if params[:upload].blank?
+    .sv-album-photos-form__photos
+      = f.simple_fields_for :photos do |p|
+        - photo_id = p.object_id
+        .sv-album-photos-form__photo{ id: photo_id }
+          = p.hidden_field :id, 'data-js' => 'photo-hidden-id'
+          .sv-album-photos-form__photo-left
+            = image_tag p.object.path.large_preview
+          .sv-album-photos-form__photo-right
+            = p.input :description, label: 'Описание фотографии:', input_html: { rows: 5 }
+            .sv-album-photos-form__photo-select
+              = p.association :album, collection: @albums,
+                                      selected: @album.id,
+                                      label: 'Поместить в альбом:',
+                                      input_html: { class: 'sel-style-compact-mini', id: "sel_#{photo_id}" }
+            = link_to 'Сохранить', '#', class: 'link-style sv-album-photos-form__photo-btn_save',
+                                        'data-js' => 'album-photos-form-photo-btn-save'
+            = link_to 'Удалить', minisite_image_path(p.object),
+                                 class: 'button-close sv-album-photos-form__photo-btn_remove',
+                                 'data-js' => 'album-photos-form-photo-btn-remove',
+                                 method: :delete,
+                                 remote: true
+            :javascript
+              new PhotoEditForm('##{photo_id}', '#sel_#{photo_id}', '#{minisite_image_path(p.object)}');
+
+  - if params[:upload].present? || @album.photos.present?
+    .sv-album-photos-form__separator
+
+  = f.submit 'Сохранить', class: 'sv-album-photos-form__btn sv-album-photos-form__btn_save'
+  = link_to 'Удалить альбом',  url, method: :delete, class: 'sv-album-photos-form__btn sv-album-photos-form__btn_destroy'
+  .clear
+
+= render 'albums/warning'

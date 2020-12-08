@@ -1,0 +1,23 @@
+.mini-site.margintopotstp
+
+  .main-title
+    = link_to edit_site_path(@site), class: 'sv-a-back sv-l' do
+      %i.icon-chevron-left
+    %span Сервис &laquo;Рассадка гостей&raquo;
+
+#main-container{controller: controller_name}
+  %ul#tables-control
+    %li.add-round-table.link-style Добавить круглый стол
+    %li.add-square-table.link-style Добавить прямоугольный стол
+    %li.save.link-style Сохранить
+
+  #chart-max
+    #chart{seating_plan_id: @seating_plan.id}
+
+  #guest-list.ui-droppable
+    #guest-list-title Список гостей
+    - @guests.each do |guest|
+      .guest.ui-draggable{type: gender_eng(guest.gender), guest_id: guest.id, class: gender_eng(guest.gender)}
+        %span.name= guest.name
+
+  .clear

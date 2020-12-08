@@ -1,0 +1,20 @@
+#mini-site-page-settings.sv-article
+  = simple_form_for page, :url => (page.new_record? ? site_pages_path(@site.id) : site_page_path(@site.id, page)) do |f|
+    .title_nobg.top-marg= page.title || 'Новая страница'
+
+    = f.input :name, disabled: page.system, label: 'Адрес страницы'
+
+    = f.input :title, label: 'Название страницы'
+    = f.input :content, label: false
+
+    .sv-l.main-check-box
+      = f.input :main, label: false
+    = f.label :main, 'Главная страница', class: 'main-label'
+    .clear
+
+    = f.submit 'Сохранить', class: 'link-style sv-l'
+
+    - if page.persisted? && !page.system
+      = link_to 'Удалить', site_page_path(@site.id, page.id), method: :delete, confirm: 'Точно удалить?', class: 'link-style sv-l ml-10'
+
+    .clear

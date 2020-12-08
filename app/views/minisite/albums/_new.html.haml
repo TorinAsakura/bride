@@ -1,0 +1,14 @@
+.sv-album-form
+  .title_nobg.sv-album-form__title
+    %ul.sv-modal-tabs.clearfix
+      %li.active
+        = link_to 'Создать альбом', '#tab-album', 'data-toggle' => 'tab'
+      %li
+        = link_to 'Загрузить фотографии', '#tab-photos', 'data-toggle' => 'tab'
+  .tab-content
+    .tab-pane#tab-album.active
+      = render 'form'
+    .tab-pane#tab-photos
+      = render 'photos_form'
+
+= render 'albums/warning'

@@ -1,0 +1,18 @@
+(function () {
+var form, comment;
+
+form = $('#sv-firm-comments-form');
+form.get(0).reset();
+form.attr('action', form.data('url'));
+
+comment = $('#{j(render 'firm_comments/comment', comment: @comment)}');
+- if @parent_id.present?
+  comment.insertAfter($('##{dom_id(@comment.parent)}'));
+- elsif params[:sort_order] == 'desc'
+  window.firmCommentForm.$elem.find('.sv-comments-box').prepend(comment);
+- else
+  window.firmCommentForm.$elem.find('.sv-comments-box').append(comment);
+
+window.firmCommentForm.resetWindow();
+window.firmCommentForm.initReply();
+})();

@@ -1,0 +1,18 @@
+<%-if (messages = @user_form.errors.messages).present?%>
+    var form = $("form#new_user:visible");
+    <%- messages.each do |field, error_msg|%>
+      $(".cntrl-group.user_<%= field%>").on('mouseover', function(){
+        form.find('.user_<%= field%>').find('.cntrls').find(".help-inline").remove();
+        form.find('.user_<%= field%>').removeClass('error');
+      });
+
+      if(form.find('.user_<%= field%>').hasClass('error')){
+        form.find('.user_<%= field%>').removeClass('error');
+        form.find('.user_<%= field%>').find('.cntrls').find('.help-inline').remove();
+      }
+      form.find('.user_<%= field%>').addClass('error').find('.cntrls').append("<div class=\"help-inline\"><%= j error_msg.first%></div>");
+    <%-end%>
+<%-else%>
+window.location = '<%=@redirect_url%>';
+<%-end%>
+

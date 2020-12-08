@@ -1,0 +1,18 @@
+.sv-search-minisite__block.sv-l
+  .sv-l.sv-search-minisite__avatar
+    = link_to_minisite site do
+      = image_tag site.logo.preview
+      %span.clear
+        .sv-minisite-title{class: "#{'one-line' if site.description.length < 55}"}
+          = truncate(site.description, length: 120)
+        - if site.client.wedding.present?
+          - client_wedding = site.client.wedding.decorate
+          .sv-wedding-days
+            - if client_wedding.days_left >= 0
+              До свадьбы
+              .days= client_wedding.days_left
+              дней
+            - elsif client_wedding.days_right > 0
+              Прошло
+              .days= client_wedding.days_right
+              дней

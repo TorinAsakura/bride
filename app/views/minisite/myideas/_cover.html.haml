@@ -1,0 +1,5 @@
+%div{:class => "cover_#{idea.id}"}
+  - if user_idea
+    = form_tag cover_minisite_myideas_path, :method => :post, :class => "form-search", remote: true do
+      = hidden_field_tag :id, user_idea.id
+      = submit_tag (user_idea.cover ? "Убрать из обложки" : "Сделать обложкой"), :class => "btn cover_submit_#{user_idea.id}"

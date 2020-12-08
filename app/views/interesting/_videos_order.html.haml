@@ -1,0 +1,10 @@
+= link_to_sort path, 'По дате добавления', 'created_at', true
+= link_to_sort path, 'По рейтингу', 'cached_votes_up', false
+= link_to_sort path, 'По просмотрам', 'views', false
+.clear
+:javascript
+  $('[data-js=video-list]').infinitescroll({
+      'navSelector': '.sv-videos-hidden-nav',
+      'nextSelector': '.sv-videos-hidden-nav link[rel=next]',
+      'itemSelector': '[data-js=video]'
+    });

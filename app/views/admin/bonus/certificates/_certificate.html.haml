@@ -1,0 +1,17 @@
+%tr.certificate{ data:{ id: certificate.id } }
+  %td= certificate.id
+  %td= certificate.name
+  %td= simple_format(truncate(certificate.description))
+  %td= certificate.number
+  %td= certificate.bonus_amount.format
+  %td= certificate.service.try(:name)
+  %td= certificate.starts_at
+  %td= certificate.ends_at
+  %td= certificate.quantity
+  %td= certificate.used_quantity
+  %td= certificate.limit
+  %td
+    = link_to(edit_admin_bonus_certificate_path(certificate), title: 'Редактировать') do
+      %i.icon-pencil>
+    = link_to([:admin, certificate], method: :delete, title: 'Отменить') do
+      %i.icon-remove>

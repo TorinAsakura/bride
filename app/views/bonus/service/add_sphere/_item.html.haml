@@ -1,0 +1,13 @@
+= div_for(item, class: 'item') do
+  %h5= item.name
+  %ul
+    - item.children.without_firm_catalogs(ids).each do |firm_catalog|
+      %li{id: dom_id(firm_catalog)}
+        .form
+          = simple_form_for subscription, url: bonus_service_subscriptions_path(subscription.service), html: { remote: true } do |f|
+            = hidden_field_tag :item_block, true
+            = f.hidden_field :signing_object_id, value: firm_catalog.id
+            = f.submit t('.pay'), class: 'link-style'
+        .name= firm_catalog.name
+        .price= subscription.service.price(subscription.target, firm_catalog).format(html: true).html_safe
+        %p.error.main-color-text

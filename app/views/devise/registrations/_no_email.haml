@@ -1,0 +1,40 @@
+- content_for :title do
+  Регистрация через соц сети
+
+%ul#roles.sv-login-role.clearfix
+  %li.active.tab-client
+    %span
+      Пользователь
+      %span.description
+        #{@authorization.name} #{social_icon(@authorization.provider, 'sign')}
+
+%hr/
+.sv-login-opacity.clearfix
+  .fields_for_client.clearfix
+    = simple_form_for user, as: reg_resource_name, url: registration_path(reg_resource_name, {with_provider: params[:with_provider]}), :html => {class: 'form-horizontal', id: 'new_client' } do |f|
+      = hidden_field_tag :profile_type, 'client'
+      .row-left.clearfix
+        .field-block
+          .notification Введите e-mail
+
+          = f.input :email, label: false, autofocus: true, placeholder: 'введите свой email', input_html: { class: 'sv-input input-big', tabindex: 3, data: {:validator_url => check_email_present_users_path, js: 'register-email'} }
+          %label.sv-input-check
+            = check_box_tag :read, :yes, true, required: 'required', tabindex: '8'
+            Я согласен с
+            = link_to 'правилами использования', 'rules', target: '_blank'
+        %div
+          = f.input :subscription, as: :boolean,label: 'Хочу получать новости сайта', input_html: {checked: true}
+
+        = f.submit 'Зарегистрироваться', class: 'sv-btn-login input-big', tabindex: 10
+
+      .cntrl-group.info-text
+        Укажите адрес электронной почты.
+        %br
+        Может потребоваться для отправки важных
+        %br
+        уведомлений или просто при необходимости сменить пароль
+
+
+  - content_for :javascripts  do
+    = javascript_tag do
+      $(document).ready(function() { new ClientRegistration($('#new_client'))});

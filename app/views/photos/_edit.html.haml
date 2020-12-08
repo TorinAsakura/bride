@@ -1,0 +1,13 @@
+- if current_firm
+  - form_url = album_photo_path(@album, @photo)
+- elsif current_client
+  - form_url = client_album_photo_path(current_client, @album, @photo)
+.sv-album-photos-form__photo-wrapper
+  .sv-album-photos-form__photo
+    = simple_form_for @photo, url: form_url do |p|
+      = p.hidden_field :id, 'data-js' => 'photo-hidden-id'
+      .sv-album-photos-form__photo-left
+        = image_tag p.object.path.large_preview
+      .sv-album-photos-form__photo-right
+        = p.input :description, label: 'Описание фотографии:', input_html: { rows: 5 }
+        = p.submit 'Сохранить', class: 'link-style sv-album-photos-form__photo-btn_save'

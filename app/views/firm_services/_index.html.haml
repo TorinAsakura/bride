@@ -1,0 +1,18 @@
+.title_nobg Услуги компании
+.sv-firm-services-list-wrapper
+  .sv-firm-services-header
+    .sv-firm-services-name.sv-l Название
+    .sv-firm-services-cost.sv-l Стоимость
+    .sv-firm-services-unit.sv-l Ед. измерения
+  = hidden_field_tag :firm_id, @firm.id
+  .sv-firm-services-list
+    = simple_form_for @firm, html: { data: {js: 'firm-services-form'}, remote: true } do |f|
+      = hidden_field_tag :anchor, 'firm-services'
+      .sv-firm-services-lines#firm-services-lines{data: {url: change_rating_firm_firm_services_path(@firm)}}
+        - firm_services = @firm.firm_services.visible
+        = f.simple_fields_for :firm_services, firm_services  do |sf|
+          = render 'firm_services/firm_service', sf: sf, last: sf.object.eql?(firm_services.last)
+  .sv-firm-services-add
+    - if current_user.has_role?(:admin) || @firm.user.is?(current_user)
+      = link_to 'Добавить услугу', new_firm_firm_service_path(@firm), class: 'sv-add_item', remote: true
+  = link_to 'Сохранить', '#', class: 'sv-l link-style sv-firm-services-save'

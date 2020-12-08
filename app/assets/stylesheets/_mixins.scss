@@ -1,0 +1,280 @@
+@mixin title_line {
+  background: #c84563;
+  height: 50px;
+  span {
+    display: iblock;
+    margin: 0;
+    float: left;
+    white-space: nowrap;
+    line-height: 24px;
+    color: white;
+    font-size: 22px;
+    font-weight: 300;
+    padding: 11px 0 11px 20px;
+    i {
+      font-siize: 14px;
+      font-style: normal;
+    }
+  }
+  ul {
+    float: right;
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      display: block;
+      margin: 0;
+      padding: 0;
+      float: left;
+    }
+  }
+}
+
+@mixin title_line_new_record_buttom {
+  ul li a {
+    background: #f1849d;
+    display: block;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    &:hover {
+      background: #aa0000;
+    }
+    i {
+      margin: 15px;
+      display: block;
+      width: 20px;
+      height: 20px;
+      overflow: hidden;
+      background: image-url('sv-icon-categories.png') repeat scroll -20px -220px rgba(0, 0, 0, 0);
+      text-indent: -9999px;
+    }
+  }
+}
+
+@mixin notification_dark {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  z-index: 98;
+  display: inline-block;
+  visibility: hidden;
+  padding: 5px 15px;
+  width: 240px;
+  border-radius: 2px;
+  background-color: $notificaiton-color;
+  box-shadow: 1px 1px 3px black;
+  color: white;
+  font-size: 12px;
+  &:after {
+    position: absolute;
+    bottom: -7px;
+    left: 10%;
+    z-index: 99;
+    border: solid;
+    border-width: 7px 7px 0 7px;
+    border-color: $notificaiton-color transparent;
+    content: "";
+  }
+}
+
+@mixin notification_light {
+  display: none;
+  position: absolute;
+  left: 0;
+  z-index: 98;
+  padding: 5px 15px;
+  border-radius: 2px;
+  background-color: $main-hover;
+  box-shadow: 1px 1px 3px rgba(105, 63, 63, 0.35);
+  color: white;
+  bottom: 100%;
+//  margin-bottom: -21px;
+  &:after {
+    position: absolute;
+    bottom: -7px;
+    left: 10%;
+    z-index: 99;
+    border: solid $main-hover;
+    border-width: 7px 7px 0 7px;
+    border-color: $main-hover transparent;
+    content: "";
+  }
+}
+
+@mixin border($color: $border-color, $width: 1, $orient: none, $type: solid) {
+  @if $orient == none {
+    border: $width * $border-width $type $color;
+  }
+  @else {
+    border-#{$orient}: $width * $border-width $type $color;
+  }
+}
+
+@mixin btn-semi-gr {
+  @include linear-gradient(#f3efe8, #f1e9dc);
+}
+
+@mixin before-abs {
+  content: "";
+  position: absolute;
+}
+
+@mixin trapeze {
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-bottom: 4px solid transparent;
+    border-left: 60px solid red;
+    border-right: 4px solid transparent;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+@mixin triangle-before($size, $color, $direction, $top: false, $bottom: false) {
+  &:before {
+    content: " ";
+    position: absolute;
+    right: 100%;
+    @if $top {
+      top: $top;
+    }
+    @if $bottom {
+      bottom: $bottom;
+    }
+    @include triangle($size, $color, $direction);
+  }
+}
+
+@mixin triangle-after($size, $color, $direction, $top: false, $bottom: false) {
+  &:after {
+    content: " ";
+    position: absolute;
+    right: 100%;
+    @if $top {
+      top: $top;
+    }
+    @if $bottom {
+      bottom: $bottom;
+    }
+    @include triangle($size, $color, $direction);
+  }
+}
+
+@mixin search-result-gr {
+  @include linear-gradient(#f3693d, #dd592b);
+}
+
+@mixin side-navigation {
+  i.arr {
+    position: absolute;
+    top: 49px;
+    left: 40px;
+    z-index: +1;
+    display: block;
+    width: 0;
+    height: 0;
+    border: 9px solid transparent;
+    border-top: 9px solid #4a0707;
+  }
+
+  ul {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  ul li {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #cccccc;
+    border-top: 0;
+  }
+
+  ul li a {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 15px 20px;
+    background: white;
+    color: #4c4c4c;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  ul li a:hover {
+    background: #f5afbf;
+    color: white;
+  }
+
+  ul li.active a {
+    background: #f1849d;
+    color: white;
+  }
+
+  ul li i.arr {
+    position: absolute;
+    top: 16px;
+    left: inherit;
+    z-index: 1;
+    display: none;
+    margin: 0;
+    padding: 0;
+    width: 0;
+    height: 0;
+    border: 9px solid transparent;
+    border-left: 9px solid white;
+    &.right {
+      right: -18px;
+    }
+    &.left {
+      left: -18px;
+    }
+  }
+
+  ul li.active i.arr {
+    display: block;
+    &.right {
+      border-left-color: #f1849d;
+    }
+    &.left {
+      border-right-color: #f1849d;
+    }
+  }
+
+  div.title {
+    position: relative;
+    padding: 0 0 0 20px;
+    background: #4a0707;
+  }
+
+  div.title span {
+    display: block;
+    float: left;
+    height: 50px;
+    color: white;
+    white-space: nowrap;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 48px;
+  }
+
+  div.title a {
+    display: block;
+    float: right;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+    background: #6d1d1d image-url('sv-icon-mech.png') 50% 50% no-repeat;
+    text-indent: 100%;
+  }
+}

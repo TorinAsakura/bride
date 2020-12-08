@@ -1,0 +1,8 @@
+%ul.sv-video-list-wrap.clearfix{ 'data-js' => 'video-list' }
+  - video.each do |v|
+    - if v.multimedia.present?
+      %li.sv-video-list-block{ 'data-js' => 'video' }
+        .youtube[v]
+          = link_to '', polymorphic_path([v.multimedia.profileable,v]), class: 'video sv-firm-video-link',
+            data: { title: truncate(v.title, length: 20), youtube: v.content }, remote: true
+        .sv-firm-video-link-bg

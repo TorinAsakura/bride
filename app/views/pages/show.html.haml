@@ -1,0 +1,3 @@
+.sv-wrapper.site-wrap.mini-site.clearfix
+  = render 'sites/shared/site_menu', site: @site, pages: @pages
+  = render @page.system ? "pages/system/#{@page.name}" : 'pages/page'

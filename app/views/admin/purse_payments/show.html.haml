@@ -1,0 +1,41 @@
+= purse_payments_scopes(@purse, @scopes, @scope)
+%table.index_table
+  %tr.resource
+    %td.attr Id
+    %td.attr= @purse_payment.id
+  %tr.resource
+    %td.attr Тип
+    %td.attr= @purse_payment.type
+  %tr.resource
+    %td.attr Кошелек-Источник
+    %td.attr= (source_purse = @purse_payment.source_purse).present? ? link_to(source_purse.user.name, admin_purse_path(source_purse)) : '-'
+  %tr.resource
+    %td.attr Кошелек
+    %td.attr= (purse = @purse_payment.purse).present? ? link_to(purse.user.name, admin_purse_path(purse)) : '-'
+  %tr.resource
+    %td.attr Target
+    %td.attr= "#{@purse_payment.target_type} (#{@purse_payment.target_id})"
+  %tr.resource
+    %td.attr Название
+    %td.attr= @purse_payment.name
+  %tr.resource
+    %td.attr Описание
+    %td.attr= @purse_payment.description
+  %tr.resource
+    %td.attr Сумма
+    %td.attr= @purse_payment.amount.format
+  %tr.resource
+    %td.attr Статус
+    %td.attr= @purse_payment.state
+  %tr.resource
+    %td.attr Параметры
+    %td.attr= @purse_payment.params
+  %tr.resource
+    %td.attr Создано
+    %td.attr= l( @purse_payment.created_at)
+  %tr.resource
+    %td.attr Обновлено
+    %td.attr= l( @purse_payment.updated_at)
+  %tr.resource
+    %td.attr Платеж-Источник
+    %td.attr= (source_payment = @purse_payment.source_payment).present? ? link_to(source_payment.id, admin_purse_payment_path(source_payment)) : '-'

@@ -1,0 +1,98 @@
+/* ===== Navigation Menu ===== */
+/*** Menu Trigger Button ***/
+i.menu-trigger {
+  display: block;
+  position: fixed;
+  top: 10px;
+  right: 0;
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+  text-align: center;
+  background: rgba($main-color, 0.65);
+  color: white;
+  border: white solid 1px;
+  border-right: none;
+  cursor: pointer;
+  z-index: 9999;
+  @include transition(background 300ms);
+  @include user-select(none);
+  &:hover,
+  &#menu-dummy,
+  &#menu0close {
+    background: rgba($main-color, 0.93);
+  }
+}
+
+@media (max-width: 767px) {
+  i.menu-trigger {
+    position: absolute;
+    top: 0;
+  }
+}
+
+/*** Menu Links ***/
+
+.menu {
+  position: fixed;
+  top: 250px;
+  right: 0;
+  margin-top: -163px;
+  z-index: 999;
+  ul {
+    list-style-type: none;
+    padding: 0;
+    a {
+      display: block;
+      height: 50px;
+      width: 50px;
+      min-width: 50px;
+      line-height: 50px;
+      text-align: center;
+      margin: 2.5px 0;
+      background: rgba($main-color, 0.65);
+      color: white;
+      border: white solid 1px;
+      border-right: none;
+      float: right;
+      position: relative;
+      @include transition(background 300ms);
+
+      &:hover,
+      &:focus,
+      &.active {
+        background: rgba($main-color, 0.93);
+        text-decoration: none;
+        color: white;
+      }
+      &:hover{
+        min-width: 220px;
+        text-align: left;
+        i, .title-text {
+          margin-left: 5px;
+        }
+        .title-text {
+          right: auto;
+        }
+      }
+      .title-text {
+        display: inline-block;
+        position: absolute;
+        right: -200px;
+        .badge{
+          color: $main-color;
+          background: #ffffff;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 767px) {
+  .menu {
+    position: absolute;
+    top: 65px;
+    margin-top: 0;
+    overflow: hidden;
+    padding-left: 50px;
+  }
+}

@@ -1,0 +1,27 @@
+@import "admin/base/mixins";
+@import "admin/base/typography";
+@import "admin/base/all";
+.sv-admin-wrapper{
+  width: 100%;
+  &.main-content{
+    width: 99%;
+    padding: 0.5%;
+    background: rgba(#fff, 0.65);
+  }
+}
+
+//Resources
+.filter-resource {
+  margin: 10px 0;
+  .filter-text, .submit {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  .submit {
+    vertical-align: text-bottom;
+  }
+}
+
+.add-resource {
+  margin: 0 10px;
+}

@@ -1,0 +1,55 @@
+- is_owner = comment.user.firm? && (comment.user.firm == @firm || comment.user.firm == @commenter)
+.sv-firm-comment{ id: dom_id(comment), class: (is_owner ? 'sv-firm-owner-comment' : '') }
+  .sv-firm-comment-left.sv-l
+    - if comment.user && comment.user.profileable_type == 'Client'
+      = link_to comment.user.client do
+        = image_tag comment.user.client.avatar, class: 'sv-l'
+    - elsif comment.user && comment.user.profileable_type == 'Firm'
+      = link_to comment.user.firm do
+        = image_tag comment.user.firm.logo, class: 'circle_frame sv-l'
+    - else
+      = image_tag 'thumb_avatar.gif', class: 'sv-l'
+
+  .sv-firm-comment-right.sv-l
+    .sv-firm-comment-author
+      - if comment.user && comment.user.client?
+        = comment.user.client.full_name
+      - elsif comment.user && comment.user.firm?
+        = comment.user.firm.name
+      - else
+        Страница удалена
+    %p
+      - if comment.parent
+        %span>= link_to_parent_author comment
+        ,
+      %span{ id: "comment_body_#{comment.id}" }
+        = auto_link_substr comment.body
+      - if comment.body.present? && comment.body.length > 500
+        %div
+          = link_to 'Показать полностью', '#', id: "show_comment_#{comment.id}"
+        :javascript
+          $(document).ready(function () {
+            $('a#show_comment_#{comment.id}').click(function (e) {
+              e.preventDefault();
+              $('#comment_body_#{comment.id}').html('#{j comment.body}');
+              $(this).hide();
+            })
+          });
+    .sv-firm-comment-actions.sv-l
+      %span= l comment.created_at, format: :comment
+      = image_tag 'sorted/im-bord.png'
+      - if comment.user
+        = link_to 'Ответить', '#', class: 'sv-comment-reply',
+                                   'data-name' => author_name(comment) + ',',
+                                   'data-url' => firm_comments_path(commentable_type: comment.commentable.class.name,
+                                                                    commentable_id: comment.commentable.id,
+                                                                    parent_id: comment.id)
+        = image_tag 'sorted/im-bord.png'
+      = render 'complaints/complaint', pretension: comment
+      - for_moderator_of @firm do
+        = image_tag 'sorted/im-bord.png'
+        = link_to 'Удалить', firm_comment_path(comment), method: :delete, confirm: 'Вы уверены?', remote: true
+
+    .sv-firm-comment-vote.sv-r{ 'data-vote-management' => "#{comment.id}-#{comment.class.name}" }
+      = render 'votes/like', resource: comment, resource_class_name: comment.class.name
+  .clear

@@ -1,0 +1,47 @@
+.row
+  .span3
+    %h4 Рубрики
+    %div
+      = link_to_unless @question_category == params[:question_category_id] && @questions == params[:user_id], "Все", questions_path
+    - @question_categories.each do |question_category|
+      %div
+        = link_to_unless_current question_category.name, questions_path(:question_category_id => question_category.id)
+  .span9
+    .pull-left{:style => "width: 630px;"}
+      %h4 Вопросы / #{@question_category ? @question_category.name: "Все"}
+      - @questions.each do |question|
+        %div{:style => "padding:10px;"}
+          .pull-left
+            = image_tag question.user.avatar.thumb if question.user
+          .pull-left{:style => "margin-left: 30px; width: 500px;"}
+            %div
+              .pull-left
+                %span
+                  = link_to question.user.name, user_path(question.user) if question.user
+                %span
+                  %small
+                    = question.user.city.try(:name) if question.user
+              .pull-right
+                %span
+                  %small
+                    = question.created_at
+              .clearfix
+            %div
+              - if question.user.client && question.user.client.wedding
+                %b Текущая неделя пользователя:
+                = question.user.client.wedding.current_weddk_number
+            %div
+              = link_to question.title, question_path(question)
+            %div
+              = question.body
+            %div
+              .pull-right
+                = link_to question.question_category.name, questions_path(:question_category_id => question.question_category.id) if question.question_category
+                = link_to_if current_user == question.user || current_user, "Удалить", question_path(question), method: :delete
+                = link_to_if current_user == question.user, "Редактировать", edit_question_path(question)
+
+          .clearfix
+    .pull-left
+      = link_to "Задать вопрос", new_question_path, :class => "btn"
+
+= paginate @questions

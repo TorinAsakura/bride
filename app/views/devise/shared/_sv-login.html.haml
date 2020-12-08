@@ -1,0 +1,23 @@
+.clearfix
+  = simple_form_for(User.new, url: new_user_session_path, remote: true, html: { class: 'sv-login-tab' }, validate: true ) do |f|
+    %p Для входа в  свой профиль заполните поля ниже
+    .field-block
+      .notification Введите e-mail
+      = f.input :login, as: :hidden, input_html: { value: '' }
+      = f.input :login, placeholder: 'E-mail', label: false, autofocus: true, input_html: { class: 'sv-input input-big', 'data-js' => 'login-email' }
+    .field-block
+      .notification Введите пароль. Может содержать символы a-Z, 1-9, # $ % &
+      = f.input :password, as: :hidden, input_html: { value: '' }
+      = f.input :password, placeholder: 'Пароль', label: false, input_html: { class: 'sv-input input-big', 'data-js' => 'login-password'}
+    - if devise_mapping.rememberable?
+      %label.sv-input-check
+        = f.check_box :remember_me
+        Запомнить меня
+    = f.submit 'Войти', :class => 'sv-btn-login input-big'
+    - if :page == data_view
+      = link_to 'Забыли пароль?', new_password_path(:user), class: 'link-style-inner input-big btn-forgot'
+    - else
+      = link_to 'Забыли пароль?', '#tab-forgot-password', 'data-toggle' => 'tab', class: 'link-style-inner btn-forgot input-big', 'data-js' => 'link-tab-forgot-password'
+  .social-block
+    %p или войдите через логин в социальной сети
+    = render '/devise/shared/social_login'

@@ -1,0 +1,9 @@
+= simple_form_for transfer_to_system, url: transfer_to_system_dealer_path, html: { remote: true, id: 'message_form', class: 'modal hide' } do |f|
+  .modal-header
+    %h3 Перевод ствердств в систему
+  .modal-body
+    = f.input :amount
+
+  .modal-footer
+    -#%a.link-style.sv-message-form-close(href="#" aria-hidden="true" data-dismiss="modal") Отменить
+    %button.link-style Подтвердить

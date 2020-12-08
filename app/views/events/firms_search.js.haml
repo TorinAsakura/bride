@@ -1,0 +1,8 @@
+- if params[:page].present?
+  $('#sv-firm-search-result').append('#{ render 'events/event/firms', firms: @firms }');
+- elsif @firms.blank? && params[:page].blank? && @event.system_event?
+  $('#sv-firm-search-result').html('#{ j render 'events/elements/empty_firms_search' }');
+- else
+  $('#sv-firm-search-result').html('#{ j render 'events/event/firms', firms: @firms }');
+  removeInfinitescroll();
+  infinitescrollFirms();

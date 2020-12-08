@@ -1,0 +1,4 @@
+= render 'firms/control_panel/firm_pages_settings_block', id: 'albums', title: 'Фотографии', path: albums_url(subdomain: firm.slug)
+= render 'firms/control_panel/firm_pages_settings_block', id: 'videos', title: 'Видеозаписи', path: firm_videos_url(subdomain: firm.slug)
+= render 'firms/control_panel/firm_pages_settings_block', id: 'journal', title: 'Журнал', path: firm_posts_page_url(subdomain: firm.slug)
+= render 'firms/control_panel/firm_pages_settings_block', id: 'comments', title: 'Отзывы', path: firm_comments_page_url(subdomain: firm.slug)

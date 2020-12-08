@@ -1,0 +1,35 @@
+.page-block#guests
+  %h1.title
+    %span= t('.title')
+    - for_moderator_of(@site) do
+      = link_to(icon('file-excel'), minisite_guests_path(format: 'xls'))
+      .add
+        = link_to(icon('print'), '#')
+  .guest-group
+    %h4.sub-title= t('.groom_bride')
+    .row
+      - if (groom = @site.groom).present?
+        .col-sm-6.groom
+          %i.icon-male
+          .name= groom.full_name
+
+      - if (bride = @site.bride).present?
+        .col-sm-6.bride
+          %i.icon-female
+          .name= bride.full_name
+
+  - @guests.each do |group, guests|
+    - new_guest = @guest.try(:new_record?) && @guest.group.eql?(group.to_s)
+    .table-responsive
+      %table.datatables
+        %thead
+          %tr
+            %th= t(".#{group}_guests")
+          - Guest::STATUSES.each do |status|
+            %th= t(".fields.#{status}")
+        %tbody
+          %tr
+            %td= render guests
+        = render('form', guest: @guest) if new_guest
+      - for_moderator_of(@site) do
+        = render('add', group: group, hide: new_guest)

@@ -1,0 +1,9 @@
+= simple_form_for @idea, html: {class: 'sv-idea-form'} do |f|
+  = f.input :name, input_html: {class: 'inp-style'}
+  = f.input :description, input_html: {class: 'textarea-style'}
+  = render 'tags/input', f: f, tags: @idea.tags
+  = render 'tags/color_input', f: f, tags: @idea.tags
+  = f.submit 'Сохранить', class: 'link-style'
+  = link_to 'Удалить', @idea, class: 'link-style-inner',
+                                         method: :delete,
+                                         confirm: 'Вы действительно хотите удалить эту идею?'

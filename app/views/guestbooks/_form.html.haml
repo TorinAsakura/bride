@@ -1,0 +1,3 @@
+= simple_form_for note, url: url, html: {class: 'guestbook-form'}, remote: true do |f|
+  = f.input :content, input_html: {placeholder: 'Введите ваше сообщение'}, label: false
+  = f.submit 'Добавить запись', class: 'link-style'

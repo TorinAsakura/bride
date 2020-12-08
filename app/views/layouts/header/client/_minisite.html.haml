@@ -1,0 +1,7 @@
+%li.m1
+  - if client.site.present?
+    = link_to(root_url(subdomain: client.site.name), title: t('.title'), class: 'm1') do
+      %i.sv-icon.loveit
+  - else
+    = link_to(new_site_url, title: t('.create_site'), class: 'm1') do
+      %i.sv-icon.loveit

@@ -1,0 +1,23 @@
+.sv-post-wrapper
+  .sv-post-owner
+    - client = post.user.client
+    .sv-post-owner-logo.sv-l
+      = user_avatar(post.user)
+    .sv-post-owner-description.sv-l
+      = link_to client.full_name, client
+      %p= client.city.try(:name)
+  .clear
+
+.sv-attachment
+  = link_to 'back', '#', class: 'sv-attachment__close', 'data-js' => 'attachment-close'
+  .sv-attachment__image
+    - if image.next_image.present?
+      = link_to community_post_image_path(post.journal, post, image.next_image), remote: true do
+        = image_tag image.image
+    - else
+      = image_tag image.image
+  .sv-attachment__actions
+    .sv-attachment__action.sv-attachment__action_date
+      = I18n.l image.updated_at, format: :comment
+    .sv-attachment__action.sv-attachment__action_like{ id: "vote_managment_#{image.id}_#{image.class.name}" }
+      = render  'votes/like', resource: image, resource_class_name: image.class.name

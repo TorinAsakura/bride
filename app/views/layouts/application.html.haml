@@ -1,0 +1,68 @@
+!!!
+%html{xmlns: 'http://www.w3.org/1999/xhtml'}
+  %head
+    %meta{content: 'width=980, initial-scale=1.0', name: 'viewport'}/
+    %meta{content: 'telephone=no', name: 'format-detection'}/
+    %meta{content: 'text/html; charset=utf-8', 'http-equiv' => 'content-type'}/
+    %title= content_for?(:title) ? yield(:title) : 'Svadba.org - главный свадебный портал'
+    = csrf_meta_tags
+    = favicon_link_tag '/favicon.ico', rel: 'icon', type: 'image/x-icon'
+    = favicon_link_tag '/favicon.ico', rel: 'shortcut icon', type: 'image/x-icon'
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag '//api-maps.yandex.ru/2.1/?lang=ru_RU'
+    = javascript_include_tag 'application'
+    = yield :javascript
+    = stylesheet_link_tag '//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css'
+
+  %body{'data-env' => Rails.env, style: body_bg_style(@style)}
+    #scroller.hide
+      #scroller-switcher
+        #opacity
+        #scroller-background
+        #up-button
+          .up-arrow
+          .text наверх
+
+    .sv-outer-wrapper
+      .background-firm
+        %header= render 'layouts/header/header'
+        = render 'layouts/sv-navigation'
+
+      .main-content.clearfix{ class: wrapper_class, 'data-js' => 'main-content' }
+        = yield
+
+      - if params[:controller] == 'home'
+        .sv-footer-push
+
+    - if params[:controller] == 'home'
+      #sv-footer
+        = render 'layouts/footer'
+
+    #edit
+    #change-first-city.sv-wedding-cities-modal.hide= render 'cities/first_city_select', items: @wedding_cities, ids: []
+    #change-first-firm-catalog.subscription-firm-catalog-items.hide= render 'firm_catalogs/first_firm_catalog_select', items: @wedding_firm_catalogs
+    #edit_auxiliary
+    #popup.modal.hide.fade.span8{'data-replace' => 'true', tabindex: '-1'}
+      .sv-close{'data-dismiss' => 'modal'} close
+      .content
+    = render 'posts/template_upload'
+
+    = yield :javascripts
+    = javascript_include_tag '//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js'
+    - if Rails.env.production?
+      = render '/layouts/analytics/yandex_metrika_counter'
+      = render '/layouts/analytics/google'
+    - if current_firm.present?
+      = render '/layouts/siteheart'
+
+    - if Rails.env.production?
+      = javascript_include_tag 'http://mysvadba.org:9292/faye.js'
+    - else
+      = javascript_include_tag 'http://localhost:9292/faye.js'
+
+- if flash[:client_first_visit].present?
+  :javascript
+    $(document).ready(function () {
+      window.modalViewer = new FirstVisitPopup('#{ j render 'layouts/pop_ups/first_visit' }');
+      window.modalViewer.show(); 
+    });
