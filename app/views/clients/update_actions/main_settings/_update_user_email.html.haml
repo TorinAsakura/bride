@@ -1,0 +1,21 @@
+/ Адрес электронной почты блок
+#client-user-email.sv-article
+  .title_nobg Адрес электронной почты
+  .sv-profile-site
+    .list-form-seting
+      = form_for client, url: update_user_email_client_path(client),  method: :put, html: {remote: true} do |f|
+        = f.fields_for 'user' do |u|
+          .field
+            %label Текущий e-mail:
+            = u.email_field :email, placeholder: 'E-mail', class: 'sv-l inp-style input-big inp-style-mini',
+              id: 'sv-client-input-email'
+            = u.submit 'Сохранить', class: 'link-style sv-l input-big', style: 'display: none;'
+            = u.hidden_field :subscription, value: false
+            %label.checkbox
+              = u.check_box :subscription, { id: 'sv-client-subscr-checkbox', checked: client.subscription}, true, nil
+              %span
+            %label{for: "checkbox"}Получать уведомления по e-mail
+            %span.result.free.yes-green{style: 'display: none;'} E-mail доступен
+            %span.result.saved.yes-green{style: 'display: none;'} E-mail сохранен
+            %span.result.not-free.no-red{style: 'display: none;'} E-mail уже используется
+            %span.result.not-valid.no-red{style: 'display: none;'} E-mail не корректен

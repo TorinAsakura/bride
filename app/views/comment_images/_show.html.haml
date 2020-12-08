@@ -1,0 +1,38 @@
+.sv-post-wrapper
+  .sv-post-owner
+    - if comment.user.profileable_type == 'Firm'
+      - firm = comment.user.firm
+      .sv-post-owner-logo.sv-post-owner-logo-firm.sv-l
+        = user_avatar(comment.user)
+      .sv-post-owner-description.sv-l
+        = link_to firm.name, firm
+        %p= firm.extended_name
+    - else
+      - client = comment.user.client
+      .sv-post-owner-logo.sv-l
+        = user_avatar(comment.user)
+      .sv-post-owner-description.sv-l
+        = link_to client.full_name, client
+        %p= client.city.try(:name)
+  .clear
+
+- next_image = image.next_image
+- prev_image = image.prev_image
+
+.sv-attachment
+  - if prev_image.present?
+    = link_to 'back', comment_image_path(comment, prev_image), class: 'sv-attachment__back', remote: true
+  .sv-attachment__image
+    - if next_image.present?
+      = link_to comment_image_path(comment, next_image), remote: true do
+        = image_tag image.image
+    - else
+      = image_tag image.image
+  .sv-attachment__actions
+    .sv-attachment__action.sv-attachment__action_date
+      = I18n.l image.updated_at, format: :comment
+    - for_moderator_of comment do
+      .sv-attachment__action.sv-attachment__action_destroy
+        = link_to 'Удалить', comment_image_path(comment, image), method: :delete, remote: true
+    .sv-attachment__action.sv-attachment__action_like{ id: "vote_managment_#{image.id}_#{image.class.name}" }
+      = render  'votes/like', resource: image, resource_class_name: image.class.name

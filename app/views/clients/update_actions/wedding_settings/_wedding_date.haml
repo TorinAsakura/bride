@@ -1,0 +1,49 @@
+= simple_form_for(wedding, url: wedding_path, html: { method: :post, class: 'form-ovrfl ws-date-form', id: 'new-wedding' }) do |f|
+  .sv-edit-client-left
+    %p Город празднования:
+  .sv-edit-client-right
+    = link_to current_user.wedding_city, '#sv-wedding-cities', class: 'wedding-city-style', 'data-toggle' => 'modal'
+  .sv-wedding-date
+    .sv-edit-client-left.sv-edit-client-wide
+      %p Дата свадьбы:
+    .sv-edit-client-right.sv-edit-client-wide
+      .sv-block-select.create-wedding><
+        = text_field_tag :wedding_date, wedding.wedding_date.try(:strftime,'%d.%m.%Y'), {class: "input-big", data: beatpicker('weddingDateBeatpickerOptions')}
+      .sv-dont-know-the-date
+        = check_box_tag 'without_date', true, nil, class: 'sv-wedding-without-date'
+        = label_tag 'without_date' do
+          %span
+          Не знаю
+    - if client.has_wedding?
+      .sv-edit-client-left
+      .sv-edit-client-right-info
+        .sv-client-wedding-date-calc{'data-js' => 'wedding-calc'}
+          Начало подготовки:
+          %span{'data-js' => 'start-scheduler-date'}= wedding.start_date
+          %br
+          %span{'data-js' => 'before-scheduler-date', 'script-exists' => wedding.script.present?.to_s}
+        .search-select-radio.clearfix{'data-js' => 'wedding-radio'}
+          #create-type.radio-block
+            .sv-l.radio-inline
+              = radio_button_tag :create_type, :edit_date, true, id: :edit_date, class: 'radio-style-circle'
+              = label_tag :edit_date do
+                %span Просто меняю дату свадьбы
+            .sv-l.radio-inline
+              = radio_button_tag :create_type, :new_date, false, id: :new_date, class: 'radio-style-circle'
+              = label_tag :new_date do
+                %span Начать подготовку с нуля
+    - else
+      = hidden_field_tag :create_type, :new_date
+
+  .clear
+
+  .sv-edit-client-left
+  .sv-edit-client-right
+    .sv-edit-client-button
+      = f.button :submit, 'Изменить', class: 'link-style'
+
+:javascript
+  var weddingDateBeatpickerOptions = $.extend({
+    startDate: #{date = wedding.wedding_date || Date.today; date.strftime('[%Y, %m, %d]')},
+    disablingRules: [{from:#{today = Date.today; today.strftime('[%Y, %m, %d]')},to:'<'}]
+  },customBeatpickerOptions)

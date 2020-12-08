@@ -1,0 +1,14 @@
+- unread_messages = current_user.unread_messages
+= link_to('#', data: {toggle: "dropdown"}, id: 'menu-messages', class: 'btn btn-icon rounded') do
+  %i.ion-ios7-chatboxes
+  - if unread_messages.present?
+    %span.badge= current_user.unread_messages.count
+
+%ul.dropdown-menu.dropdown-extend(role="menu" aria-labelledby="menu-messages")
+  - if unread_messages.present?
+    %li.dropdown-header= t('.title', count:  current_user.unread_messages.count)
+    = render partial: 'messages/footer_message', collection: unread_messages.decorate, as: :message
+  %li.dropdown-footer
+    = link_to(messages_url(subdomain: ''), class: 'view-all', tabindex: '-1') do
+      %i.ion-ios7-arrow-thin-right.pull-right
+      = t('.all_messages')

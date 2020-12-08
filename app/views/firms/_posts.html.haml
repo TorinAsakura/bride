@@ -1,0 +1,59 @@
+#sv-read-it
+  .title.clearfix
+    - if link_to_back
+      = link_to firm_link(@firm), class: 'sv-a-back sv-l' do
+        %i.icon-chevron-left
+    = link_to firm_posts_page_path do
+      %span
+        Журнал
+        %i= "(#{@firm.posts.size})"
+    %ul
+      %li.one
+        = link_to '#', class: 'sv-view-tab active' do
+          %i крупно
+      %li.two
+        = link_to '#', rel: :small, class: 'sv-view-tab' do
+          %i компактно
+      - if current_firm == @firm
+        %li.add
+          = link_to new_post_path, data: { js: 'new-post-link' }, remote: true, class: 'add sv-post-form-link' do
+            %i добавить
+      %li.search
+        = link_to '#', data: { js: 'posts-search-link' } do
+          %i поиск
+
+  .sv-posts-search-form{ 'data-js' => 'post-search-form', class: expand ? 'sv-posts-search-form_visible' : '' }
+    = form_tag firm_posts_page_path, method: :get do
+      = hidden_field_tag :search_type, @search_type, 'data-js' => 'post-search-type'
+      .sv-posts-search-form__links
+        = link_to 'Все статьи',
+                  firm_posts_page_path(link_to_back: link_to_back, search_type: 'all', posts_search: params[:posts_search]),
+                  class: 'sv-posts-search-form__link' + (@search_type == 'all' ? ' sv-posts-search-form__link_active' : ''),
+                  remote: true
+        = link_to (current_firm && @firm.user.is?(current_user) ? 'Мои статьи' : 'Статьи'),
+                  firm_posts_page_path(link_to_back: link_to_back, search_type: 'my', posts_search: params[:posts_search]),
+                  class: 'sv-posts-search-form__link' + (@search_type == 'my' ? ' sv-posts-search-form__link_active' : ''),
+                  remote: true
+        = link_to 'Избранное',
+                  firm_posts_page_path(link_to_back: link_to_back, search_type: 'starred', posts_search: params[:posts_search]),
+                  class: 'sv-posts-search-form__link' + (@search_type == 'starred' ? ' sv-posts-search-form__link_active' : ''),
+                  remote: true
+      = button_tag 'Найти', name: nil, class: 'sv-posts-search-form__btn find-button'
+      = hidden_field_tag :search_type, @search_type || 'all'
+      = hidden_field_tag :link_to_back, link_to_back
+      = text_field_tag :posts_search,
+                        params[:posts_search],
+                        class: 'inp-style sv-posts-search-form__input sv-posts-search-form__input_small',
+                        placeholder: 'Поиск по статьям'
+      .clear
+
+  #journal_form.sv-firm-post-form{ 'data-js' => 'new-post-form' }
+
+  - if @posts.present?
+    .sv-firm-posts
+      = render 'posts/posts', posts: @posts
+  - elsif for_moderator_of @firm
+    .sv-empty-section
+      .sv-empty-section__inner
+        У вас еще нет ни одной статьи в журнале, хотите
+        = link_to 'добавить запись?', new_polymorphic_path([@firm, :post]), remote: true, class: 'sv-empty-section__link'

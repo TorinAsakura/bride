@@ -1,0 +1,61 @@
+.sv-community {
+
+  .sv-album-upload-link {
+    display: block;
+    text-align: center;
+    background: #f0849b;
+    color: #fff;
+    font-size: 16px;
+    height: 50px;
+    line-height: 50px;
+    text-decoration: none;
+    margin: 10px 0 0 0;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  .sv-album-upload-link__icon {
+    display: inline-block;
+    height: 50px;
+    padding-left: 50px;
+    background: image-url('sv-icon-camera-big.png') no-repeat 0px 50%;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+}
+
+.sv-community__load-photo {
+  background: image-url('sv-icon-readit.png') no-repeat scroll -40px -40px rgba(0, 0, 0, 0);
+  display: block;
+  float: right;
+  height: 20px;
+  margin: 0 5px 0 0;
+  width: 20px;
+}
+
+.sv-attachment__back {
+  display: block;
+  font-size: 0px;
+  position: absolute;
+  top: -20px;
+  bottom: 0px;
+  width: 25px;
+
+  &:hover {
+    background: #ccc;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0px;
+    top: 50%;
+    border: 8px solid transparent;
+    border-right: 8px solid #fff;
+  }
+}

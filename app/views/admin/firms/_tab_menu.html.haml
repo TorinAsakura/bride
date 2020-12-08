@@ -1,0 +1,5 @@
+%ul.nav.nav-tabs
+  %li{class: ('active' if params[:type].blank?)}
+    = link_to 'Все', admin_firms_path
+  %li{class: ('active' if params[:type].eql?('dealers'))}
+    = link_to 'Диллеры', select_admin_firms_path(type: 'dealers')

@@ -1,0 +1,9 @@
+ru:
+  admin:
+    bonus:
+      services:
+        index:
+          services_empty: Нет услуг
+      certificates:
+        index:
+          certificates_empty: Нет сертификатов

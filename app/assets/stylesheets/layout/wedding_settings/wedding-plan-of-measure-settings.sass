@@ -1,0 +1,43 @@
+.plan-of-measure
+  .stag-party-marker
+    +clearfix
+    position: relative
+    margin-bottom: $main-padding
+    color: white
+    .time
+      float: left
+      display: inline-block
+      padding: $main-margin/4 $main-margin*1.25
+      background-color: $circle-red
+      position: relative
+      &:before
+        content: ''
+        border-color: transparent
+        border-style: solid
+        border-width: $border-width*6
+        position: absolute
+        border-top-color: $circle-red
+        margin-top: 0
+        bottom: 0
+        left: 40%
+        z-index: 2
+        top: 100%
+        width: $border-width
+        height: $border-width
+    .marker-text
+      color: $black
+      display: inline-block
+      padding-left: $main-padding
+      .name
+        font-size: $main-margin*1.33
+        color: $main-color
+      .description
+        font-size: 0.8em
+    .icon-remove
+      cursor: pointer
+      color: $gray
+      float: right  
+  .map
+    height: 470px
+  .link-style
+    margin-top: $main-padding

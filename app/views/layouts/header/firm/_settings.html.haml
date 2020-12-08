@@ -1,0 +1,10 @@
+%li.m1
+  = link_to('', title: t('.title'), class: 'm1') do
+    %i.sv-icon.setting
+  %i.arr
+  .drop.sv-drop-settings
+    %ul
+      %li= link_to(t('.edit'), edit_firm_url(firm))
+      %li= link_to(t('.privacy'), '#')
+      %li= link_to(t('.contract'), '/contract')
+      %li= link_to(t('.logout'), destroy_user_session_url, data: {method: :delete})

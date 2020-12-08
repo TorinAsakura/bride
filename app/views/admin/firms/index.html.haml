@@ -1,0 +1,20 @@
+= render 'tab_menu'
+.filter-resource
+  = form_tag( admin_firms_path, method: :get, remote: true) do
+    .filter-text= text_field :search, :name, placeholder: 'Название'
+    .filter-text= text_field :search, :city, placeholder: 'Город'
+    .submit= submit_tag "Поиск", :name => nil, class: 'link-style'
+
+%table.index_table
+  %thead
+    %tr
+      %th Название
+      %th Город
+      %th Диллер
+      %th Удален
+      %th Действия
+    %tbody#firms-list
+      = render @firms
+
+.page-action
+  .current-page#firms-paginate= paginate @firms, window: 3, outer_window: 3

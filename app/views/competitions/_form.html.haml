@@ -1,0 +1,54 @@
+= simple_form_for [@firm, @competition],  html: { id: "competitions_form", multipart: true } do |f|
+  - if @competition.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@competition.errors.count, "error")} prohibited this competition from being saved:"
+      %ul
+        - @competition.errors.full_messages.each do |msg|
+          %li= msg
+
+  =f.hidden_field :firm_id, :value => @firm.id
+
+  .field
+    .control-group
+      .logo
+        = image_tag(@competition.banner_url, class: "competition-banner-preview", id: "competition-banner-preview")
+      .button
+        = f.input :banner, :as => :file, :label => false, wrapper: :none
+        - if @competition.banner?
+          = check_box_tag :remove_banner
+          = label_tag :remove_banner, 'удалить баннер', :class => 'label-check-box'
+
+  .field
+    = f.input :name, placeholder: "Введите название конурса", label: "Название конкурса"
+  .field
+    = f.input :about_competition, placeholder: "Введите описание конкурса", label: "Описание конкурса"
+  .field
+    = f.input :rules, placeholder: "Введите правила конкурсов", label: "Правила конкурса"
+  .field
+    = f.fields_for :competition_prizes do |prize|
+      = render 'competition_prize_fields', f: prize
+    = link_to_add_fields "Добавить приз", f, :competition_prizes, ''
+
+  .field
+    .control-group.text
+      %fieldset.form
+        %legend Период действия конкурса
+        .error-date.lower{style: "display:none;"}
+          Дата завершения конкурса меньше даты начала конкурса!
+        .error-date.equally{style: "display:none;"}
+          Дата завершения конкурса равна дате начала. Конкурс будет длится один день!
+        .field
+          = f.label :start_date, "Дата начала конкурса"
+          = f.text_field :start_date, placeholder: "Начало конкурса", :class => 'datepicker', :value => ( @competition.start_date? ? @competition.start_date.strftime("%d-%m-%Y") : '' )
+
+        .field
+          = f.label :deadline_date, "Дата окончания конкурса"
+          = f.text_field :deadline_date, placeholder: "Завершение конкурса", :class => 'datepicker', :value => ( @competition.deadline_date? ? @competition.deadline_date.strftime("%d-%m-%Y") : '' )
+
+        .field
+          = f.check_box :is_started, :type => "button"
+          = f.label :is_started, "Начать конкурс", :class => 'label-check-box'
+
+  = link_to "Удалить", { controller: :competitions, action: :destroy}, :method => :delete, confirm: "Удалить конкурс?", class: "btn btn-danger"
+
+  %button.btn.btn-primary#submit Шаг №2

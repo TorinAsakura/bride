@@ -1,0 +1,49 @@
+#user-phone {
+  .cntrl-group.tel.optional {
+    float: left;
+  }
+  .small-number {
+    width: 40px !important;
+    float: left;
+  }
+  .full-number {
+    float: left;
+    width: 100px !important;
+  }
+  .sv-l {
+    float: left;
+    //margin-top: 15px
+    input {
+      height: 24px !important;
+      text-align: center;
+      line-height: 1;
+    }
+  }
+  form {
+    @include clearfix;
+    height: auto;
+    overflow: visible;
+  }
+  .sv-profile-site.sv-r.rows-form-tel {
+    overflow: visible;
+  }
+  .notification {
+    padding: $main-padding $main-padding $main-padding $main-padding;
+    height: auto;
+    width: 220px;
+    bottom: $main-margin / 2;
+    display: none;
+    visibility: visible;
+    input {
+      margin-top: $main-padding;
+      height: $input-height + $main-margin / 2 - 6px;
+      padding: 0 $text-padding;
+      width: 56.2%;
+      float: left;
+    }
+    .link-style.sv-l {
+      margin-top: $main-padding;
+      float: left;
+    }
+  }
+}

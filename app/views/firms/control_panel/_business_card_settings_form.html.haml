@@ -1,0 +1,49 @@
+#firm-control-panel-business-card-settings.firm-settings{style: 'display:none;'}
+  .sv-article
+    .title_nobg= t('.title')
+    .sv-firms-about-card
+      %p= t('.description').html_safe
+      .sv-firms-about-card-buttons
+        = link_to t('.edit'), '#sv-firm-edit-business-card', class: 'link-style', 'data-toggle' => 'modal'
+        - if (pro = Bonus::Service::Pro.find_by_slug('pro')).present?
+          = link_to t('.pro', action: pro.decorate.link_text), new_bonus_service_subscription_path(pro), remote: true, class: 'link-style pro-service'
+
+    #sv-firms-list
+      - cutaways = %w(vip pro base)
+      #cutaway-tabs.sv-ui-tabs
+        %ul
+          - cutaways.each do |cutaway|
+            %li= link_to(t(".cutaways.#{cutaway}"), "#cutaway-#{cutaway}")
+        - cutaways.each do |cutaway|
+          %div{id: "cutaway-#{cutaway}"}
+            = render "firms/cutaways/#{cutaway}", firm: @firm.decorate, cutaway: cutaway
+      :javascript
+        $('#cutaway-tabs').tabs();
+
+    #sv-firm-edit-business-card.modal.hide{ style: 'padding:19px;' }
+      = simple_form_for @firm, html: { id: 'firm-business-card-form' } do |f|
+        = hidden_field_tag :anchor, 'business-card-settings'
+        = f.input :description, input_html: { class: 'portrayal textarea-style', }
+        .support_of_services
+          = f.simple_fields_for :firm_services, @card_service do |ff|
+            = ff.hidden_field :raiting, value: -1
+            = ff.hidden_field :name, value: 'Базовая услуга'
+            .services_measurement.sv-l
+              %p Стоимость базовой услуги
+              = ff.input_field :cost, maxlength: 7, class: 'inp-style-mini-compact inp-style'
+              %label Например: 3000
+            .services_measurementon.sv-r
+              %p Единица измерения
+              = ff.input_field :unit, maxlength: 16, class: 'inp-style-mini-compact inp-style'
+              %label Например: руб. за фотосессию
+        .portrayal.margintop28 Информационная панель
+        .the_device_of
+          .menu_of_the_device.sv-r
+            = f.select :business_card_right_block, options_for_select(Firm.options_for_business_card, @firm.business_card_right_block), {}, {data: {'select2-options' => {minimumResultsForSearch: -1}}}
+          .latest_photo_albums.sv-l
+            = f.select :business_card_left_block, options_for_select(Firm.options_for_business_card, @firm.business_card_left_block), {}, {data: {'select2-options' => {minimumResultsForSearch: -1}}}
+          .latest_photo_knab
+            = button_tag 'Сохранить', class: 'link-style sv-l knabowe'
+            = link_to 'Отменить', '#business-card-settings', class: 'link-style sv-l', onclick: '$.fancybox.close();'
+:javascript
+  $('#firm-business-card-form select').select2({ minimumResultsForSearch: -1});

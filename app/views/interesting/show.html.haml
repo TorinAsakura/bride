@@ -1,0 +1,91 @@
+.sv-article.left
+  #sv-read-it
+    .title.clearfix
+      %span Интересно читать
+      %ul
+        %li.one
+          = link_to '#', class: 'sv-view-tab active' do
+            %i крупно
+        %li.two
+          = link_to '#', rel: :small, class: 'sv-view-tab' do
+            %i компактно
+        %li.search
+          = link_to '#', data: { js: 'posts-search-link' } do
+            %i поиск
+
+    .hide{ 'data-js' => 'post-search-form' }
+      .sv-posts-search-form.sv-posts-search-form_visible
+        = form_tag interesting_path, method: :get do
+          = text_field_tag :posts_search,
+                           params[:posts_search],
+                           class: 'inp-style sv-posts-search-form__input sv-posts-search-form__input_large',
+                           placeholder: 'Поиск по статьям'
+          = button_tag 'Искать', name: nil, class: 'find-button'
+
+      .sv-posts-order-wrapper
+        .sv-posts-order
+          = render 'interesting/posts_order', path: interesting_path
+
+    %div{ 'data-js' => 'interesting-posts' }
+      - if @posts.present?
+        = render 'posts/posts', posts: @posts
+      - else
+        .sv-empty-section
+          .sv-empty-section__inner
+            По вашему запросу ничего не найдено.
+
+    .sv-posts-hidden-nav.hide
+      = paginate @posts
+
+#sv-firm-side-videos#sv-videos-block.sv-interesting-videos
+  .title.clearfix
+    = link_to videos_interesting_path do
+      %span Интересно смотреть
+    %ul
+      %li.search
+        = link_to '#', data: { js: 'videos-search' } do
+          %i поиск
+
+  .hide{ 'data-js' => 'videos-search-form' }
+    .sv-videos-search-form
+      = form_tag videos_interesting_path, method: :get do
+        = text_field_tag :videos_search,
+                         params[:videos_search],
+                         class: 'inp-style sv-videos-search-form__input sv-videos-search-form__input_very-small',
+                         placeholder: 'Поиск по видео'
+        = button_tag 'Искать', name: nil, class: 'find-button'
+
+  - if @videos.present?
+    %ul.sv-video-list-wrap.one-column{ 'data-js' => 'video-list' }
+      - @videos.each do |video|
+        %li.sv-video-list-block{ 'data-js' => 'video' }
+          - if video.content.match(/vk/) || video.content.match(/vimeo/)
+            = link_to polymorphic_path([video.multimedia.profileable, video]), remote: true, class: 'video_link_preview' do
+              .video-container
+                %img.video_image_preview{src: "#{video.media_preview}"}
+                %span.video-info
+                  %span.video-play
+                    %span.video-play-icon
+                    %span.video-title #{video.title}
+                  %span.video-duration 
+                    #{video.duration.present? ? video.duration : "??:??:??"}
+          - else 
+            .youtube[video]
+              = link_to '', polymorphic_path([video.multimedia.profileable, video]),
+                            class: 'video sv-firm-video-link',
+                            data: { title: truncate(video.title, length: 20), youtube: video.content },
+                            remote: true
+              .sv-firm-video-link-bg
+  - else
+    .sv-empty-section
+      .sv-empty-section__inner
+        По вашему запросу ничего не найдено.
+
+  .sv-videos-hidden-nav
+    = rel_next_prev_link_tags @videos
+- content_for :javascript do
+  :javascript
+    $(document).ready(function(){
+      $("a[data-js=videos-search]").trigger("click");
+      $("a[data-js=posts-search-link]").trigger("click");
+    })

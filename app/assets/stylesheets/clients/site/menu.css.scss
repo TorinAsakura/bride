@@ -1,0 +1,44 @@
+#content {
+  .container {
+    .menu-block {
+      margin-top: $grid-gutter-width / 2;
+      padding-left: 0;
+      ul {
+        border-left: none;
+        > li {
+          a {
+            border-radius: 0;
+            i {
+              color: $main-color;
+            }
+            &.active {
+              &, &:hover, &:focus {
+                i {
+                  color: $white;
+                }
+                .badge{
+                  color: $main-menu-color;
+                  background: $white;
+                }
+              }
+            }
+            .title-text {
+              display: inline-block;
+              margin-left: 5px;
+              font-size: 14px;
+
+            }
+            .badge{
+              color: $white;
+              background: $main-color;
+              font-size: 12px;
+              position: absolute;
+              right: 16px;
+              top: 34%
+            }
+          }
+        }
+      }
+    }
+  }
+}

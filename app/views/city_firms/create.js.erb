@@ -1,0 +1,7 @@
+<%- id = "c#{rand(99999)}"%>
+$.fancybox.close();
+$('.sv-firm-cities').html($('<%= j(render 'city_firms/city_firm', firm: @firm, city_firm: @city_firm, id: id)%>'));
+$('.sv-firm-add-city-popup-wrapper').html('<%= j(render 'city_firms/add_city', firm: @firm)%>');
+$('.sv-firm-cities-address').append('<%= j(render 'city_firms/city_firm_address', firm: @firm, city_firm: @city_firm, id: id)%>');
+
+window.firmSettingsCitySelector = new FirmSettingsCitySelector('<%= id%>', '<%= @city_firm.city.name%>');

@@ -1,0 +1,9 @@
+- current_user.save
+- if current_user.valid_password? params[:user][:password]
+  $('#edit_user span.password-no').hide();
+  $('#edit_user span.password-changed').show();
+  $('#edit_user span.password-changed').fadeOut(3000);
+- else
+  $('#edit_user span.password-changed').hide();
+  $('#edit_user span.password-no').show();
+  $('#edit_user span.password-no').fadeOut(3000);

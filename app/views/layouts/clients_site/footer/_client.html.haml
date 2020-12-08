@@ -1,0 +1,7 @@
+.btn-group.dropup
+  = render 'layouts/clients_site/footer/messages'
+.btn-group.dropup
+  = render 'layouts/clients_site/footer/client/friends', client: current_client.decorate
+.btn-group.dropup
+  = render 'layouts/clients_site/footer/client/settings', client: current_client.decorate
+= render 'layouts/clients_site/footer/user'

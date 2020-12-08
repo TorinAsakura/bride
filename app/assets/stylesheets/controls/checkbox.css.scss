@@ -1,0 +1,19 @@
+.checkbox {
+  padding: 0;
+  float: left;
+  margin-right: $main-margin / 3;
+  input {
+    display: none;
+  }
+  span {
+    width: 16px;
+    height: 16px;
+    margin: $main-margin / 4 $main-padding / 2 0 $main-padding * 1.5;
+    display: block !important;
+    background: image-url("checkbox_unchecked.jpg");
+  }
+  input:checked + span {
+    float: left;
+    background: image-url("checkbox_checked.jpg");
+  }
+}

@@ -1,0 +1,36 @@
+- @polls.each_with_index do |poll, i|
+  .sv-poll{ class: "#{'sv-poll-odd' if i.odd?}" }
+    .sv-img-poll
+      - poll.images.order(:id).each do |img|
+        .sv-l
+          = link_to poll, remote: true do
+            = image_tag img.image.url(poll.images.count == 2 ? :preview_for_one_second : :preview_for_one_third)
+        - if poll.images.count == 2
+          %span.sv-or-or.sv-or-or-one или
+        - if poll.images.count == 3
+          %span.sv-or-or или
+          %span.sv-or-or.sv-or-or-r или
+
+    .wa-coments
+      .wa-avatar
+        = link_to poll.client do
+          - if poll.client
+            = image_tag poll.client.avatar.thumb
+          - else
+            = image_tag 'thumb_avatar.gif'
+      .wa-comm
+        - if poll.client
+          = link_to poll.client.full_name, client_path(poll.client), class: 'name-user'
+        - else
+          %span.name-user Страница удалена
+        %span.wa-time #{time_ago_in_words(poll.created_at)} назад
+        %span.wa-option.sv-r
+          = link_to '#', remote: true do
+            %i.wa-icon.wa-comment
+            = poll.comment_threads.count
+          = link_to '#', remote: true do
+            %i.wa-icon.wa-like
+            = poll.total_votes
+        %p #{poll.title}
+  - if i.odd?
+    .clear

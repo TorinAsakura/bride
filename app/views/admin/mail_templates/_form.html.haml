@@ -1,0 +1,11 @@
+= simple_form_for [:admin, mail_template], html: { class: '' }, validate: true do |f|
+  .modal-header
+    %h3= mail_template.new_record? ? 'Новая рассылка' : 'Редактировать рассылку'
+  .modal-body
+    %p
+      = f.input :title
+    %p
+      = f.input :body, as: :text
+  .modal-footer
+    = f.button :submit, 'Сохранить', class: 'link-style'
+    = link_to 'Удалить', admin_mail_template_path(mail_template), method: 'delete', confirm: 'Вы уверены?', class: 'link-style' unless mail_template.new_record?

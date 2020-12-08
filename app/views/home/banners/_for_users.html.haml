@@ -1,0 +1,61 @@
+.sv-banner-form{'data-js' => 'banner-form', style: 'display:none;'}
+  - if current_client.wedding.blank?
+    .sv-banner-form__title.title_nobg
+      Планируй свадьбу сейчас!
+
+    .sv-banner-form__text.sv-banner-form__text_first
+      Svadba.org — пожалуй, лучшее место, где вы с легкостью сможете спланировать и подготовить грандиозную свадьбу.
+
+    = simple_form_for(wedding, url: wedding_path) do |f|
+      = hidden_field_tag :create_type, 'new_date'
+
+      %label.sv-banner-form__label Выберите город, где готовитесь к свадьбе
+      = link_to current_client.decorate.wedding_city_name, '#sv-wedding-cities', class: 'sv-banner-form__city', 'data-toggle' => 'modal'
+
+      %label.sv-banner-form__label Выберите дату свадьбы
+      .sv-banner-form__date
+        = select_tag 'wedding_date[day]',
+                     options_for_select(['День'] + (1..31).to_a, get_day(wedding.wedding_date)),
+                     class: 'select-day',
+                     data: {'select2-options' => {minimumResultsForSearch: -1}},
+                     id: 'day'
+        = select_tag 'wedding_date[month]',
+                     options_for_select(['Месяц'] + months_list, get_month(wedding.wedding_date)),
+                     class: 'select-month',
+                     data: {'select2-options' => {minimumResultsForSearch: -1}},
+                     id: 'month'
+        = select_tag 'wedding_date[year]',
+                     options_for_select(['Год'] + (Date.today.year..(Date.today.year+3)).to_a, get_year(wedding.wedding_date)),
+                     class: 'select-year',
+                     data: {'select2-options' => {minimumResultsForSearch: -1}},
+                     id: 'year'
+
+      .sv-banner-form__without-date.client-settings
+        = check_box_tag :without_date, true, nil, class: 'sv-wedding-without-date'
+        = label_tag :without_date do
+          %span
+          Еще не выбрали дату
+
+      .sv-banner-form__submit
+        = f.submit 'Начать планирование', class: 'link-style'
+  - elsif current_client.site.blank?
+    .sv-banner-form__title.title_nobg
+      Ваш личный свадебный сайт
+
+    .sv-banner-form__text.sv-banner-form__text_first
+      Совершенно бесплатно получите свой личный свадебный мини-сайт, где вы сможете готовиться к собственной свадьбе, используя множество интерактивных сервисов.
+
+    = simple_form_for site do |f|
+      %label.sv-banner-form__label{for: 'site_description'} Описание сайта
+      = f.input :description, label: false,
+                              input_html: {class: 'inp-style sv-banner-form__site-description'},
+                              placeholder: 'Например: Свадьба Саши и Маши'
+
+      %label.sv-banner-form__label{for: 'site_name'} Адрес сайта
+      %span.sv-banner-form__site-domain .svadba.org
+      = f.input :name, label: false,
+                       input_html: {class: 'inp-style sv-banner-form__site-name'},
+                       placeholder: 'Например: Sasha-i-masha'
+
+      .sv-banner-form__submit
+        = f.submit 'Создать мини-сайт', class: 'link-style'

@@ -1,0 +1,39 @@
+= icon('menu', '', class: 'icon-lg menu-trigger show', id: 'menu-open')
+= icon('menu', '', class: 'icon-lg menu-trigger hidden', id: 'menu-close')
+= icon('menu', '', class: 'icon-lg menu-trigger hidden', id: 'menu-dummy')
+.menu(role="navigation")
+  %ul
+    %li.hidden.clearfix
+      = link_to(main_domain_link(root_path)) do
+        = icon('home', t('.home'), class: 'icon-lg')
+    - if minisite_access?(site)
+      - i = 1
+      - pages.decorate.each do |page|
+        %li.hidden.clearfix{class: ("delay-#{i}" unless i.zero?)}
+          - i+=1
+          = link_to( minisite_page_path(page.name), class: action?(page.name)) do
+            = icon(page.icon, page.title, class: 'icon-lg')
+      %li.hidden.clearfix{class: "delay-#{i}"}
+        = link_to(minisite_my_ideas_ideas_path, class: action?('my_ideas')) do
+          = icon('lightbulb', t('.ideas'), class: 'icon-lg')
+
+      %li.hidden.clearfix{class: "delay-#{i+1}"}
+        = link_to('#wedding_calc', class: action?('wedding_calc')) do
+          = icon('calculator', t('.wedding_calc'), class: 'icon-lg')
+
+      %li.hidden.clearfix{class: "delay-#{i+2}"}
+        = link_to('#guests', class: action?('guests')) do
+          = icon('users', t('.guests', count: 1).html_safe, class: 'icon-lg')
+
+      %li.hidden.clearfix{class: "delay-#{i+3}"}
+        = link_to('#seating_plan', class: action?('seating_plan')) do
+          = icon('flag', t('.seating_plan'), class: 'icon-lg')
+
+      %li.hidden.clearfix{class: "delay-#{i+4}"}
+        = link_to('#wishlists', class: action?('wishlists')) do
+          = icon('gift', t('.wishlists'), class: 'icon-lg')
+
+      %li.hidden.clearfix{class: "delay-#{i+5}"}
+        = link_to('#events', class: action?('events')) do
+          = icon('heart-empty', t('.events'), class: 'icon-lg')
+

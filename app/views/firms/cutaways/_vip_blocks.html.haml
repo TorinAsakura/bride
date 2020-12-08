@@ -1,0 +1,6 @@
+- unless firm.business_card_left.eql?(:nothing) && firm.business_card_right.eql?(:nothing)
+  .sv-firm-card-blocks
+    .sv-firm-card-block-left.sv-l
+      = render 'firms/business_card_block', firm: firm, block: firm.business_card_left
+    .sv-firm-card-block-right.sv-l
+      = render 'firms/business_card_block', firm: firm, block: firm.business_card_right

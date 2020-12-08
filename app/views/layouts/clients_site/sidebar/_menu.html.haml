@@ -1,0 +1,51 @@
+%ul.nav.nav-pills.nav-stacked.aside-item.tab-menu
+  - pages.ordered.decorate.each do |page|
+    %li
+      = link_to( minisite_page_path(page.name), class: action?(page.name)) do
+        = icon(page.icon, page.title, class: 'icon-sm')
+
+  - unless site.ideas.blank?
+    %li
+      = link_to(minisite_my_ideas_ideas_path, class: action?('my_ideas')) do
+        = icon('lightbulb', t('.ideas'), class: 'icon-sm')
+
+  - unless site.guests.blank? || Rails.configuration.skip_minisite_services
+    %li
+      = link_to(minisite_guests_path, class: action?('guests')) do
+        = icon('users', t('.guests').html_safe, class: 'icon-sm')
+        %span.badge= site.guests.count
+
+  - unless site.seating_plan.blank? || Rails.configuration.skip_minisite_services
+    %li
+      = link_to(minisite_seating_plan_path, class: action?('seating_plan')) do
+        = icon('flag', t('.seating_plan'), class: 'icon-sm')
+
+  - unless Rails.configuration.skip_minisite_services
+    %li
+      = link_to('#events', class: action?('events')) do
+        = icon('heart-empty', t('.events'), class: 'icon-sm')
+
+  - unless site.wishlists.blank? || Rails.configuration.skip_minisite_services
+    %li
+      = link_to('#wishlists', class: action?('wishlists')) do
+        = icon('gift', t('.wishlists'), class: 'icon-sm')
+      -#minisite_wishlists_path
+
+  - unless site.wedding_calc.blank? || Rails.configuration.skip_minisite_services
+    %li
+      = link_to('#wedding_calc', class: action?('wedding_calc')) do
+        = icon('calculator', t('.wedding_calc'), class: 'icon-sm')
+      -#minisite_wedding_calc_path
+
+  -#%li.dropdown-menu-activate{class: ('active' if [minisite_plan_of_measures_path, minisite_plan_of_measures_path, minisite_wedding_program_path, minisite_second_day_program_path].include? request.fullpath )}
+  -#%li.dropdown-menu-activate{class: ('active' if controller_name)}
+  -#  = link_to 'План мероприятий', '#', class: tab_active?(minisite_plan_of_measures_path(type: :man)) || tab_active?(minisite_plan_of_measures_path(type: :woman)) || action?('seating_plan') || action?('second_day_program')
+  -#
+  -#  %ul.dropdown-menu-active{class: tab_active?(minisite_plan_of_measures_path(type: :man)) || tab_active?(minisite_plan_of_measures_path(type: :woman)) || action?('wedding_program') || action?('second_day_program')}
+  -#    %li= link_to 'Мальчишник', minisite_plan_of_measures_path(type: :man), class: tab_active?(minisite_plan_of_measures_path(type: :man))
+  -#    %li= link_to 'Девишник', minisite_plan_of_measures_path(type: :woman), class: tab_active?(minisite_plan_of_measures_path(type: :woman))
+  -#
+  -#    - unless site.programms.wedding_day.blank?
+  -#      %li= link_to 'День свадьбы', minisite_wedding_program_path, class: action?('wedding_program')
+  -#    - unless site.programms.second_day.blank?
+  -#      %li= link_to 'Второй день', minisite_second_day_program_path, class: action?('second_day_program')

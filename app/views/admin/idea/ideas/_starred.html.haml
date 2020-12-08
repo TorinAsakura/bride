@@ -1,0 +1,9 @@
+%div{:class => "starred_"+idea.id.to_s}
+  - if (starred = current_user.user_ideas.idea(idea).first).present?
+    = link_to("-", idea, method: :delete, remote: true, class: "btn btn-info", title: 'Убрать из идей')
+  - else
+    = simple_form_for ::Idea::Idea.new, html: {remote: true} do |f|
+      = f.hidden_field :id, name: "id", value: idea.id
+
+      %button.btn.btn-success{title: 'Добавить в свои идеи'} +
+

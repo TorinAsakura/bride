@@ -1,0 +1,18 @@
+= simple_form_for [:admin, @section],
+                  remote: true,
+                  html: { id: 'idea_section_form', multipart: true, class: 'modal' } do |f|
+  .title_nobg
+    = params[:action] == 'new' ? 'Новая категория свадебных идей' : 'Редактирование категории свадебных идей'
+  = f.input :name, label: 'Название'
+  = f.input :description, as: :text, laebl: 'Описание', input_html: { rows: 3 }
+  = f.label 'Выберите обложку для категории'
+  = f.file_field :image
+
+  %div
+    %button.link-style Сохранить
+    - if @section.persisted?
+      = link_to 'Удалить',
+                admin_idea_section_path(@section),
+                class: 'link-style-active',
+                method: :delete,
+                confirm: 'Вы уверены?'

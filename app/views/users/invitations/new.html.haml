@@ -1,0 +1,42 @@
+%h3 Регистрация свадьбы:
+fffff
+%h4 Укажите свою пару:
+= simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :defaults => { :input_html => { :class => 'input-xlarge' } }, :html => {:method => :post} do |f|
+  -#= devise_error_messages!
+  %p
+    .row
+      .span4
+        %label.radio
+          = radio_button_tag 'user[existed]', '1', false, :class => 'existed_user'
+          Является пользователем системы
+    .row
+      .form-search
+        .span4
+          .input-prepend
+            %button.btn{ :type => 'submit', :disabled => 'disabled'}
+              %i.icon-search
+          = hidden_field_tag :couple_id, '', :class => 'input-large search-query', :placeholder => 'найти половинку'
+
+  %br/
+  .row
+    .span4
+      %label.radio
+        = radio_button_tag 'user[existed]', '0', true, :class => 'existed_user'
+        Не является пользователем системы
+
+  .row
+    .span4
+      = f.input :name
+    .span5
+      %label.string.required
+        %abbr{:title => 'required'}*
+        Укажите e-mail для отправки приглашеня:
+      = f.input :email, :label => false
+  .row
+    #wedding_date.span4.date.input-append{'data-date'=>Date.today.to_s, 'data-date-format'=>"yyyy-mm-dd"}
+      Укажите дату мероприятия
+      = text_field_tag 'wedding_date', Date.today.to_s, :class => 'span2', :placeholder => 'выберите дату', :id => 'wedding_date_field'
+      .add-on
+        %i.icon-calendar
+  %br/
+  %div= f.submit "Завершить", :class => 'btn btn-large btn-success'

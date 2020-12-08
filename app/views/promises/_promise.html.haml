@@ -1,0 +1,15 @@
+%div
+  - if wishlist.promises.length > 0
+    Кто хочет подарить:
+    = wishlist.promises.map {|p| "#{p.user.name} #{p.user.surname}"}.join(',')
+
+%div
+  - if current_user
+    - if p = current_user.promises.where(:wishlist_id => wishlist.id).first
+      = link_to "Не буду дарить", promise_path(p, :wishlist_id => wishlist.id), {:method => :delete, :remote => true, :class => [:btn, "btn-info"]}
+    - else
+      = simple_form_for wishlist.promises.new, :html => {:remote => true} do |f|
+        = f.hidden_field :wishlist_id, :name => "wishlist_id", :value => wishlist.id
+
+        %button.btn.btn-success{} Подарю
+

@@ -1,0 +1,7 @@
+.social-login
+  %ul.unstyled.inline.provider-list
+    - Secrets.defined_providers.each do |provider|
+      %li
+        = link_to "/auth/#{provider}" do
+          %i{:class => "icon icon-social icon-#{provider}"}
+          = t("social_accounts.providers.#{provider}")

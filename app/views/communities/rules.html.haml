@@ -1,0 +1,13 @@
+.sv-wrapper.sv-community.margintopotstp
+  .main-title.clearfix
+    = link_to community_path(@community), class: 'sv-a-back sv-l', alt: 'Назад' do
+      %i.icon-chevron-left
+    %span= @community.name
+
+  =render 'communities/shared/sidebar', community: @community
+  .sv-article
+    .sv-community__title
+      Правила клуба
+    .sv-community__description
+      = simple_format @community.rules
+

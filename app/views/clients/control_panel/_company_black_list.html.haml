@@ -1,0 +1,13 @@
+- company_to ||= false
+.corporations.company.all-bklist
+  .folks.sv-l
+    = image_tag 'caps/sv-user_photo.jpg', alt: 'naan'
+  .title
+    = link_to 'Конкор-Оптика', '#'
+  .naymenovanye
+    %p Компания
+  .to_blacklist.add_company
+    - if company_to
+      = link_to 'В чёрный список', '#', class: 'link-style sv-l'
+    - else
+      = link_to 'Убрать из списка', '#', class: ' link-style-inner sv-l'

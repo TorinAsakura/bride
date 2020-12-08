@@ -1,0 +1,3 @@
+$('#client-user-email').html('#{j(render 'clients/update_actions/main_settings/update_user_email', client: @client)}');
+- if @email_changed
+  $('#client-user-email span.result.saved').show();

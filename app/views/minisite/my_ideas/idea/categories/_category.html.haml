@@ -1,0 +1,5 @@
+.col-lg-2.col-md-3.col-sm-4.col-xs-6.sv-idea.idea-category{class: category.filter_class}
+  .sv-idea__image
+    = link_to category.site_category_url(@site) do
+      .sv-idea__image-body{data: category.decorate.site_image_bg(@site)}
+      .sv-idea__image-text= category.name

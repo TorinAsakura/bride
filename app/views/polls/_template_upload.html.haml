@@ -1,0 +1,9 @@
+%script{ id: 'polls-template-upload', type: 'text/x-tmpl' }
+  {% for (var i=0, file; file=o.files[i]; i++) { %}
+  .template-upload.sv-polls-previews-preview.fade
+    .preview
+      %span.fade
+    .cancel
+      %button.sv-polls-preview-remove-btn.no-btn Удалить изображение
+    .sv-or-or или
+  {% } %}

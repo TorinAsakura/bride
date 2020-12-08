@@ -1,0 +1,16 @@
+- if @service.uniq_form?
+  - signing_service = @subscription.signing_service.decorate
+  .sv-wrapper.sv-search
+    .title.clearfix
+      = link_to edit_firm_url(current_firm), class: 'sv-a-back sv-l', title: 'Назад' do
+        %i.icon-chevron-left
+      %span= signing_service.title
+    .sv-new-subscription
+      %p= signing_service.sub_title
+
+      .balance
+        %p
+          Ваш баланс:
+          %span.btn-link= current_firm.purse.available_amount.format(html: true).html_safe
+        = link_to('Пополнить', edit_firm_url(current_firm, anchor: 'monetize-purse'), class: "btn")
+      = render "#{@subscription.service.class.to_s.underscore}/items", items: @items, subscription: @subscription, ids: @subscription.all_signing_object_ids

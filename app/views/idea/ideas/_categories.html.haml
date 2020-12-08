@@ -1,0 +1,11 @@
+.row  
+  - @idea_categories.each do |c|
+    .span3
+      = link_to idea_path(c), :class => "thumbnail pull-left", :style => "text-decoration:none; height: 300px; width:200px; margin:5px;" do
+        = image_tag(c.image.url(:thumb), :class => "img-rounded", :alt => short_ver(c.description, 60)) if c.image.url
+        .album_info
+          #{c.ideas.ready.length} фото
+        .album_name
+          = c.name
+      .album_description
+        = short_ver c.description, 60

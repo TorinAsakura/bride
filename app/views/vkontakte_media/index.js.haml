@@ -1,0 +1,10 @@
+if("#{@referrer}".indexOf("polls") ===  -1){
+$('.sv-album-form__buttons').replaceWith('#{j(render( :file => 'vkontakte_media/index.html.haml'))}');
+$('#edit').data('referrer', '');
+}else{
+-#window.modalViewer = new VkontakteViewer()
+-#window.modalViewer.show(, '#{j(render 'show')}');
+$('#edit').html('#{j(render file: 'vkontakte_media/index.html.haml')}');
+$('#edit').data('referrer', '#{@referrer}');
+$.fancybox($('#edit'), {});
+}

@@ -1,0 +1,45 @@
+- form_url = @community_category.new_record? ? admin_community_categories_path : admin_community_category_path(@community_category)
+
+.sv-admin-community-category__popup
+  = simple_form_for @community_category, url: form_url,
+                    method: "#{@community_category.new_record? ? :post : :put}", 
+                    html: {multipart: true, id: 'community-category-form', class: '' }  do |f|
+
+    .sv-admin-community-category__popup__title
+      %h3= community_category.new_record? ? 'Новая категория' : 'Редактировать категорию'
+
+    .sv-admin-community-category__popup_body
+      .inline-table
+        %h5 Заголовок категории
+      .inline-table
+        = f.input :title, label: false
+      .inline-table
+
+      %br
+      .inline-table
+        %h5 Описание категории
+      .inline-table
+        = f.input :description, label: false, input_html: {style: 'width: 500px; height:100px;'}
+
+      .inline-table
+        %h5 Аватар
+      .inline-table
+        #community-avatar-img
+          = image_tag @community_category.avatar.preview
+          - unless @community_category.new_record?
+            = link_to 'Удалить аватар', remove_avatar_admin_community_category_path(@community_category),
+              class: 'link-style',
+              method: :delete,
+              remote: true,
+              id: 'remove_avatar'
+      .inline-table
+        = f.input :avatar, as: :file, label: false
+      %br
+      .inline-table
+        = f.button :submit, 'Сoхранить', class: 'link-style'
+
+        - unless community_category.new_record?
+          = link_to 'Удалить', admin_community_category_path(community_category),
+            confirm: 'Точно удалить?',
+            method: :delete,
+            class: 'link-style sv-r'

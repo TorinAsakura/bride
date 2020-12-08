@@ -1,0 +1,20 @@
+= f.simple_fields_for :spheres, f.object.spheres.with_deleted do |ff|
+  - dis = f.object.has_pro? && ff.object.persisted? ? :disabled : nil
+  %div{id: dom_id(ff.object)}
+    - class_name = "c_#{dom_id(ff.object)}"
+    .sv-firm-catalog-wrapper{ class: class_name, data: { js: 'firm-sphere-wrapper' } }
+      = link_to('', [f.object, ff.object], class: "sv-r delete-button#{' deleted' if ff.object.deleted?}", data: { js: 'firm-sphere-remove-link' }, remote: true, method: :delete)
+      = ff.input :id, collection: FirmCatalog.top.map{ |fc| [fc.name, fc.id] }, label: false, input_html: { class: 'firm_catalog_id', disabled: dis, data: {'select2-options' => {minimumResultsForSearch: -1}} }, selected: ff.object.firm_catalog.parent.id
+      .sv-firm-services-arrow{class: ('no-background' unless dis.nil?)}
+      = ff.input :firm_catalog_id, collection: ff.object.firm_catalog.parent.firm_catalogs, label: false, input_html: { class: 'firm_catalog_ids', disabled: dis, data: {'select2-options' => {minimumResultsForSearch: -1}} }
+      .clear
+    - unless request.xhr?
+      - content_for :javascripts do
+        :javascript
+          $(document).ready(function () {
+            new FirmCatalogSelector({
+              sphere: '.#{class_name} .firm_sphere_id',
+              catalog: '.#{class_name} .firm_catalog_id',
+              catalogList: '.#{class_name} select.firm_catalog_ids'
+            });
+          });

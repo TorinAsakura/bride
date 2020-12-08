@@ -1,0 +1,26 @@
+.page-block#seating_plan
+  %h1.title
+    = link_to minisite_page_path('about'), class: 'a-back' do
+      %i.icon-chevron-left
+    %span= t('.title').html_safe
+
+
+.main-full-content
+  .mini-site.margintopotstp
+
+
+  #main-container{controller: controller_name}
+    .print
+
+      #chart-max
+        #chart{seating_plan_id: @seating_plan.id}
+
+      #tables-and-guests
+
+      #guest-list
+        #guest-list-title Список гостей
+        - @guests.each do |guest|
+          .guest{type: gender_eng(guest.gender), guest_id: guest.id, class: gender_eng(guest.gender)}
+            %span.name= guest.name
+
+      .clear

@@ -1,0 +1,31 @@
+.sv-firm-address-form
+  .title_nobg= address.new_record? ? 'Добавить филиал' : 'Редактировать филиал'
+  = simple_form_for([firm, address]) do |f|
+    = f.input :name, label: 'Название филиала'
+    = f.input :address, input_html: { 'data-js' => 'firm-address-address', placeholder: 'Например: ул. Раскольникова, д. 35' }
+    = f.input :explanation, label: 'Пояснение адреса', input_html: { 'data-js' => 'firm-address-explanation', placeholder: 'Например: ТЦ "Торговый квартал", 1 этаж, остановка "Электротехников"' }
+    %div(style='margin: 0px 0px 15px;')
+      .sv-l(style='margin-right: 10px; width: 20%;')
+        = f.input :working_time_start, as: :string, label: 'Время роботы', input_html: { value: f.object.working_time_start.to_s(:time), style:"width: 85%;", 'data-js' => 'firm-address-time-start' }
+      .sv-l(style='width: 20%;')
+        = f.input :working_time_end, as: :string, label: '&nbsp;'.html_safe, input_html: {  value: f.object.working_time_end.to_s(:time), style:"width: 85%;", 'data-js' => 'firm-address-time-end' }
+      .clear
+    %div{ style: 'margin: 15px 0px 15px;' }
+      = label :phone, 'Телефон'
+      = f.simple_fields_for :phone_numbers do |b|
+        = render 'phone_numbers/phone_number_fields', f: b
+      = link_to_add_fields('Добавить телефон', f, :phone_numbers, 'phone_numbers/')
+    - if address.new_record?
+      %div{ style: 'text-align:center;' }
+        = link_to 'Сохранить', '#', class: 'link-style', 'data-js' => 'firm-address-submit'
+        = link_to 'Отмена', '#', class: 'link-style', 'data-js' => 'firm-address-cancel'
+    - else
+      = f.submit 'Сохранить', class: 'link-style'
+  .sv-firm-address-address-popup
+    %ul
+      %li
+        В данном поле введите точный "строительный адрес" вашего филиала, для того, чтобы определить местоположение в Яндекс.Картах.
+  .sv-firm-address-explanation-popup
+    %ul
+      %li В данном поле введите адрес вашего филиала, который будет понятен вашим клиентам.
+  .clear

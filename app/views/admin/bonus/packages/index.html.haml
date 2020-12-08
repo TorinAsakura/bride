@@ -1,0 +1,16 @@
+%table.index_table
+  %thead
+    %tr
+      - %w(months_count percent).each do |attr|
+        %th= Bonus::Package.human_attribute_name(attr)
+  %tbody
+    - @packages.each do |package|
+      %tr
+        %td= package.months_count
+        %td= best_in_place package, :percent, path: admin_bonus_service_package_path(@service, package)
+
+.add-resource
+  = link_to(new_admin_bonus_service_package_path(@service), class: 'link-style') do
+    %i.icon-plus
+    Добавить
+%br

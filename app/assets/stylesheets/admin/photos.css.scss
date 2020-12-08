@@ -1,0 +1,81 @@
+.sv-admin-photos {
+  .add-photo {
+    margin: 0 0 10px 0;
+  }
+
+  .photo {
+    padding: 10px 5px;
+
+    &:nth-child(even) {
+      background: #eee;
+    }
+
+    &:nth-child(odd) {
+      background: #ddd;
+    }
+    .about {
+      display: inline-block;
+      width: 600px;
+      vertical-align: top;
+      margin: 0 15px;
+      font-size: 16px;
+
+      span {
+        font-weight: bold;
+      }
+
+      .tags {
+        margin-top: 10px;
+      }
+    }
+
+  }
+  .action-block {
+    display: inline-block;
+    width: 120px;
+    vertical-align: top;
+  }
+  .page-action {
+    .icon-backward:before {
+      content: '';
+    }
+    .icon-forward:before {
+      content: '';
+    }
+  }
+}
+
+.sv-admin-photo-form {
+  .description {
+    width: 450px;
+    height: 200px;
+  }
+
+
+  .tags-field {
+    margin: 10px 0;
+  }
+  .combosex_main {
+    width: 500px;
+
+    li {
+      margin: 6px 3px 3px 3px;
+
+      &.combosex_input_span {
+        margin-top: 3px;
+      }
+    }
+
+    input {
+      margin: 0;
+    }
+  }
+}
+
+.sv-admin-photo-sub-menu {
+  margin: 10px 0;
+
+  a {
+    margin-right: 10px;
+  }
+}

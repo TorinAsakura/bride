@@ -1,0 +1,7 @@
+#sv-resend-confirm
+  %h1.title Повторное письмо с активацией
+  = simple_form_for resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post } do |f|
+    %div
+      .description Введите e-mail, для письма с повторной активацией.
+      = f.input :email, placeholder: 'E-mail', label: false, input_html: {class: 'input-big'}
+      = f.submit 'Выслать активацию', class: 'link-style input-big'

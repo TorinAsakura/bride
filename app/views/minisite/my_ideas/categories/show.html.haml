@@ -1,0 +1,22 @@
+.page-block
+  %h1.title
+    = link_to minisite_my_ideas_root_path, class: 'a-back' do
+      %i.icon-chevron-left
+    %span= t('.title', category: @category.name)
+    - for_moderator_of @site do
+      .add
+        = link_to(idea_section_category_url(@category.sections.first, @category), remote: true, title: t('.add')) do
+          %i.icon-doc-alt
+
+  .row#ideas
+    .col-xs-12.sv-minisite-ideas__grid{data: {'max-page' => @ideas.total_pages}}= render @ideas
+
+  .row.hidden.sv-ideas__nav
+    = rel_next_prev_link_tags @ideas
+
+- if session[:idea]
+  = content_for :javascript do
+    :javascript
+      $(document).ready(function () {
+        $.getScript('#{session.delete(:idea)}');
+      });

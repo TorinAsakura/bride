@@ -1,0 +1,6 @@
+- if post.accepted?
+  = link_to(t('static.reaccept'), refuse_post_path(post), remote: true, method: :post)
+- else
+  = link_to(t('static.accept'), accept_post_path(post), remote: true, method: :post)
+  = image_tag 'sorted/im-bord.png'
+  = link_to(t('static.resufe'), refuse_post_path(post), remote: true, method: :post)

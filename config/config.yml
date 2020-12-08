@@ -1,0 +1,7 @@
+robokassa_login: 'mikevb'
+robokassa_secret: 'razdva12'
+
+amazon_s3_key: "AKIAIY3QENJLXN6HPGIQ"
+amazon_s3_secret: "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"
+
+base_domain: "lvh.me"

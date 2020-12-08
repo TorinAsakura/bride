@@ -1,0 +1,3 @@
+.col-lg-3.col-md-4.col-sm-6.col-xs-6.photo{class: ("animated delay-#{photo_counter - 1 % 15 + 1} bounceIn#{cycle('','Left','','Right','','Up')}" unless photo_counter.zero?)}
+  = link_to [photo.album, photo], remote: true, id: dom_id(photo) do
+    = image_tag(photo.path.try(:large_preview), class: 'img-responsive')

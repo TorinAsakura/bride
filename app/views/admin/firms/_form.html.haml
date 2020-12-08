@@ -1,0 +1,57 @@
+= simple_form_for firm, url: (firm.new_record? ? admin_firms_path(firm) : admin_firm_path(firm)), html: {class: 'form-horizontal firm-settings' }  do |f|
+  = f.input :id, as: :hidden
+  %h3
+    = firm.new_record? ? 'Новая фирма' : firm.name
+
+  - unless firm.new_record?
+    .span2
+      = link_to 'Профиль компании', firm_link(firm)
+    .span2
+      = link_to 'Удалить', admin_firm_path(firm), method: 'delete', confirm: 'Вы уверены?', class: 'link-style'
+
+  .span5
+    = f.input :name
+  .span7
+    %label Категории:
+    = f.simple_fields_for :spheres do |ff|
+      - class_name = "c#{rand(99999)}"
+      .sv-firm-catalog-wrapper{ class: class_name, data: { js: 'firm-sphere-wrapper' } }
+        = ff.hidden_field :_destroy, data: { js: 'firm-sphere-destroy-field' }
+        = link_to '', '#', class: 'sv-r close-button', data: { js: 'firm-sphere-remove-link' }
+        = ff.input :id, collection: FirmCatalog.top.map{ |fc| [fc.name, fc.id] }, label: false, input_html: { class: 'firm_catalog_id'}, selected: ff.object.firm_catalog.parent.id
+        .sv-firm-services-arrow
+        = ff.input :firm_catalog_id, collection: ff.object.firm_catalog.parent.firm_catalogs, label: false, input_html: { class: 'firm_catalog_ids' }
+        .clear
+    = link_to_add_fields 'Добавить еще одну категорию', f, :spheres, 'firms/'
+
+    = f.input :status, as: :select, collection: Firm.get_status_values, include_blank: false
+
+  .span8
+    %h3 Основные атрибуты
+    = f.input :extended_name
+    = f.input :description
+    .control-group
+      %label Логотип
+      .controls
+        .span3
+          = image_tag(firm.logo_url, class: 'firm-logo-img')
+        .span2
+          = f.input :logo, as: :file, label: false, wrapper: :none
+    #sv-firm-detail-poster
+      %label Баннер
+      .span4
+        - if firm.banner_album && (cover = Photo.find_by_id(firm.banner_album.cover_id))
+          = image_tag(cover.banner_path.usual)
+        - else
+          .bg-svgrey.noposter
+      .span2
+        = simple_fields_for 'banner_album' do |f|
+          = f.input_field :pictures, as: :file, label: false, input_html: {multiple: true}, required: false, wrapper: :none, name: 'banner_album[pictures][][banner_path]'
+      .span8
+        = f.submit 'Сохранить', class: 'link-style'
+
+- unless firm.new_record?
+  .span8.contacts
+    = render 'city_firms/index' 
+  .span8.firm-services
+    = render 'firm_services/index'

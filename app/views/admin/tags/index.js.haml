@@ -1,0 +1,7 @@
+- if @usual_tags
+  $("#usual-tag").html('#{j(render partial:"tag", collection: @usual_tags, as: :tag)}');
+  $(".usual_paginator").html('#{j(paginate @usual_tags, param_name: "[usual][page]", remote: true)}');
+
+- if @accepted_tags
+  $("#accepted-tag").html('#{j(render partial:"tag", collection: @accepted_tags, as: :tag)}');
+  $(".accepted_paginator").html('#{j(paginate @accepted_tags, param_name: "[accepted][page]", remote: true)}');

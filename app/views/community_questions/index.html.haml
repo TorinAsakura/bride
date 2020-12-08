@@ -1,0 +1,16 @@
+- @questions.each do |question|
+  %div{:Style => "border:1px solid #EDEDED; margin-bottom: 5px; padding: 5px;"}
+    = link_to question.title, community_question_path(params[:community_id], question)
+    %p
+      %small
+        .pull-left
+          Ответов: #{question.answers.length}
+          - unless question.answers.blank?
+            Последний от #{link_to_user(question.answers.last.user)} #{l question.answers.last.created_at, :format => :comment}
+        .pull-right
+          - if question.answer.nil?
+            %span.label.label-success Вопрос открыт
+          - else
+            %span.label Вопрос закрыт
+        .clearfix
+    .cleafix

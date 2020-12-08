@@ -1,0 +1,4 @@
+- if (add_category = Bonus::Service::AddSphere.find_by_slug('add-category')).present? && @firm.has_pro?
+  = link_to 'Добавить еще одну категорию', new_bonus_service_subscription_url(add_category), class: 'sv-add_item', id: 'add-form-category'
+- elsif !@firm.has_spheres?
+  = link_to 'Выбрать категорию', '#change-first-firm-catalog', class: 'sv-add_item', id: 'add-firm-firm-catalog', data: { toggle: 'modal' }

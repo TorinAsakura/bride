@@ -1,0 +1,44 @@
+= render :partial => 'layouts/admin_tab_menu',  :locals => { :select => "question" }
+%ul.nav.nav-tabs
+  %li
+    = link_to "Вопросы", admin_questions_path
+  %li.active
+    = link_to "По рубрикам", admin_question_categories_path
+
+.row
+  .span3
+    %div
+      = link_to "Создать новую рубрику", new_admin_question_category_path, :remote => true
+      %h5 Рубрики
+      %div
+        = link_to_unless @question_category == params[:question_category_id], "Все", admin_question_categories_path
+      - @question_categories.each do |question_category|
+        %div
+          = link_to_unless_current question_category.name + "|", admin_question_categories_path(:question_category_id => question_category.id)
+          = link_to "Удалить", admin_question_category_path(question_category.id), :method => "DELETE"
+  .span9
+    - @questions.each do |question|
+      %div{:style => "padding-bottom: 10px;"}
+        .pull-left
+          = user_avatar(question.user)
+        .pull-left{:style => "padding-left:10px;"}
+          %div{:style => "width: 410px;"}
+            %div{:style => "min-height: 63px;"}
+              %div #{link_to_user(question.user)}
+              %div #{question.title}
+              %div #{question.body}
+            %div
+              .pull-left
+                %small #{l question.created_at, :format => :comment}
+            %div{:style => "margin-top:20px;"}
+              .pull-right
+                = link_to "Редактировать", edit_admin_question_path(question), :remote => true
+                = link_to "Удалить", admin_question_path(question), :method => "delete"
+              .clearfix
+      .clearfix
+      %hr
+    = paginate @questions
+
+
+
+

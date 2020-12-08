@@ -1,0 +1,6 @@
+var firmServicesLines = $('.sv-firm-services-list form').find('#firm-services-lines');
+firmServicesLines.find('.sv-firm-services-line.last').removeClass('last');
+firmServicesLines.append($('<%= j(render 'form', service: @service) %>'));
+firmServicesLines.find('.sv-firm-services-line:last').find('input.raiting').val(firmServicesLines.find('.sv-firm-services-line').length);
+updateFirmServices.remove(firmServicesLines.find('.sv-firm-services-line:last').find('[data-js=firm-service-remove]'));
+NotificationByFields.init($('.sv-firm-services-list').find('.sv-firm-services-line-new').find('.field-block.with-notification'));

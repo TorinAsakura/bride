@@ -1,0 +1,13 @@
+.main-full-content
+  .mini-site#main-container-wedding-calc{wedding_calc_id: @wedding_calc.id}
+    .calc-categories.cf
+      .main-title#calc-top-menu
+        = link_to_minisite(@site, nil, class: 'sv-a-back sv-l') do
+          %i.icon-chevron-left
+        %span Свадебный калькулятор
+
+        .all-categories-total-price
+          %span.total-text Всего расходов на
+          %span.price
+          %span.total-text руб.
+      #calc-top-menu-clone

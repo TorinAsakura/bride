@@ -1,0 +1,11 @@
+- content_for :javascripts do
+  :javascript
+    WeddingCitiesList.init('#sv-wedding-cities');
+= render "cities/wedding_cities_filters", items: items
+.items#city-items
+  - items.group_by(&:name_index).each do |i, items|
+    .city-group.item{data: {item: i}}
+      %h5= i
+      %ul
+        - items.each do |item|
+          %li.city-item{id: dom_id(item), data: {country: item.country.id}}= edit_user_wedding_city_link(current_user, item)

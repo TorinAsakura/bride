@@ -1,0 +1,86 @@
+.button, .link-style, button{
+  height: $input-small-height + $main-margin / 2;
+  line-height: $input-small-height + $main-margin / 2;
+  padding: 0 $main-padding !important;
+  &.input-big {
+    height: $input-height + $main-margin / 2;
+    line-height: $input-height + $main-margin / 2;
+  }
+  &.input-super-big {
+    height: $input-small-height * 2.5;
+    line-height: $input-small-height * 2.5;
+  }
+  &:hover {
+    padding: 0 $main-padding;
+  }
+}
+
+.link-style, a.link-style {
+  background: #c84563;
+  color: white;
+  text-decoration: none;
+  padding: 0 20px !important;
+  display: inline-block;
+  line-height: $input-small-height + $main-margin / 3;
+  border: 1px solid #c84563;
+  cursor: pointer;
+  vertical-align: top;
+  &:hover {
+    background: #f1849d;
+    border: 1px solid #f1849d;
+    color: #fff;
+    padding: 0px 20px !important;
+  }
+  &.success{
+    background-color: #62C462;
+    border-color: #51A351;
+    &:hover{
+      background: white;
+      color: #51A351;
+    }
+  }
+}
+
+.link-style-inner {
+  height: $input-small-height;
+  line-height: $input-small-height;
+}
+
+.link-style {
+  box-sizing: border-box;
+  &:hover {
+    line-height: $input-small-height + $main-margin / 2 - 2px;
+  }
+  &.input-big, &.input-big:hover {
+    line-height: $input-height + $main-margin / 2 - 2px;
+  }
+}
+
+.btn {
+  @include border($main-color);
+  @include inline-block;
+  height: $input-small-height + $main-margin / 3;
+  line-height: $input-small-height + $main-margin / 4;
+  cursor: pointer;
+  vertical-align: bottom;
+  color: white;
+  background: $main-color;
+  &.input-big {
+    height: $input-height + $main-margin / 3;
+    line-height: $input-height + $main-margin / 4;
+  }
+  &:hover {
+    background: white;
+    color: $main-color;
+  }
+  &.btn-default {
+    &:hover,
+    &:focus,
+    &:active,
+    &.active,
+    .open {
+      background: white;
+      color: $main-color;
+    }
+  }
+}

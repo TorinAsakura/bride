@@ -1,0 +1,5 @@
+$('[data-part=site-address]').html('#{j(render 'sites/mini_site_edit/base_settings/update_address', site: @site)}');
+$('[data-part=site-address] [type=submit]').hide();
+
+- if @site_name_changed
+  $('[data-part=site-address] span.updated').show();

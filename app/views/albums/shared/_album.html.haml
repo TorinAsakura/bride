@@ -1,0 +1,9 @@
+.sv-firm-album{ class: hidden == true ? 'sv-firm-album_hidden' : '' }
+  = link_to polymorphic_path([journal, album]) do
+    = image_tag album.cover.nil? ? 'placeholders/stub_for_album.jpg' : album.cover.path.cover
+  .sv-firm-album__info
+    = link_to polymorphic_path([journal, album]), class: 'sv-firm-album__info-name' do
+      = album.name
+      .sv-firm-album__info-icon
+      .sv-firm-album__info-count
+        = album.photos.count

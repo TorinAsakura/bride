@@ -1,0 +1,6 @@
+$('#edit').find('.modal').modal('hide');
+$('#edit').html('<%= j(render "#{@subscription.service.class.to_s.underscore}/subscribe", subscription: @subscription)%>');
+$('#edit').find('.modal').modal('show');
+<%if @subscription.service.uniq_form?%>
+<%= render "#{@subscription.service.class.to_s.underscore}/subscribe_actions", subscription: @subscription%>
+<%end%>

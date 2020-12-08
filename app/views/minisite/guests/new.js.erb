@@ -1,0 +1,4 @@
+var list = $('#<%= @guest.group%>-guests');
+list.append('<%= j(render 'form', guest: @guest)%>');
+list.parent().find('.add-item').hide();
+MinisitesGuest.init('<%= @guest.group%>');

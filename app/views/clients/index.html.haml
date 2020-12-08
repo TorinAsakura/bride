@@ -1,0 +1,59 @@
+.sv-wrapper.sv-search.margintopotstp
+  .title.clearfix
+    = link_to :back, class: 'sv-a-back sv-l', alt: 'Назад' do
+      %i.icon-chevron-left
+    %span Поиск
+    %ul
+      %li.search
+        = link_to root_path do
+          %i найти
+
+  .ovflhid.sv-search-form
+    .title_nobg.clearfix
+      .sv-l Люди
+      .sv-l= link_to 'Свадебные сайты', all_minisites_path
+
+    = simple_form_for @search, url: clients_path, html: { method: :get, id: 'client-search-form', remote: true} do |f|
+      .block-sv-find-user
+        .sv-l
+          = f.input :fullname, required: true, placeholder: 'Введите ФИО или id пользователя', label: false
+
+        .sv-l.otp
+          = f.input_field :city_id, id: 'client_city_id', data: { 'select2-disabled' => true, 'autocomplete-path' => city_autocomplete_path }
+          = link_to 'x', clients_path, id: 'sv-reset-city-select'
+
+        .sv-radio-user.sv-l
+          Пол:
+          = f.radio_button :gender, 'people', id: 'people', class: 'radio-style-people', checked: true
+          = label_tag 'people'
+          = f.radio_button :gender, false, id: 'girl', class: 'radio-style-girl'
+          = label_tag 'girl'
+          = f.radio_button :gender, true, id: 'man', class: 'radio-style-man'
+          = label_tag 'man'
+
+        .sv-without-avatar.sv-l
+          = f.input :without_avatar, as: :hidden, input_html: { value: false }
+          %label.checkbox
+            = f.check_box :without_avatar, {}, true, nil
+            %span
+          %label.sv-l{for: 'checkbox'} Без фото
+
+        .sv-search-date.sv-l
+          День рождения:
+          = select_tag 'search[day]', options_for_select(['День'] + (1..31).to_a), class: 'select-day',
+            id: 'day', data: {'select2-options' => {minimumResultsForSearch: -1}}
+          = select_tag 'search[month]', options_for_select(['Месяц'] + months_list), class: 'select-month',
+            id: 'month', data: {'select2-options' => {minimumResultsForSearch: -1}}
+          = select_tag 'search[year]', options_for_select(['Год'] + ((Date.today.year-90)..(Date.today.year-12)).to_a.reverse), class: 'select-years',
+            id: 'year', data: {'select2-options' => {minimumResultsForSearch: -1}}
+
+          = hidden_field_tag 'sort', 'created_at', id: 'sv-search-sort-type'
+          = hidden_field_tag 'order', 'DESC', id: 'sv-search-order-type'
+        .sv-end-find-us.sv-r
+          = f.button :submit, 'Найти', class: 'link-style sv-l'
+  .title_nobg
+    = link_to 'По популярности', clients_path, class: "sv-search-sort #{params[:order]}", sort: 'popular'
+    = link_to 'По дате регистрации', clients_path, class: "active sv-search-sort #{params[:order]}", sort: 'created_at'
+
+#sv-search-clients
+  = render 'clients_for_index', clients: @clients

@@ -1,0 +1,13 @@
+#client-user-email {
+  @include clearfix;
+  .title_nobg.top-marg {
+    margin-top: 5px;
+  }
+  .field {
+    //font-size: 14px
+    .link-style.sv-l {
+      margin: 0 $main-padding 0 $main-margin-small;
+      float: left;
+    }
+  }
+}

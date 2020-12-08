@@ -1,0 +1,22 @@
+.sv-wrapper.sv-community.margintopotstp
+  .main-title
+    = link_to community_albums_path(@community), class: 'sv-a-back sv-l', alt: 'Назад' do
+      %i.icon-chevron-left
+    %span= @community.name
+
+  = render 'communities/shared/sidebar', community: @community
+
+  .sv-article
+    .sv-community__title
+      Фотографии из обсуждений
+
+    %div{ 'data-js' => 'photo-preview-list' }
+      - @post_images.each do |i|
+        = link_to community_image_path(@community, i),
+          remote: true, id: dom_id(i), class: 'sv-firm-album-photo sv-l', 'data-js' => 'photo-preview' do
+          = image_tag i.image.large_preview
+
+    .sv-photos-hidden-nav
+      = rel_next_prev_link_tags @post_images
+
+    .clearfix

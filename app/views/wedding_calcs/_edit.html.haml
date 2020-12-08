@@ -1,0 +1,40 @@
+.sv-article
+  #main-container-wedding-calc{wedding_calc_id: wedding_calc.id}
+    .calc-categories.cf
+
+      #calc-top-menu.edit-block
+        = link_to 'Назад', :back, class: 'link-style'
+        .calc-save.link-style{onclick: 'saveWeddingCalcData()'} Сохранить
+        .calc-add-item.link-style{onclick: 'weddingCalcShowModalAddItem()'} Добавить статью расходов
+
+        .all-categories-total-price
+          -#%span.total-text Всего расходов на
+          %span.price
+          %span.total-text руб.
+      #calc-top-menu-clone
+
+  #modal-add-item.hide.modal
+    .modal-header
+      %h3
+        Новая статья расходов
+    .modal-body
+      .field.long
+        .label Категория
+        = select_tag 'parent_category', options_for_select([ ['Невеста', 'bride'], ['Жених', 'groom'] , ['Кольца', 'rings'],
+                                                             ['Бракосочетание / Венчание' , 'wedding'], ['Аксессуары' , 'accessories'],
+                                                             ['Свадебный банкет' , 'the_wedding_banquet'], ['Печатная продукция' , 'printed_matter'],
+                                                             ['Цветы и шарики' , 'flowers_and_balloons'], ['Фото и видеосъемка' , 'photos_and_video'],
+                                                             ['Тамада и музыка' , 'master_of_ceremonies_and_music'], ['Транспорт' , 'transport'],
+                                                             ['Прическа, макияж и маникюр' , 'makeup'], ['Прогулка' , 'tour'],
+                                                             ['Свадебное путешествие' , 'honeymoon'], ['Первая брачная ночь' , 'the_wedding_night'],
+                                                             ['Последний аккорд' , 'the_last_chord']  ]), class: 'modal-category'
+
+      .field.long
+        .label Название статьи
+        %input.modal-item-name.long{type: 'text', placeholder: 'Название статьи'}
+      .field
+        .label Единица измерения
+        %input.modal-item-iu{type: 'text', placeholder: 'Единица измерения'}
+
+    .modal-footer
+      %button.btn.btn-primary.add-new-item{onclick: 'weddingCalcAddItem()'} Сохранить

@@ -1,0 +1,7 @@
+%h3
+  Избранное
+- @favorites.each do |favorite|
+  - case favorite.favoriteable.class.to_s
+  - when 'Post'
+    = render :partial => 'posts/posts', :locals => {:posts => [favorite.favoriteable], :journal => favorite.favoriteable.journal}
+= paginate @favorites

@@ -1,0 +1,17 @@
+%h3 Клиенты:
+- @clients.each do |c|
+  %p
+    = c.email
+    -if c.user.has_role? :admin
+      = link_to 'Убрать админа', remove_admin_user_admin_path(c.user.id), method: :delete
+    -else
+      = link_to 'Сделать админом', make_admin_user_admin_path(c.user.id), method: :post
+
+%h3 Фирмы:
+- @firms.each do |f|
+  %p
+    = f.email
+    -if f.user.has_role? :admin
+      = link_to 'Убрать админа', remove_admin_user_admin_path(f.user.id), method: :delete
+    -else
+      = link_to 'Сделать админом', make_admin_user_admin_path(f.user.id), method: :post

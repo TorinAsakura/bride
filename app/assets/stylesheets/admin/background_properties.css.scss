@@ -1,0 +1,57 @@
+// Place all the styles related to the admin/background_images controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here:http://sass-lang.com/
+
+.background-properties {
+  margin: 10px;
+}
+
+.background-property {
+  margin: 10px;
+  display: inline-block;
+  width: 175px;
+}
+.background-property-form{
+  h1.title {
+    margin-bottom: 14px;
+    padding: 12px 0 10px 10px;
+    border-bottom: 1px solid #f1849d;
+    color: #c84563;
+    font-weight: 300;
+    font-size: 22px;
+  }
+
+  #style_form {
+    margin: 0 10px;
+
+    .w100 {
+      width: 100px;
+    }
+
+    .w400 {
+      width: 400px;
+    }
+
+    .text-bottom {
+      vertical-align: text-bottom;
+    }
+
+    .inline {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 5px 0 10px;
+    }
+
+    [type=radio],
+    [type=checkbox] {
+      margin: 0;
+    }
+
+    .field {
+      margin: 10px 0;
+    }
+    .preview_img img {
+      width: 400px;
+    }
+  }
+}

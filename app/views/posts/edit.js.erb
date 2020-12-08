@@ -1,0 +1,6 @@
+window.postForm = new PostForm('<%= j(render 'form', journal: @journal, post: @post)%>');
+window.postForm.show();
+
+<%- if @post_form.post.is_resource? 'Community' %>
+  $('#post_category_id').select2();
+<%-end %>

@@ -1,0 +1,151 @@
+.sv-admin-task__show
+  .sv-admin-task__title 
+    Задача
+
+  = simple_form_for [:admin, task], html: { id: 'task-form', multipart: true, novalidate: true}  do |f|
+    - type_task_values = Task.get_type_task_values
+    - type_task_values.delete(["Пользовательский", :custom])
+    .sv-admin-task__inputs-one-line
+      = f.input :type_task, as: :select, collection: type_task_values, include_blank: false, class: 'sv-half'
+      = f.association :task_category
+    = f.input :name, required: false, input_html: { class: 'sv-full' }
+    .sv-admin-task__without-service{style: "display:#{'none' if task.with_service?}"}
+      .clear
+      %label Банер задачи
+      .sv-admin-task__illustration-wrap
+        #task-illustration
+          - if task.image.present?
+            = image_tag task.image.thumb
+          - else 
+            = image_tag 'sorted/sv-admin-task-poster.png'
+          = f.hidden_field :x, value: '0', id: 'illustration_x'
+          = f.hidden_field :y, value: '0', id: 'illustration_y'
+          = f.hidden_field :x2, value: '650', id: 'illustration_x2'
+          = f.hidden_field :y2, value: '200', id: 'illustration_y2'
+          = f.hidden_field :scale, value: '1', id: 'illustration_scale'
+          = f.input_field :image, as: :file, required: !task.image.file, id: 'task-upload-poster'
+
+      %button.sv-admin-task__upload-poster.link-style
+        Загрузить изображение
+      #illustration-popup
+        .title_nobg Редактирование постера для задачи
+        #illustration-on-upload
+          %img
+        %div{ style: 'text-align:center;' }
+          = link_to 'Сохранить', admin_task_categories_path, class: 'link-style', 'data-js' => 'illustration-popup-close'
+      .sv-admin-task__description
+        %label Описание задачи
+        = f.input :description, label: false, input_html: { class: 'sv-full redactor' }
+
+        %label.sv-full Изображения (файлы .jpg, .jpeg, .png, .gif, .bmp)
+        .sv-admin-task__button{ 'data-js' => 'task-upload-file' }
+          = image_tag 'sorted/sv-post-attach-photo.png'
+
+        .sv-admin-task__images.clearfix
+          - task.images.each do |i|
+            .sv-admin-task__image
+              .sv-admin-task__image-preview
+                - image_link = i.image.to_s
+                = link_to image_link, target: '_blank' do
+                  = image_tag i.image.large_preview
+              .sv-admin-task__image-info
+                %p= image_link
+              = link_to remove_image_admin_task_path(task, i), class: 'sv-file-remove-ajax' do 
+                = image_tag './sorted/sv-icon-small-close.png'
+
+
+      %label.sv-full Документы (файлы .rar, .doc, .xls, .pdf)
+      .sv-admin-task__load-file__button
+        = text_field_tag :file_title, '', placeholder: 'Название файла'
+        %button.link-style{ 'data-js' => 'task-upload-file' }
+          Выбрать файл
+      .sv-admin-task__load-files
+        - task.files.each do |file|
+          .sv-admin-task__load-file
+            .sv-admin-task__load-file__extension
+              = link_to file.url.url, target: '_blank' do 
+                = image_tag "icon_ext/#{file.url.file.extension}.png", alt: file.url.file.extension
+            .sv-admin-task__load-file__name
+              %p= link_to file.title, file.url.url, target: '_blank'
+              %p.sv-admin-task__load-file__size= "#{file.url.file.filename} (#{to_mb(file.url.file.size)})"
+            = link_to remove_file_admin_task_path(task, file), class: 'sv-file-remove-ajax' do 
+              = image_tag './sorted/sv-icon-small-close.png'
+
+      %label Теги
+      = render 'tags/input', f:f
+      .clear    
+
+      %p 
+        %label Категории компаний
+        = link_to 'Добавить категорию', admin_task_categories_path, class: 'sv-admin__add-firm-category'
+
+      .sv-admin-task-category
+        %ul.sv-categories
+          - if @firm_catalogs.present?
+            - @firm_catalogs.top.each do |fc_top|
+              %li.sv-category
+                = select_tag 'task[firm_catalog_tasks_attributes][][firm_catalog_id]', 
+                  options_from_collection_for_select(FirmCatalog.top, 'id', 'name', fc_top.id), 
+                  include_blank: true, class: 'sv-admin-category-select', id: ''
+                = link_to 'x', admin_task_categories_path, class: 'task-remove-file-link'
+                %ul
+                  - @firm_catalogs.where(parent_id: fc_top.id).each do |fc_bottom|
+                    %li
+                      %i.login_arrow
+                      = select_tag 'task[firm_catalog_tasks_attributes][][firm_catalog_id]', 
+                        options_from_collection_for_select(FirmCatalog.where(parent_id: fc_top.id), 
+                        'id', 'name', fc_bottom.id), class: 'sv-admin-subcategory-select', id: ''
+                      = link_to 'x', admin_task_categories_path, class: 'task-remove-file-link'
+                = link_to 'Добавить подкатегорию', admin_task_categories_path, class: 'sv-admin__add-firm-subcategory'
+      .clear
+      %p 
+        %label Категории свадебной идеи
+        = link_to 'Добавить категорию свадебной идеи', admin_task_categories_path, class: 'sv-admin__add-idea-category'
+
+      .sv-admin-task-category
+        %ul.sv-categories
+          - if @idea_categories_group.present?
+            - @idea_categories_group.each do |key, ic_group|
+              %li.sv-category
+                = select_tag '', options_from_collection_for_select(Idea::Section.all, 'id', 'name', key),
+                  include_blank: true, class: 'sv-admin-category-idea-select', id: ''
+                = link_to 'x', admin_task_categories_path, class: 'task-remove-file-link'
+                %ul
+                  - ic_group.each do |ic|
+                    %li
+                      %i.login_arrow
+                      = select_tag 'task[idea_category_tasks_attributes][][category_id]',
+                        options_from_collection_for_select(Idea::Section.find(key).categories, 'id', 'name', ic.category_id),
+                        class: 'sv-admin-subcategory-select', id: ''
+                      = link_to 'x', admin_task_categories_path, class: 'task-remove-file-link'
+                = link_to 'Добавить подкатегорию', admin_task_categories_path, class: 'add-idea-subcategory'
+    .clear
+    .sv-task-with-service{style: "display:#{'none' unless task.with_service?}"}
+      = f.input :service, as: :select, collection: Task.get_service_values, label: 'Выберите сервис', input_html: {style: 'width: 400px'}
+    .modal-footer
+      = link_to 'Сохранить', '', class: 'link-style sv-l', id: 'task-send-form'
+      - unless task.new_record?
+        .sv-end-form
+          .field-block
+            .notification
+              Вы действительно хотите удалить задачу?
+              Все данные будут удалены.
+              = link_to 'Подтверждаю', admin_task_path(task), method: 'delete', class: 'link-style sv-l'
+            = link_to 'Удалить', '', class: 'sv-confirm-button link-style sv-l'#, id: 'remove-task' 
+
+    .sv-task-settings.wait Подождите, идёт сохранение
+    .sv-task-settings.error Ошибка, проверьте заполнение полей
+    .sv-task-settings.saved Сохранено
+
+    .clearfix
+    - if task.events.any?
+      .sv-admin-task__update-all-events
+        = link_to 'Обновить для всех пользователей', update_all_events_admin_task_path(task),
+          confirm: "Действие приведёт к изменению задачи в #{task.events.count} планировщиках. Также у пользователей обнулятся выполненые подзадачи в этой задаче. Продолжить?",
+          method: 'put', class: 'link-style'
+
+  = form_for :file, url: load_file_admin_task_path(task.id || 0), html: { id: 'task-files'} do |f|
+    %table
+      %tbody.files
+    .p-rel.hide
+      = f.file_field :files, multiple: true, id: 'task-files-upload'

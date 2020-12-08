@@ -1,0 +1,14 @@
+.main-right-content
+  %article
+    %section
+      %h1.page-title Свадебные идеи
+
+    .page-content.sv-minisite-idea-sections
+      .sv-minisite-idea-sections__grid
+        = render @sections
+        - @idea_sections.each do |section|
+          .sv-minisite-idea-section
+            .sv-minisite-idea-section__image
+              = link_to idea_categories_minisite_myidea_path(section) do
+                = image_tag section.image_url :thumb
+            .sv-minisite-idea-section__title= section.name

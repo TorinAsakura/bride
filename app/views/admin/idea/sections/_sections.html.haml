@@ -1,0 +1,15 @@
+- @sections.each_with_index do |section, i|
+  %div{ style: 'display: inline-block; width: 200px;' }
+    = link_to admin_idea_section_path(section) do
+      %h4= section.name
+      = image_tag(section.image.url(:thumb)) if section.image.url
+    %div
+      = link_to 'Редактировать', edit_admin_idea_section_path(section), remote: true
+    %div
+      = link_to 'Удалить', admin_idea_section_path(section), method: :delete, confirm: 'Вы уверены?'
+    - unless i.zero?
+      %div
+        = link_to 'Влево', move_left_admin_idea_section_path(section), method: :post, remote: true
+    - unless i == @sections.count - 1
+      %div
+        = link_to 'Вправо', move_right_admin_idea_section_path(section), method: :post, remote: true

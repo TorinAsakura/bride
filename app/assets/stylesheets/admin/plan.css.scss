@@ -1,0 +1,188 @@
+#sv-admin-plan-row {
+  margin:5px 0 0;
+  height:41px;
+}
+
+#sv-admin-plan-row div.sv-plan-etap {
+  float:left;
+}
+
+#sv-admin-plan-row span {
+  display:block;
+  float:left;
+  margin:0;
+  padding:0;
+  color:#c84563;
+  height:41px;
+  line-height:41px;
+  border-left:1px solid #f1849d;
+}
+
+#sv-admin-plan-row div.sv-plan-etap.first-child span {
+  border-left:0;
+}
+
+#sv-admin-plan-row div.sv-plan-etap span a {
+  display:block;
+  color:#c84563;
+  padding:0 9px 0 9px;
+  &.s1 {
+    color: #fff;
+    background: #c84563;
+  }
+  &.s2 {
+    color: #fff;
+    background: #4a0707;
+  }
+}
+
+#sv-admin-plan-row div.sv-plan-etap span a:hover, #sv-admin-plan-row div.sv-plan-etap span a.active {
+  background:#f1849d;
+  color:#fff;
+  text-decoration:none;
+}
+
+#sv-admin-plan-row div.sv-plan-dates {
+  float:left;
+  border-left:1px solid #f1849d;
+  height:41px;
+  line-height:41px;
+  padding:0 5px;
+  width:345px;
+}
+
+#sv-admin-plan-row div.sv-plan-dates .mCSB_scrollTools {
+  top:30px!important;
+}
+
+#sv-admin-plan-row div.sv-plan-days {
+  float:left;
+  border-left:1px solid #f1849d;
+  height:41px;
+  line-height:41px;
+  padding:0 5px;
+}
+
+#sv-admin-plan-row ul {
+  display:block;
+  float:left;
+  list-style:none;
+  margin:0;
+  padding:0;
+  height:40px;
+}
+
+#sv-admin-plan-row ul li {
+  display:block;
+  float:left;
+  margin:0;
+  padding:8px 0;
+}
+
+#sv-admin-plan-row ul li a {
+  display:block;
+  margin:0;
+  padding:0 5px;
+  min-width:15px;
+  height:25px;
+  line-height:25px;
+  text-align:center;
+  color:#c84563;
+}
+
+#sv-admin-plan-row ul li a:hover {
+  text-decoration:none;
+  background:#cccccc;
+}
+
+#sv-admin-plan-row ul li a.s1 {
+  color:#fff;
+  background:#c84563;
+}
+
+#sv-admin-plan-row ul li a.s2 {
+  color:#fff;
+  background:#4a0707;
+}
+
+#sv-admin-plan-row ul li a.s3 {
+  background: #cccccc;
+}
+
+.sv-admin-plans__tasks-list {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid #CCCCCC;
+  .s1 { border-color: #cb0000; }
+  .s2 { border-color: #0099ff; }
+  .s3 { border-color: #f464d0; }
+  .s4 { border-color: #ffcc00; }
+  .s5 { border-color: #009900; }
+}
+
+.sv-admin-plans__tasks .sv-aside {
+  margin: 0px 25px 0 0;
+  width: 420px;
+}
+
+.sv-admin-plans__task-box {
+  display: block;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  border-color: #009900;
+  border-left: 4px solid #B3B3B3;
+  &:hover {
+    background: #ffdddd;
+  }
+  .borders {
+    border-bottom: 1px solid #CCCCCC;
+    border-right: 1px solid #CCCCCC;
+  }
+  .name {
+    display: table-cell;
+    margin: 0;
+    padding: 4px 0;
+    height: 35px;
+    vertical-align: middle; 
+    a {
+      color: #4c4c4c;
+      margin: 0 15px 0 15px;   
+      display: block;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.sv-admin-plan__type-title {
+  background: none repeat scroll 0 0 #C84563;
+  color: #FFFFFF;
+  font-size: 22px;
+  font-weight: 300;
+  overflow: hidden;
+  .sv-choice {
+    background: #C84563;
+    margin: 0;
+    ul {
+        margin: 0;
+        li {
+            line-height: 14px !important;
+        }
+    }
+    .center {
+      display: block;
+      margin: 15px;
+      font-size: 22px !important;
+    }
+  }
+}
+
+.sv-admin-plan__task-select-filter {
+  width: 315px;
+}
+
+.sv-admin-plan__find-task-input {
+  width: 400px;  
+}

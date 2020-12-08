@@ -1,0 +1,33 @@
+.fields_for_client.clearfix
+  = simple_form_for (@client_form || client_form), as: reg_resource_name, remote: true, url: registration_path(reg_resource_name, {with_provider: params[:with_provider]}),validate: true, html: {class: 'form-horizontal new_client', id: 'new_client', autocomplete: 'off' } do |f|
+    = hidden_field_tag :profile_type, 'client'
+    .row-left.clearfix
+      .field-block
+        = f.input :firstname, as: :hidden, input_html: { value: '' }
+        .notification Введите имя
+        = f.input :firstname, placeholder: 'Имя', label: false, input_html: { class: 'sv-input input-big', tabindex: 3 }
+
+      .field-block
+        = f.input :lastname, as: :hidden, input_html: { value: '' }
+        .notification Введите фамилию
+        = f.input :lastname, placeholder: 'Фамилия', label: false, input_html: { class: 'sv-input input-big', tabindex: 3 }
+      .field-block
+        = f.input :email, as: :hidden, input_html: { value: '' }
+        .notification Введите e-mail
+        = f.input :email, placeholder: 'E-mail', autofocus: true, label: false, input_html: { class: 'sv-input input-big', tabindex: 3 }
+      .field-block
+        = f.input :password, as: :hidden, input_html: { value: '' }
+        -# fix chrome autocomplete
+        .notification Введите пароль. Может содержать символы a-Z, 1-9, # $ % &
+        = f.input :password, placeholder: 'Пароль', label: false, required: true, :input_html => { pattern: User.password_format.source, class: 'sv-input input-big register_pass_1', tabindex: 4, 'data-js' => 'register-password' }
+      %div
+        %label.sv-input-check
+          = check_box_tag :read, :yes, true, required: 'required', tabindex: '8'
+          Я согласен с
+          = link_to 'правилами использования', "#{root_url}rules", target: '_blank'
+      %div
+        = f.input :subscription, as: :boolean,label: 'Хочу получать новости сайта', input_html: {checked: true}
+      = f.submit 'Зарегистрироваться', class: 'sv-btn-login input-big', tabindex: 10
+    .cntrl-group.social-block.clearfix
+      %p.ml-30 Регистрация с помощью соц.сетей
+      = render '/devise/shared/social_login'

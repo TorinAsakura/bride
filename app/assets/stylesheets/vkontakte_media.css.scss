@@ -1,0 +1,69 @@
+// Place all the styles related to the vkontakte_download_photos controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.selected_vk_photo{
+  border: 3px solid #C84563;
+  opacity: 0.6;
+}
+
+.vk_photo{
+  float: left;
+  margin: 7px;
+  margin-bottom: 0px;
+  width: auto;
+  height: auto;
+  min-height: 150px;
+  min-width: 130px;
+  position: relative;
+}
+
+#select_vk_photos_btn{
+  margin-top: 16px;
+}
+
+.choose_photos{
+  color: #C84563;
+  font-size: 17.5px;
+  font-family: 'Open Sans';
+  font-weight:300;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.loading{
+  top: 50%;
+  right: 45%;
+  position: absolute;
+}
+
+.album_preview{
+  float: left;
+  margin: 11px;
+  margin-top: 5px;
+  width: 150px;
+  height: 150px;
+  position: relative;
+}
+
+.galka{
+  background-image: image-url("galka.png");
+  position: absolute;
+  top: 50px;
+  left: 45px;
+}
+.controls{
+  text-align: center;
+  margin-top: 7px;
+  .next{
+     position: relative;
+     left: 10px;
+  }
+  .navigation-controls{
+    top: 16px !important;
+  }
+  .prev{
+     position: relative;
+     right: 10px;
+  }
+}

@@ -1,0 +1,37 @@
+#sv-timetable__switch
+  .title.clearfix
+    .sv-choice.sv-l
+      %ul
+        %li.prev
+          - if @timetable.prev.present?
+            = link_to wedding_timetable_path(@timetable.prev), class: 'icon prev' do
+              %i Назад
+          - else
+            = link_to '#', class: 'icon prev' do
+              %i Назад
+        %li.center
+          = timetable_name @timetable.t_type, @timetable.index_number
+        %li.next
+          - if @timetable.next.present?
+            = link_to wedding_timetable_path(@timetable.next), class: 'icon next' do
+              %i Вперёд
+
+          - else
+            = link_to '#', class: 'icon next' do 
+              %i Вперёд
+        %li.sv-r
+          = link_to 'Настройки', edit_wedding_timetable_path(@timetable), remote: true, class: 'sv-title-edit sv-r'
+
+#sv-timetable__events-menu 
+  = render 'events/elements/menu', events: @events
+
+#sv-timetable__wedding-info
+  = render 'weddings/info_box', wedding: @wedding
+
+#sv-timetable__current-users
+  - if @clients_on_current_timetable.present?
+    .title-braun-aside.title.clearfix
+      %span
+        Пользователи
+    .sv-participants
+      = render 'clients/box', clients: @clients_on_current_timetable

@@ -1,0 +1,7 @@
+.hide{ 'data-js' => 'album-form-warning' }
+  .sv-album-form-warning
+    .sv-album-form-warning__text Вы действительно хотите закрыть окно? Все данные пропадут.
+    = link_to 'OK', '#', class: 'link-style sv-album-form-warning__button sv-album-form-warning__button_ok',
+                         'data-js' => 'album-form-warning-ok'
+    = link_to 'Отмена', '#', class: 'link-style sv-album-form-warning__button sv-album-form-warning__button_cancel',
+                              'data-js' => 'album-form-warning-cancel'

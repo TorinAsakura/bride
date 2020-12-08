@@ -1,0 +1,4 @@
+$("#sv-posts-search-result").html('#{ j render partial: 'communities/post', collection: @posts, as: :post }');
+removeInfinitescroll();
+infinitescrollCommunityPosts('#{search_params_to_path(@search_params)}');
+initVideoPlayer();

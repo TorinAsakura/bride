@@ -1,0 +1,32 @@
+.fancybox-skin {
+  border-radius: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  a {
+    transition: none;
+    &:hover {
+      box-shadow: none;
+    }
+  }
+}
+
+.fancybox-close {
+  background: image-url('sorted/sv-icon-close.png') 0 0 no-repeat;
+  width: 20px;
+  height: 20px;
+  top: 15px;
+  right: 15px;
+  box-shadow: none;
+}
+
+.fancybox-close:hover {
+  background-position: 0 -20px;
+}
+
+.fancybox-skin {
+  background: white;
+}
+
+.fancybox-inner {
+  overflow: visible !important;
+}

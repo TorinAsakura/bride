@@ -1,0 +1,3 @@
+= interkassa_payment_form(payment.amount.to_f, payment.decorate.pay_form_params) do
+  = submit_tag 'Подтвердить', class: 'link-style'
+  = link_to 'Отменить', fail_payment_interkassa_deposits_path(ik_pm_no: payment.token)

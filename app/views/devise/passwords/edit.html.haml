@@ -1,0 +1,11 @@
+#sv-edit-password
+  %h1.title Новый пароль
+  = simple_form_for resource, :as => resource_name, :url => password_path(resource_name), validate: true, :html => { :method => :put } do |f|
+    %div
+      = f.hidden_field :reset_password_token
+      .description Введите новый пароль для Вашего аккаунта: 
+      .field-block
+        = f.input :password, placeholder: 'Новый пароль', label: false, input_html: {class: 'input-big'}
+      .field-block
+        = f.input :password_confirmation, placeholder: 'Повторите пароль', label: false, input_html: {class: 'input-big'}
+    = f.submit 'Изменить пароль', class: 'link-style input-big'

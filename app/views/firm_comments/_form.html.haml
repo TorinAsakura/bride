@@ -1,0 +1,32 @@
+.sv-firm-comments-window.sv-comments-window
+  = simple_form_for Comment.new, remote: true,
+                                 url: firm_comments_path(commentable_type: resource.class.name,
+                                                         commentable_id: resource.id,
+                                                         parent_id: parent_id),
+                                 html: { id: 'sv-firm-comments-form',
+                                         class: 'sv-comments-form',
+                                         'data-js' => 'comment-form',
+                                         'data-url' => firm_comments_path(commentable_type: resource.class.name,
+                                                                          commentable_id: resource.id,
+                                                                          parent_id: parent_id) } do |f|
+    = hidden_field_tag :sort_order, 'desc', 'data-js' => 'sv-comments-order'
+
+    = f.input_field :body, as: :text,
+                           label: :none,
+                           wrapper: :none,
+                           placeholder: 'Оставить отзыв',
+                           autocomplete: 'off',
+                           class: 'textarea-style autoResize',
+                           'data-js' => 'comment-body'
+
+    = f.submit 'Отправить', class: 'link-style'
+
+    = link_to 'Ответить,', '#', class: 'sv-comments-form-rlink'
+:javascript
+  $(document).ready(function() {
+    window.firmCommentForm = new CommentForm({
+      'element': '#sv-comments-block',
+      'modal': false,
+      'multipart': false
+    });
+  });

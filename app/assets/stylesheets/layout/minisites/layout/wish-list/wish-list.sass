@@ -1,0 +1,34 @@
+
+$wish-img: 152px
+.wish-list
+  margin-bottom: $main-padding * 2
+  .preview
+    width: $wish-img
+    height: $wish-img
+    overflow: hidden
+    display: block
+    box-shadow: none
+    +border
+    img
+      min-width: 100%
+      min-height: 100%
+  li
+    display: table
+    margin-bottom: $layout-margin
+    a
+      color: $main-color
+    &:last-child
+      margin-bottom: 0
+    > *
+      vertical-align: top
+      display: table-cell
+      &:last-child
+        padding-left: $main-margin-big
+
+  .wish-content
+    width: 460px
+    .present-name
+      color: #C84563
+    .text
+      margin-bottom: $main-padding
+      font-size: 12px

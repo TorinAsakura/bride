@@ -1,0 +1,7 @@
+.sv-wrapper
+  = render 'firms/shared/sidebar'
+
+  .sv-article.left
+    = render 'firms/shared/header'
+
+    = render 'clients/clients', resource: @firm, title: 'Наши клиенты', path: firm_customers_path, clients: @clients

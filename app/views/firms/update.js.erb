@@ -1,0 +1,17 @@
+$('.sv-firm-settings-saved').css('display', 'inline').fadeOut(3000);
+<%if !@firm.has_spheres? && (add_category = Bonus::Service::AddSphere.find('add-category')).present?%>
+$('.add-sphere').html('<%= j render 'spheres/add_firm_catalog', firm: @firm%>');
+<%end%>
+<%- if (errors = @firm.errors).present?%>
+    <%- errors.messages.each do |field, error_msg|%>
+       <%- if field.to_s.scan('firm_services').present?%>
+            var field = $($('.sv-firm-services-<%= field.to_s.split('.').last%>-input').filter(function() { return $(this).find('input').val() == ""; })[0]);
+            if (0 == field.parent().find('.notification.visible').length) {
+                field.find('.notification').addClass('visible');
+            }
+        <%-end%>
+    <%-end%>
+<%-else%>
+    $(".firm-services-wrapper").html("<%= j(render 'firm_services/index')%>");
+    updateFirmServices.init();
+<%-end%>

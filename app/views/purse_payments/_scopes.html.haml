@@ -1,0 +1,6 @@
+%ul.sv-table-nav.ovflhid.width-center-table-nav
+  - scope ||= 'all'
+  - %w(all deposit withdrawal).each do |s|
+    - active = s.eql?(scope)
+    %li{class: ('active' if active)}
+      = link_to( t(".#{s}"), purse_payments_path(scope: s), remote: true)

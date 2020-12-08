@@ -1,0 +1,17 @@
+.title.itle.clearfix
+  = link_to wedding_timetable_event_path(@event.timetable, @event), remote: true, class: 'sv-a-back sv-l' do
+    %i.icon-chevron-left
+  %span.sv-l Полезно читать
+  %ul.sv-r
+    %li.one
+      = link_to '#', class: 'sv-view-tab active', rel: '' do
+        %i крупно
+    %li.two
+      = link_to '#', class: 'sv-view-tab', rel: 'small' do
+        %i компактно
+
+#sv-posts-list
+  = render 'events/shared/posts', posts: @posts
+
+.sv-posts-hidden-nav.hide
+  = paginate @posts, param_name: 'posts_page' 

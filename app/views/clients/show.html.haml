@@ -1,0 +1,27 @@
+= render 'clients/shared/sidebar'
+.sv-article
+  .clearfix
+    - if @client.user.destroyed?
+      Страница удалена пользователем
+    - else
+      = render 'clients/shared/info'
+
+      #sv-search__posts
+        = render 'clients/posts', link_to_back: false
+
+      %div{ style: 'height:20px;' }
+
+      .sv-comments__block
+        = render 'comments/comments_section', resource: @client, comments: @comments, modal: false
+
+      .sv-comments-hidden-nav
+        = rel_next_prev_link_tags @comments
+
+  :javascript
+    $(document).ready(function () {
+      window.commentForm = new CommentForm({
+        'element': '.sv-comments__block',
+        'modal': false,
+        'multipart': true
+      });
+    });

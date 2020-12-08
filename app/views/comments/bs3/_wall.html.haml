@@ -1,0 +1,4 @@
+%article#wall
+  %header= render 'comments/bs3/wall/header'
+  %section#wall-form= render 'comments/bs3/wall/form', resource: resource
+  %section#wall-comments= render 'comments/comments', resource: resource, comments: resource.comments, modal: false

@@ -1,0 +1,19 @@
+= link_to "назад", (@owner.class.to_s == 'User' ? user_videos_path(@owner) : firm_videos_path(@owner))
+.clear-fix
+  %p
+    Заголовок:
+    = @video.title
+  %p
+    Описание:
+    = @video.description
+
+  .youtube[@video]
+    .player
+    = render "/tags/tags", tags: @video.tags, wrap_name: Proc.new{|name| link_to name all_videos_path(:tags=>[tag]) }
+    = render :partial => "likes/like", :locals => {:likeable => @video}
+    = render :partial => "complaints/complaint", :locals => {:pretension => @video}
+    = link_to "Посмотреть на YouTube", @video.content, {:class => 'video'}
+
+    = link_to "Удалить", user_video_path(@owner, @video), :method => :delete, :confirm => 'Точно удалить?' if @owner.class.to_s == 'User' and @owner.id == current_user.id
+    = link_to "Удалить", firm_video_path(@owner, @video), :method => :delete, :confirm => 'Точно удалить?' if @owner.class.to_s == 'Firm' and @owner.can_edit?(current_user)
+.clear-fix

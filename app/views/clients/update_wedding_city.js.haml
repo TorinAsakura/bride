@@ -1,0 +1,9 @@
+$.fancybox.close();
+
+if (typeof window.modalViewer !== 'undefined'){
+window.modalViewer.$step = 2;
+window.modalViewer.show();
+}
+
+var weddingCityLink = $('a[href="#sv-wedding-cities"]');
+weddingCityLink.text('#{j current_user.wedding_city}');

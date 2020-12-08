@@ -1,0 +1,6 @@
+= link_to 'Новая категория свадебных идей', new_admin_idea_section_path, class: 'link-style', remote: true
+
+%div{ style: 'height: 20px;' }
+
+%div{ 'data-js' => 'idea-sections' }
+  = render 'admin/idea/sections/sections'

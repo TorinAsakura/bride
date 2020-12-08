@@ -1,0 +1,78 @@
+.sv-wrapper.sv-community.margintopotstp
+  .main-title.clearfix
+    = link_to community_path(@community), class: 'sv-a-back sv-l', alt: 'Назад' do
+      %i.icon-chevron-left
+    %span= @community.community_category.try(:title)
+
+  = render 'communities/shared/sidebar', community: @community
+  .sv-article
+    .sv-community__post-show{ id: dom_id(@post) }
+      .sv-community__post-title
+        = link_to raw(@post.title), path_to_post(@post), remote: true
+      .sv-community__info.clearfix
+        = link_to client_path(@post.user.client), class: 'sv-l' do
+          = image_tag @post.user.avatar.small, class: 'sv-user-small-avatar'
+        .sv-user-name
+          = link_to @post.user.client.full_name, client_path(@post.user.client)
+        .sv-post-info
+          %i.date= community_post_date @post.created_at
+          %i.comments_count= @post.comment_threads.count
+      .clearfix
+      .sv-community__post-content
+        = simple_format @post.body
+
+        .sv-post-images
+          - @post.images.each do |img|
+            = image_tag img.image, id: dom_id(img)
+        %ul.sv-video-list-wrap.no-info
+          - @post.videos.each do |video|
+            = render 'videos/player', video: video
+        .clear
+
+        .sv-post-actions
+          - if user_signed_in? 
+            = render 'complaints/complaint', pretension: @post
+          - if current_user.present? && !@post.is_resource?('Community')
+            = image_tag 'sorted/im-bord.png'
+            = render 'favorites/favorite', favoriteable: @post
+          - for_moderator_of @post.user.profileable do
+            = image_tag 'sorted/im-bord.png'
+
+            = link_to 'Редактировать', edit_path_to_post(@post),
+                      remote: true,
+                      confirm: @post.accepted? ? "Ваш пост будет заново отправлен на модерацию" : nil
+            = image_tag 'sorted/im-bord.png'
+
+            = link_to 'Удалить', path_to_post(@post),
+                                 method: :delete,
+                                 confirm: 'Ваш пост удалится безвозвратно'
+
+          .sv-r{ 'data-vote-management' => "#{@post.id}-#{@post.class.name}" }
+            = render 'votes/like', resource: @post, resource_class_name: @post.class.name
+
+          - for_admin do
+            .sv-post-admin{ 'data-js' => 'post-admin' }
+        = render 'posts/for_admin', post: @post unless @post.is_resource?('Community')
+
+    .clear
+
+    #sv-community__post-comments.sv-comments__block
+      .sv-comments-header
+        Комментарии
+      - if current_user.present?
+        = render 'comments/form', resource: @post, modal: false
+      - else
+        = render 'comments/register'
+      = render 'comments/comments', resource: @post, comments: @comments, modal: false
+
+    .sv-comments-hidden-nav
+      = rel_next_prev_link_tags @comments
+
+    :javascript
+      $(document).ready(function () {
+        window.commentForm = new CommentForm({
+          'element': '#sv-community__post-comments',
+          'modal': false,
+          'multipart': true
+        });
+      });

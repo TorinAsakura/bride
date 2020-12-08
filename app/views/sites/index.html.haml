@@ -1,0 +1,42 @@
+.sv-wrapper.sv-search.margintopotstp
+  .title.clearfix
+    = link_to :back, class: 'sv-a-back sv-l', alt: 'Назад' do
+      %i.icon-chevron-left
+    %span Поиск
+    %ul
+      %li.search
+        = link_to root_path do
+          %i найти
+
+  .ovflhid.sv-search-form
+    .title_nobg.clearfix
+      .sv-l= link_to 'Люди', clients_path
+      .sv-l Свадебные сайты
+
+    = simple_form_for @search, url: all_minisites_path, html: { method: :get, id: 'minisite-search-form', remote: true} do |f|
+      .block-sv-find-user
+        .sv-l
+          = f.input :fullname, required: true, placeholder: 'Введите ФИО или id пользователей', label: false
+
+        .sv-l.otp
+          = f.input_field :city_id, id: 'client_city_id', data: { 'select2-disabled' => true, 'autocomplete-path' => city_autocomplete_path }
+          = link_to 'x', all_minisites_path, id: 'sv-reset-city-select'
+        .sv-search-date.sv-l
+          Дата свадьбы:
+          = select_tag 'search[day]', options_for_select(['День'] + (1..31).to_a), class: 'select-day',
+            id: 'day', data: {'select2-options' => {minimumResultsForSearch: -1}}
+          = select_tag 'search[month]', options_for_select(['Месяц'] + months_list), class: 'select-month',
+            id: 'month', data: {'select2-options' => {minimumResultsForSearch: -1}}
+          = select_tag 'search[year]', options_for_select(['Год'] + (Wedding.first_year..Wedding.last_year).to_a), class: 'select-years',
+            id: 'year', data: {'select2-options' => {minimumResultsForSearch: -1}}
+
+          = hidden_field_tag 'sort', 'created_at', id: 'sv-search-sort-type'
+          = hidden_field_tag 'order', 'ASC', id: 'sv-search-order-type'
+        .sv-end-find-us.sv-r
+          = f.button :submit, 'Найти', class: 'link-style sv-l'
+  .title_nobg
+    = link_to 'По популярности', all_minisites_path, class: "sv-search-sort #{params[:order]}", sort: 'popular'
+    = link_to 'По дате до свадьбы', all_minisites_path, class: "active sv-search-sort #{params[:order]}", sort: 'wedding_days'
+
+#sv-search-minisites
+  = render 'sites', sites: @sites

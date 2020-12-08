@@ -1,0 +1,6 @@
+- wrap_name ||= Proc.new{|name| name}
+- wrap_last_name ||= wrap_name
+.sv-tags-prefix= prefix if defined? prefix
+- tags.each_with_index do |t, i|
+   .sv-tag
+      = (i == tags.length - 1) ? wrap_last_name.call(t.name) : wrap_name.call(t.name)

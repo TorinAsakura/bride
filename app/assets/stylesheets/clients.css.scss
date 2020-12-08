@@ -1,0 +1,950 @@
+.client-edit {
+  .search-select-radio.clearfix {
+    .radio-block {
+      display: inline-block;
+    }
+    label {
+      display: inline-block;
+      color: #c84563;
+    }
+    .radio-point {
+      margin: -4px 4px 0 0;
+    }
+  }
+  .search-user {
+    margin: 0 0 15px 0;
+    .search-user-input {
+      margin: -3px 10px 0 0;
+      width: 500px;
+    }
+  }
+  .user-sv-found {
+    width: 400px;
+    img {
+      width: 151px;
+    }
+    .sv-location-us {
+      font-style: italic;
+    }
+    .sv-age {
+      font-weight: 12px;
+      font-style: italic;
+    }
+    .desc {
+      width: 200px;
+      a.link-style {
+        width: 175px;
+      }
+    }
+  }
+  .wedding-city-input {
+    width: 600px;
+  }
+  .center {
+    text-align: center;
+  }
+  .row {
+    margin: 10px 0 10px 15px;
+    .title {
+      display: inline-block;
+      width: 300px;
+    }
+    .sequrity-level {
+      display: inline-block;
+      color: #c84563;
+    }
+  }
+  .sv-article .company {
+    width: 325px;
+  }
+  .link-style-inner, .link-style-inner:hover {
+    padding: 2px 15px;
+  }
+}
+
+/* начало setting_wedding */
+.face_human {
+  float: left;
+  margin: 0 0 15px;
+  width: 600px;
+  .customer {
+    margin: 0 20px 0 0;
+    width: 150px;
+  }
+}
+
+.face_tab {
+  float: left;
+  margin: 10px 0 0;
+  a {
+    margin: 0 0 0 5px;
+    color: #c84563;
+    text-decoration: none;
+    font-style: Italic;
+    font-size: 16px;
+  }
+}
+
+.name_being {
+  margin: 55px 170px 0;
+  width: 400px;
+  height: 50px;
+  color: #555555;
+  font-size: 12px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.name_being img {
+  padding: 0px 6px 4px 0px;
+}
+
+.name_being p {
+  margin: 53px 0px 0px 0px;
+}
+
+.name_being .info {
+  float: left;
+  width: 130px;
+}
+
+.name_being .box {
+  float: left;
+}
+
+.click_its_me {
+  float: left;
+  margin: 15px 0 0 0;
+  padding: 4px 0;
+  border: none;
+  color: white;
+  ul {
+    display: none;
+  }
+}
+
+.set_name {
+  margin: 9px 0px 8px 0px;
+  padding: 10px 10px 0;
+  width: 650px;
+}
+
+.button-style {
+  margin: 0 0 0 5px;
+  padding: 2px 10px;
+  border: none;
+  background-color: #c84563;
+  color: white;
+  font-style: light;
+  font-size: 14px;
+}
+
+.enter_the_name {
+  overflow: hidden;
+  margin: 0px 0px 15px 0px;
+}
+
+.enter_the_name input {
+  margin: 0px 0px 0px 5px;
+}
+
+.combined_transport {
+  margin: 0px 0px 15px 0px;
+}
+
+.menu_match_personal {
+  margin-left: 15px;
+}
+
+.fixing {
+  overflow: hidden;
+  margin: 29px auto 0px;
+  width: 116px;
+}
+
+.search {
+  .inp-style-mini-compact {
+    width: 100% !important;
+  }
+  .inp-style-right-compact {
+    margin: 0 0 0 5px;
+    width: 245px !important;
+  }
+  .select2-choice .select2-arrow b {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: image-url("sorted/search.jpg");
+  }
+}
+
+#sv-client-side-navigation {
+  margin: 0 0 20px 0;
+  @include side-navigation;
+}
+
+.sv-client-avatar {
+  position: relative;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 278px;
+  border: 1px solid #f0849b;
+  &:hover {
+    .sv-client-avatar__actions {
+      display: block;
+    }
+  }
+}
+
+.sv-client-avatar__image {
+  display: block;
+
+  img {
+    width: 278px;
+    height: 302px;
+  }
+}
+
+.sv-client-avatar__image {
+  background: image_url('loading.gif') no-repeat 50% 50%;
+}
+
+.sv-client-avatar__actions-wrapper {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  left: 10px;
+  height: 110px;
+}
+
+.sv-client-avatar__actions {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  display: none;
+  margin: 0px;
+  padding: 10px 0px;
+  background: #4a0707;
+  opacity: 0.8;
+}
+
+.sv-client-avatar__action {
+  display: block;
+  padding-left: 25px;
+  height: 30px;
+  line-height: 30px;
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  i {
+    display: block;
+    float: left;
+    margin: 5px 5px 0px 0px;
+    width: 25px;
+    height: 20px;
+  }
+}
+
+.sv-client-avatar__action_hidden {
+  display: none;
+}
+
+.sv-client-avatar__action_upload i {
+  background: image-url('sv-icon-banner-upload.png') 0px 0px no-repeat;
+}
+
+.sv-client-avatar__action_edit i {
+  background: image-url('sv-icon-pen-white.png') -15px -15px no-repeat;
+}
+
+.sv-client-avatar__action_destroy i {
+  background: image-url('glyphicons-halflings-white.png') -312px 4px no-repeat;
+}
+
+#sv-client-avatar-editor {
+  display: none;
+  padding: 20px;
+  width: 730px;
+
+  .tab-content {
+    overflow: visible;
+    margin-top: 50px;
+  }
+
+  .sv-client-avatar-editor-form {
+    margin: 50px;
+    .sv-client-avatar-editor-input {
+      position: relative;
+      margin: 0px auto;
+      width: 250px;
+      button {
+        width: 250px;
+        height: 25px;
+        text-align: center;
+      }
+      input[type=file] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 25px !important;
+        font-size: 200px;
+        opacity: 0;
+        filter: alpha(opacity = 0);
+        cursor: pointer;
+      }
+    }
+  }
+
+  .sv-client-avatar-jcrop-wrapper {
+    overflow: hidden;
+    margin: 40px 50px;
+    width: 640px;
+    max-height: 640px;
+    background: #ededed;
+    text-align: center;
+  }
+
+  .sv-client-avatar-jcrop {
+    display: inline-block;
+    overflow: hidden;
+  }
+
+  .sv-client-avatar-editor-save {
+    margin: 0px auto;
+  }
+
+  input[type=file] {
+    display: block;
+  }
+}
+
+#sv-remove-client-avatar {
+  display: none;
+  padding: 10px;
+  .title_nobg {
+    border: none;
+  }
+  .button-line {
+    text-align: center;
+  }
+}
+
+.sv-client-photos-block {
+  &:hover {
+    .sv-client-photos__view-all {
+      display: block;
+    }
+  }
+}
+
+.sv-client-photos {
+  position: relative;
+  margin-bottom: 6px;
+  overflow: hidden;
+  &:hover {
+    .sv-client-photos__view-all {
+      display: block;
+    }
+  }
+}
+
+.sv-client-photos_left {
+  float: left;
+  width: 328px;
+}
+
+.sv-client-photos_right {
+  float: right;
+  width: 320px;
+}
+
+.sv-client-photos__view-all {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  display: none;
+
+  .icon-chevron-right {
+    float: right;
+    width: 53px;
+    height: 51px;
+  }
+
+  span {
+    display: block;
+    float: left;
+    width: 269px;
+    height: 51px;
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    text-align: center;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 50px;
+  }
+
+  img {
+    display: block;
+    float: right;
+    padding: 17px 19px;
+    width: 13px;
+    height: 17px;
+    background: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.sv-client-photos__upload-first-btn {
+  position: absolute;
+  right: 35px;
+  bottom: 30px;
+  left: 35px;
+  display: block;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+}
+
+.sv-client-photo_small {
+  float: left;
+  margin: 0px 4px 4px 0px;
+  width: 160px;
+  height: 160px;
+}
+
+.sv-client-photo_big {
+  width: 322px;
+  height: 324px;
+}
+
+.sv-client-friendship {
+  padding: 10px 0px;
+}
+
+.sv-client-info {}
+
+.sv-client-info_primary {
+  height: 140px;
+}
+
+.sv-client-info_secondary {
+  margin-top: -50px;
+}
+
+.sv-client-info_full {
+  height: auto;
+  margin-top: 0px;
+}
+
+.sv-client-info__list {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  overflow: hidden;
+}
+
+.sv-client-info__list_hidden {
+  display: none;
+}
+
+.sv-client-info__list-item {
+  margin-bottom: 10px;
+}
+
+.sv-client-info__list-item_group {
+  margin-bottom: 20px;
+}
+
+.sv-client-info__item-title {
+  display: inline-block;
+  width: 145px;
+  color: #b2b2b2;
+}
+
+.sv-side-friends {
+  display: block;
+  margin: 10px 0px;
+  padding: 0px;
+  list-style: none;
+}
+
+.sv-side-friends__friend {
+  display: inline-block;
+  margin: 0px 0px 10px 10px;
+  padding: 0px;
+  &:nth-child(3n+1) {
+    margin-left: 0px;
+  }
+}
+
+.sv-side-friends__friend-avatar {
+  width: 90px;
+}
+
+.sv-client-fullname {
+  color: #c84563;
+  font-weight: 300;
+  font-size: 20px;
+}
+
+.sv-client-fullname__gender {
+  display: inline-block;
+  width: 20px;
+  height: 18px;
+  background: image-url('sv-icon-man-or-girl.png') no-repeat;
+}
+
+.sv-client-fullname__gender_people {
+  background: image-url("sorted/people.png") no-repeat scroll 0 -18px rgba(0, 0, 0, 0);
+  width: 30px;
+}
+
+.sv-client-fullname__gender_male {
+  background-position: 0px -18px;
+}
+
+.sv-client-fullname__gender_female {
+  background-position: -19px -18px;
+}
+
+.sv-client-fullname__link {
+  text-decoration: none !important;
+}
+
+.sv-client-status {
+  position: relative;
+  margin: 10px 0px 10px 0px;
+  padding: 8px;
+  border: 1px solid #ccc;
+
+  a {
+    color: #4d4d4d;
+    &.sv-change-status {
+      color: #b2b2b2;
+    }
+  }
+
+  p {
+    margin: 0px;
+    height: 62px;
+  }
+
+  &:after,
+  &:before {
+    position: absolute;
+    display: block;
+    width: 0px;
+    height: 0px;
+    content: '';
+  }
+
+  &:before {
+    top: -20px;
+    left: 20px;
+    border: 10px solid transparent;
+    border-bottom: 10px solid #ccc;
+  }
+
+  &:after {
+    top: -18px;
+    left: 21px;
+    border: 9px solid transparent;
+    border-bottom: 9px solid #fff;
+  }
+}
+
+.sv-client-status_hidden {
+  display: none;
+}
+
+.sv-client-status_placeholder {
+  text-indent: -9999px;
+}
+
+.sv-client-status-edit {
+  position: relative;
+  margin: 0px 0px 10px 0px;
+  padding: 8px;
+  background: #4a0707;
+
+  &:before {
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    display: block;
+    width: 0px;
+    height: 0px;
+    border: 10px solid transparent;
+    border-bottom: 10px solid #4a0707;
+    content: "";
+  }
+
+  form {
+    margin: 0px;
+  }
+
+  .textarea-style {
+    width: 260px;
+    resize: none;
+  }
+}
+
+.sv-client-status-edit_hidden {
+  display: none;
+}
+
+.sv-client-friends-sections {
+  margin: -18px 0px 10px 0px;
+  text-align: center;
+}
+
+.sv-client-friends-section {
+  &:first-child {
+    float: left;
+  }
+  &:last-child {
+    float: right;
+  }
+}
+
+.sv-firm-client-block-gender {
+  display: inline-block;
+  width: 20px;
+  height: 18px;
+  background: image-url('sv-icon-man-or-girl.png') no-repeat;
+}
+
+.sv-firm-client-block-gender_male {
+  background-position: 0px -18px;
+}
+
+.sv-firm-client-block-gender_female {
+  background-position: -19px -18px;
+}
+
+.radio-find-couple {
+  margin: 0 30px 10px 45px;
+}
+
+.select-handly-type {
+  margin: 19px 0 0 0;
+}
+
+#search_params_couple_id {
+  width: 516px;
+}
+
+.sv-edit-client-left {
+  float: left;
+  width: 170px;
+  height: 30px;
+  text-align: right;
+  p {
+    margin: 3px 0 0 0;
+  }
+}
+
+.sv-edit-client-right {
+  height: 30px;
+  margin-left: 190px;
+  .button-style {
+    margin-left: 0;
+  }
+  input[type=checkbox] {
+    float: left;
+  }
+  label {
+    color: #c84563;
+  }
+}
+
+.sv-edit-client-right-info {
+  margin-left: 190px;
+
+}
+
+.sv-wedding-without-date {
+  margin: 8px 0 20px 0;
+}
+
+.sv-edit-client-wide {
+  height: 50px;
+}
+
+#new-wedding .sv-block-select {}
+
+.sv-edit-client-button {
+  float: left;
+  input {
+    padding: 2px 21px;
+  }
+}
+
+.client-settings {
+
+  a.client-control-panel-link.black-list-settings {
+    margin-left: 190px;
+  }
+}
+
+.sv-dont-know-the-date {
+  input[type="checkbox"] {
+    display: none;
+  }
+  input[type="checkbox"] + label span {
+    display: inline-block;
+    margin: -1px 4px 0 0;
+    width: 19px;
+    height: 19px;
+    background: image-url('sorted/sv-checkbox-standart.png') left top no-repeat;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  input[type="checkbox"]:checked + label span {
+    background: image-url('sorted/sv-checkbox-standart.png') bottom center no-repeat;
+  }
+}
+
+.select-text {
+  float: left;
+  margin: 3px 0 0 0;
+}
+
+.sv-client-info-btn {
+  display: block;
+  float: right;
+  width: 50px;
+  height: 50px;
+  font-size: 0px;
+  text-decoration: none !important;
+}
+
+.sv-client-info-btn_down {
+  font-family: "fontello";
+  color: white;
+  content: "\e8b8";
+  background: #4a0707;
+  font-size: 24px;
+  &:hover {
+    background: #5e0b0b;
+  }
+}
+
+.sv-client-info-btn_up {
+  font-family: "fontello";
+  background: #4a0707;
+  content: "\e8cd";
+  font-size: 24px;
+  color: white;
+  &:hover {
+    background: #5e0b0b;
+  }
+}
+
+#client-profile-settings {
+  .city-editor {
+    .city-name {
+      display: inline-block;
+      max-width: 300px;
+      overflow: hidden;
+      line-height: 20px;
+      white-space: nowrap;
+    }
+    .icon-edit {
+      margin: 3px 5px;
+      cursor: pointer;
+      vertical-align: top;
+    }
+    .add-on {
+      height: 30px;
+    }
+  }
+  .rows-form {
+    margin: 0 0 0 4px;
+  }
+  .sv-block-select {
+    margin: 0;
+  }
+  .rows-form-2 {
+    margin: 0 4px 0 0;
+  }
+  .sv-end-form {
+    margin: 20px 0;
+  }
+}
+
+.sv-empty-section {
+  max-width: 600px;
+  height: 75px;
+  line-height: 75px;
+  text-align: center;
+  margin: 15px auto 0px;
+  color: #b2b2b2;
+  border: 1px solid #fae3eb;
+  background: #fcfcfc;
+}
+
+.sv-empty-section__inner {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.sv-empty-section_with-margin {
+  margin-bottom: 20px;
+}
+
+.sv-empty-section__link {
+  color: #f1839b;
+}
+
+.sv-avatar-viewer {
+  width: 760px;
+  padding: 20px;
+}
+
+.sv-avatar-viewer__owner {
+  margin: -20px -20px 20px -20px;
+  padding: 10px;
+  background: #fafafa;
+  overflow: hidden;
+}
+
+.sv-avatar-viewer__owner-avatar {
+  margin: 0px 19px 0px 0px;
+  float: left;
+
+  img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.sv-avatar-viewer__owner-info {
+  float: left;
+
+  p {
+    font-size: 12px;
+    color: #b3b3b3;
+  }
+}
+
+.sv-avatar-viewer__image {
+  margin-bottom: 20px;
+  text-align: center;
+
+  img {
+    max-width: 100%;
+    max-height: 500px;
+  }
+}
+
+.sv-client-info {
+  a.link-with-arrow {
+    position: relative;
+    padding: 0px 30px 0px 20px !important;
+
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      border: 7px solid transparent;
+      border-top: 7px solid #fff;
+      right: 10px;
+      top: 10px;
+    }
+
+    &:hover {
+      padding: 0px 30px 0px 20px !important;
+
+      &:after {
+        border-top: 7px solid #c84563;
+      }
+    }
+  }
+}
+
+.sv-friendship-popover {
+  display: inline-block;
+  color: #fff;
+
+  .popover {
+    background: #5d3535;
+    border-radius: 0px;
+  }
+
+  .popover-content {
+    width: 180px;
+  }
+
+  .link-style {
+    margin-top: 10px;
+    width: 180px;
+    text-align: center;
+  }
+
+  .arrow {
+    border-bottom-color: #5d3535 !important;
+
+    &:after {
+      border-bottom-color: #5d3535 !important;
+    }
+  }
+}
+
+.base-client-settings {
+  #invite-couple-info {
+    width: 70px;
+    display: inline-block;
+
+    .sv-end-form {
+      margin: 0;
+    }
+  }
+
+  .sv-invite-firstname {
+    width: 230px !important;
+    margin-left: 15px;
+  }
+
+  .sv-invite-email {
+    width: 230px !important;
+  }
+
+  .sv-confirm-button {
+    margin-bottom: 1px;
+  }
+}
+
+.create-wedding {
+  width: 300px;
+  display: inline-block;
+  #wedding_date {
+    width: 237px;
+  }
+}
+
+.sv-dont-know-the-date {
+  width: 100px;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.sv-client-wedding-date-calc {
+  border: 1px solid #fae3eb;
+  background: #fcfcfc;
+  color: #c84563;
+  padding: 15px 25px;
+  margin-bottom: 15px;
+}
+
+.changed-settings-in-profile{
+  border: 1px solid #9ceb7d;
+  color: #26a73b;
+  backround-color: #f2ffed;
+  font-size: 14px;
+  text-align: center;
+  padding-bottom: 5px;
+}

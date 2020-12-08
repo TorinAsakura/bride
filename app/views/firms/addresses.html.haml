@@ -1,0 +1,14 @@
+.sv-wrapper
+  = render 'firms/shared/sidebar'
+
+  .sv-article.left
+    = render 'firms/shared/header'
+
+    #sv-addresses-block
+      .title.clearfix
+        = link_to firm_link(@firm), class: 'sv-a-back sv-l' do
+          %i.icon-chevron-left
+          -#= image_tag 'sv-icon-arrow_l.png', alt: 'Назад'
+        %span Контакты
+
+    = render 'addresses/addresses'

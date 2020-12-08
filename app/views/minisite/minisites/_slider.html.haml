@@ -1,0 +1,10 @@
+.modal.hide
+  .modal-body
+    = image_tag @photo.path
+    %div
+      .pull-left1
+        %div
+          =  @photo.description
+        %div{:style => "padding-bottom: 20px;"}
+          Добавлена #{l @photo.created_at, :format => :full}
+      .clearfix

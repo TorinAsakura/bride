@@ -1,0 +1,19 @@
+year:
+  id: 1
+  service_id: 1
+  months_count: 12
+half_year:
+  id: 2
+  service_id: 1
+  months_count: 6
+  percent: 40
+quarter:
+  id: 3
+  service_id: 1
+  months_count: 3
+  percent: 100
+month:
+  id: 4
+  service_id: 1
+  months_count: 1
+  percent: 140

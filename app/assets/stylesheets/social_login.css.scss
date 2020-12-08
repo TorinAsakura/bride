@@ -1,0 +1,27 @@
+#sv-login,
+#sv-login-page {
+  .social-login {
+    i{
+      font-size: 1.3em;
+    }
+    margin: 0;
+    padding: 0;
+
+    a {
+      text-decoration: none;
+    }
+
+    .icon-social {
+      width:  23px;
+      height: 23px;
+    }
+
+    .provider-list {
+      li {
+        margin: 0 0 23px 0;
+        padding: 0px;
+        width: 138px;
+      }
+    }
+  }
+}

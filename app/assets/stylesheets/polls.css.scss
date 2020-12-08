@@ -1,0 +1,421 @@
+.sv-polls {
+  overflow:hidden;
+
+  a.sv-a-back img {
+    height:16px;
+  }
+}
+
+.sv-polls-previews-wrapper {
+  margin: 0px 10px;
+}
+
+.sv-polls-previews {
+  overflow: hidden;
+
+  .fade {
+    text-align: center;
+    display: block;
+  }
+}
+
+.sv-polls-previews-preview {
+  float: left;
+  margin: 0px 0px 20px 100px;
+  position: relative;
+  width: 206px;
+  height: 206px;
+
+  .sv-or-or {
+    left: -66px;
+  }
+
+  &:nth-child(3n+1) {
+    margin: 0px 0px 20px 50px;
+
+    .sv-or-or {
+      display: none;
+    }
+  }
+
+  .preview {
+    width: 206px;
+    height: 206px;
+    overflow: hidden;
+  }
+
+  &:hover {
+    .sv-polls-preview-remove-btn {
+      opacity: 0.6;
+    }
+  }
+}
+
+.sv-polls-preview-remove-btn {
+  outline: none;
+  border: none;
+  background: #000000;
+  opacity: 0.0;
+  color: #ffffff;
+  position: absolute;
+  width: 206px;
+  height: 25px;
+  line-height: 25px;
+  font-size: 12px;
+  bottom: 0px;
+  left: 0px;
+  display: block;
+
+  &:hover {
+    opacity: 0.8 !important;
+  }
+}
+
+.sv-poll-form {
+  background: #e6e6e6;
+  padding: 20px 10px;
+  display: none;
+
+  .inp-style-compact {
+    width: 245px !important;
+  }
+}
+
+.sv-poll-error-wrapper {
+  position: absolute;
+}
+
+.sv-poll-error {
+  position:absolute;
+  display:none;
+  z-index:1;
+  height: 50px;
+  line-height: 50px;
+  width: 260px;
+  text-align: center;
+  background:#5d3535;
+  color:#fff;
+  box-shadow:0 1px 3px #555;
+  font-size: 12px;
+  opacity: 0.8;
+  top: -60px;
+  left: 5px;
+  i {
+    position: absolute;
+    left: 120px;
+    top: 50px;
+    display:block;
+    width:0;
+    height:0;
+    border:10px solid transparent;
+    border-top:10px solid #5d3535;
+  }
+}
+
+.sv-poll-form-link {
+  background-color: #f1849d;
+}
+
+.sv-poll-form-link-expanded {
+  background-color: #e6e6e6;
+
+  i {
+    background-position: -40px -40px !important;
+  }
+}
+
+.sv-polls-list {
+  overflow:hidden;
+  margin:20px 0 0 0;
+}
+
+.sv-poll {
+  width: 475px;
+  float: left;
+  margin: 0 0px 32px 0;
+}
+
+.sv-poll-odd {
+  width: 475px;
+  float: left;
+  margin: 0 0 32px  10px;
+}
+
+.sv-img-poll {
+  position:relative;
+  overflow:hidden;
+
+  img {
+    margin:0;
+    padding:0;
+  }
+}
+
+.sv-img-poll-2 {
+  img {
+    width:33%;
+  }
+}
+
+.sv-img-poll-3 {
+  img {
+    width:50%;
+  }
+}
+
+.sv-or-or {
+  position: absolute;
+  top: 45%;
+  left: 140px;
+  z-index: 200;
+  display: block;
+  padding: 7px 0px;
+  text-align: center;
+  width: 36px;
+  height: 22px;
+  color: #fff;
+  font-style: italic;
+  background-color: #c84563;
+  border-radius: 100px;
+  box-shadow: inset 0px 1px 2px #000000;
+}
+
+.sv-or-or-r {
+  right: 140px;
+  left: inherit;
+}
+
+.sv-or-or-r-big {
+  right: 173px;
+  left: inherit;
+}
+
+.sv-or-r-big-two {
+  right: 361px;
+  left: inherit;
+}
+
+.sv-or-or-one {
+  right: 217px;
+  left: inherit;
+}
+
+.sv-or-or-mov {
+  left: -18px;
+}
+
+.sv-poll-wrapper {
+  width: 909px;
+  padding: 15px;
+  height: auto;
+  overflow: hidden;
+
+  .sv-comment-form-wrapper_sticky {
+    width: 910px;
+  }
+}
+
+.sv-poll-header {
+  overflow:hidden;
+  display:block;
+}
+
+.sv-poll-about {
+  a {
+    font-size: 14px;
+    color:#c84563;
+  }
+}
+
+.sv-poll-about-timeago {
+  font-size: 12px;
+  color: #b3b3b3;
+  padding: 0px 0px 0px 12px;
+}
+
+.sv-poll-accordion {
+  position: relative;
+  margin-top: 15px;
+}
+
+.sv-poll-accordion-inner {
+  position: relative;
+  width: 9999px;
+  height: 464px;
+}
+
+.sv-poll-variant {
+  position: relative;
+  height: 464px;
+  background-position: 50% 0%;
+  background-repeat: no-repeat;
+  overflow: visible;
+  text-align: center;
+}
+
+.sv-poll-variant-3 {
+  width: 303px;
+}
+
+.sv-poll-variant-2 {
+  width: 452px;
+}
+
+.sv-poll-variant-fade {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: none;
+}
+
+.sv-poll-results {
+  padding: 7px 0px;
+  line-height: 20px;
+  font-style: italic;
+  text-align: center;
+}
+
+.sv-poll-no-results {
+  padding: 8px 0px;
+}
+
+.sv-poll-result {
+  font-style: normal;
+  font-size: 18px;
+  height: 38px;
+  line-height: 38px;
+  width: 60px;
+  margin: auto;
+  border-radius: 19px;
+  box-shadow: inset 0px 1px 2px #000000;
+}
+
+.sv-poll-max-result {
+  background: #c84563;
+  color: #ffffff;
+}
+
+.sv-poll-vote {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  width: 75px;
+  height: 75px;
+  margin: -38px 0px 0px -38px;
+  background-color:#dce8e6;
+  border-radius: 100px;
+  box-shadow: inset 0px 1px 2px #9db3af;
+
+  img {
+    position: relative;
+    top: 25px;
+  }
+}
+
+.sv-poll-textarea {
+  width: 910px !important;
+  max-width: 916px;
+  margin: 0 5px;height:46px;
+}
+
+.sv-poll-form {
+  .sv-polls-upload {
+    margin: 10px 10px 10px 22px;
+    overflow: hidden;
+  }
+
+  .sv-polls-upload-input {
+    position:relative;
+    overflow:hidden;
+    max-width:225px;
+    height:50px;
+    padding-bottom: 10px;
+    margin-left: 60px;
+  }
+
+  .sv-polls-upload-input input[type=file] {
+    font-size:200px;
+    position:absolute;
+    top:0;
+    right:0;
+    height:50px;
+    opacity:0;
+    filter:alpha(opacity=0);
+    cursor:pointer
+  }
+
+  button.upload-is-comp {
+    border: 0;
+    color: #fff;
+    background: #c84563;
+    display: block;
+    padding: 15px 0;
+    width: 225px;
+    text-align: center;
+  }
+
+  button, a.upload-is-img {
+    border: none;
+    display: inline-block !important;
+    background: none;
+    padding: 0px !important;
+    margin-left: 4px;
+  }
+}
+
+.sv-poll-question {
+  font-size: 14px;
+  color: #4d4d4d;
+}
+
+.sv-poll-author {
+  padding: 0px 19px 0px 0px;
+
+  img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.sv-poll-submit-wrapper {
+  text-align: center;
+}
+
+.sv-poll-actions {
+  margin-bottom: 20px;
+}
+
+.waiting_message_for_poll{
+  color: #008000;
+  font-size: 16px;
+  text-align: center;
+}
+
+.pl-socials{
+  padding: 4px 9px !important;
+}
+
+.social_names{
+  font-size: 12px;
+  font-family: open sans;
+  position: relative;
+  top: -2px;
+}
+.social_names_wrapper{
+  margin-top: 10px !important;
+  margin-bottom: 6px !important;
+  i{
+    font-size: 20px;
+  }
+}
+.icon-vk{
+  background: image-url('icons/social_networks.png') no-repeat;
+  background-position: (-3px) -4px;
+  float: left;
+  height: 23px;
+  margin-left: -3px;
+  margin-right: 3px;
+  margin-bottom: 6px;
+  width: 23px;
+}

@@ -1,0 +1,67 @@
+= simple_form_for [:admin, @style], html: {id: 'style_form', 'data-js' => 'background-property-form'} do |f|
+
+  .field
+    = f.input :title, input_html: {class: 'w400', placeholder: 'Название цветовой схемы', value: Date.today}
+
+  .field
+    = f.label :color
+    = f.text_field :color, 'data-js' => 'background-property-color', class: 'w100', placeholder: '#xxyyzz', pattern: '#[\dabcdefABCDEF]{6}'
+    %span.link-style{'data-js' => 'background-property-reset-color'} Сбросить
+
+  .field
+    = f.label :image
+    .preview_img
+      - unless f.object.image.blank?
+        = image_tag f.object.image_url
+
+    = f.input :image, as: :file, input_html: {class: 'w400', multiple: @style.new_record?}, label: false
+
+  .field.clearfix
+    = f.label :attachment
+    = f.radio_button(:attachment, 'fixed', 'data-js' => 'fixed')
+    = f.label :attachment_fixed, 'Не прокручивать фон', class: 'inline'
+    = f.radio_button(:attachment, 'scroll', 'data-js' => 'scroll')
+    = f.label :attachment_scroll, 'Прокручивать фон', class: 'inline'
+
+  .field.clearfix
+    = f.label :position
+    = f.radio_button(:position, 'left', 'data-js' => 'left')
+    = f.label :position_left, 'по левому краю', class: 'inline'
+    = f.radio_button(:position, 'center', 'data-js' => 'center')
+    = f.label :position_center, 'по центру', class: 'inline'
+    = f.radio_button(:position, 'right', 'data-js' => 'right')
+    = f.label :position_right, 'по правому краю', class: 'inline'
+
+  .field.clearfix
+    = f.label :repeat
+    = f.radio_button(:repeat, 'no-repeat')
+    = f.label 'repeat_no-repeat', 'Не повторять', class: 'inline'
+    = f.radio_button(:repeat, 'repeat-y')
+    = f.label 'repeat_repeat-y', 'Повторять по вертикали', class: 'inline'
+    = f.radio_button(:repeat, 'repeat-x')
+    = f.label 'repeat_repeat-x', 'Повторять по горизонтали', class: 'inline'
+    = f.radio_button(:repeat, 'repeat')
+    = f.label 'repeat_repeat', 'Повторять по горизонтали и вертикали', class: 'inline'
+
+  .field.clearfix
+    = f.check_box :is_active, class: 'checkbox'
+    = f.label :is_active, class: 'checkbox-label', class: 'inline'
+
+  .field.clearfix
+    = f.check_box :header, class: 'checkbox', 'data-js' => 'header'
+    = f.label :header, class: 'checkbox-label', class: 'inline'
+  .field.header-colors-field{class: ('hidden' unless @style.header?)}
+    = f.label :header_color
+    = f.text_field :header_color, class: 'w100', placeholder: '#xxyyzz', pattern: '#[\dabcdefABCDEF]{6}'
+  .field.header-colors-field{class: ('hidden' unless @style.header?)}
+    = f.label :header_date_color
+    = f.text_field :header_date_color, class: 'w100', placeholder: '#xxyyzz', pattern: '#[\dabcdefABCDEF]{6}'
+
+
+  .field.clearfix
+    = f.check_box :general, class: 'checkbox'
+    = f.label :general, class: 'checkbox-label', class: 'inline'
+
+  = f.submit 'Сохранить', class: 'link-style'
+  - unless @style.new_record?
+    = link_to 'Удалить', admin_background_property_path(@style), method: :delete, confirm: 'Вы уверенны?', class: 'link-style'

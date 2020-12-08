@@ -1,0 +1,75 @@
+= simple_form_for @plan, url: admin_script_plan_path(@plan), html: {id: 'plan_form', style: 'left: 40%'}  do |f|
+
+  #sv-admin-plan-row
+    .sv-plan-etap.first-child
+      %span
+        = link_to 'Планирование', edit_admin_script_plan_path(params[:script_id], @planning), remote: true,
+          class: plan_class(@planning, @plan)
+    .sv-plan-dates
+      %ul
+        - @weeks.each do |week|
+          %li
+            = link_to week.index_number,edit_admin_script_plan_path(params[:script_id], week), 
+              rel: 'tooltip', 'data-original-title' => 'недель', remote: true, class: plan_class(week, @plan)
+    .sv-plan-days
+      %ul
+        - @days.each_with_index do |day, i|
+          %li
+            = link_to day.index_number, edit_admin_script_plan_path(params[:script_id], day), 
+              rel: 'tooltip', 'data-original-title' => 'дней', remote: true, class: plan_class(day, @plan)
+    .sv-plan-etap
+      %span
+        = link_to 'День свадьбы', edit_admin_script_plan_path(params[:script_id], @wedding_day),
+          remote: true,
+          class: plan_class(@wedding_day, @plan)
+    .sv-plan-etap
+      %span
+        =link_to 'После свадьбы', edit_admin_script_plan_path(params[:script_id], @after_wedding),
+          remote: true,
+          class: plan_class(@after_wedding, @plan)
+
+  #sv-admin-add-task.sv-admin-plans__tasks
+    .sv-aside
+      .sv-admin-plan__type-title
+        .sv-choice.sv-l
+          %ul
+            %li
+              %span.center Несортированные задачи
+      %p
+        = text_field_tag 'task_free_filter', nil, class: 'sv-admin-plan__find-task-input', placeholder: 'Поиск задачи'
+        = select 'task_category_free_filter', nil, TaskCategory.all.collect {|p| [ p.name, p.id ] }, 
+                                              { include_blank: 'Все категории' }, 
+                                              class: 'sv-admin-plan__task-select-filter', 
+                                              id: 'filter-select1'
+        = link_to 'фильтр', '#', class: 'link-style sv-r link-filter-tasks'
+      %ul.sv-admin-plans__tasks-list
+        - @plan_free_task.each do |t|
+          %li.sv-admin-plans__task-box{class: "s#{t.type_id} task-id-#{t.id} task-category-id-#{t.task_category_id}", 'data-id' => t.id} 
+            .borders
+              .vis
+                .name
+                  = link_to t.name, add_task_admin_script_plan_path(params[:script_id], @plan, t), 
+                    remote: true, method: 'post'
+
+  #sv-admin-remove-task.sv-admin-plans__tasks
+    .sv-aside
+      .sv-admin-plan__type-title
+        .sv-choice.sv-l
+          %ul
+            %li
+              %span.center= timetable_name @plan.plan_type, @plan.index_number
+      %p
+        = text_field_tag 'task_plan_filter', nil, class: 'sv-admin-plan__find-task-input', placeholder: 'Поиск задачи'
+        = select 'task_category_plan_filter', nil, TaskCategory.all.collect {|p| [ p.name, p.id ] }, 
+                                              {include_blank: 'Все категории'}, 
+                                              class: 'sv-admin-plan__task-select-filter', 
+                                              id: 'filter-select2'
+        = link_to 'фильтр', '#', class: 'link-style sv-r link-filter-tasks'
+      %ul.sv-admin-plans__tasks-list{'data-url' => order_tasks_admin_script_plan_path(@plan.script,@plan)}
+        - @plan_task.each do |t|
+          %li.sv-admin-plans__task-box{class: "s#{t.type_id} task-id-#{t.id} task-category-id-#{t.task_category_id}", 'data-id' => t.id}
+            .borders
+              .vis
+                .name
+                  = link_to t.name, remove_task_admin_script_plan_path(params[:script_id], @plan, t), 
+                    remote: true, method: 'post'

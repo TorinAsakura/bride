@@ -1,0 +1,12 @@
+= simple_form_for [:admin, @question], :html => {:id => "firm_catalog_form", :class => 'modal hide', :style => ""}  do |f|
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Новая категория
+  .modal-body
+    %p
+      = f.input :title
+      = f.input :body, :input_html => {:style => "width: 500px;", :rows => 6}
+      = f.association :question_category
+  .modal-footer
+    %a.btn{:href => "#", "aria-hidden" => "true", "data-dismiss" => "modal"} Закрыть
+    %button.btn.btn-primary Сохранить

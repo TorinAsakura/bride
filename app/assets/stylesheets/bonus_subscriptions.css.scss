@@ -1,0 +1,22 @@
+.sv-new-subscription{
+  >p{
+    margin-top: 10px;
+  }
+  .balance{
+    margin: 10px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #c84564;
+    p{
+      display: inline-block;
+      margin: 0;
+    }
+  }
+}
+
+#subscription-city-items, #subscription-firm-catalog-items{
+  .items{
+    .city-group{
+      width: 230px;
+    }
+  }
+}

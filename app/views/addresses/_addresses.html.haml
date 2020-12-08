@@ -1,0 +1,45 @@
+- if (city_firms = @firm.city_firms).present?
+  - city_firms.each_with_index do |city_firm, i|
+    .title_nobg= city_firm.city.name
+    .sv-firm-contacts
+      - city_firm.all_addresses.each do |addr|
+        %ul
+          - if addr.mobile_phone.present?
+            %li
+              %i.sv-icon.mobile
+              .sv-firm-phone-hidden{ 'data-js' => 'firm-hidden-phone', 'data-id' => city_firm.id }
+                = format_phone addr.mobile_phone
+                = link_to 'Показать', '#', class: 'sv-firm-show-phone-link',
+                                           'data-js' => 'firm-show-phone-link',
+                                           'data-url' => get_phone_firm_url(@firm, city_firm)
+          - if addr.phone.present?
+            %li
+              %i.sv-icon.phone
+              = addr.phone
+          - if addr.skype.present?
+            %li
+              %i.sv-icon.skype
+              = addr.skype
+          - if addr.email.present?
+            %li
+              %i.sv-icon.mail
+              = link_to addr.email, "mailto:#{addr.email}", rel: 'nofollow'
+          - if addr.site.present?
+            %li
+              %i.sv-icon.url
+              = link_to addr.site, "http://#{addr.site}", rel: 'nofollow'
+      .clear
+    .sv-firm-contact-map{ id: "map#{i}" }
+      :javascript
+        $(window).load(function() { initMap({ id: 'map#{i}', addresses: '#{j city_firm.addresses_for_map}', zoomControl: true }); });
+
+    - city_firm.addresses.ordered.each do |address|
+      = render 'city_firms/marker', city_firm: city_firm, address: address, editable: false
+
+    %div{ style: 'height:30px;' }
+
+- elsif for_moderator_of @firm
+  .sv-empty-section
+    .sv-empty-section__inner
+      У вас не выбран город, хотите
+      = link_to 'добавить город?', edit_firm_url(@firm, anchor: 'addresses'), class: 'sv-empty-section__link'

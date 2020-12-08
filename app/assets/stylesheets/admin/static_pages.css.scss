@@ -1,0 +1,73 @@
+// Place all the styles related to the admin/static_pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.static-page {
+  #page_form {
+    .redactor_editor,
+    .redactor_editor:focus {
+      min-height: 200px;
+    }
+
+    .field {
+      margin: 10px 0;
+    }
+
+    .w400 {
+      width: 400px;
+    }
+
+    .checkbox-label {
+      display: inline-block;
+      margin: 0 0 0 25px;
+    }
+
+    .checkbox {
+      margin: 0;
+    }
+
+    .help-inline {
+      vertical-align: top;
+      padding-left: 10px;
+      height: 28px;
+      line-height: 28px;
+      color: #f1849d;
+    }
+  }
+
+  .page {
+    margin: 10px 0;
+
+    &:nth-child(odd) {
+      background: #ddd;
+    }
+  }
+
+  .page-show {
+    width: 445px;
+    margin: 0 10px;
+    display: inline-block;
+  }
+
+  .page-visible {
+    display: inline-block;
+    width: 210px;
+    color: #fff;
+    padding: 3px 10px;
+    margin: 0 5px;
+    text-align: center;
+    font-size: 14px;
+
+    &.visible-true {
+      background: #008000;
+    }
+    &.visible-false {
+      background: #ff0000;
+    }
+  }
+
+  .page-link {
+    margin: 0 10px;
+  }
+
+}

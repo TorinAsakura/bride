@@ -1,0 +1,38 @@
+#sv-videos-block
+  .title.clearfix
+    = link_to interesting_path, class: 'sv-a-back sv-l' do
+      %i.icon-chevron-left
+    %span Интересно смотреть
+    %ul
+      %li.search
+        = link_to '#', data: { js: 'videos-search' } do
+          %i поиск
+
+  .hide{ 'data-js' => 'videos-search-form' }
+    .sv-videos-search-form.sv-videos-search-form_visible
+      = form_tag videos_interesting_path, method: :get do
+        = text_field_tag :videos_search,
+                         params[:videos_search],
+                         class: 'inp-style sv-videos-search-form__input sv-videos-search-form__input_very-large',
+                         placeholder: 'Поиск по видео'
+        = button_tag 'Искать', name: nil, class: 'find-button'
+
+    .sv-posts-order-wrapper
+      .sv-posts-order
+        = render 'interesting/videos_order', path: videos_interesting_path
+
+  %div{ 'data-js' => 'interesting-videos' }
+    - if @videos.present?
+      = render 'interesting/videos', videos: @videos
+    - else
+      .sv-empty-section
+        .sv-empty-section__inner
+          По вашему запросу ничего не найдено.
+
+  .sv-videos-hidden-nav
+    = rel_next_prev_link_tags @videos
+- content_for :javascript do
+  :javascript
+    $(document).ready(function(){
+      $("a[data-js=videos-search]").trigger("click");
+    })

@@ -1,0 +1,14 @@
+- friends = current_user.friends
+%li.m1
+  = link_to(firm_customers_url, title: t('.title'), class: 'm1') do
+    %i.sv-icon.people
+  %i.arr
+  .drop.sv-drop-friends
+    .title= t('.title')
+    %ul
+      - friends.limit(5).decorate.each do |friend|
+        %li
+          .avatar= friend.thumb_avatar_image
+          .name= friend.name
+      - if friends.count > 5
+        %li.last= link_to( t('static.show_all'), customers_firm_url(firm), class: 'link-show-all')

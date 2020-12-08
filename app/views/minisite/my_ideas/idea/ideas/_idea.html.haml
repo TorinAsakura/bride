@@ -1,0 +1,7 @@
+.sv-minisite-idea.sv-idea_hidden
+  .sv-idea__image
+    = link_to @category ? minisite_my_ideas_category_idea_path(@category, idea) : minisite_my_ideas_idea_path(idea), remote: true do
+      = image_tag idea.image.image_url :thumb
+      - unless @category
+        - if (collection = idea.collection).present?
+          .sv-idea__image-text= collection.name

@@ -1,0 +1,18 @@
+.sv-wrapper.site-wrap.mini-site.clearfix
+  = render 'sites/shared/site_menu', site: @site, pages: @pages
+
+  .sv-article{'data-js' => @page.name}
+    %h1.title
+      .back-link
+        = link_to 'Фотогалерея', polymorphic_path([@site, :albums])
+      = @album.name
+      .add-album
+        = link_to new_polymorphic_path([@site, :album]), remote: true, class: 'sv-photo-gallery-form-link add-album' do
+          %i добавить
+
+    .sv-photo-gallery-form
+
+    #photos-block
+      - @photos.each do |photo|
+        = render partial: 'pages/system/photo', locals: {firm: @firm, resource: @resource, album: @album, photo: photo}
+      .clearfix

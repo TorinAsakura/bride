@@ -1,0 +1,53 @@
+january:
+  id: 1
+  service_id: 1
+  month: 1
+  discount: 30
+february:
+  id: 2
+  service_id: 1
+  month: 2
+  discount: 20
+march:
+  id: 3
+  service_id: 1
+  month: 3
+  discount: 10
+april:
+  id: 4
+  service_id: 1
+  month: 4
+may:
+  id: 5
+  service_id: 1
+  month: 5
+june:
+  id: 6
+  service_id: 1
+  month: 6
+july:
+  id: 7
+  service_id: 1
+  month: 7
+august:
+  id: 8
+  service_id: 1
+  month: 8
+september:
+  id: 9
+  service_id: 1
+  month: 9
+october:
+  id: 10
+  service_id: 1
+  month: 10
+november:
+  id: 11
+  service_id: 1
+  month: 11
+  discount: 10
+december:
+  id: 12
+  service_id: 1
+  month: 12
+  discount: 20

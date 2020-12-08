@@ -1,0 +1,112 @@
+.base-client-settings {
+  width: 640px;
+  @include clearfix;
+  label {
+    line-height: $input-height + $main-margin / 2;
+    display: block;
+    float: left;
+    margin-bottom: $main-padding;
+    text-align: right;
+    width: 166px;
+    padding-right: $main-padding;
+  }
+  .cntrl-group.cntrls {
+    margin-left: 186px;
+  }
+  textarea {
+    width: 430px;
+    height: 100px;
+    resize: none;
+  }
+  input {
+    margin-bottom: $main-padding;
+  }
+  .select2-container {
+    margin-bottom: $main-padding;
+    width: 90px;
+  }
+  .user-marital_status,
+  .user-children,
+  .user-attitude-to-alcohol,
+  .user-attitude-to-smoking,
+  .user-firstname,
+  .user-lastname,
+  .user-gender,
+  .user-country,
+  .user-city {
+    width: 274px;
+  }
+  .user-firstname, .user-lastname, .client_birthday input {
+    width: 250px !important;
+  }
+
+  #site_description {
+    width: 64% !important;
+  }
+  .list-form-seting-lastname {
+    margin: 0;
+    label[class="select optional"] {
+      width: 46px;
+      padding: 0 20px 0 20px;
+    }
+    > div:first-of-type {
+      float: left;
+      width: 460px;
+    }
+  }
+  .list-form-seting-birthday {
+    .cntrl-group:nth-child(1), .cntrls {
+      float: left;
+    }
+    .client_visibility {
+      label {
+        width: 46px;
+        padding: 0 20px 0 20px;
+      }
+    }
+    .cntrls {
+      .date:nth-child(1) {
+        width: 60px;
+      }
+      .date:nth-child(3) {
+        width: 134px;
+        padding: 0 $main-padding / 2 0 $main-padding / 2;
+      }
+      .date:nth-child(5) {
+        width: 76px;
+      }
+    }
+  }
+  .user-interests, .user-favorite-shows, .user-favorite-films, .user-favorite-books, .user-favorite-music {
+    width: 430px !important;
+  }
+  input.radio-style-girl[type="radio"], input.radio-style-man[type="radio"] {
+    + label {
+      text-indent: 9999999999999999px;
+      width: 22px;
+      height: 42px;
+      background: image-url('sorted/sv-icon-man-or-girl-big.png') 0px 1px no-repeat;
+    }
+    &:checked + label {
+      background-position: 0px -47px;
+    }
+  }
+  input.radio-style-man[type="radio"] {
+    + label {
+      width: 28px;
+      background-position: (-42px) -1px;
+    }
+    &:checked + label {
+      background-position: (-42px) -48px;
+    }
+  }
+  .sv-radio-user {
+    height: 52px;
+    width: 270px;
+  }
+  .client_gender {
+    label {
+      padding-top: $main-padding / 2;
+    }
+  }
+}

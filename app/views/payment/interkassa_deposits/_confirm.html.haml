@@ -1,0 +1,2 @@
+%p= t('payment.interkassa_deposit.confirm_payment', amount: payment.amount.format, payer: payment.user.name).html_safe
+= render 'confirm_form', payment: payment

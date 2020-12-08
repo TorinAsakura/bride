@@ -1,0 +1,19 @@
+#sv-firm-side-services.block
+  .title.clearfix
+    %span Услуги
+    - for_moderator_of firm do
+      = link_to 'Редактировать', edit_firm_url(firm, anchor: 'firm-services')
+  - if services.present?
+    %ul
+      - services.visible.first(FIRM_SERVICES_COUNT).each do |firm_service|
+        %li
+          .clearfix
+            = firm_service.name
+            %span<
+              #{firm_service.cost}#{'<br />'.html_safe}
+              %i= firm_service.unit
+  - elsif for_moderator_of firm
+    .sv-empty-section
+      .sv-empty-section__inner
+        У вас еще нет ни одной услуги, хотите
+        = link_to 'добавить услугу?', edit_firm_url(firm, anchor: 'firm-services'), class: 'sv-empty-section__link'

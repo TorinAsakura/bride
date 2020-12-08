@@ -1,0 +1,19 @@
+.sv-wrapper.sv-community-categories.margintopotstp
+  .main-title.clearfix
+    %span Клубы
+
+  - @community_categories.each do |category|
+    .sv-communities-category
+      .sv-communities-category__info
+        .title= category.title
+        .description= category.description
+      .sv-community-categories__list.clearfix
+
+        - category.communities.each do |community|
+          .sv-community__block.sv-l
+            .logo.sv-l
+              = link_to community_path(community) do
+                = image_tag community.logo.preview
+            .info.sv-l
+              .title= link_to community.name, community_path(community)
+              .description= community.description

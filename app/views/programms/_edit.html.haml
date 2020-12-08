@@ -1,0 +1,22 @@
+.mini-site.margintopotstp
+
+  %h1.title
+    .back-link
+      = link_to 'Назад', edit_site_path(site)
+    = ( second_day ? 'Программа &laquo;День после свадьбы&raquo;' : 'Программа &laquo;День свадьбы&raquo;' ).html_safe
+
+    .add-album
+      - if second_day
+        = link_to 'Добавить', new_site_programms_second_path(site), remote: true
+      - else
+        = link_to 'Добавить', new_site_programm_path(site), remote: true
+
+  .clearfix
+    - programs.each do |program|
+      .program
+        .name= program.name
+        .description= nl2br program.description
+        .time= I18n.l program.time, format: :short_time
+
+        = link_to 'Редактировать', edit_site_programm_path(site, program), remote: true
+        = link_to 'Удалить', site_programm_path(site, program), method: :delete, confirm: 'Вы уверены?'

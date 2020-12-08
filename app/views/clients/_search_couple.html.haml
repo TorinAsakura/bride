@@ -1,0 +1,75 @@
+- if client.present?
+  = form_tag change_couple_wedding_path, id: 'change-couple-form' do
+    .combined_transport
+      = hidden_field_tag :couple_id, client.id
+      .face_human
+        .customer
+          = link_to client do
+            =image_tag client.avatar.icon, size: '150x150', alt: client.full_name
+        .face_tab
+          %i.sv-client-fullname__gender{ class: client.gender ? 'sv-client-fullname__gender_male' : 'sv-client-fullname__gender_female' }
+          = link_to client.full_name, client_path(client)
+        .name_being
+          - if client.birthday.present?
+            .info
+              День рождения:
+            .box
+              #{l(client.birthday, format: '%d %B %Y')}
+              (#{link_to(client.zodiac, '#').html_safe}),
+              #{client.age} #{pluralize client.age, 'год', 'года', 'лет'}
+          - if client.city.present?
+            .info
+              Город проживания:
+            .box
+              = image_tag '/assets/sv-icon-locate.png', alt: 'flag'
+              = link_to client.city.name, '#'
+        .sv-end-form
+          - if current_client.couple == client
+            .field-block
+              .notification
+                Вы действительно хотите расстаться с этим человеком?
+                %br
+                После расставания список ваших задач по подготовке к свадьбе
+                будет работать отдельно от другого пользователя.
+                = submit_tag 'Подтвердить', class: 'link-style sv-l'
+              = link_to 'Разорвать отношения', '', class: 'sv-confirm-button link-style sv-l'
+          - else
+            .field-block
+              - if current_client.is? client
+                %span.link-style-active.sv-l Это Вы
+
+              - elsif current_client.gender == client.gender
+                - if current_client.male?
+                  %span.link-style-active.sv-l Найдите себе девушку
+                - else
+                  %span.link-style-active.sv-l Найдите себе парня
+
+              - elsif current_client.invited? client
+                - invite = current_client.wedding_invite
+                .notification
+                  Вы действительно хотите отменить предложение?
+                  = link_to 'Отменить', reject_client_invite_path(invite.couple, invite), class: 'link-style sv-l', method: :put, id: 'sdfdsfsd'
+                = link_to 'Предложение сделано', '', class: 'sv-confirm-button link-style-active sv-l'
+
+              - elsif client.invited? current_client
+                - invite = client.wedding_invite
+                .notification
+                  Что сделать с предложением?
+
+                  = link_to 'Принять', confirm_client_invite_path(current_client, invite), 
+                    method: :post, class: 'link-style sv-l'
+                  = link_to 'Отказать', reject_client_invite_path(current_client, invite),
+                    method: :put, class: 'link-style sv-l'
+                = link_to 'Ожидает подтверждение предложения', '', class: 'sv-confirm-button link-style-active sv-l'
+
+              - elsif client.has_couple?
+                %span.link-style-active.sv-l Уже есть пара
+
+              - else
+                .notification
+                  Вы действительно хотите сделать предложение этому человеку?
+                  %br
+                  После этого вы сможете вместе выполнять задачи для подготовке
+                  к вашей незабываемой свадьбе.
+                  = submit_tag 'Подтвердить', class: 'link-style sv-l'
+                = link_to 'Сделать предложение', '#', class: 'sv-confirm-button link-style sv-l'

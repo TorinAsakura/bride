@@ -1,0 +1,13 @@
+.sv-wrapper
+  = render 'weddings/timetables_row', timetable_select: @timetable, timetables: @timetables
+.sv-wrapper
+  #sv-event__sidebar.sv-aside
+    = render 'events/event/sidebar', event: @event
+
+  #main_part.sv-article.sv-manag
+    - if @event
+      = render @event
+    - else
+      %h1
+        %i Задача:
+        Пусто

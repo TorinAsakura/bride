@@ -1,0 +1,15 @@
+- @categories.each_with_index do |category, i|
+  %div{ style: 'display: inline-block; width: 200px;' }
+    = link_to admin_idea_category_path(category) do
+      %h4= category.name
+      = image_tag(category.image.url(:thumb)) if category.image.url
+    %div
+      #{category.ideas.length} фото
+    %div
+      = link_to 'Редактировать', edit_admin_idea_category_path(category, section_id: @section), remote: true
+    - unless i.zero?
+      %div
+        = link_to 'Влево', move_left_admin_idea_category_path(category, section_id: @section), method: :post, remote: true
+    - unless i == @categories.count - 1
+      %div
+        = link_to 'Вправо', move_right_admin_idea_category_path(category, section_id: @section), method: :post, remote: true

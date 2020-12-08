@@ -1,0 +1,24 @@
+%fieldset.competition-prize
+  .text
+    .row.left
+      .field
+        .control-group.logo
+          .img
+            = image_tag(f.object.picture_url, class: "competition-prize-preview")
+          .button
+            = f.input :picture, as: :file, label: false, wrapper: :none, input_html: { class: 'competition-prize-input'}
+    .row.right
+      .field
+        .control-group
+          = f.label :title, "Название"
+          = f.text_field :title, required: true
+
+      .field
+        .control-group
+          = f.label :description, "Описание"
+          = f.text_area :description, required: true
+
+      .field
+        .control-group
+          = f.hidden_field :_destroy
+          = link_to "Удалить приз", '#', class: "remove_fields"

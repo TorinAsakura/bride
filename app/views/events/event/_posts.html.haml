@@ -1,0 +1,32 @@
+- if posts.present?
+  .title.itle.clearfix
+    - if posts.num_pages > 1
+      = link_to posts_page_wedding_timetable_event_path(@event.timetable, @event, 1, show: :all), remote: true do
+        %span.sv-l Полезно читать
+    - else 
+      %span.sv-l Полезно читать
+    .sv-choice.sv-r
+      - if posts.num_pages > 1
+        - posts_page = params[:posts_page].to_i
+        %ul
+          %li.prev
+            - if posts_page > 1
+              = link_to posts_page_wedding_timetable_event_path(@event.timetable, @event, posts_page - 1),
+                remote: true, class: 'icon prev' do
+                %i Назад
+          %li.page
+            .center= posts_page
+          %li.next
+            - if posts_page < posts.num_pages
+              = link_to posts_page_wedding_timetable_event_path(@event.timetable, @event, posts_page + 1), remote: true, class: 'icon next' do
+                %i Вперёд 
+    %ul.sv-r
+      %li.one
+        = link_to '#', class: 'sv-view-tab active', rel: '' do
+          %i крупно
+      %li.two
+        = link_to '#', class: 'sv-view-tab', rel: 'small' do
+          %i компактно
+
+  #sv-posts-list
+    = render 'events/shared/posts', posts: posts

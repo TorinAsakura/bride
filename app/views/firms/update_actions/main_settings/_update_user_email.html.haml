@@ -1,0 +1,21 @@
+#firm-user-email.sv-article.sv-firm-change-email-wrapper
+  .title_nobg Адрес электронной почты
+  .sv-firm-email-changed-popup
+    %ul
+      %li На ваш новый email отправлено письмо с подтверждением
+      %li На ваш старый email отправлено письмо с уведомлением
+  .sv-firm-email-already-used-popup
+    %ul
+      %li E-mail уже используется
+  .sv-firm-email-invalid-popup
+    %ul
+      %li E-mail не корректен
+  .sv-profile-site
+    .list-form-seting
+      = form_for firm, url: update_user_email_firm_path(firm),  method: :put, html: {:remote => true} do |f|
+
+        = f.fields_for 'user' do |u|
+          .field
+            %label Текущий e-mail:
+            = u.email_field :email, placeholder: "E-mail", class: 'sv-l inp-style inp-style-mini'
+            = u.submit 'Сохранить', class: 'link-style sv-l', style: 'display: none;'

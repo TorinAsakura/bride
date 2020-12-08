@@ -1,0 +1,43 @@
+$('#sv-admin-task-info-box').html("<%= j(render 'form', task: @task) %>");
+searchTags();
+$('#task_type_task, #task_task_category_id, #task_service').select2();
+taskPosterView();
+
+var categoryFirmDiv = "<%= j(select_tag 'task[firm_catalog_tasks_attributes][][firm_catalog_id]', 
+                        options_from_collection_for_select(FirmCatalog.top, 'id', 'name'), 
+                        include_blank: true, class: 'sv-admin-category-select', id: '') %>";
+var removeLink = "<%= j(link_to 'x', '#', class: 'task-remove-file-link') %>";
+var addSubcategoryFirmLink = "<%= j(link_to 'Добавить подкатегорию', '#', class: 'sv-admin__add-firm-subcategory') %>";
+var subcategoryFirmDiv = "<%= j(select_tag 'task[firm_catalog_tasks_attributes][][firm_catalog_id]', '', 
+                          class: 'sv-admin-subcategory-select', id: '') %>";
+
+var selectArrayFirm = new Object();
+editFirmCategories();
+loadFileForTask();
+
+$('.redactor').redactor({ lang: 'ru', plugins: ['fullscreen', 'fontsize', 'fontcolor', 'fontfamily', 'checkbox'] });
+$('select.sv-admin-category-select, select.sv-admin-subcategory-select, select.sv-admin-category-idea-select').select2();
+
+<% if @firm_catalogs.present? %>
+  <% @firm_catalogs.top.each do  |fc_top|%>
+    getFirmCatalogChildren(<%= fc_top.id %>);
+  <% end %>
+<% end %>
+
+var categoryIdeaDiv = "<%= j(select_tag '', options_from_collection_for_select(::Idea::Section.all, 'id', 'name'),
+                        include_blank: true, class: 'sv-admin-category-idea-select', id: '') %>";
+
+var addSubcategoryIdeaLink = "<%= j(link_to 'Добавить подкатегорию', '#', class: 'add-idea-subcategory') %>";
+
+var subcategoryIdeaDiv = "<%= j(select_tag 'task[idea_category_tasks_attributes][][category_id]', '',
+                          class: 'sv-admin-subcategory-select', id: '') %>";
+
+editIdeaCategories();
+var selectArrayIdea = new Object();
+
+<% if @idea_categories_group.present? %>
+  <% @idea_categories_group.each do  |key, _|%>
+    getIdeaCategories(<%= key %>);
+  <% end %>
+<% end %>
+

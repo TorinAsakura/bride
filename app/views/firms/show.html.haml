@@ -1,0 +1,49 @@
+.sv-wrapper
+  - unless @firm.user.destroyed?
+    = render 'firms/shared/sidebar'
+
+  .sv-article.left
+    = render 'firms/shared/header'
+
+    - unless @firm.user.destroyed?
+      #sv-firm-detail-text
+        .clearfix
+          .sv-firm-description= auto_link_text @firm.description
+
+      - if @firm.show_albums? && (for_moderator_of(@firm) || @photos.present?)
+        #sv-photo-gallery-block
+          .title.clearfix
+            = link_to albums_path do
+              %span
+                Фотографии
+                %i= "(#{@firm.user.photos.size})"
+            %ul
+              %li.add
+                - for_moderator_of @firm do
+                  - if @latest_album.present?
+                    = link_to new_album_path(upload_to: @latest_album), remote: true, class: 'add sv-photo-gallery-form-link' do
+                      %i Загрузить фотографии
+                  - else
+                    = link_to new_album_path, remote: true, class: 'add sv-photo-gallery-form-link' do
+                      %i Загрузить фотографии
+          .sv-photo-gallery-form
+          - if @photos.present?
+            .sv-firm-photos-previews
+              - @photos.last(8).each_with_index do |photo, i|
+                = link_to album_photo_path(photo.album, photo), class: 'sv-firm-photos-preview sv-l', remote: true do
+                  = image_tag photo.path.preview
+              .clear
+          - else
+            .sv-empty-section.sv-empty-section_with-margin
+              У Вас нет ни одной фотографии, хотите
+              = link_to 'добавить фотографию?', new_album_path, remote: true, class: 'sv-empty-section__link'
+
+
+      - if @firm.show_journal? && (for_moderator_of(@firm) || @posts.present?)
+        = render 'firms/posts', link_to_back: false, expand: false
+
+        .sv-posts-hidden-nav
+          = rel_next_prev_link_tags @posts
+
+- unless @firm.user.destroyed?
+  = render 'firms/shared/add_friends_modal', firm: @firm

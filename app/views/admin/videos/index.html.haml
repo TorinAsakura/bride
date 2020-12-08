@@ -1,0 +1,11 @@
+#sv-read-it.sv-admin-videos
+  .title.clearfix
+    = link_to 'Все', admin_videos_path, class: 'm10'
+    |
+    = link_to 'Рекомендованые', admin_videos_path(status: 1), class: 'm10'
+    |
+    = link_to 'Принятые', admin_videos_path(status: 2), class: 'm10'
+  = render 'videos/videos', videos: @videos if @videos
+
+  .sv-videos-hidden-nav
+    = rel_next_prev_link_tags @videos

@@ -1,0 +1,30 @@
+.sv-aside  
+  .sv-community-avatar
+    - if community.avatar.blank?
+      .sv-community-avatar__image
+        = image_tag 'avatar.gif', 'data-js' => 'community-avatar-image', 'data-image-url' => community.avatar_url
+    - else
+      = link_to '#', remote: true, class: 'sv-community-avatar__image' do
+        = image_tag community.avatar.thumb, 'data-js' => 'community-avatar-image', 'data-image-url' => community.avatar_url
+
+    - for_moderator_of community do
+      .sv-community-avatar__actions-wrapper
+        %ul.sv-community-avatar__actions
+          %li.sv-community-avatar__action.sv-community-avatar__action_upload
+            %i
+            = link_to 'Загрузить аватарку', '#', 'data-js' => 'community-avatar-upload'
+          %li.sv-community-avatar__action.sv-community-avatar__action_edit{ class: community.avatar.blank? ? 'sv-community-avatar__action_hidden' : ''}
+            %i
+            = link_to 'Редактировать', '#', 'data-js' => 'community-avatar-edit'
+          %li.sv-community-avatar__action.sv-community-avatar__action_destroy{ class: community.avatar.blank? ? 'sv-community-avatar__action_hidden' : '' }
+            %i
+            = link_to 'Удалить', '#', 'data-js' => 'community-avatar-destroy'
+
+  = render 'communities/shared/avatar_editor', community: community
+
+  .sv-community__join
+    - if user_signed_in? && current_user.client?
+      = link_to_unless community.clients.include?(current_client), 'Вступить в клуб', join_the_community_community_path(community) do
+        = link_to 'Покинуть клуб', leave_the_community_community_path(community)
+
+  = render 'communities/shared/navigation', community: community

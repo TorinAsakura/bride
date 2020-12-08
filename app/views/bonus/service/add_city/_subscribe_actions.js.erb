@@ -1,0 +1,51 @@
+var city_selector = $('#add_city_form').find('#bonus_subscription_signing_object_id');
+if (city_selector.length > 0) {
+    city_selector.removeClass('hidden').parents('.cntrl-group').removeClass('hidden').find('label').removeClass('hidden');
+    city_selector.select2({
+        placeholder: "Выберите город",
+        minimumInputLength: 1,
+        ajax: {
+            url: city_selector.data('autocomplete-path'),
+            dataType: "json",
+            data: function (term, page) {
+                return {
+                    query: term,
+                    page: page,
+                    firms_only: true,
+                    firm_id: <%= subscription.target.id%>
+                };
+            },
+            results: function (data, page) {
+                return {results: $.map(data, function(value, i) { return {id: value.id, text: value.full_name } }) };
+            }
+        },
+        initSelection: function(element, callback) {
+            var id=$(element).val();
+            if (id!=="") {
+                $.ajax(city_selector.data('autocomplete-path'), {
+                    data: {
+                        id: id
+                    }
+                }).done(function(data) { callback({id: data.id, text: data.full_name }); });
+            }
+        }
+    }).on("change", function(e){
+        $.getJSON( '<%= price_bonus_service_path(subscription.service)%>',
+                {
+                    firm_id: <%= subscription.target.id%>,
+                    city_id: e.val
+                },
+                function( data ) {
+                    var form = $('#add_city_form'),
+                        submit = form.find('.modal-footer').find('button');
+
+                    <%if subscription.target.has_cities?%>
+                    form.find('.price').removeClass('hidden').find('span.btn-link').html(data.price);
+                    <%else%>
+                    submit.html('Добавить');
+                    <%end%>
+                    submit.removeClass('hidden');
+                }
+        )
+    });
+}

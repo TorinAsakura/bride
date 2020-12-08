@@ -1,0 +1,21 @@
+- id = firm_catalog.id.to_i
+- slug = firm_catalog.try(:slug) || 'all'
+%li.sv-firm-catalog-item{id: dom_id(firm_catalog), class: ('active' if (@firm_catalog.try(:parent_id) || @firm_catalog.try(:id)).eql?(id)), data: {'submenu-id' => "sub-catalog-id-#{id}"}}
+  = link_to(city_firm_catalog_firms_path(@city.try(:slug) || 'all', slug), remote: true, class: 'category-link', data: {catalog: slug }) do
+    = firm_catalog.name
+  - if (children = firm_catalog.children).present?
+    .sub-catalog{id: "sub-catalog-id-#{id}", style: ("background-image:url('#{firm_catalog.logo.url(:thumb)}')" if firm_catalog.logo.present?)}
+      - grouped_catalogs = children.decorate.group_by(&:category_name)
+      - group_class = grouped_catalogs.count > 1 ? 'w-50' : 'w-100'
+      - grouped_catalogs.each do |group_name, catalogs|
+        .children-category{class: group_class}
+          %h4= group_name
+          %ul
+            - catalogs.each do |catalog|
+              %li.sv-firm-sub-catalog-item{id: dom_id(catalog), class: ('active' if (@firm_catalog.try(:id)).eql?(catalog.id))}
+                = link_to(city_firm_catalog_firms_path(@city.try(:slug) || 'all', catalog ), remote: true, class: 'category-link', data: {catalog: catalog.slug}) do
+                  = catalog.name
+                - if (extended_name = catalog.extended_name).present?
+                  %span.extended-name= extended_name
+
+

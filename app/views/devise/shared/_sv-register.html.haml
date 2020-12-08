@@ -1,0 +1,19 @@
+%ul#roles.sv-login-role.clearfix
+  %li
+    %span.w700 Ваша роль на свадьбе:
+  %li.active.tab-client
+    = label_tag 'tab_client' do
+      = radio_button_tag 'tab','client', false, :class=>'tab', onclick: "$('.fields_for_firm').css('display', 'none');$('.fields_for_client').css('display', 'block');"
+      Пользователь
+      %span.description (Невеста, Жених, Гость)
+  %li
+    = label_tag 'tab_firm' do
+      = radio_button_tag 'tab','firm', false, :class=>'tab', onclick: "$('.fields_for_client').css('display', 'none');$('.fields_for_firm').css('display', 'block');"
+      Исполнитель
+      %span.description (Свадебная компания)
+%hr/
+.sv-login-opacity.clearfix
+  %p Заполните поля ниже
+  = render '/devise/shared/register_client', client_form: client_form
+  = render '/devise/shared/register_firm', firm_form: firm_form
+  .sv-bg-trans-white.hide

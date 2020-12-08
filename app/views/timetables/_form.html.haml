@@ -1,0 +1,44 @@
+.title-ms
+  = link_to wedding_timetable_path(timetable), class: 'sv-a-back sv-l', remote: true do
+    %i.icon-chevron-left
+  %span.sv-l Настройка списка задач
+= form_tag wedding_timetable_path(timetable), method: :put do
+  .office_pages.ovflhid
+    - timetable.events.change.each do |e|
+      .ation_list-team{id: "e-status-#{e.id}"}
+        %div{ class: "sv-list-name sv-l #{'sv-list-not-active' if e.hidden?} #{'sv-active-name-i' if e.completed?}"}
+          = e.name
+        .sv-list-switch.sv-l
+          = hidden_field_tag "events[#{e.id}][aasm_state]", 'hidden'
+          - state = e.may_hide? ? e.aasm_state : 'uncompleted'
+          = check_box_tag "events[#{e.id}][aasm_state]", state, !e.hidden?, class: 'check-style', id:"c#{e.id}"
+          %label{for: "c#{e.id}"}
+            %span
+        .sv-list-guests.sv-l
+          = select_tag "events[#{e.id}][timetable_id]", options_from_collection_for_select(wedding_timetables, 'id', 'info_format', timetable.id), class: 'sel-style-compact-mini', id: "time#{e.id}"
+
+    .end-form
+      = submit_tag 'Сохранить', class: 'link-style sv-l'
+
+.title_nobg Мои задачи
+- if timetable.events.user_event.blank?
+  %p
+    На текущей неделе у вас нет собственных задач. Вы можете добавить задачу на любую
+    неделю. Для этого нажмите кнопку «Добавить новую задачу»
+- else
+  - timetable.events.user_event.each do |e|
+    .sv-timetable__user-events.clearfix{id: "e-remove-#{e.id}"}
+      .sv-timetable__user-event.sv-l= e.name
+      .sv-timetable__user-event-edit.sv-l
+        = link_to 'Редактировать',edit_wedding_timetable_event_path(timetable,e), remote: true, class: 'link-style sv-l'
+      .sv-event__remove.sv-l
+        .close-button.sv-l
+        .sv-event__remove-info.destroy
+          %p Вы уверены?
+          = link_to 'Удалить', wedding_timetable_event_path(timetable, e),
+            class: 'link-style',
+            'data-js' => 'scheduler-event-destroy',
+            'data-id' => e.id
+
+.sv-timetable__user-event
+  = link_to 'Добавить новую задачу', new_wedding_timetable_event_path(timetable), class: 'sv-add_item', remote: true

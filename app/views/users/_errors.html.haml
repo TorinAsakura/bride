@@ -1,0 +1,7 @@
+- if user.errors.any?
+  .alert.fade.in.alert-error
+    %a.close{"data-dismiss" => "alert", href: "#"}> x
+    - user.errors.messages.values.each do |msg|
+      - msg.each do |m|
+        = m
+        %br

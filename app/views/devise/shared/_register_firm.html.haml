@@ -1,0 +1,73 @@
+.fields_for_firm.clearfix.hide
+  = simple_form_for (@firm_form || firm_form), as: reg_resource_name,
+                              url: registration_path(reg_resource_name, { with_provider: params[:with_provider] }),
+                              validate: true,
+                              remote: true,
+                              html: {class: 'form-horizontal new_firm', id: 'new_firm', autocomplete: 'off' } do |f|
+    = hidden_field_tag :profile_type, 'firm'
+    .sv-left
+      .field-block
+        .notification.h40
+          Введите название вашей компании.
+          %br>/
+          Например &laquo;Конкор-оптика&raquo;
+        = f.input :name,
+                  placeholder: 'Название компании',
+                  label: false,
+                  input_html: { class: 'sv-input input-big', tabindex: 3, 'data-js' => 'register-c-name' }
+      .field-block
+        = f.input :email, as: :hidden, input_html: { value: '' }
+        .notification Введите e-mail
+        = f.input :email, placeholder: 'E-mail',
+                  label: false,
+                  input_html: { class: 'sv-input input-big', tabindex: 5, 'data-js' => 'register-c-email' }
+
+      .field-block
+        = f.input :password, as: :hidden, input_html: { value: '' }
+        -# fix chrome autocomplete
+        .notification Введите пароль. Может содержать символы a-Z, 1-9, # $ % &
+        = f.input :password,
+                  placeholder: 'Пароль',
+                  label: false,
+                  input_html: { pattern: User.password_format.source,
+                                class: 'sv-input input-big register_pass_1',
+                                tabindex: 6,
+                                'data-js' => 'register-c-password' }
+      .field-block
+        .notification Введите подтверждение пароля
+        = f.input :password_confirmation,
+                  placeholder: 'Подтвердите пароль',
+                  label: false,
+                  input_html: { pattern: User.password_format.source,
+                                class: 'sv-input input-big register_pass_2',
+                                tabindex: 7,
+                                'data-js' => 'register-c-confirm-password' }
+    .sv-right
+      .field-block
+        .notification.h40
+          Укажите суть вашей деятельности.
+          %br>/
+          Например &laquo;сеть салонов оптики&raquo;
+        = f.input :extended_name,
+                  placeholder: 'Дополнение к названию',
+                  label: false,
+                  input_html: { class: 'sv-input input-big', tabindex: 4, 'data-js' => 'register-c-description' }
+      .city-select
+        .register-input-city
+          = f.input_field :city_ids, as: :hidden
+          = link_to f.object.try(:city).try(:full_name) || 'Выберите город', '#change-first-city', class: 'sv-input input-big register-city-firm-link', id: 'register-city-firm-link', data: { toggle: 'modal'}
+      .category-select
+        .register-input-firm-catalog
+          = f.input_field :firm_catalog_ids, as: :hidden
+          = link_to f.object.try(:firm_catalog).try(:name) || 'Выберите категорию', '#change-first-firm-catalog', class: 'sv-input input-big register-sphere-link', id: 'register-sphere-link', data: { toggle: 'modal'}
+    .clear
+    .cntrl-group
+      %div
+        %label.sv-input-check
+          = check_box_tag :read, :yes, true, required: 'required', tabindex: '8'
+          Я согласен с
+          = link_to 'договором оферты', "#{root_url}oferta", target: '_blank'
+      %div
+        = f.input :subscription, as: :boolean,label: 'Хочу получать новости сайта', input_html: { checked: true }
+      = f.hidden_field :parent_token, value: request.env['affiliate.tag']
+      = f.submit 'Зарегистрироваться', class: 'sv-btn-login input-big', tabindex: 10

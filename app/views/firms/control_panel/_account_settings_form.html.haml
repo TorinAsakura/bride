@@ -1,0 +1,8 @@
+#firm-control-panel-account-settings.firm-settings{ style: 'display:none;' }
+  -# uncomment when ready
+  =# render 'firms/update_actions/main_settings/update_status', firm: firm, firm_before_change: firm_before_change
+  = render 'firms/update_actions/main_settings/update_firm_slug', firm: firm
+  = render 'firms/update_actions/main_settings/update_user_email', firm: firm
+  = render 'users/update_actions/main_settings/update_user_password', user: firm.user
+  = render 'users/update_actions/main_settings/update_phone', user: firm.user
+  = render 'firms/update_actions/main_settings/remove_account', firm: firm

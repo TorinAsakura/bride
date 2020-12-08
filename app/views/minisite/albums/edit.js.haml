@@ -1,0 +1,3 @@
+window.modalViewer = new AlbumViewer(window.location, window.location, '#{j(render 'edit')}');
+window.modalViewer.show();
+window.albumForm = new AlbumForm('#{@album.id}');

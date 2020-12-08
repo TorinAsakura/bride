@@ -1,0 +1,132 @@
+.sv-album-form__buttons{style: "margin: 0px 0"}
+  %p.choose_photos{data: {album_id: @aid}}
+    Загрузка фотографий из Vkontakte
+
+  .sv-inner-box
+    .title.clearfix
+      = link_to vkontakte_media_path, remote: true, class: "sv-a-back sv-l" do
+        %i.icon-chevron-left
+      %span #{@album_name}
+  .controls
+    - @photos.each do |photo|
+      .vk_photo{id: "photo_#{photo.pid}"}
+        %p
+          = photo.text
+          %br
+          = image_tag photo.src
+          = image_tag "galka.png", class: "galka", style: "visibility: hidden"
+    .clear
+    .controls
+      = link_to "", "#", class: 'icon-chevron-left prev navigation-controls', style: "display: none", data: {first_image_id: @photos.first.pid}
+      = link_to "Выбрать отмеченные фото", "#", class: "input-big link-style", id: "select_vk_photos_btn" ,"data-album_id" => @aid
+      = link_to "", "#", class: 'icon-chevron-right next navigation-controls', data: {last_image_id: @photos.last.pid}
+
+
+:javascript
+  $.cookie.json = true;
+
+  if(!!$.cookie("photo_ids") && $.cookie("photo_ids") !== 'null'){
+    var photo_ids = $.cookie("photo_ids");
+  }else{
+    var photo_ids = [];
+  }
+
+  var divs = $("div[id*=photo][class*=vk_photo]");
+  var reg_exp = /[^a-z, \_]+/i;
+  var upload_to = null;
+  var upload_album_id = null;
+  var min_image_in_poll = 2;
+  var max_image_in_poll = 3;
+  var valid_for_context = true;
+
+  var validate_images_length = function(){
+    if(photo_ids.length < min_image_in_poll || photo_ids.length > max_image_in_poll){
+      valid_for_context = false;
+    }else{
+      valid_for_context = true;
+    }
+  }
+
+  if($("#edit").data('referrer').indexOf('polls') === -1){
+    var album_form = $("[data-js=album-photos-form]");
+    upload_album_id = album_form[0].action.match(/[0-9]+$/)[0];
+  }else{
+    upload_to = 'poll'
+  }
+
+  $(".fancybox-close").on('click', function(){
+    clear_offset();
+    clear_photo_ids();
+  });
+
+  $.each(divs, function(index, elem){
+      $(elem).click(function() {
+          var full_id = this.id;
+          var id = parseInt(full_id.match(reg_exp)[0]);
+
+          if($(this).hasClass("checked")) {
+              img = $(this).find('img')[0];
+              $(img).removeClass("selected_vk_photo");
+              galka_img = $(this).find('img')[1];
+
+              $(this).removeClass("checked");
+
+              $(galka_img).css('visibility', 'hidden');
+
+              photo_ids = $.cookie("photo_ids");
+              index = photo_ids.indexOf(id);
+              photo_ids.splice(index, 1);
+              $.cookie("photo_ids", photo_ids);
+          } else {
+              $(this).addClass("checked");
+              img = $(this).find('img')[0];
+              $(img).addClass("selected_vk_photo");
+              galka_img = $(this).find('img')[1];
+
+              photo_ids.push(id);
+              $(galka_img).css('visibility', 'visible');
+              $.cookie("photo_ids", photo_ids);
+          }
+      });
+  });
+
+  $("#select_vk_photos_btn").on('click', function(){
+    clear_offset();
+    var aid = $("#select_vk_photos_btn").data("album_id")
+    var vk_photos_params = {
+      "photo_ids": $.cookie("photo_ids"),
+      "album_id" : $("#select_vk_photos_btn").data("album_id")
+    };
+
+    if(upload_to){
+      validate_images_length();
+    }
+
+    if(valid_for_context){
+      show_loader();
+
+      $.get(
+        "/vkontakte_media/download",
+        {
+          vk_photos_params: vk_photos_params,
+          album_id: upload_album_id,
+          upload_to: upload_to
+        }
+      ).done(function(data) {
+          clear_photo_ids();
+      });
+    }else{
+      alert("Чтобы создать опрос, вы должны выбрать от 2 до 3 изображений");
+    }
+  });
+
+  function show_loader(){
+    $(".sv-album-form__buttons").css('opacity', '0.6');
+    $(".sv-album-form__buttons").append("<img src=/assets/loading.gif class=loading>");
+  }
+  var clear_offset = function(){
+    $.cookie('offset', null);
+  }
+  var clear_photo_ids = function(){
+    $.cookie('photo_ids', null);
+  }

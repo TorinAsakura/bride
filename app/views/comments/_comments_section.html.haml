@@ -1,0 +1,14 @@
+= render 'comments/header', modal: modal
+
+- if modal
+  - unless current_user.present?
+    = render 'comments/register'
+  = render 'comments/comments', resource: resource, comments: comments, modal: true
+  - if current_user.present?
+    = render 'comments/form', resource: resource, modal: true
+- else
+  - if current_user.present?
+    = render 'comments/form', resource: resource, modal: false
+  - else
+    = render 'comments/register'
+  = render 'comments/comments', resource: resource, comments: comments, modal: false

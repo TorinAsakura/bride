@@ -1,0 +1,31 @@
+- if current_user.present?
+  - case resource_class_name
+  - when 'PollImage'
+    = link_to votes_like_path(resource: resource, resource_class_name: resource_class_name), class: 'sv-poll-vote', remote: true, method: :post do
+      = image_tag 'sorted/sv-icon-vote.png'
+  - when 'Post', 'Firm', 'MediaContent', 'Photo', 'Idea::Idea', 'Client', 'UserCommentImage', 'Site', 'PostImage'
+    - if current_user.voted_as_when_voted_for(resource) || current_user.voted?(resource)
+      = link_to votes_unlike_path(resource: resource, resource_class_name: resource_class_name), class: 'sv-i-like-wrapper', remote: true, method: :delete do
+        .sv-i-like.cnt.sv-i-like-active.active
+          %span= resource.likes.count
+    - else
+      = link_to votes_like_path(resource: resource, resource_class_name: resource_class_name), class: 'sv-i-like-wrapper', remote: true, method: :post do
+        .sv-i-like.cnt
+          %span= resource.likes.count
+  - when 'Comment'
+    - if current_user.voted_as_when_voted_for(resource) || current_user.voted?(resource)
+      = link_to votes_unlike_path(resource: resource, resource_class_name: resource_class_name), class: 'sv-i-like-wrapper', remote: true, method: :delete do
+        .sv-i-like.cnt.sv-i-like-active.active
+          %span= resource.likes.count
+    - else
+      = link_to votes_like_path(resource: resource, resource_class_name: resource_class_name), class: resource.likes.count.zero? ? 'sv-i-like-wrapper sv-i-like-wrapper_hidden' : 'sv-i-like-wrapper', remote: true, method: :post do
+        .sv-i-like.cnt
+          %span= resource.likes.count
+  - else
+    .sv-r
+      %b
+        = resource.likes.count
+      - if current_user.voted_as_when_voted_for(resource) || current_user.voted?(resource)
+        = button_to 'Dislike', votes_unlike_path(resource: resource, resource_class_name: resource_class_name), remote: true, method: :delete
+      - else
+        = button_to 'Like it', votes_like_path(resource: resource, resource_class_name: resource_class_name), remote: true

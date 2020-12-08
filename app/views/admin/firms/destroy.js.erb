@@ -1,0 +1,10 @@
+var firm = $('#<%= dom_id(@firm)%>');
+var deletedStatus = firm.find('.deleted-status i');
+var deletedLink   = firm.find('a i.icon-remove');
+<%- if @firm.deleted?%>
+deletedStatus.removeClass('icon-remove text-red').addClass('icon-ok text-green');
+deletedLink.addClass('text-green').parents('a').attr('title', 'Восстановить');
+<%-else-%>
+deletedStatus.removeClass('icon-ok text-green').addClass('icon-remove text-red');
+deletedLink.removeClass('text-green').parents('a').attr('title', 'Удалить');
+<%-end%>

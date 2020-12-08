@@ -1,0 +1,9 @@
+.sv-wrapper.client-edit
+  - if @timetables[:planning]
+    = render 'weddings/timetables_row', timetable_select: @timetable, timetables: @timetables
+.sv-wrapper.client-edit
+  = render 'clients/shared/edit_client_site_menu', site: @site, pages: @pages, client: @client
+
+  = render 'clients/control_panel/base_settings_form', client: @client
+  = render 'clients/control_panel/main_settings_form', client: @client
+  = render 'clients/control_panel/wedding_settings_form', client: @client, wedding: @wedding, site: @site

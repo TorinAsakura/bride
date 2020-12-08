@@ -1,0 +1,10 @@
+#sv-search-clients-result.sv-search-result
+  = render clients
+
+.sv-clients__nav.hide
+  = paginate clients
+
+:javascript
+  $(document).ready(function () {
+    infinitescrollClients();
+  });

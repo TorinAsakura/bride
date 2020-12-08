@@ -1,0 +1,16 @@
+.sv-wrapper
+  = render 'firms/shared/sidebar'
+
+  .sv-article.left
+    = render 'firms/shared/header'
+
+    #sv-comments-block
+      .title.clearfix
+        = link_to firm_link(@firm), class: 'sv-a-back sv-l' do
+          %i.icon-chevron-left
+        .sv-comments-header
+          Отзывы
+          = link_to 'up', '#', class: 'sv-comments-arrow sv-comments-arrow_asc'
+          = link_to 'down', '#', class: 'sv-comments-arrow sv-comments-arrow_desc sv-comments-arrow_current'
+      = render 'firm_comments/form', resource: @firm, parent_id: nil
+      = render 'firm_comments/comments', comments: @comments

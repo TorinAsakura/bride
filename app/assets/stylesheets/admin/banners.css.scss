@@ -1,0 +1,37 @@
+.sv-admin-banner-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+}
+
+.sv-admin-banner {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.sv-admin-banner-form {
+  width: 600px;
+
+  input[type=file] {
+    height: auto;
+    line-height: 1;
+    margin: 10px 0 20px;
+  }
+
+  input[type=checkbox] {
+    margin: 4px 8px 0 0 !important;
+    display: block !important;
+  }
+
+  input[type=submit] {
+    margin-top: 20px;
+  }
+}
+
+.sv-admin-banner-form__visibility {
+  margin-top: 20px;
+}
+
+.sv-admin-banner-form__checkbox {
+  overflow: hidden;
+}

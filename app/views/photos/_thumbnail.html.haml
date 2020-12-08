@@ -1,0 +1,7 @@
+- if album.is_resource? 'Site', 'Firm'
+  - photo_link = firm_album_photo_path(album, photo)
+- else
+  - photo_link = polymorphic_path([resource, album, photo])
+
+= link_to photo_link, remote: true, id: dom_id(photo), class: 'sv-firm-album-photo sv-l', 'data-js' => 'photo-preview' do
+  = image_tag photo.path.try(:large_preview)

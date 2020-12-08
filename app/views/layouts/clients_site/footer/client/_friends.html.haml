@@ -1,0 +1,15 @@
+- friends = current_user.friendships_awaiting_acceptance
+- invited = client.invited.includes(:client)
+- count = friends.count + invited.count
+= link_to('#', data: {toggle: "dropdown"}, id: 'menu-friends', class: 'btn btn-icon rounded') do
+  %i.icon.ion-person-add
+  - if count > 0
+    %span.badge= count
+- if count > 0
+  %ul.dropdown-menu.dropdown-extend(role="menu" aria-labelledby="menu-friends")
+    - unless friends.count.zero?
+      %li.dropdown-header= t('.friends')
+      %li.notif-media= render friends.decorate, client: client
+    - unless invited.count.zero?
+      %li.dropdown-header= t('.invited')
+      %li.notif-media= render invited.decorate, client: client

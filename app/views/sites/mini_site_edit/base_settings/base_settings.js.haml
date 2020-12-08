@@ -1,0 +1,6 @@
+$('[data-part=base-settings]').html('#{j(render 'sites/mini_site_edit/base_settings/base_settings', site: @site)}');
+$('[data-part=base-settings] select').select2();
+$('[data-part=base-settings] [type=submit]').hide();
+
+- if @site_changed
+  $('[data-part=base-settings] span.updated').show();

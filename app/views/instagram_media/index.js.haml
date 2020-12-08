@@ -1,0 +1,7 @@
+$('.sv-album-form__buttons').replaceWith('#{j(render( :file => 'instagram_media/index.html.haml'))}');
+if("#{@referrer}".indexOf("polls") ===  -1){
+}else{
+$('#edit').html('#{j(render file: 'instagram_media/index.html.haml')}');
+$.fancybox.open($('#edit' ));
+}
+instagramPaginator();

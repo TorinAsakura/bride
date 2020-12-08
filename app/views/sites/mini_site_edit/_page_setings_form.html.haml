@@ -1,0 +1,9 @@
+#mini-site-page-settings.mini-site-settings.sv-article.margintopotstp{style: 'display:none;'}
+  .mini-site
+    .title_nobg.top-marg Дополнительная страница
+    %div= text_field_tag :title, nil, placeholder: 'Название страницы', class: 'inp-style inp-style-compact ml10'
+    %div= text_area_tag :page_data, nil, placeholder: 'Содержание раздела', class: 'inp-style page-data'
+
+    .result.clear
+      = link_to 'Сохранить', '#', class: 'link-style sv-l'
+      = link_to 'Удалить', '#', class: 'link-style-inner sv-l'

@@ -1,0 +1,5 @@
+.sv-wrapper.mini-site-edit
+  = render 'clients/shared/edit_client_site_menu', site: @site, pages: @pages, client: @client
+
+  #edit-site{'data-js' => 'edit-site'}
+    = render 'sites/mini_site_edit/base_settings_form', site: @site

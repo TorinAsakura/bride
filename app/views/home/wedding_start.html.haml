@@ -1,0 +1,9 @@
+%h3 Поздравляем!
+%h4
+  Подготовка свадьбы #{current_user.name} и
+  #{current_user.couple.name},
+  назначенной на #{I18n.localize(current_user.wedding.wedding_date, :format => :wed_date)} началась!
+
+.row-fluid
+  .span4
+    =link_to "Приступить", edit_wedding_path(current_user.wedding), :class => "btn btn-large btn-success btn-block"

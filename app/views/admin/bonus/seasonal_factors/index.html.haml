@@ -1,0 +1,10 @@
+%table.index_table
+  %tbody
+    - @seasonal_factors.in_groups_of(4) do |group|
+      %tr
+        - group.each do |seasonal_factor|
+          %td
+            %b= I18n.t("date.month_names")[seasonal_factor.month]
+            %td
+              = best_in_place seasonal_factor, :discount, path: admin_bonus_service_seasonal_factor_path(@service, seasonal_factor)
+%br

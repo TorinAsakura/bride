@@ -1,0 +1,17 @@
+.title.clearfix
+  = link_to interesting_path do
+    %span Интересно читать
+  %ul
+    %li.two-large
+      = link_to '#', class: 'sv-view-tab active' do
+        %i крупно
+    %li.two
+      = link_to '#', rel: :small, class: 'sv-view-tab' do
+        %i компактно
+    %li.prev
+      = link_to_previous_page posts, '<i>предыдущая</i>'.html_safe, remote: true, params: {resource: :posts}
+    %li.number
+      = posts.current_page if (posts.current_page > 1) && (posts.current_page != posts.total_pages)
+    %li.next
+      = link_to_next_page posts, '<i>следующая</i>'.html_safe, remote: true, params: {resource: :posts}
+= render 'posts/posts', posts: posts

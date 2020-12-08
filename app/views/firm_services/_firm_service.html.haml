@@ -1,0 +1,16 @@
+.sv-firm-services-line{id: dom_id(sf.object), class: "#{' sv-firm-services-line-new' if sf.object.new_record?}#{' last' if last}", data: { id: sf.object.id, url: sf.object.persisted? ? firm_firm_service_path(sf.object.firm, sf.object) : nil } }
+  .sv-l
+    .sv-top
+    = link_to '', '#', class: 'service-up sv-top'
+    = link_to '', '#', class: 'service-down sv-bottom'
+  .sv-firm-services-name-input.sv-l.field-block.with-notification
+    .notification= t('.notification.name')
+    = sf.input_field :name, maxlength: 50, class: 'inp-style-mini-compact inp-style sv-l'
+  .sv-firm-services-cost-input.sv-l.field-block.with-notification
+    .notification.ha.big= t('.notification.cost')
+    = sf.input_field :cost, class: 'inp-style-elvish inp-style sv-l'
+  .sv-firm-services-unit-input.sv-l.field-block.with-notification
+    .notification.ha.big-r= t('.notification.unit')
+    = sf.input_field :unit, class: 'inp-style-elvish inp-style sv-l'
+  .sv-firm-services-move-btn.sv-l
+    = link_to 'удалить', '#', class: 'sv-r close-button', 'data-js' => 'firm-service-remove'

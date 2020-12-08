@@ -1,0 +1,17 @@
+= simple_form_for [@site, @event_programm], html: {class: 'modal hide', style: 'width: 650px;'}  do |f|
+  .modal-header
+    %h3
+      - if @event_programm.second_day
+        Программа Дня после свадьбы
+      - else
+        Программа Дня свадьбы
+  .modal-body{style: 'max-height: 800px;'}
+    %div
+      %p
+        = f.hidden_field :second_day, value: (params[:second_day] || f.object.second_day || false), name: 'second_day'
+        = f.input :name, label: 'Название'
+        = f.input :description, input_html: {rows: 9, style: 'width: 255px;'}, label: 'Описание'
+        = f.input :time, label: 'Время начала'
+  .modal-footer
+    %button.btn.btn-primary Сохранить
+    = link_to 'Удалить', site_programm_path(@site, @event_programm), method: :delete, confirm: 'Вы уверены?', class: 'btn' unless @event_programm.new_record?

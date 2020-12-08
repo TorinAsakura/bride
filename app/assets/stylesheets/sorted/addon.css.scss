@@ -1,0 +1,160 @@
+.side-navigation {
+	margin: 0 0 2em 0;
+}
+
+.side-navigation > .nav-header {
+	background:#4a0707;
+	padding:0;
+	margin:0;
+	position: relative;
+}
+
+.side-navigation > .nav-header > .nav-header-label {
+	padding:0 20px;
+	margin:0;
+	display: block;
+	font-size: 22px;
+	color:#fff;
+	font-weight: 300;
+	line-height: 48px;
+	height: 50px;
+	text-transform: none;
+}
+
+.side-navigation > .nav-header > .fly-arrow {
+	display: block;
+	position: absolute;
+	border: 9px solid transparent;
+	border-top: 9px solid #4a0707;
+	z-index: +1;
+	width: 0;
+	height: 0;
+	left: 40px;
+	top: 49px;
+}
+
+.side-navigation > ul.nav {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.side-navigation > ul.nav > li {
+	border: 1px solid #ccc;
+	border-top: 0;
+	line-height: 20px;
+	margin: 0;
+	padding: 0;
+	position: relative;
+}
+
+.side-navigation > ul.nav > li > .fly-arrow {
+	display: none;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	z-index: +1;
+	right: -18px;
+	top: 16px;
+	width: 0;
+	height: 0;
+	border: 9px solid transparent;
+	border-left: 9px solid #fff;
+}
+
+.side-navigation.right > ul.nav > li > .fly-arrow {
+	left: -18px;
+	border: 9px solid transparent;
+	border-right: 9px solid #fff;
+}
+
+.side-navigation > ul.nav > li > a {
+	display: block;
+	padding: 15px 20px;
+	background: #fff;
+	text-decoration: none;
+	line-height: 18px;
+	color: #4c4c4c;
+	border: 0;
+	margin: 0;
+	font-size: 16px;
+}
+
+.side-navigation > ul.nav > li > a:hover {
+	background: #f5afbf;
+	color: #fff;
+	outline: 1px solid #f5afbf;
+}
+
+.side-navigation > ul.nav > li > a > .badge {
+	background: transparent;
+	color: #b2b2b2;
+	font-size: 18px;
+	line-height: 1em;
+	font-weight: normal;
+	padding: 0;
+	margin: 0;
+	text-shadow:none;
+}
+
+.side-navigation > ul.nav > li > a:hover > .badge {
+	color: #fff;
+}
+
+.side-navigation > ul.nav > li.active {
+
+}
+
+.side-navigation > ul.nav > li.active > .fly-arrow {
+	display: block;
+	border-left-color: #f1849d;
+}
+
+.side-navigation.right > ul.nav > li.active > .fly-arrow {
+	border-right-color: #f1849d;
+}
+
+.side-navigation > ul.nav > li.active > a
+{
+	background: #f1849d;
+	color: #fff;
+	outline: 1px solid #f1849d;
+}
+
+input.string, input.password {
+  font-size: 14px;
+  background:#fafafa;
+  color:#4c4c4c;
+  font-family:'Open Sans', sans-serif;
+  padding:3px 7px 3px 7px;
+  border-radius: 0px;
+}
+
+body .modal {
+	margin: 0;
+	padding: 0;
+}
+
+.fancybox-wrap .modal{
+  padding: 15px;
+}
+
+.sv-footer-push {
+  height: 200px;
+}
+
+#sv-footer {
+  height: 200px;
+  background: #f1849d;
+}
+
+.ui-widget-content {
+	font-size: 12px;
+	line-height: 1.3em;
+}
+
+.ui-widget-content select {
+	padding: inherit;
+	height: auto;
+	line-height: inherit;
+}

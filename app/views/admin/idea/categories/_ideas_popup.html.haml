@@ -1,0 +1,8 @@
+= simple_form_for @idea_category, :url => add_ideas_admin_idea_category_path, remote: true, :method => :post, :html => {:id => "form", :multipart => true,  :class => 'modal hide', :style => "width: 650px;"} do |f|
+  = f.input :id, :as => :hidden
+  .title_nobg Список существующих идей
+
+  = grouped_collection_select(:idea_section, :idea_category_id, @idea_sections, :categories, :name, :id, :name, :prompt => "Выберите подраздел")
+  #ideas_block
+
+  %button.link-style Сохранить

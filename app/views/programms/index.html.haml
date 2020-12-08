@@ -1,0 +1,13 @@
+.main-right-content
+  .mini-site.margintopotstp
+    %article
+      %section
+        %h1.page-title
+          = ( params[:second_day]  == true ? 'Программа &laquo;День после свадьбы&raquo;' : 'Программа &laquo;День свадьбы&raquo;' ).html_safe
+
+        .clearfix
+          - @programs.each do |program|
+            .program
+              .name= program.name
+              .description= nl2br program.description
+              .time= I18n.l program.time, format: :short_time

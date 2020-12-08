@@ -1,0 +1,20 @@
+two:
+  id: 1
+  service_id: 1
+  years_count: 2
+  discount: 3
+three:
+  id: 2
+  service_id: 1
+  years_count: 3
+  discount: 5
+four:
+  id: 3
+  service_id: 1
+  years_count: 4
+  discount: 7
+five:
+  id: 4
+  service_id: 1
+  years_count: 5
+  discount: 10

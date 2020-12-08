@@ -1,0 +1,18 @@
+.sv-article{'data-js' => @page.name}
+  %h1.title
+    = @page.title
+    .add-album
+      = link_to new_polymorphic_path([@site, :album]), remote: true, class: 'sv-photo-gallery-form-link add-album' do
+        %i добавить
+
+  .sv-photo-gallery-form
+
+  .albums.clearfix
+    - @albums.each do |album|
+      - next if album.photos.blank?
+      = link_to site_album_path(@site, album.id), :class => 'album-thumbnail' do
+        = image_tag (album.cover.blank? ? 'avatar.gif' : album.cover.path)
+
+        .album-info.clearfix
+          .album-name.sv-l= substr album.name, 25
+          .photo-count.sv-r= album.photos.size

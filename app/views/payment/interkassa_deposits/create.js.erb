@@ -1,0 +1,9 @@
+var depositBlock = $('#payment_interkassa_deposit');
+depositBlock.find('p.error').html('');
+<% if @interkassa_deposit.errors.empty? %>
+depositBlock.html("<%= j render('confirm', payment: @interkassa_deposit) %>");
+<% else %>
+    <% if @interkassa_deposit.errors.get(:amount).present? %>
+depositBlock.find('p.error').html("<%= @interkassa_deposit.errors.messages[:amount].join('<br/>').html_safe%>");
+    <% end %>
+<% end %>

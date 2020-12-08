@@ -1,0 +1,8 @@
+= form_tag idea_ideas_url(subdomain: ''), method: :get, class: 'footer-search' do
+  = text_field_tag 'idea[tag_list]', nil, placeholder: t('.placeholder'), class: 'search-field'
+  = button_tag(type: 'submit') do
+    %i.icon-search
+.colors
+  - Tag::COLORS.each do |color, slug|
+    = link_to(idea_color_url(color: slug, subdomain: '')) do
+      .circle{style: "background-color:#{color};"}

@@ -1,0 +1,29 @@
+var addSphereForm = $('#add_sphere_form');
+addSphereForm.find('.firm_catalog_id, select.firm_catalog_ids').select2();
+new FirmCatalogSelector({
+    sphere: '#add_sphere_form .firm_sphere_id',
+    catalog: '#add_sphere_form .firm_catalog_id',
+    catalogParams: {
+        firm_id: <%= subscription.target.id%>
+    },
+    catalogList: '#add_sphere_form select.firm_catalog_ids'
+});
+addSphereForm.find('select.firm_catalog_ids').on("change", function(e){
+    $.getJSON( '<%= price_bonus_service_path(subscription.service)%>',
+            {
+                firm_id: <%= subscription.target.id%>,
+                firm_catalog_id: e.val
+            },
+            function( data ) {
+                var form = $('#add_sphere_form'),
+                    submit = form.find('.modal-footer').find('button');
+
+                <%if subscription.target.has_spheres?%>
+                form.find('.price').removeClass('hidden').find('span.btn-link').html(data.price);
+                <%else%>
+                submit.html('Добавить');
+                <%end%>
+                submit.removeClass('hidden');
+            }
+    )
+});

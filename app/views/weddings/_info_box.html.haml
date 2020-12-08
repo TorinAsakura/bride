@@ -1,0 +1,25 @@
+.title-browns.title-pink-darck
+  %span.sv-l= (left = wedding.days_left) <= 0 ? 'Женаты' : 'Дней до свадьбы'
+  %span.sv-l.day= left if left > 0
+  = link_to '', edit_client_path(current_client, anchor: 'wedding-settings'), class: 'sv-title-seting'
+.sv-prezent{ style: ('display: none' if cookies["sv-scheduler-info-box"]) }
+  - if current_client.site.present?
+    = image_tag current_client.site.logo.scheduler
+  %ul
+    %li.male
+      = link_to wedding.groom.full_name, client_path(wedding.groom), class: 'i' unless wedding.groom.blank?
+    %li.female
+      = link_to wedding.bride.full_name, client_path(wedding.bride), class: 'i' unless wedding.bride.blank?
+    %li.location
+      = link_to current_client.wedding_city.name, '#', class: 'i' unless current_client.wedding_city.blank?
+    %li.checks
+      = link_to "#{wedding.events.completed.count} из #{wedding.events.count} (#{percent_complete(wedding)}%) задач", '#', class: 'i'   
+    %li.date
+      = link_to wedding.wedding_date, '#', class: 'i'   
+.sv-mi_site.ovflhid
+  .sv_our-website.sv-l
+    - if current_client.site.present?
+      = link_to 'Свадебный мини-сайт', root_url(subdomain: current_client.site.name), class: 'link-style-white'
+    - else
+      = link_to 'Создать мини-сайт', new_site_path, class: 'link-style-white'
+  =link_to '', '', id: 'slide-info-box', class: "sv-title-seting sv-r #{link_title_style}"

@@ -1,0 +1,10 @@
+- if params[:video_page].to_i > 1 && params[:show] == 'all'
+  $('#sv-video-list').append('#{ render 'events/shared/video', video: @video }');
+- elsif params[:show] == 'all'
+  clearEventContent(); 
+  $('#sv-view-it').html('#{j render 'events/show_only/video', video: @video }');
+  infinitescrollEventVideo('#{ wedding_timetable_event_path(@event.timetable, @event) }');
+- else
+  $('#sv-view-it').html('#{j render 'events/event/video', video: @video }');
+
+initVideoPreviews();

@@ -1,0 +1,30 @@
+.sv-community__client {
+  border-bottom: 1px solid #c84564;
+  padding: 15px 0;
+  .sv-client-fullname {
+    margin: 0 0 10px 0;
+  }
+  .sv-client-info__list {
+    height: 94px; 
+    .sv-client-info__item-title {
+      width: 140px;
+    }
+  }
+  .sv-client-info__list-item {
+    margin: 0 0 5px 0;
+  }
+}
+.sv-community__client-info {
+  margin: 0 0 0 10px;
+  .sv-client-fullname {
+    line-height: 20px;
+  }
+}
+.sv-community__client-avatar {
+  width: 150px;
+  height: 150px;
+}
+
+.sv-community__client-button {
+  margin: 0 0 0 20px;
+}

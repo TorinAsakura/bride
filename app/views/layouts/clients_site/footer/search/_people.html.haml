@@ -1,0 +1,4 @@
+= form_tag clients_url(subdomain: ''), method: :get, class: 'footer-search' do
+  = text_field_tag 'search[:fullname]', nil, placeholder: t('.placeholder'), class: 'search-field'
+  = button_tag(type: 'submit') do
+    %i.icon-search

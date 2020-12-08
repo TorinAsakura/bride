@@ -1,0 +1,7 @@
+.title.clearfix.sv-messages-title
+  %span #{@recipient.try(:full_name) || @recipient.name || 'Пользователь'}
+
+.sv-messages
+  = render partial: 'messages/message', collection: @messages.reverse
+
+= render 'messages/form'

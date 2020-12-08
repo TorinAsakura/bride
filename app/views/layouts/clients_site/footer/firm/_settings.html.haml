@@ -1,0 +1,5 @@
+= link_to('#', data: {toggle: "dropdown"}, id: 'menu-settings', class: 'btn btn-icon rounded') do
+  %i.icon.ion-ios7-gear
+%ul.dropdown-menu(role="menu" aria-labelledby="menu-settings")
+  %li= link_to(t('.edit'), edit_firm_url(firm))
+  %li= link_to(t('.logout'), destroy_user_session_url, method: :delete)

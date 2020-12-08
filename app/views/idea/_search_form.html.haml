@@ -1,0 +1,40 @@
+= simple_form_for Idea::Idea.new,
+                  url: idea_ideas_path,
+                  html: { class: 'sv-ideas__search-form' },
+                  method: :get do |f|
+  .hide
+    = text_field_tag :colors, nil, 'data-js' => 'idea-search-taglist'
+    = hidden_field_tag :section_id, @section.try(:id)
+    = hidden_field_tag :category_id, @category.try(:id)
+
+  .sv-ideas__search-input
+    = text_field_tag :ideas_search,
+                     params[:ideas_search] || @color_names,
+                     class: 'inp-style sv-ideas__search-input-tag',
+                     placeholder: 'Поиск по свадебным идеям',
+                     'data-js' => 'idea-search-input'
+
+    .sv-ideas__search-colors
+      = render 'idea/color_input', f: f
+
+  .sv-ideas__select
+    - if @category.present?
+      .sv-ideas__select-name{ 'data-js' => 'section-select' }= @category.name
+    - elsif @section.present?
+      .sv-ideas__select-name{ 'data-js' => 'section-select' }= @section.name
+    - else
+      .sv-ideas__select-name.sv-ideas__select-name_empty{ 'data-js' => 'section-select' } Выберите группу
+
+    %ul.sv-ideas__section-popup
+      %li.sv-ideas__section-popup-link
+        = link_to 'Показать все', idea_ideas_path, class: 'sv-idea-section-link'
+      - @all_sections.each do |section|
+        %li.sv-ideas__section-popup-link
+          = link_to section.name, section, class: 'sv-idea-section-link'
+        - section.categories.ordered.each do |category|
+          %li.sv-ideas__section-popup-link
+            = link_to category.name, idea_section_category_path(section, category), class: 'sv-idea-category-link'
+
+  %button.link-style.sv-ideas__search-button Найти
+
+  .clear

@@ -1,0 +1,10 @@
+%li.m1
+  = link_to(edit_client_url(client), title: t('.title'), class: 'm1') do
+    %i.sv-icon.setting
+  %i.arr
+  .drop.sv-drop-settings
+    %ul
+      %li= link_to(t('.edit'), edit_client_url(client))
+      %li= link_to(t('.privacy'), '')
+      %li= link_to(t('.rules'), main_domain_link('/rules'))
+      %li= link_to(t('.logout'), destroy_user_session_url, method: :delete)

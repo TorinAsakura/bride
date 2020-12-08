@@ -1,0 +1,5 @@
+%ul.sv-login-soc
+  - User.omniauth_providers.each do |provider|
+    %li
+      - unless provider.to_s.titleize == "Mailru"
+        = link_to image_tag("soc-login-#{provider.to_s.titleize}.gif"), omniauth_authorize_path('user', provider)

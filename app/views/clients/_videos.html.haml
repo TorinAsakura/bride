@@ -1,0 +1,68 @@
+#sv-videos-block
+  .title.clearfix
+    = link_to @client, class: 'sv-a-back sv-l' do
+      %i.icon-chevron-left
+    %span
+      Видеозаписи
+    %ul
+      %li.add
+        - for_moderator_of @client do
+          = link_to new_polymorphic_path([@client, :video]), remote: true do
+            %i добавить
+
+  .sv-videos-search-form.sv-videos-search-form_visible
+    = form_tag client_videos_path(@client), method: :get, remote: true do
+      = hidden_field_tag :search_type, @search_type, 'data-js' => 'video-search-type'
+      .sv-videos-search-form__links
+        = link_to 'Все видео',
+                  videos_client_path(@client, link_to_back: link_to_back, search_type: 'all', videos_search: params[:videos_search]),
+                  class: 'sv-videos-search-form__link' + (@search_type == 'all' ? ' sv-videos-search-form__link_active' : ''),
+                  remote: true
+        = link_to (current_client && @client.is?(current_client) ? 'Мои видео' : 'Видео'),
+                  videos_client_path(@client, link_to_back: link_to_back, search_type: 'my', videos_search: params[:videos_search]),
+                  class: 'sv-videos-search-form__link' + (@search_type == 'my' ? ' sv-videos-search-form__link_active' : ''),
+                  remote: true
+        = link_to 'Избранное',
+                  videos_client_path(@client, link_to_back: link_to_back, search_type: 'starred', videos_search: params[:videos_search]),
+                  class: 'sv-videos-search-form__link' + (@search_type == 'starred' ? ' sv-videos-search-form__link_active' : ''),
+                  remote: true
+      = button_tag 'Найти', name: nil, class: 'sv-videos-search-form__btn find-button'
+      = hidden_field_tag :search_type, @search_type || 'all'
+      = hidden_field_tag :link_to_back, link_to_back
+      = text_field_tag :videos_search,
+                       params[:videos_search],
+                       class: 'inp-style sv-videos-search-form__input sv-videos-search-form__input_small',
+                       placeholder: 'Поиск по статьям'
+
+  - if @videos.present?
+    %ul.sv-video-list-wrap.two-columns{ 'data-js' => 'video-list' }
+      - @videos.each do |v|
+        %li.sv-video-list-block{ 'data-js' => 'video' }
+          - if v.content.match(/vk/) || v.content.match(/vimeo/)
+            = link_to polymorphic_path([v.multimedia.profileable, v]), remote: true, class: 'video_link_preview' do
+              .video-container
+                %img.video_image_preview{src: "#{v.media_preview}"}
+                %span.video-info
+                  %span.video-play
+                    %span.video-play-icon
+                    %span.video-title #{v.title}
+                  %span.video-duration 
+                    #{v.duration.present? ? v.duration : "??:??:??"}
+          -else
+            .youtube[v]
+              = link_to '', polymorphic_path([v.multimedia.profileable, v]), class: 'video sv-firm-video-link',
+                data: { title: truncate(v.title, length: 20), youtube: v.content }, remote: true
+              .sv-firm-video-link-bg
+             
+  - else
+    .sv-empty-section
+      .sv-empty-section__inner
+        - if params[:search_type] == 'starred'
+          Еще нет ни одного избранного видео
+        - elsif params.has_key? :videos_search
+          По запросу '#{params[:videos_search]}' ничего не найдено
+        - elsif for_moderator_of(@client)
+          Еще нет ни одного видео, хотите
+          = link_to 'добавить видео?', new_client_video_path(@client), remote: true, class: 'sv-empty-section__link'
+        - else
+          Еще нет ни одного видео

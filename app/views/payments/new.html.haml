@@ -1,0 +1,7 @@
+%h2 Новый платеж
+
+= @payment.errors.inspect
+= simple_form_for [@firm, @payment] do |f|
+  = f.input :amount
+  = f.button :submit
+  = link_to 'Отмена', :back, class: 'btn'

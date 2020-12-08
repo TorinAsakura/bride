@@ -1,0 +1,8 @@
+= form_for tag, url: ( tag.new_record? ? admin_tags_path : admin_tag_path(tag) ), html: {id: 'colored-tag-form'} do |f|
+  = f.text_field :name, id: 'colored-tag-name', required: true, placeholder: 'Название тэга'
+  = f.text_field :color, id: 'colored-tag-color', presense: true, placeholder: 'Код #xxyyzz', pattern: '#[\dabcdef]{6}', required:true
+  - if 'edit' != action_name
+    = f.submit 'Добавить', class: 'link-style'
+  - else
+    = f.submit 'Обновить', class: 'link-style'
+    = link_to 'Отмена', new_admin_tag_path, class: 'link-style va-middle', remote: true

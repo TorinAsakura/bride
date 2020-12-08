@@ -1,0 +1,44 @@
+.tags
+  .colored-tags
+    %h1.title Цветовые тэги
+
+    = render 'form', tag: Tag.new
+
+    #tag-list
+      - Tag.color.each do |colored_tag|
+        .colored-tag
+          = link_to edit_admin_tag_path(colored_tag), remote: true do
+            .tag-label{:style=>"background-color:#{colored_tag.color}"}
+            .tooltip= colored_tag.name
+          = link_to 'x', admin_tag_path(colored_tag), method: 'delete', confirm: 'Вы уверены?', remote: true, class: 'destroy-tag', 'data-type-tag' => 'color'
+
+  .text-tags.clearfix
+    %h1.title Текстовые тэги
+
+    .usual-tags
+      %h2.title Список тэгов
+
+      = form_tag admin_tags_path, method: :get, remote: true, class: 'search-form' do
+        = text_field_tag 'usual[search]', params[:usual][:search], class: 'search-tag-name', placeholder: 'Введите название тега или его часть'
+        .count-tags Минимальное количество совпадений
+        = text_field_tag 'usual[count]', params[:usual][:count], class: 'search-tag-count', pattern: '\d*', placeholder: 'от'
+        = submit_tag 'Фильтр', class: 'link-style'
+
+      #usual-tag
+        = render partial: 'tag', collection: @usual_tags, as: :tag
+      .usual_paginator
+        = paginate @usual_tags, param_name: '[usual][page]', remote: true
+
+    .accepted-tags
+      %h2.title Системные тэги
+
+      = form_tag admin_tags_path, method: 'get', remote: true, class: 'search-form' do
+        = text_field_tag 'accepted[search]', params[:accepted][:search], class: 'search-tag-name', placeholder: 'Введите название тега или его часть'
+        .count-tags Минимальное количество совпадений
+        = text_field_tag 'accepted[count]', params[:accepted][:count], class: 'search-tag-count', pattern: '\d*', placeholder: 'от'
+        = submit_tag 'Фильтр', class: 'link-style'
+
+      #accepted-tag
+        = render partial: 'tag', collection: @accepted_tags, as: :tag
+      .accepted_paginator
+        = paginate @accepted_tags, param_name: '[accepted][page]', remote: true

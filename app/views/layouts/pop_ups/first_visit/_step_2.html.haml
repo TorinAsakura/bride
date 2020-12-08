@@ -1,0 +1,28 @@
+.sv-first-visit__title
+  Планирование Свадьбы
+  .sv-r Шаг 2 из 3
+.sv-first-visit__body
+  %p
+    Начните готовиться к вашей свадьбе уже сегодня. Заполните анкету и получите доступ к системе подготовки и планирования свадьбы.
+    Позже Вы сможете поменять дату свадьбы, при необходимости.
+
+  = simple_form_for(Wedding.new, url: wedding_path, remote: true,
+    html: { method: :post, class: 'form-ovrfl ws-date-form', id: 'sv-first-visit__form-step2' }) do |f|
+    .line
+      = label_tag 'wedding-city', 'Город празднования:', class: 'long'
+      = link_to current_user.wedding_city, '#sv-wedding-cities', class: 'wedding-city-style', 'data-toggle' => 'modal'
+
+    .line
+      = label_tag 'wedding-city', 'Дата свадьбы:', class: 'long'
+      .sv-block-select.create-wedding
+        = text_field_tag :wedding_date, Date.today.strftime('%d.%m.%Y')
+        = hidden_field_tag :create_type, :new_date
+      .sv-dont-know-the-date
+        %label.checkbox
+          = check_box_tag 'without_date', true, nil, class: 'sv-wedding-without-date'
+          %span
+        %label{for: 'checkbox'} Не знаю
+
+    .footer
+      = f.submit 'Сохранить', class: 'link-style sv-r otp'
+      = link_to 'Пропустить шаг...', '#', class: 'sv-r sv-skip-step', 'data-js' => 'first-visit__skip-step'

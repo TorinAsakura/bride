@@ -1,0 +1,14 @@
+= render 'search_form'
+
+%h1 Результаты поиска
+.breadcrumbs
+  = link_to "Мои идеи", minisite_myideas_path
+%br
+
+- @ideas.each do |i|
+  - category = i.idea_categories.first
+  .span2
+    - if i.image
+      = link_to minisite_image_path(id: i.image.id, idea_category_id: category.id), :remote => true do
+        = image_tag(i.image.image_url(:thumb), :class => "img-rounded")
+    = render 'starred', :o => i, :ic => category

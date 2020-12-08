@@ -1,0 +1,7 @@
+development:
+  shop_id: '53206a9bbf4efca14acc67a3'
+  secret:  'nsyrSchLFQPZlgQK'
+
+production:
+  shop_id: '53206a9bbf4efca14acc67a3'
+  secret:  '7nrdP8wPhxZZpVBR'

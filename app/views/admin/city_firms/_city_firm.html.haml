@@ -1,0 +1,13 @@
+.sv-firm-city{id: dom_id(city_firm), data: {js: 'city-firm-select-wrapper', rating: city_firm.rating, id: city_firm.id }}
+  .sv-city-firm-rating-buttons
+    = link_to 'вверх', '#', class: 'sv-city-firm-rating-button sv-city-firm-rating-button_top'
+    = link_to 'вниз', '#', class: 'sv-city-firm-rating-button sv-city-firm-rating-button_bottom'
+  .sv-city-firm-select-wrapper__input
+    - if city_firm.firm.has_pro?
+      = text_field_tag :name, city_firm.city.full_name, class: 'inp-style', disabled: :disabled
+    - else
+      = link_to city_firm.city.full_name, '#change-first-city', class: 'inp-style active', data: { url: change_city_firm_city_firm_url(city_firm.firm, city_firm), toggle: 'modal'}
+
+  .sv-city-firm-select-wrapper__button
+    = link_to '', [city_firm.firm, city_firm], method: :delete, class: "sv-r delete-button#{' deleted' if city_firm.deleted?}", remote: true
+  .clear

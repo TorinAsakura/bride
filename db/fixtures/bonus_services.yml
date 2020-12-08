@@ -1,0 +1,103 @@
+pro:
+  id: 1
+  identifier: 'pro'
+  slug: 'pro'
+  type: 'Bonus::Service::Pro'
+  state: 'active'
+  position: 1
+  name: 'Pro аккаунт'
+  description: |
+    <p>Открывает доступ&nbsp; ко всем разделам сайта.<br>
+     Открывает личный сайт компании посетителям.<br>
+     Расширенная визитка в каталоге.<br>
+    </p>
+  amount_cents: 416
+  dealer_percent: 20
+  trial_duration: 10
+  list: true
+vip:
+  id: 2
+  identifier: 'vip'
+  slug: 'vip'
+  type: 'Bonus::Service'
+  state: 'active'
+  position: 2
+  name: 'VIP  размещение'
+  description: |
+    <p>Более расширенная визитка в каталоге.<br>
+    Визитка находится выше, чем у Pro аккаунта.
+    </p>
+  amount_cents: 500
+  dealer_percent: 20
+  trial_duration: 10
+  list: true
+add_city:
+  id: 3
+  identifier: 'add-city'
+  slug: 'add-city'
+  type: 'Bonus::Service::AddCity'
+  state: 'active'
+  position: 3
+  name: 'Дополнительный город'
+  description: |
+    <p>Если ваша компания представлена в разных городах России, вы можете подключить дополнительные города к своему профилю.<br>
+    </p>
+  discount: 5
+  dealer_percent: 20
+  list: true
+add_category:
+  id: 4
+  identifier: 'add-category'
+  slug: 'add-category'
+  type: 'Bonus::Service::AddSphere'
+  state: 'active'
+  position: 4
+  name: 'Дополнительная категория'
+  description: |
+    <p>Вы можете подключить дополнительные рубрики в каталоге компаний.<br>
+    </p>
+  discount: 25
+  dealer_percent: 20
+  list: true
+add_subcategory:
+  id: 5
+  identifier: 'add-subcategory'
+  slug: 'add-subcategory'
+  type: 'Bonus::Service::AddSphere'
+  state: 'active'
+  position: 5
+  name: 'Дополнительная подкатегория'
+  description: |
+    <p>Вы можете подключить дополнительные рубрики в каталоге компаний для вашей сферы деятельности.<br>
+    </p>
+  discount: 50
+  dealer_percent: 20
+  list: false
+color:
+  id: 6
+  identifier: 'color'
+  slug: 'color'
+  type: 'Bonus::Service'
+  state: 'active'
+  position: 6
+  name: 'Выделение в каталоге'
+  description: |
+    <p>Выделить визитку компании цветом в каталоге<br>
+    </p>
+  amount_cents: 100
+  dealer_percent: 20
+  trial_duration: 10
+high_in:
+  id: 7
+  identifier: 'high-in'
+  slug: 'high-in'
+  type: 'Bonus::Service'
+  state: 'active'
+  position: 7
+  name: 'Подъём в каталоге'
+  description: |
+    <p>Зафиксировать визитку вверху каталога<br>
+    </p>
+  amount_cents: 100
+  dealer_percent: 20
+  pay_once: true

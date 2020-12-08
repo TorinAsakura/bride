@@ -1,0 +1,17 @@
+#subscription-city-items.sv-wedding-cities-modal
+  = render "cities/wedding_cities_filters", items: items
+  .items#city-items
+    - items.group_by(&:name_index).each do |i, items|
+      .city-group.item{data: {item: i}}
+        %h5= i
+        %ul
+          - items.each do |item|
+            %li.city-item{id: dom_id(item), data: {country: item.country.id}}
+              .form
+                = simple_form_for subscription, url: bonus_service_subscriptions_path(subscription.service), html: { remote: true } do |f|
+                  = hidden_field_tag :item_block, true
+                  = f.hidden_field :signing_object_id, value: item.id
+                  = f.submit t('.pay'), class: 'link-style'
+              .name{title: item.full_name}= item.name
+              .price= subscription.service.price(subscription.target, item).format(html: true).html_safe
+              %p.error.main-color-text

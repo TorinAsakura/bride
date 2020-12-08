@@ -1,0 +1,4 @@
+<% if @user_idea.cover %>
+  $('[class^="btn cover_submit"]').val("Сделать обложкой");
+<% end %>
+$('.cover_submit_<%= @user_idea.id %>').val('<%= @user_idea.cover ? "Убрать из обложки" : "Сделать обложкой" %>');

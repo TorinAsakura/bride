@@ -1,0 +1,26 @@
+.sv-search
+  .title.clearfix
+    %span Выберите компанию
+    %ul
+      %li.search
+        = link_to wedding_timetable_event_path(event.timetable,event) do
+          %i найти
+
+  .ovflhid.sv-search-form
+    = simple_form_for @search, url: firms_search_wedding_timetable_event_path(event.timetable,event), 
+      html: { method: :get, id: 'client-search-form', remote: true} do |f|
+      .sv-find-firm-block
+        .sv-l
+          = f.input :fragment, required: true, placeholder: 'Введите название компании', label: false
+
+        .sv-select-city.sv-l
+          .sv-company-side-city-select{ 'data-js' => 'side-city-select' }
+            = link_to('#side-city-select', data: {toggle: 'modal', all: 'Все города'}) do
+              %span.city= current_user.wedding_city
+              .sv-company-side-city-arr
+            = f.input_field :city_id, as: :hidden
+
+            #side-city-select.sv-wedding-cities-modal.hide= render 'cities/side_city_select', items: wedding_cities
+
+        .sv-end-find-us.sv-l
+          = f.button :submit, 'Найти', class: 'link-style sv-l'

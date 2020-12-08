@@ -1,0 +1,22 @@
+.sv-first-visit
+  #step1.step
+    = render 'layouts/pop_ups/first_visit/step_1'
+  #step2.step
+    = render 'layouts/pop_ups/first_visit/step_2'
+  #step3.step
+    = render 'layouts/pop_ups/first_visit/step_3'
+
+
+.hide{ 'data-js' => 'post-form-warning' }
+  .sv-album-form-warning
+    .sv-album-form-warning__text Вы действительно хотите закрыть окно? Все несохраненные данные пропадут.
+    = link_to 'OK', '#', class: 'link-style sv-album-form-warning__button sv-album-form-warning__button_ok',
+                         'data-js' => 'post-form-warning-ok'
+    = link_to 'Отмена', '#', class: 'link-style sv-album-form-warning__button sv-album-form-warning__button_cancel',
+                              'data-js' => 'post-form-warning-cancel'
+
+:javascript
+  var weddingDateBeatpickerOptions = $.extend({
+    startDate: #{date = Date.today; date.strftime('[%Y, %m, %d]')},
+    disablingRules: [{from:#{today = Date.today; today.strftime('[%Y, %m, %d]')},to:'<'}]
+  },customBeatpickerOptions)

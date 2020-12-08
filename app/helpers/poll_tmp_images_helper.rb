@@ -1,0 +1,2 @@
+module PollTmpImagesHelper
+end

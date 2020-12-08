@@ -1,0 +1,63 @@
+.sv-video-wrapper
+  %div{ id: "video_#{@video.id}" }
+    .sv-video-owner
+      - if @video.multimedia.profileable_type == 'Firm'
+        - firm = @video.multimedia.firm
+        .sv-video-owner-logo.sv-video-owner-logo-firm.sv-l
+          = user_avatar(@video.multimedia)
+        .sv-video-owner-description.sv-l
+          = link_to firm.name, firm
+          %p= firm.extended_name
+      - else
+        - client = @video.multimedia.client
+        .sv-video-owner-logo.sv-l
+          = user_avatar(@video.multimedia)
+        .sv-video-owner-description.sv-l
+          = link_to client.full_name, client
+          %p= client.city.try(:name)
+    .clear
+
+  .sv-video-player-wrapper
+    .sv-video-player-title= @video.title
+    = render 'videos/player', video: @video
+
+  - if @video.description
+    .sv-video-player-description= auto_link_text @video.description
+
+  - if @video.tags.present?
+    .sv-video-tags
+      = render 'tags/tags', tags: @video.tags,
+                            prefix: 'Тэги:',
+                            wrap_name: Proc.new { |name| link_to name + ', ', videos_interesting_url(tags:[name]) },
+                            wrap_last_name: Proc.new { |name| link_to name, videos_interesting_url(tags:[name]) }
+
+  .sv-video-actions
+    %span.sv-video-date
+      = I18n.l @video.updated_at, format: :comment
+    - unless for_moderator_of(@video.multimedia.profileable)
+      = image_tag 'sorted/im-bord.png'
+      = render 'complaints/complaint', pretension: @video
+    - unless current_user.blank? || current_user.is?(@video.multimedia)
+      = image_tag 'sorted/im-bord.png'
+      = render 'favorites/favorite', favoriteable: @video
+
+    - for_moderator_of(@video.multimedia.profileable) do
+      = image_tag 'sorted/im-bord.png'
+      - edit_video_link = request.subdomain.present? ? edit_video_path(@video) : edit_polymorphic_path([@video.multimedia.profileable, @video])
+      = link_to 'Редактировать', edit_video_link, remote: true
+      = image_tag 'sorted/im-bord.png'
+      - destroy_video_link = request.subdomain.present? ? video_path(@video) : polymorphic_path([@video.multimedia.profileable, @video])
+      = link_to 'Удалить', destroy_video_link, method: :delete, confirm: 'Ваше видео удалится безвозвратно'
+
+    .sv-r
+      %div{ id: "vote_managment_#{@video.id}_#{@video.class.name}" }
+        = render 'votes/like', resource: @video, resource_class_name: @video.class.name
+
+    - for_admin do
+      .sv-post-admin{ 'data-js' => 'video-admin' }
+        = render 'videos/for_admin', video: @video
+
+  .clear
+
+  = render 'comments/comments_section', resource: @video, comments: @comments, modal: true
+

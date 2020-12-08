@@ -1,0 +1,5 @@
+= render partial: 'layouts/admin_tab_menu',  locals: { select: 'static_pages' }
+
+.static-page.new
+  %h1.title= link_to @page.title, admin_static_page_path(@page)
+  = render 'form'

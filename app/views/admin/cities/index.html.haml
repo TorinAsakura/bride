@@ -1,0 +1,12 @@
+.filter-city
+  = form_tag( 'cities_search', method: :get, remote: true) do
+    .city-name= text_field :search, :city, placeholder: 'Город'
+    .region-name= text_field :search, :region, placeholder: 'Регион'
+    .wedding-city= select_tag :search_wedding_city, options_for_select([["Все города", nil], ["Особые города", true]], nil), :include_blank => false, :name => 'search[wedding_city]', :class => 'input', style: 'width: 150px'
+    .submit= submit_tag "Поиск", :name => nil, class: 'link-style'
+
+.sv-admin-cities
+  = render 'cities_list'
+
+.add-city
+  = link_to 'Добавить город', new_admin_city_path, remote: true

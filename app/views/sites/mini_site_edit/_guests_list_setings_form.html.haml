@@ -1,0 +1,82 @@
+#mini-site-guests-list-settings.mini-site-settings.sv-article.margintopotstp{style: 'display:none;'}
+  .mini-site
+    .title_nobg.top-marg Список гостей
+    .row
+      %p.type.groom Жених:
+      %p.name.groom= 'Иван Петроплавский'
+      .drink-level.sv-r= select_tag :groom_drink, options_for_select(['Пьет', 'Пьет умеренно', 'Не пьет'], 'Пьет'), class: 'select-level', include_blank: true
+
+    .row
+      %p.type.bride Невеста:
+      %p.name.bride= 'Алевтина Матвиенская'
+      .drink-level.sv-r= select_tag :bride_drink, options_for_select(['Пьет', 'Пьет умеренно', 'Не пьет'], 'Пьет умеренно'), class: 'select-level', include_blank: true
+
+    .title_nobg.top-marg Гости со стороны жениха
+    .row
+      %p.sv-l.index= '1.'
+
+      %p.sv-l.guest= text_field_tag :guest, nil, class: 'sv-l inp-style inp-style-mini-compact', placeholder: 'Очень важный гость'
+
+      .cntrl-group.input-sex.sv-l
+        .sv-l.mr10
+          = radio_button_tag 'guest-check[0]', 'man', false, id: 'man0', class: 'radio-style-man'
+          = label_tag 'man0'
+        .sv-l.mr10
+          = radio_button_tag 'guest-check[0]', 'girl', false, id: 'girl0', class: 'radio-style-girl'
+          = label_tag 'girl0'
+
+      .drink-level.sv-r= select_tag :guest_drink, options_for_select(['Пьет', 'Пьет умеренно', 'Не пьет'], 'Пьет'), class: 'select-level', include_blank: true
+
+    .row
+      %p.sv-l.index= '2.'
+
+      %p.sv-l.guest= text_field_tag :guest, nil, class: 'sv-l inp-style inp-style-mini-compact', placeholder: 'Очень важный гость'
+
+      .cntrl-group.input-sex.sv-l
+        .sv-l.mr10
+          = radio_button_tag 'guest-check[1]', 'man', false, id: 'man1', class: 'radio-style-man'
+          = label_tag 'man1'
+        .sv-l.mr10
+          = radio_button_tag 'guest-check[1]', 'girl', false, id: 'girl1', class: 'radio-style-girl'
+          = label_tag 'girl1'
+
+      .drink-level.sv-r= select_tag :guest_drink, options_for_select(['Пьет', 'Пьет умеренно', 'Не пьет'], 'Пьет умеренно'), class: 'select-level', include_blank: true
+
+    = link_to 'Добавить гостя', '#', class: 'add-guest'
+
+    .title_nobg.top-marg Гости со стороны невесты
+    .row
+      %p.sv-l.index= '1.'
+
+      %p.sv-l.guest= text_field_tag :guest, nil, class: 'sv-l inp-style inp-style-mini-compact', placeholder: 'Очень важный гость'
+
+      .cntrl-group.input-sex.sv-l
+        .sv-l.mr10
+          = radio_button_tag 'guest-check[0]', 'man', false, id: 'man0', class: 'radio-style-man'
+          = label_tag 'man0'
+        .sv-l.mr10
+          = radio_button_tag 'guest-check[0]', 'girl', false, id: 'girl0', class: 'radio-style-girl'
+          = label_tag 'girl0'
+
+      .drink-level.sv-r= select_tag :guest_drink, options_for_select(['Пьет', 'Пьет умеренно', 'Не пьет'], 'Пьет'), class: 'select-level', include_blank: true
+
+    .row
+      %p.sv-l.index= '2.'
+
+      %p.sv-l.guest= text_field_tag :guest, nil, class: 'sv-l inp-style inp-style-mini-compact', placeholder: 'Очень важный гость'
+
+      .cntrl-group.input-sex.sv-l
+        .sv-l.mr10
+          = radio_button_tag 'guest-check[1]', 'man', false, id: 'man1', class: 'radio-style-man'
+          = label_tag 'man1'
+        .sv-l.mr10
+          = radio_button_tag 'guest-check[1]', 'girl', false, id: 'girl1', class: 'radio-style-girl'
+          = label_tag 'girl1'
+
+      .drink-level.sv-r= select_tag :guest_drink, options_for_select(['Пьет', 'Пьет умеренно', 'Не пьет'], 'Пьет умеренно'), class: 'select-level', include_blank: true
+
+    = link_to 'Добавить гостя', '#', class: 'add-guest'
+
+    .result.clear
+      = link_to 'Сохранить', '#', class: 'link-style sv-l'
+      = link_to 'Версия для печати', '#', class: 'link-style sv-l'

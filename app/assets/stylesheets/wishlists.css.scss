@@ -1,0 +1,85 @@
+.wish {
+  margin: 20px 0;
+
+.left-row {
+  display: inline-block;
+  width: 300px;
+  vertical-align: top;
+}
+
+.right-row {
+  display: inline-block;
+  width: 650px;
+}
+
+  .image {
+    width: 250px;
+    margin-right: 50px;
+    img {
+      width: 250px;
+      height: auto;
+    }
+  }
+
+  .edit {
+    margin-bottom: 10px;
+  }
+
+  .name {
+    color:  #c84563;
+    margin-bottom: 10px;
+    font-weight: bold;
+    line-height: 22px;
+    font-size: 18px;
+  }
+
+  .url {
+    display: block;
+  }
+
+  .description {
+    line-height: 16px;
+    font-size: 14px;
+  }
+}
+
+.unwish {
+  margin: 20px 0;
+
+  .edit {
+    margin-bottom: 10px;
+  }
+
+  .number {
+    display: inline-block;
+    margin-right: 5px;
+    font-size: 16px;
+  }
+  .name {
+    color:  #000;
+    margin-bottom: 5px;
+    font-weight: bold;
+    line-height: 22px;
+    font-size: 18px;
+    display: inline-block;
+  }
+
+  .description {
+    line-height: 16px;
+    font-size: 14px;
+  }
+}
+
+.sv-wishlist__wish-form {
+  width: 650px;
+  textarea {
+    width: 97%;
+  }
+  input[type="text"] {
+    width: 97%;
+  }
+}
+
+.sv-wishlist__wish-image {
+  margin: 0 0 10px 0;
+}

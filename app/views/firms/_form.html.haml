@@ -1,0 +1,103 @@
+.span12
+  - unless @firm.new_record?
+    Текущий баланс:
+    = @firm.balance
+    %p
+      = link_to "Пополнить баланс", checkout_firm_path(@firm)
+
+    %p= link_to 'Фотоконкурсы', firm_index_firm_competitions_path(@firm)
+
+  .span5
+    = simple_form_for @firm, html: { class: "form-horizontal" } do |f|
+      - if @firm.errors.any?
+        #error_explanation
+          %h2= "#{pluralize(@firm.errors.count, "error")} prohibited this firm from being saved:"
+          %ul
+            - @firm.errors.full_messages.each do |msg|
+              %li= msg
+
+      = f.input :id, as: :hidden
+      = f.input :name
+      = f.input :extended_name
+      .control-group
+        %label Логотип
+        .controls
+          .span3
+            = image_tag(@firm.logo_url, class: "firm-logo-img")
+          .span2
+            = f.input :logo, :as => :file, :label => false, wrapper: :none
+            = link_to "Удалить", destroy_logo_firm_path(@firm), remote: true, class: "btn btn-danger" unless @firm.new_record?
+      #sv-firm-detail-poster{ style: "height: 150px; margin: 0;" }
+        %label Баннер
+        .span4
+          - if @firm.banner_album && (cover = Photo.find_by_id(@firm.banner_album.cover_id))
+            = image_tag(cover.banner_path.usual)
+          - else
+            .bg-svgrey.noposter
+        .span2
+          = simple_fields_for 'banner_album' do |f|
+            = f.input :pictures, :as => :file, :label => false, :input_html => {:multiple => true}, :required => false, wrapper: :none
+            = link_to "Удалить", unbind_banner_firm_path(@firm), remote: true, class: "btn btn-danger" unless @firm.new_record?
+
+      = f.input :description, :input_html => {:rows => 9, :style => "width: 255px;"}
+      = f.input :base_sphere_id, :collection => FirmCatalog.all, :group_method => :firm_catalogs, :as => :grouped_select, :group_label_method => :name, :label_method => :name, :value_method => :id, :input_html => {:multiple => false, :size => 18 }, :required => true
+      %div
+        %label Категории:
+        / Firm.find(@firm.id) для случая рендеринга формы с ошибками
+        - if @firm.new_record? || Firm.find(@firm.id).status == :usual
+          - firm_catalog = @firm.base_sphere.parent if @firm.base_sphere
+          = f.association :firm_catalogs, collection: firm_catalog ? firm_catalog.firm_catalogs : [], input_html: { multiple: true, style: "width: 250px;", class: "selectable firm_catalog_ids" }, label: false, disabled: (firm_catalog ? false : true)
+
+        - else
+          = f.simple_fields_for :spheres do |builder|
+            = render "firms/sphere_fields", :f => builder
+          = link_to_add_fields "Добавить сферу", f, :spheres, ''
+
+      = f.input :status, :as => :select, :collection => Firm.get_status_values, :include_blank => false unless @firm.new_record?
+      .submit-firm
+        = f.submit 'Сохранить', class: "btn btn-primary"
+
+  .span8.firm-services
+    = render 'firm_services/index' unless @firm.new_record?
+  .span8.contacts
+    = render 'city_firms/index'
+
+  .span8
+    - unless @firm.new_record?
+      .span1
+      .span3
+        - if @firm.user == current_user
+          -#%p
+            -#= f.input :administrator, :input_html => {:style => "width: 250px;"}
+            = f.input :user_id, :input_html => {:style => "width: 250px;"}
+          -#%p
+            -#= f.association :moderators, :label_method => :login, :input_html => {:multiple => true, :style => "width: 250px;"}
+            = f.input :moderator_ids, :input_html => {:style => "width: 250px;"}
+            -# todo: find more efficient way
+            :javascript
+              var s2_moderators_map = {
+                #{
+                  @firm.moderators.map {|m| "#{m.id}: '#{m.login}'"}.join(',')
+                }
+              };
+              var s2_administrators_map = {
+                #{
+                  "#{@firm.user.id}: '#{@firm.user.login}'" if @firm.user
+                }
+              };
+
+        - if @firm.status == :advanced && !@firm.status_changed?
+          %ul.nav.nav-tabs#business
+            %li= link_to "ЧЛ", "#pp", {'data-togle' => 'tab'} if @firm.business.nil? || @firm.business_type == 'Pp'
+            %li= link_to "ИП", "#ie", {'data-togle' => 'tab'} if @firm.business.nil? || @firm.business_type == 'Ie'
+            %li= link_to "Юр. Лицо", "#ooo", {'data-togle' => 'tab'} if @firm.business.nil? || @firm.business_type == 'Company'
+          %p
+            = link_to "Сменить форму собственности", firm_business_path(@firm), :confirm => 'Вы точно уверены? Текущее значение будет удалено!', :method => :delete unless @firm.business.nil?
+
+          .tab-content
+            .tab-pane#pp
+              = render 'pp', :f => f, :firm => @firm if @firm.business.nil? || @firm.business_type == 'Pp'
+            .tab-pane#ie
+              = render 'ie', :f => f, :firm => @firm if @firm.business.nil? || @firm.business_type == 'Ie'
+            .tab-pane#ooo
+              = render 'company', :f => f, :firm => @firm if @firm.business.nil? || @firm.business_type == 'Company'

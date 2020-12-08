@@ -1,0 +1,36 @@
+!!!
+%html
+  %head
+    %meta{charset: 'utf-8'}
+    %meta{'http-equiv' => 'X-UA-Compatible', content: 'IE=Edge,chrome=1'}
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
+    %meta{content: 'text/html; charset=utf-8', 'http-equiv' => 'content-type'}/
+    %title= content_for?(:title) ? yield(:title) : @site.title
+    = csrf_meta_tags
+
+    = stylesheet_link_tag '//fonts.googleapis.com/css?family=Marck+Script|Open+Sans:400,300,300italic,600,400italic,700,700italic,600italic|Marmelad&subset=latin,cyrillic,cyrillic-ext'
+    = stylesheet_link_tag 'clients/site', media: 'all'
+    = stylesheet_link_tag '//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css'
+    = yield :stylesheet
+    = csrf_meta_tags
+
+    = favicon_link_tag
+
+  %body{data: {bg: @site.try(:body_image_url)}}
+    .wrapper
+      = render 'layouts/clients_site/header', site: @site, wedding: @site.try(:wedding)
+      %section#content
+        .container
+          .row
+            - if @with_menu && @site
+              .menu-block.col-md-3= render 'layouts/clients_site/sidebar', site: @site, pages: @pages
+            .content-block{class: @with_menu && @site ? 'col-md-9' : 'col-md-12'}
+              = yield
+      #edit
+    = render 'layouts/clients_site/footer'
+
+    / Le HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+      = javascript_include_tag '//html5shim.googlecode.com/svn/trunk/html5.js'
+    = javascript_include_tag 'clients/site'
+    = yield :javascript

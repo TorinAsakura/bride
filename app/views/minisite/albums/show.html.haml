@@ -1,0 +1,18 @@
+.page-block
+  %h1.title
+    = link_to minisite_all_albums_path, class: 'a-back' do
+      %i.icon-chevron-left
+    %span= @album.name
+    - for_moderator_of @site do
+      .add
+        = link_to edit_minisite_album_path(@album), remote: true do
+          %i.icon-cog-alt
+
+  = render 'photos', photos: @photos, album: @album
+
+- if session[:photo]
+  = content_for :javascript do
+    :javascript
+      $(document).ready(function () {
+        $.getScript('#{session.delete :photo}');
+      });

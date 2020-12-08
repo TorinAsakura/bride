@@ -1,0 +1,23 @@
+body.sv-admin-body {
+  @import "admin/base/components/text_colors";
+  @import "admin/base/components/tables";
+  .sv-outer-wrapper{
+    margin: 0 auto;
+    .main-content{
+      margin-bottom: 0;
+    }
+  }
+  #sv-footer{
+    height: 50px;
+  }
+
+  .w400{
+    width: 400px;
+  }
+  form{
+    .field{
+      position: relative;
+    }
+  }
+
+}

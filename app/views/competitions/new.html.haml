@@ -1,0 +1,11 @@
+.sv-wrapper.competition.new
+  .breadcrumbs
+    = link_to @firm.name, firm_link(@firm)
+    >
+    = link_to 'Конкурсы', firm_index_firm_competitions_path(@firm.id)
+    > Новый конкурс
+    .clearfix
+
+  %h1 Добавить новый конкурс
+
+  = render 'form'

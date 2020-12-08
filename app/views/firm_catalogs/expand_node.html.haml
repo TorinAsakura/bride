@@ -1,0 +1,3 @@
+%ol.nested_set= expandable_tree(@children, {namespace: :admin, title: :name, render_module: RenderSortableTreeFirmCatalogHelper})
+:javascript
+  $('#node_#{dom_id(@children.first.parent)}').find('ol.nested_set .best_in_place').best_in_place();

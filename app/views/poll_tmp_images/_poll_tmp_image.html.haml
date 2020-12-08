@@ -1,0 +1,20 @@
+.template-upload.sv-polls-previews-preview.fade.in.remote_upload
+  .preview
+    = image_tag poll_tmp_image.image.url(:thumb)
+:javascript
+  var total = $(".remote_upload").length;
+  $(".sv-polls-previews").data('remote_upload', true);
+  $(".sv-polls-upload").hide();
+  $(".remote_upload").each(function(index, value){
+      if(index !== total){
+        $(this).append('<div class="sv-or-or">или</div>');
+      }
+  })
+  $(".title_nobg:last").html("Выбранные фотографии");
+  $(".title_nobg:last").css('text-align', 'center');
+
+  $("#new_poll_submit_link").unbind();
+  $("#new_poll_submit_link").on("click", function(){
+    $(".title_nobg:first").html("<p class='waiting_message_for_poll'>Подождите пожалуйста, мы создаем опрос для вас</p>");
+    $("#new_poll").submit();
+  });

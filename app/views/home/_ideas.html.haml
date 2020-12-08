@@ -1,0 +1,9 @@
+.sv-home__title
+  = link_to 'Свадебные идеи', idea_sections_path, class: 'sv-home__title-link'
+.sv-home__ideas
+  - ideas.each do |idea|
+    - if idea[:idea].present? && idea[:category].present?
+      = link_to '',
+                idea_section_category_idea_path(idea[:category].sections.first, idea[:category], idea[:idea]),
+                class: 'sv-home__idea',
+                style: "background-image: url(#{idea[:idea].image.image_url(:thumb)})"

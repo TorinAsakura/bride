@@ -1,0 +1,3 @@
+.sv-comments-box
+  - nested_set_options(comments.order(:created_at)) do |comment|
+    = render 'firm_comments/comment', comment: comment

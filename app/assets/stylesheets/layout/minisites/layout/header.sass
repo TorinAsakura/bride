@@ -1,0 +1,74 @@
+header.page
+  $height: $header-height
+  height: $real-header-height+$real-header-height/2
+  background: $base-background-color image-url('header-backround.jpg') 50% 50% no-repeat
+  $margin: 20px
+  $line-height: $height
+  position: relative
+  z-index: 1200
+  border-bottom: 1px solid
+  background-size: cover
+  border-bottom-color: $red
+
+  .wrapper
+    background-color: rgba(255,255,255,0.35)
+    +outer-container
+    padding: 0 0
+    display: table
+    height: 100%
+    > *
+      display: table-cell
+      vertical-align: middle
+      text-align: left
+
+  .name-block
+    width: 54%
+    color: $black
+    font-family: 'Playfair Display', serif
+    animate: none
+    position: relative
+    label
+      font-size: 2.9em
+
+  .name-block-big
+    width: 66%
+    color: $black
+    font-family: serif
+    animate: none
+    position: relative
+    label
+      font-size: 2.9em
+  .day-year
+    color: $main-color
+    font-size: $font-size*2.5+$font-size/2
+    margin-left: $main-padding*9
+    padding: 0 $main-padding*2+$main-padding/2
+    font-style: oblique
+    width: 34%
+    position: relative
+    font-family: 'Heather Script One', arial
+    p
+      text-align: center
+      margin-bottom: $main-margin
+      padding: $main-padding/4
+
+  .remained
+    border-bottom: 1px solid
+    border-bottom-color: $red
+    width: 12%
+    background-color: $main-menu-color
+    color: white
+    padding: $main-margin+$main-margin/2 0 $main-margin+$main-margin/2 0
+    margin-left: $main-margin*36-$main-padding/2
+    height: $real-header-height + $real-header-height/2 - 1px
+    font-weight: lighter
+    margin-top: -$main-padding - $main-padding/2
+    p
+      text-align: center
+      font-size: 16px
+    .nomber-day
+      text-align: center
+      line-height: 1
+      font-size: 67px
+      height: 60px
+

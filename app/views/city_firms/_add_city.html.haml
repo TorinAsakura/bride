@@ -1,0 +1,7 @@
+- if firm.all_city_firms.present?
+  - if (add_city = Bonus::Service::AddCity.find_by_slug('add-city')).present? && firm.has_active_pro?
+    = link_to 'Добавить город', new_bonus_service_subscription_url(add_city), class: 'sv-add_item', id: 'add-form-city'
+- else
+  = link_to 'Добавить город', '#change-first-city', class: 'sv-add_item', id: 'add-form-city', data: { toggle: 'modal' }
+  = simple_form_for([firm, firm.all_city_firms.build], remote: true) do |f|
+    = f.input :city_id, as: :hidden

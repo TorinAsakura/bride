@@ -1,0 +1,10 @@
+- if @image.imageable.image && @image.imageable_type == 'Idea::Idea'
+  %strong
+    = @image.imageable.description
+  %br
+  = @image.imageable.tags.map{|t| t.name}.join(', ')
+  %br
+  = @image.imageable.colors.map{|c| c.name}.join(', ')
+  %hr
+  = image_tag(@image.imageable.image.image_url)
+  = render :partial => "/minisite/myideas/starred", :locals => {:o => @image.imageable, :ic => @idea_category}

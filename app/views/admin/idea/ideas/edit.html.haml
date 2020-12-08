@@ -1,0 +1,9 @@
+= simple_form_for [:admin, @category], url: admin_idea_idea_path(@category.id), html: { id: 'photo_album_form' }  do |f|
+  = f.simple_fields_for :ideas, @ideas do |p|
+    %div{ style: 'width: 500px; margin-bottom: 50px;' }
+      = image_tag p.object.image.image.thumb
+      = p.input :name, label: 'Название'
+      = p.input :description, as: :text, label: 'Описание', input_html: { rows: 3 }
+      = render "tags/input", f: p, tags: p.object.tags
+      = render "tags/color_input", f: p, tags: p.object.tags
+  %button.link-style Сохранить

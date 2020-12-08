@@ -1,0 +1,12 @@
+= simple_form_for @question_category, :url => (@question_category.new_record? ? admin_question_categories_path : admin_question_category_path(@question_category)), :html => {:id => "firm_catalog_form", :class => 'modal hide', :style => ""}  do |f|
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Новая категория
+  .modal-body
+    %p
+      = f.input :name
+  .modal-footer
+    = link_to "Удалить", admin_question_category_path(@question_category), :method => :delete, :confirm => 'Вы уверены?', :class => "btn" if @question_category.persisted? and @question_category.questions.blank?
+    %a.btn{:href => "#", "aria-hidden" => "true", "data-dismiss" => "modal"} Закрыть
+    %button.btn.btn-primary Сохранить
+

@@ -1,0 +1,10 @@
+.sv-aside.right
+  - if @firm.show_addresses?
+    = render 'firms/shared/r_contacts', firm: @firm
+  = render 'firms/shared/r_navigation', firm: @firm
+  - if @firm.show_services? && (for_moderator_of(@firm) || @firm_services.present?)
+    = render 'firms/shared/r_services', firm: @firm, services: @firm_services
+  - if @firm.show_videos? && (for_moderator_of(@firm) || @videos.present?)
+    = render 'firms/shared/r_videos', firm: @firm, videos: @videos
+  - if @clients.present?
+    = render 'firms/shared/r_clients', firm: @firm, clients: @clients, clients_requests: @clients_requests

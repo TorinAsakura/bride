@@ -1,0 +1,9 @@
+.title_nobg Город
+.cap_company
+  .sv-firm-cities#firm-cities{data: {url: rating_firm_city_firms_url(@firm)}}= render @firm.all_city_firms
+  = render 'city_firms/form', firm: @firm
+.clearfix
+
+.title_nobg Адрес
+.cap_company
+  .sv-firm-cities-address= render partial: 'city_firms/city_firm_address', collection: @firm.all_city_firms, as: :city_firm, locals: {firm: @firm, id: nil}

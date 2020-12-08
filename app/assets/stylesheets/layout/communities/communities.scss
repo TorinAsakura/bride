@@ -1,0 +1,47 @@
+.sv-community-categories {
+  .main-title {
+    @include title_line;
+  }
+}
+
+.sv-communities-category {
+  margin: 20px 0 60px;
+}
+.sv-communities-category__info {
+  border-bottom: 1px solid #F1849D;
+  margin: 0 10px 0 0;
+  padding: 0 0 5px 5px;
+  .title {
+    color: #C84563;
+    font-size: 22px;
+    font-weight: 300;
+   }
+  .description {
+    margin: 5px 0 0 0; 
+    font-size: 12px;
+  }
+}
+
+.sv-community__block {
+  width: 480px;
+  margin: 10px 0 0 0;
+  .title {
+    color: #C84563;
+    font-size: 22px;
+    font-weight: 300;
+  }
+  .info {
+    margin: 0 0 0 10px;
+  }
+  .logo {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 110px;
+  }
+  .description {
+    margin: 5px 0 0 0;
+    font-size: 12px;
+    width: 350px;
+  }
+}
+

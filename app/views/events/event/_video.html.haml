@@ -1,0 +1,27 @@
+- if video.present?
+  .title.itles.clearfix
+    - if video.num_pages > 1
+      = link_to video_page_wedding_timetable_event_path(@event.timetable, @event, 1, show: :all), remote: true do
+        %span.sv-l Полезно посмотреть
+    - else 
+      %span.sv-l Полезно посмотреть
+    .sv-choice.sv-r
+      - if video.num_pages > 1
+        - video_page = params[:video_page].to_i
+        %ul
+          %li.prev
+            - if video_page > 1
+              = link_to video_page_wedding_timetable_event_path(@event.timetable, @event, video_page - 1),
+                remote: true, class: 'icon prev' do
+                %i Назад
+          %li.page
+            .center= video_page
+          %li.next
+            - if video_page < video.num_pages
+              = link_to video_page_wedding_timetable_event_path(@event.timetable, @event, video_page + 1),
+                remote: true, class: 'icon next' do
+                %i Вперёд
+
+
+  #sv-video-list
+    = render 'events/shared/video', video: video

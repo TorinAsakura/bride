@@ -1,0 +1,85 @@
+#firm-control-panel-black-list-settings.firm-settings{style: 'display:none;'}
+  = simple_form_for @firm, html: { class: "form-horizontal" } do |f|
+    .sv-article
+      .title_nobg Поиск пользователей и компаний
+      .find.sv-clear
+        %input.sv-l{:type => "text", :value => "Введите ссылку на страницу или ID пользователя или компании"}/
+        %button.sv-l Найти
+      .add_to_blacklist
+        .sv-user
+          .customer
+            = image_tag 'caps/anna.png', alt: 'anna'
+          .person
+            = link_to 'Анна Титкакова', '#'
+          .naymenovanye
+            %p Пользователь
+          .to_blacklist
+            %a.link-style.sv-l{:href => "#"} В чёрный список
+        .company
+          .folks.sv-l
+            = image_tag 'caps/sv-user_photo.jpg', alt: 'naan'
+          .person
+            = link_to 'Василиса Чернобровина', '#'
+          .naymenovanye
+            %p Компания
+          .to_blacklist
+            %a.link-style.sv-l{:href => "#"} В чёрный список
+      .title_nobg.margintop28 Чёрный список
+      .add_to_blacklist
+        .sv-hidden
+          .sv-user
+            .customer
+              = image_tag 'caps/anna.png', alt: 'anna'
+            .person
+              = link_to 'Анна Титкакова', '#'
+            .naymenovanye
+              %p Пользователь
+            .to_blacklist
+              = link_to 'В чёрный список', '#', class: 'link-style-inner sv-l'
+          .company
+            .folks.sv-l
+              = image_tag 'caps/sv-user_photo.jpg', alt: 'naan'
+            .person
+              = link_to 'Василиса Чернобровина', '#'
+            .naymenovanye
+              %p Компания
+            .to_blacklist
+              = link_to 'В чёрный список', '#', class: 'link-style-inner sv-l'
+        .sv-hidden
+          .sv-user
+            .customer
+              = image_tag 'caps/anna.png', alt: 'anna'
+            .person
+              = link_to 'Анна Титкакова', '#'
+            .naymenovanye
+              %p Пользователь
+            .to_blacklist
+              = link_to 'В чёрный список', '#', class: 'link-style-inner sv-l'
+          .company
+            .folks.sv-l
+              = image_tag 'caps/sv-user_photo.jpg', alt: 'naan'
+            .person
+              = link_to 'Василиса Чернобровина', '#'
+            .naymenovanye
+              %p Компания
+            .to_blacklist
+              = link_to 'В чёрный список', '#', class: 'link-style-inner sv-l'
+        .sv-hidden
+          .sv-user
+            .customer
+              = image_tag 'caps/anna.png', alt: 'anna'
+            .person
+              = link_to 'Анна Титкакова', '#'
+            .naymenovanye
+              %p Пользователь
+            .to_blacklist
+              = link_to 'В чёрный список', '#', class: 'link-style-inner sv-l'
+          .company
+            .folks.sv-l
+              = image_tag 'caps/sv-user_photo.jpg', alt: 'naan'
+            .person
+              = link_to 'Василиса Чернобровина', '#'
+            .naymenovanye
+              %p Компания
+            .to_blacklist
+              = link_to 'В чёрный список', '#', class: 'link-style-inner sv-l'

@@ -1,0 +1,14 @@
+%tr.resource
+  %td.attr= purse_payment.id
+  %td.attr
+    - purse = purse_payment.purse
+    - if purse.user.present?
+      = link_to(purse.user.name, admin_purse_payment_path(purse))
+    - else
+      Системный счет
+  %td.attr= purse_payment.type.constantize.to_name
+  %td.attr= "#{purse_payment.name}<br/> (#{purse_payment.description})".html_safe
+  %td.attr= purse_payment.amount.format(html:true, sign_before_symbol: true).html_safe
+  %td.attr= purse_payment.state
+  %td.attr= l( purse_payment.created_at)
+  %td.attr= link_to('Подробнее', admin_purse_payment_path(purse_payment))

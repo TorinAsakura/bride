@@ -1,0 +1,13 @@
+- if tag
+  - if tag.accepted
+    .accepted-tag.clearfix
+      = link_to accept_admin_tag_path(tag), method: 'post', remote: true do
+        .arrow-left
+      .tag-name= substr tag.name, 30
+      .tag-count= tag.sqlcount
+  -else
+    .usual-tag.clearfix
+      .tag-name= substr tag.name, 30
+      .tag-count= tag.sqlcount
+      = link_to accept_admin_tag_path(tag), method: 'post', remote: true do
+        .arrow-right

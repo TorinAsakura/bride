@@ -1,0 +1,56 @@
+.sv-wrapper.sv-community.margintopotstp
+  .main-title
+    = link_to community_path(@community), class: 'sv-a-back sv-l', alt: 'Назад' do
+      %i.icon-chevron-left
+    %span= @community.name
+
+  = render 'communities/shared/sidebar', community: @community
+
+  .sv-article
+    .sv-community__title
+      Фотоальбомы
+      - for_moderator_of @community do
+        - if @latest_album.present?
+          = link_to '', new_polymorphic_path([@community, :album], upload_to: @latest_album), remote: true, class: 'sv-community__load-photo'
+        - else
+          = link_to '', new_polymorphic_path([@community, :album]), remote: true, class: 'sv-community__load-photo'
+
+    .sv-firm-albums
+      .sv-firm-album
+        = link_to images_community_path(@community) do
+          - preview_image = @community.images.present? ? @community.images.first.image.cover : 'avatar.png'
+          = image_tag preview_image
+        .sv-firm-album__info
+          = link_to images_community_path(@community), class: 'sv-firm-album__info-name' do
+            Фотографии из обсуждений
+            .sv-firm-album__info-icon
+            .sv-firm-album__info-count
+              = @community.images.count
+
+      - if @albums.present?
+        - @albums.reverse.first(3).each do |album|
+          = render 'albums/shared/album', journal: @community, album: album, hidden: false
+        - @albums.reverse.drop(3).each do |album|
+          = render 'albums/shared/album', journal: @community, album: album, hidden: true
+
+    - if @albums.count > 4
+      .sv-firm-albums__show-all
+        = link_to "Показать все альбомы (#{@albums.length})", '#'
+
+    - if @photos.present?
+      .sv-firm-albums-actions
+        %span.sv-firm-albums-actions__count Последние загруженные фотографии
+
+    .sv-firm-albums-photos{ 'data-js' => 'photo-preview-list' }
+      - @photos.each do |photo|
+        = render 'photos/thumbnail', resource: @community, album: photo.album, photo: photo
+
+    .sv-photos-hidden-nav
+      = rel_next_prev_link_tags @photos
+
+
+- if session.delete :new
+  :javascript
+    $(document).ready(function () {
+      $.getScript('#{new_community_album_path(@community)}');
+    });       

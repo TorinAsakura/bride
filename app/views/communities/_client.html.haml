@@ -1,0 +1,42 @@
+.sv-community__client.sv-search-client__block
+  .sv-l.sv-community__client-avatar
+    = link_to client_path(client), class: ''  do
+      = image_tag client.user.avatar.icon, class: '' unless client.user.nil?
+  .sv-l.sv-community__client-info
+    %h2.sv-client-fullname
+      %i.sv-client-fullname__gender{ class: gender_class(client) }
+      = link_to client.full_name, client, class: 'sv-client-fullname__link'
+
+    %ul.sv-client-info__list
+      - if client.birthday.present?
+        %li.sv-client-info__list-item
+          %span.sv-client-info__item-title День рождения:
+          %span #{l(client.birthday, format: '%d %B %Y')} г.
+      - if client.city.present?
+        %li.sv-client-info__list-item
+          %span.sv-client-info__item-title Город проживания:
+          %span
+            = image_tag '/assets/sv-icon-locate.png', alt: 'flag'
+            = link_to client.city.name, clients_path(city_id: client.city.id)
+      - if client.wedding.present?
+        %li.sv-client-info__list-item
+          %span.sv-client-info__item-title Дата свадьбы:
+          %span 
+            #{l(client.wedding.wedding_date, format: '%d %B %Y')} г.,
+            - if Date.today > client.wedding.wedding_date
+              #{l(client.wedding.wedding_date, format: '%A')}
+              (прошло #{client.wedding.decorate.days_right} дня)
+            - else
+              (#{l(client.wedding.wedding_date, format: '%A')})
+      - if client.site.present?
+        %li.sv-client-info__list-item
+          %span.sv-client-info__item-title Свадебный сайт:
+          %span= link_to_minisite client.site
+
+    .sv-community__client-button
+      - if current_client && current_client.is?(client)
+        = link_to 'это Вы', '#', class: 'link-style-inner'
+      - else
+        = link_to 'Написать сообщение', new_messages_path(client.user.id), remote: true, class: 'link-style'
+      = friend_action client.user
+  .clearfix

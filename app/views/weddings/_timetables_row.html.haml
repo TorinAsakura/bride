@@ -1,0 +1,31 @@
+#sv-plan-row
+  - timetable_current = current_wedding.current_timetable
+  .sv-plan-etap.first-child
+    %span
+      = link_to 'Планирование', wedding_timetable_path(timetables[:planning].first),
+        class: timetable_class(timetable_select, timetable_current, timetables[:planning].first)
+
+  .sv-plan-dates
+    %ul
+      - timetables[:week].try(:each) do |week|
+        %li
+          = link_to week.index_number, wedding_timetable_path(week),
+            rel: 'tooltip',
+            'data-original-title' => 'недель',
+            class: timetable_class(timetable_select, timetable_current, week)
+
+  .sv-plan-days
+    %ul
+      - timetables[:day].try(:each_with_index) do |day, i|
+        %li
+          = link_to day.index_number, wedding_timetable_path(day), 
+            html_options = {rel: 'tooltip', 'data-original-title' => 'дней', class: timetable_class(timetable_select,timetable_current, day)}
+  .sv-plan-etap
+    %span
+      = link_to 'День свадьбы', wedding_timetable_path(timetables[:wedding_day].first),
+        class: timetable_class(timetable_select, timetable_current, timetables[:wedding_day].first)
+  .sv-plan-etap
+    %span
+      = link_to 'После свадьбы', wedding_timetable_path(timetables[:after_wedding].first),
+        class: timetable_class(timetable_select, timetable_current, timetables[:after_wedding].first)
+

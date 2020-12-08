@@ -1,0 +1,28 @@
+%ul.dropdown-menu<
+  - if (name = address.name).present?
+    %li
+      %i.icon-home
+      = name
+  %li{title: address.explanation.presence}
+    %i.icon-location
+    = address.contacts_address
+  - if (mobile_phone = address.mobile_phone).present?
+    %li
+      %i.icon-mobile
+      = format_phone mobile_phone, true
+  - if (phone = address.phone).present?
+    %li
+      %i.icon-phone
+      = phone
+  - if (email = address.email).present? && user_signed_in?
+    %li
+      %i.icon-mail
+      = link_to email, "mailto:#{email}", rel: 'nofollow'
+  - if (skype = address.skype).present?
+    %li
+      %i.icon-skype
+      = skype
+  - if (site = address.site).present?
+    %li
+      %i.icon-globe
+      = link_to site, address.site_url, rel: 'nofollow', target: '_blank'

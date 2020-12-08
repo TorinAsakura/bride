@@ -1,0 +1,9 @@
+= render 'clients/shared/sidebar'
+
+.sv-article
+  = render 'clients/clients', resource: @client, title: @client.user.is?(current_user) ? 'Мои друзья' : 'Друзья', path: friends_client_path(@client), clients: @friends
+
+:javascript
+  $(document).ready(function () {
+    infinitescrollClients();
+  });

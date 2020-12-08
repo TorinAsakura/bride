@@ -1,0 +1,43 @@
+= render 'clients/shared/sidebar'
+
+.sv-article
+  .clearfix
+    .sv-inner-box
+      .title.clearfix
+        = link_to client_albums_path(@client), class: 'sv-a-back sv-l' do
+          %i.icon-chevron-left
+        %span
+          Фотографии
+        %ul
+          %li.add
+            - for_moderator_of @client do
+              = link_to new_polymorphic_path([@client, :album], upload_to: @album), remote: true do
+                %i добавить
+
+    .title_nobg.sv-album-title
+      = @album.name || raw('&nbsp;')
+      - for_moderator_of @client do
+        = link_to edit_polymorphic_path([@client, @album]), remote: true, class: 'sv-firm-album-edit-link' do
+          %i
+
+    - for_moderator_of @client do
+      = link_to new_polymorphic_path([@client, @album], upload_to: @album), remote: true, class: 'sv-firm-album-upload-link' do
+        .sv-firm-album-upload-link__icon Добавить фотографии в альбом
+
+    %div{ 'data-js' => 'photo-preview-list' }
+      - @album_photos.each do |photo|
+        = render 'photos/thumbnail', resource: @client, album: @album, photo: photo
+
+    .sv-photos-hidden-nav
+      = rel_next_prev_link_tags @album_photos
+
+    .sv-photos-hidden-nav
+      = rel_next_prev_link_tags @album_photos
+
+    .clearfix
+
+    - if session[:photo]
+      :javascript
+        $(document).ready(function () {
+          $.getScript('#{session.delete :photo}');
+        });

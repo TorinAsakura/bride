@@ -1,0 +1,16 @@
+= render 'menu'
+%h3
+  Баланс системного счета:
+  = PursePayment.system_amount.format
+
+= simple_form_for @purse_payment, url: admin_deposit_admin_purse_path(@purse) do |f|
+  .field.span12
+    = f.input :amount
+    - if (errors = @purse_payment.errors).present?
+      %p.error.main-color-text= errors[:base].join('<br/>')
+  .field.span12
+    = f.input :name, input_html: {style: 'width:100%;'}
+  .field.span12
+    = f.input :description, input_html: {rows: 4}
+  .field.span12
+    = f.submit 'Сохранить', class: 'btn'

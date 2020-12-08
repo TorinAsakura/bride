@@ -1,0 +1,15 @@
+= simple_form_for [:admin, script], html: {id: 'script_form', class: 'modal hide', style: 'width: 650px;'} do |f|
+  .modal-header
+    %h3= script.new_record? ? 'Новый скрипт' : 'Редактировать скрипт'
+  .modal-body
+    %p
+      = f.input :name, input_html: { class: 'inp-style-long' }
+    %p
+      = f.input :description, input_html: { style: 'width: 550px', rows: 5 }
+    -if script.new_record?
+      %p
+        = f.input :weeks, as: :integer
+  .modal-footer
+    %button.link-style Сохранить
+    = link_to 'Закрыть', admin_task_categories_path, class: 'link-style', 'data-js' => 'illustration-popup-close'
+    = link_to 'Удалить', admin_script_path(script), method: 'delete', confirm: 'Вы уверены?', class: 'link-style sv-r' unless script.new_record?

@@ -1,0 +1,15 @@
+.form-colorpicker
+  margin: 0 0 $main-padding
+  display: table
+  > *
+    display: table-cell!important
+    &:last-child
+      line-height: $input-height+$main-margin-small/2!important
+      height: $input-height!important
+      margin: 0!important
+
+  .fc-frame
+    //height: $input-height
+    width: $input-height
+    +border()
+    border-right: none

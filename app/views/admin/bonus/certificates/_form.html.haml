@@ -1,0 +1,30 @@
+.row
+  .field.span12
+    = SystemAccount.svadba.purse.amount.format(html: true).html_safe
+.row
+  .field.span4
+    = f.input :name, input_html: {class: 'span4'}
+  .field.span4
+    = f.input :quantity, input_html: {class: 'span4'}
+  .field.span4
+    = f.input :limit
+
+.row
+  .field.span6
+    = f.input :amount
+  .field.span6
+    = f.association :service, input_html: {class: 'span4'}
+.row
+  .field.span6
+    = f.input :starts_at, as: :date
+  .field.span6
+    = f.input :ends_at, as: :date
+
+.row
+  .field.span12
+    = f.input :description, input_html: { data: {js: 'bonus-certificate-description'}}
+
+
+.row
+  .field.span12
+    = f.submit 'Сохранить', class: 'btn'

@@ -1,0 +1,35 @@
+#sv-header.clearfix
+  #sv-logo-box
+    = link_to 'Svadba.org', root_url(subdomain: false), class: 'logo'
+
+  #sv-sign-box
+    - if user_signed_in?
+      - user = current_user.decorate
+      .sv-logged-box.clearfix{class: user.profile_class}
+
+        %ul.m1
+          = render 'layouts/header/messages'
+          = render "layouts/header/#{user.profile_class}"
+          = render 'layouts/header/profile', user: user
+
+    - elsif 'user_registrations' != controller_name && !('sessions' == controller_name && 'new' == action_name)
+      - if @firm.present?
+        .sv-login-box
+          = link_to 'Вход', new_user_session_url, class: 'sv-login', 'data-js' => 'link-modal-login'
+          = link_to 'Регистрация', new_user_registration_url, 'data-toggle' => 'modal', class: 'link-style', 'data-js' => 'link-modal-register'
+      - else
+        .sv-login-box
+          = link_to 'Вход', '#sv-login', 'data-toggle' => 'modal', class: 'sv-login', 'data-js' => 'link-modal-login'
+          = link_to 'Регистрация', '#sv-login', 'data-toggle' => 'modal', class: 'link-style', 'data-js' => 'link-modal-register'
+        #sv-login{style: "display:none;"}
+          %ul.sv-modal-tabs.clearfix
+            %li.active= link_to 'Вход', '#tab-login', 'data-toggle' => 'tab', 'data-js' => 'link-tab-login'
+            %li= link_to 'Регистрация', '#tab-register', 'data-toggle' => 'tab', 'data-js' => 'link-tab-register'
+          .tab-content
+            #tab-login.tab-pane.active.clearfix= render 'devise/shared/sv-login', data_view: :madal
+            #tab-register.tab-pane= render 'devise/shared/sv-register', :client_form => ClientRegistrationForm.new, :firm_form => FirmRegistrationForm.new
+            #tab-forgot-password.tab-pane= render 'devise/shared/forgot_password'
+
+#popup.modal.hide.fade.span8{'data-replace' => 'true', tabindex: '-1'}
+  .sv-close{'data-dismiss' => 'modal'} close
+  .content

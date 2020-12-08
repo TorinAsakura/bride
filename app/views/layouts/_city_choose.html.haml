@@ -1,0 +1,41 @@
+.row
+  .span3
+    = label_tag :city, content_tag(:abbr, "*", :title => "required") + " " + t(:city)
+    = f.input :city_id, :input_html => { :id => "city_id", :style => "width: 206px;" }, :label => false
+
+:javascript
+  var s2_cities_map = {
+    #{
+      "#{f.object.city.id}: '#{f.object.city.text}'" if f.object.city
+    }
+  };
+
+-#- if f.object.new_record? || f.object.city.nil?
+  .row
+    .span3
+      = label_tag :country, content_tag(:abbr, "*", :title => "required") + " " + t(:country)
+      = f.input :country, :as => :select, :collection => Country.all, :input_html => { :id => "country_id" }, :include_blank => true, :required => true, :label => false
+  .row
+    .span3
+      = label_tag :region, content_tag(:abbr, "*", :title => "required") + " " + t(:region)
+      = f.input :region, :as => :select, :input_html => { :id => "region_id", :disabled => true }, :include_blank => true, :required => true, :label => false
+  .row
+    .span3
+      = label_tag :city, content_tag(:abbr, "*", :title => "required") + " " + t(:city)
+      = f.input :city_id, :as => :select, :input_html => { :id => "user_city", :disabled => true }, :label => false
+-#- else
+  - @city = f.object.city
+  - @region = @city.region
+  - @country = @region.country
+  .row
+    .span3
+      = label_tag :country, content_tag(:abbr, "*", :title => "required") + " " + t(:country)
+      = f.input :country, :as => :select, :collection => Country.all, :input_html => { :id => "country_id" }, :include_blank => true, :required => true, :label => false, :selected => @country.id
+  .row
+    .span3
+      = label_tag :region, content_tag(:abbr, "*", :title => "required") + " " + t(:region)
+      = f.input :region, :as => :select, :collection => @country.regions, :input_html => { :id => "region_id", :disabled => false }, :include_blank => true, :required => true, :label => false, :selected => @region.id
+  .row
+    .span3
+      = label_tag :city, content_tag(:abbr, "*", :title => "required") + " " + t(:city)
+      = f.input :city_id, :as => :select, :collection => @region.cities, :input_html => { :id => "user_city", :disabled => false }, :required => true, :label => false

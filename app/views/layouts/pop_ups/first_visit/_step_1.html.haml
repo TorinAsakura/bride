@@ -1,0 +1,39 @@
+.sv-first-visit__title
+  Добро пожаловать на Svadba.org
+  .sv-r Шаг 1 из 3
+.sv-first-visit__body
+  %p
+    Добро пожаловать на свадебный портал нового поколения 
+    = link_to 'Svadba.org.', '#'
+    Здесь Вы найдёте всё необходимое, что нужно для подготовки и организации собственной свадьбы. 
+    Для комфортной работы с сайтом пожалуйста заполните небольшую анкету:
+
+  = simple_form_for current_client, remote: true, html: { id: 'sv-first-visit__form-step1' } do |f|
+    .line
+      = f.input :firstname,
+                input_html: { class: 'user-firstname sv-l' },
+                placeholder: 'Введите имя',
+                label: 'Имя:'
+
+      = f.input :city_id,
+        as: :hidden,
+        input_html: {data: {'select2-disabled' => true, 'autocomplete-path' => city_autocomplete_path}, class: 'user-city sv-l'},
+        label: 'Родной город:',
+        label_html: {class: 'right'}
+
+    .line
+      = f.input :lastname,
+                input_html: { class: 'user-lastname sv-l' },
+                placeholder: 'Введите фамилию',
+                label: 'Фамилия:'
+
+      = label_tag 'man', 'Пол:', class: 'right'
+      .sv-radio-user.sv-l
+        = f.radio_button :gender, false, id: 'girl', class: 'radio-style-girl'
+        = label_tag 'girl'
+        = f.radio_button :gender, true, id: 'man', class: 'radio-style-man'
+        = label_tag 'man'
+
+    .footer 
+      = f.submit 'Сохранить', class: 'update_client link-style sv-r otp'
+      = link_to 'Пропустить шаг...', '#', class: 'sv-r sv-skip-step', 'data-js' => 'first-visit__skip-step'

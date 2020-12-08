@@ -1,0 +1,76 @@
+.sv-post-wrapper
+  .sv-post-owner
+    - if @post.user.profileable_type == 'Firm'
+      - firm = @post.user.firm
+      .sv-post-owner-logo.sv-post-owner-logo-firm.sv-l
+        = user_avatar(@post.user)
+      .sv-post-owner-description.sv-l
+        = link_to firm.name, firm
+        %p= firm.extended_name
+    - else
+      - client = @post.user.client
+      .sv-post-owner-logo.sv-l
+        = user_avatar(@post.user)
+      .sv-post-owner-description.sv-l
+        = link_to client.full_name, client
+        %p= client.city.try(:name)
+  .clear
+
+  .sv-post-title
+    %h3
+      = @post.title
+  .clear
+
+  - if @post.illustration.present?
+    = image_tag @post.illustration.image.medium, class: 'sv-post-modal-illustration'
+
+  .sv-post-body
+    = auto_link_text @post.body
+  .clear
+
+  .sv-post-images
+    - @post.images.each do |img|
+      = image_tag img.image, id: dom_id(img)
+  %ul.sv-video-list-wrap.no-info
+    - @post.videos.each do |video|
+      = render 'videos/player', video: video
+  .clear
+
+  - if @post.tags.present?
+    .sv-post-tags
+      = render 'tags/tags', tags: @post.tags,
+                            prefix: 'Тэги:',
+                            wrap_name: Proc.new { |name| link_to name + ', ', interesting_url(tags:[name]) },
+                            wrap_last_name: Proc.new { |name| link_to name, interesting_url(tags:[name]) }
+
+  .sv-post-actions
+    %span.sv-post-date
+      = I18n.l @post.created_at, format: :comment
+    - unless for_moderator_of(@post.user.profileable)
+      = image_tag 'sorted/im-bord.png'
+      = render 'complaints/complaint', pretension: @post
+    - if current_user.present? && !@post.is_resource?('Community')
+      = image_tag 'sorted/im-bord.png'
+      = render 'favorites/favorite', favoriteable: @post
+    - for_moderator_of(@post.user.profileable) do
+      = image_tag 'sorted/im-bord.png'
+
+      = link_to 'Редактировать', edit_path_to_post(@post),
+                remote: true,
+                confirm: @post.accepted? ? "Ваш пост будет заново отправлен на модерацию" : nil
+      = image_tag 'sorted/im-bord.png'
+
+      = link_to 'Удалить', path_to_post(@post),
+                           method: :delete,
+                           confirm: 'Ваш пост удалится безвозвратно'
+
+    .sv-r{ 'data-vote-management' => "#{@post.id}-#{@post.class.name}" }
+      = render 'votes/like', resource: @post, resource_class_name: @post.class.name
+
+    - for_admin do
+      .sv-post-admin{ 'data-js' => 'post-admin' }
+        = render 'posts/for_admin', post: @post unless @post.is_resource?('Community')
+
+  .clear
+
+  = render 'comments/comments_section', resource: @post, comments: @comments, modal: true

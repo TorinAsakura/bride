@@ -1,0 +1,8 @@
+= simple_form_for [:admin, @firm_catalog], html: {id: "firm_catalog_form", class: 'modal hide form-horizontal', multipart: true, style: "width:600px;"}, remote: true  do |f|
+  .modal-header
+    %h3 Новый раздел
+  .modal-body
+    = render 'form', f: f
+  .modal-footer
+    %a.btn(href="#" onclick="$.fancybox.close(); return false;" ) Закрыть
+    %button.btn.btn-primary Сохранить

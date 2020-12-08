@@ -1,0 +1,10 @@
+- if params[:posts_page].to_i > 1 && params[:show] == 'all'
+  $('#sv-ideas-list').append('#{ render 'events/shared/posts', posts: @posts }');
+- elsif params[:show] == 'all'
+  clearEventContent(); 
+  $('#sv-read-it').html('#{j render 'events/show_only/posts', posts: @posts }');
+  infinitescrollPosts();
+- else
+  $('#sv-read-it').html('#{j render 'events/event/posts', posts: @posts }');
+
+initJournalTabsSwitch();

@@ -1,0 +1,25 @@
+#add_new{
+  line-height: 70px;
+  height: 70px;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  background-color: #EDEDED;
+  border: 1px solid #E4E4E4;
+}
+#add_new:hover{
+  background-color: #E4E4E4;
+  border: 1px solid #EDEDED;
+}
+.album_info{
+  text-align: right;
+}
+
+#next{
+  cursor: pointer;
+  min-width: 500px;
+  min-height: 500px;
+  display: block;
+  text-align: center;
+  position:relative;
+}

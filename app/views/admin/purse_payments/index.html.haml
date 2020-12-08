@@ -1,0 +1,18 @@
+= purse_payments_scopes(@purse, @scopes, @scope)
+
+%table.index_table
+  %thead
+    %tr
+      %th Id
+      %th Кошелек
+      %th Тип
+      %th Описание
+      %th Сумма
+      %th Статус
+      %th Создано
+      %th Действия
+    %tbody#payments-list
+      = render partial: 'purse_payment', collection: @purse_payments, as: :purse_payment
+
+.page-action
+  .current-page#payments-paginate= paginate @purse_payments, window: 3, outer_window: 3

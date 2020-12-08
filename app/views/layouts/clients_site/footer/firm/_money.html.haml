@@ -1,0 +1,9 @@
+= link_to('#', data: {toggle: "dropdown"}, id: 'menu-settings', class: 'btn btn-icon rounded') do
+  %i.icon.ion-social-usd-outline
+%ul.dropdown-menu(role="menu" aria-labelledby="menu-settings")
+  %li.dropdown-header
+    = t('.title')
+    %span.cash= firm.money
+  = render 'bonus/services/by_footer'
+  %li= link_to(t('.balance'), edit_firm_url(firm, anchor: 'monetize-purse'))
+  %li= link_to(t('.statistic'), edit_firm_url(firm, anchor: 'monetize-payments'))

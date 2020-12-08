@@ -1,0 +1,10 @@
+.title.itles.clearfix
+  = link_to wedding_timetable_event_path(@event.timetable,@event), remote: true, class: 'sv-a-back sv-l' do
+    %i.icon-chevron-left
+  %span.sv-l Свадебные идеи
+
+#sv-ideas-list
+  = render 'events/shared/ideas', ideas: @ideas
+
+.sv-ideas-hidden-nav.hide
+  = paginate @ideas, param_name: 'ideas_page'

@@ -1,0 +1,45 @@
+#guests {
+  .guest-group {
+    margin-bottom: 20px;
+    .guest {
+      font-size: 16px;
+      .gender i {
+        font-size: 120%;
+      }
+      .name, .actions {
+        display: inline-block;
+      }
+      .actions {
+        a {
+          font-size: 13px;
+          &:hover {
+            text-decoration: none;
+          }
+          i {
+            opacity: 0.8;
+            &:hover {
+              opacity: 1;
+            }
+            &.icon-pencil {
+              color: $icon-blue;
+            }
+            &.icon-remove {
+              color: $red;
+            }
+          }
+
+        }
+      }
+    }
+    .groom {
+      > i {
+        color: $groom;
+      }
+    }
+    .bride {
+      > i {
+        color: $bride;
+      }
+    }
+  }
+}

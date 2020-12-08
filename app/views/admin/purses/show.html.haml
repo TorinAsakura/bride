@@ -1,0 +1,21 @@
+= render 'menu'
+
+%p
+  %strong= Purse.human_attribute_name(:name)
+  = @purse.user.name
+%p
+  %strong= Purse.human_attribute_name(:amount)
+  = @purse.amount.format
+%p
+  %strong= Purse.human_attribute_name(:blocked_amount)
+  = @purse.blocked_amount.format
+%p
+  %strong= Purse.human_attribute_name(:available_amount)
+  = @purse.available_amount.format
+%p
+  %strong= Purse.human_attribute_name(:deposit_course)
+  1 к
+  = @purse.deposit_course
+
+%p
+  = link_to('Сменить скидку', edit_admin_purse_path(@purse))

@@ -1,0 +1,4 @@
+.sv-wrapper.mini-site-edit
+  = render 'clients/shared/edit_client_site_menu', site: @site, pages: @site.try(:pages), client:  current_user.profileable
+
+= render 'edit', site: @site, white_list: @white_list, black_list: @black_list

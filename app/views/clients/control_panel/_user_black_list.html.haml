@@ -1,0 +1,13 @@
+- user_to ||= false
+.user.sv-user.all-bklist
+  .customer
+    = image_tag 'caps/anna.png', alt: 'anna'
+  .person
+    = link_to 'Анна Титкакова', '#'
+  .naymenovanye
+    %p Пользователь
+  .to_blacklist
+    - if user_to
+      = link_to 'В чёрный список', '#', class: 'link-style sv-l'
+    - else
+      = link_to 'Убрать из списка', '#', class: ' link-style-inner sv-l'

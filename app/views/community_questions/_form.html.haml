@@ -1,0 +1,5 @@
+= simple_form_for @question, :url => @question.new_record? ? community_questions_path : community_question_path(@question) do |f|
+  = f.input :title
+  = f.input :body, :input_html => {:style => "width: 500px;", :rows => 6}
+  = f.input :question_category_id, :collection => @community.question_categories
+  %button.btn.btn-primary Отправить

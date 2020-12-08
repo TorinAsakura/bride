@@ -1,0 +1,7 @@
+- wheres = %w(idea article people company)
+%ul.nav.nav-tabs
+  - wheres.each do |w|
+    %li{class: ('active' if w.eql?(wheres.first))}= link_to(t(".#{w}.name"), "##{w}", data: {toggle: 'tab'})
+.tab-content
+  - wheres.each do |w|
+    .tab-pane{class: ('active' if w.eql?(wheres.first)), id: w}= render "layouts/clients_site/footer/search/#{w}"

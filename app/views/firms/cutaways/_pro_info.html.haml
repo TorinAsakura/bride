@@ -1,0 +1,32 @@
+.sv-logo.firm-logo-img-outside
+  = link_to firm_link(firm) do
+    = image_tag firm.logo_url(:usual), class: 'firm-logo-img big'
+
+.sv-info
+  - if @card_service.present? && @card_service.cost.present?
+    .sv-price
+      %b= @card_service.cost
+      %br/
+      #{ @card_service.unit}
+  .sv-i-phone
+    .dropdown
+      = link_to(firm.user.phone, '#', id: 'firm-contacts-icon', class: 'dropdown-toggle',  data: {toggle: "dropdown"})
+      - if (address = firm.base_city_firm.try(:base_address)).present?
+        = render 'firms/shared/contacts', address: address.decorate
+  .sv-r{ id: "vote_managment_#{firm.id}_#{dom_class(firm.object).capitalize}" }
+    = render 'votes/like', resource: firm, resource_class_name: dom_class(firm.object).capitalize
+
+.sv-title
+  = link_to text_in_quotes(firm.name), firm_link(firm)
+  %i{class: "sv-#{cutaway}"}
+
+.sv-short
+  = firm.extended_name
+
+.sv-tags.sv-firm-card-tags
+  - firm.spheres.each do |sphere|
+    %span= sphere.firm_catalog.name if sphere.persisted?
+
+.sv-descr
+  = firm.description
+  %br

@@ -1,0 +1,18 @@
+= render 'clients/shared/sidebar'
+
+.sv-article
+  .clearfix
+    #sv-search__posts
+      = render 'clients/posts', link_to_back: true
+
+- if session[:post]
+  :javascript
+    $(document).ready(function () {
+      $.getScript('#{session.delete :post}');
+    });
+
+- if session.delete :new
+  :javascript
+    $(document).ready(function () {
+      $.getScript('#{new_client_post_path(@client)}');
+    });

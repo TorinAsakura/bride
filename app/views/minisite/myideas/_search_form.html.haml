@@ -1,0 +1,7 @@
+= form_tag search_minisite_myideas_path, :method => :get, :class => "form-search", :id => "form-search" do
+  = text_field_tag :q, @q, :class=>"input-medium search-query", :placeholder => "Поиск идей"
+  = submit_tag "Искать", :class => "btn"
+
+.clearfix
+  - Tag.color.each do |c|
+    %div{:style => "cursor: pointer; float: left; width: 25px; height: 25px; border: 1px solid gray; margin: 5px; background-color: #{c.color}", :title => "#{c.name}", :onclick => "$('#q').val('#{c.name}');$('#form-search').submit()"}

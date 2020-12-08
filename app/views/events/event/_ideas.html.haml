@@ -1,0 +1,25 @@
+- if ideas.present?
+  .title.itles.clearfix
+    - if ideas.num_pages > 1
+      = link_to ideas_page_wedding_timetable_event_path(@event.timetable, @event, 1, show: :all), remote: true do
+        %span.sv-l Свадебные идеи
+    - else 
+      %span.sv-l Свадебные идеи
+    .sv-choice.sv-r
+      - if ideas.num_pages > 1
+        - ideas_page = params[:ideas_page].to_i
+        %ul
+          %li.prev
+            - if ideas_page > 1
+              = link_to ideas_page_wedding_timetable_event_path(@event.timetable, @event, ideas_page - 1),
+                remote: true, class: 'icon prev' do
+                %i Назад
+          %li.page
+            .center= ideas_page
+          %li.next
+            - if ideas_page.to_i < ideas.num_pages
+              = link_to ideas_page_wedding_timetable_event_path(@event.timetable, @event, ideas_page.to_i + 1), remote: true, class: 'icon next' do
+                %i Вперёд
+
+  #sv-ideas-list
+    = render 'events/shared/ideas', ideas: @ideas

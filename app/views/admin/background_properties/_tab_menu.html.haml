@@ -1,0 +1,7 @@
+%ul.nav.nav-tabs
+  %li{class: ('active' if params[:type].blank?)}
+    = link_to 'Все', admin_background_properties_path
+  %li{class: ('active' if params[:type].eql?('headers'))}
+    = link_to 'Фон шапки', select_admin_background_properties_path(type: 'headers')
+  %li{class: ('active' if params[:type].eql?('backgrounds'))}
+    = link_to 'Основной фон', select_admin_background_properties_path(type: 'backgrounds')

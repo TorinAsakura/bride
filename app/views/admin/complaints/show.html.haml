@@ -1,0 +1,78 @@
+=link_to 'Назад', admin_complaints_path
+
+%div
+  %div
+    Дата создания:
+    %br
+    = @complaint.created_at
+  %div
+    Предмет жалобы:
+    = t(@complaint.pretension_type.to_s)
+    %br
+    Текст жалобы
+    %br
+    = @complaint.content
+= link_to "Удалить жалобу", admin_complaint_path(@complaint), :method => "delete", :confirm => "Точно удалить?"
+%hr
+- case @complaint.pretension.class.to_s
+- when 'User'
+  = link_to "Перейти на страницу пользователя", user_path(@complaint.pretension)
+- when 'Firm'
+  = link_to "Перейти на страницу фирмы", firm_link(@complaint.pretension)
+- when 'MediaContent'
+  - if @complaint.pretension.multimedia.class.to_s == 'Firm'
+    - if @complaint.pretension.video
+      = link_to "Перейти на страницу c видео", firm_video_path(@complaint.pretension.multimedia.id, @complaint.pretension.id)
+    - else
+      = link_to "Перейти на страницу с аудио", firm_audio_path(@complaint.pretension.multimedia.id, @complaint.pretension.id)
+  - else
+    - if @complaint.pretension.video
+      = link_to "Перейти на страницу c видео", user_video_path(@complaint.pretension.multimedia.id, @complaint.pretension.id)
+    - else
+      = link_to "Перейти на страницу с аудио", user_audio_path(@complaint.pretension.multimedia.id, @complaint.pretension.id)
+- when 'Photo'
+  - photo_album = @complaint.pretension.photo_album
+  - if photo_album.resource.class.to_s == 'User'
+    = link_to "Перейти в альбом пользователя", user_album_path(photo_album.resource.id, photo_album.id)
+    |
+    = link_to "Перейти на страничку фотографии", user_album_user_photo_path(photo_album.resource.id, photo_album.id, @complaint.pretension.id)
+  - else
+    = link_to "Перейти в альбом фирмы", firm_album_path(photo_album.resource.id, photo_album.id)
+    |
+    = link_to "Перейти на страничку фотографии", firm_album_user_photo_path(photo_album.resource.id, photo_album.id, @complaint.pretension.id)
+- when 'Post'
+
+  - journal = @complaint.pretension.journal
+  - if journal.class.to_s == 'User'
+    = link_to "Перейти на страницу записи", user_post_path(journal.id,  @complaint.pretension.id)
+  - elsif journal.class.to_s == 'Community'
+    = link_to "Перейти на страницу записи", show_post_community_path(journal.id,  @complaint.pretension.id)
+  - else
+    = link_to "Перейти на страницу записи", firm_post_path(journal.id,  @complaint.pretension.id)
+- when 'Comment'
+  %p
+    Комментарий:
+  %p
+    = @complaint.pretension.body
+  - commentable = @complaint.pretension.commentable
+  - if commentable.class.to_s == 'Post'
+    - journal = commentable.journal
+    - if journal.class.to_s == 'User'
+      = link_to "Перейти на страницу записи", user_post_path(journal.id,  commentable.id)
+    - else
+      = link_to "Перейти на страницу записи", firm_post_path(journal.id,  commentable.id)
+  - if commentable.class.to_s == 'Firm'
+    = link_to "Перейти на страницу Фирмы", firm_link(commentable)
+  - if commentable.class.to_s == 'User'
+    = link_to "Перейти на страницу Пользователя", user_path(commentable.id)
+  - if commentable.class.to_s == 'Photo'
+    - photo_album = commentable.photo_album
+    - if photo_album.resource.class.to_s == 'User'
+      = link_to "Перейти в альбом пользователя", user_album_path(photo_album.resource.id, photo_album.id)
+      |
+      = link_to "Перейти на страничку фотографии", user_album_user_photo_path(photo_album.resource.id, photo_album.id, commentable.id)
+    - else
+      = link_to "Перейти в альбом фирмы", firm_album_path(photo_album.resource.id, photo_album.id)
+      |
+      = link_to "Перейти на страничку фотографии", firm_album_user_photo_path(photo_album.resource.id, photo_album.id, commentable.id)
+

@@ -1,0 +1,56 @@
+.sv-wrapper.sv-community.margintopotstp
+  .main-title
+    = link_to community_path(@community), class: 'sv-a-back sv-l', alt: 'Назад' do
+      %i.icon-chevron-left
+    %span= @community.name
+
+  = render 'communities/shared/sidebar', community: @community
+  .sv-article
+    .sv-community__title
+      Состав клуба
+
+    .sv-community__search-form.clearfix
+      = simple_form_for @search, url: members_community_path(@community), html: { method: :get, id: 'client-search-form', remote: true} do |f|
+        .block-sv-find-user
+          .sv-l
+            = f.input :fullname, required: true, placeholder: 'Введите ФИО или id пользователя', label: false
+
+          .sv-l.otp
+            = f.input_field :city_id, id: 'client_city_id', data: { 'select2-disabled' => true, 'autocomplete-path' => city_autocomplete_path }
+            = link_to 'x', members_community_path(@community), id: 'sv-reset-city-select'
+
+          .sv-radio-user.sv-l
+            Пол:
+            = f.radio_button :gender, 'people', id: 'people', class: 'radio-style-people', checked: true
+            = label_tag 'people'
+            = f.radio_button :gender, false, id: 'girl', class: 'radio-style-girl'
+            = label_tag 'girl'
+            = f.radio_button :gender, true, id: 'man', class: 'radio-style-man'
+            = label_tag 'man'
+
+          .sv-search-date.sv-l
+            Дата свадьбы:
+            = select_tag 'search[day]', options_for_select(['День'] + (1..31).to_a), class: 'select-day',
+              id: 'day', data: {'select2-options' => {minimumResultsForSearch: -1}}
+            = select_tag 'search[month]', options_for_select(['Месяц'] + months_list), class: 'select-month',
+              id: 'month', data: {'select2-options' => {minimumResultsForSearch: -1}}
+            = select_tag 'search[year]', options_for_select(['Год'] + (Wedding.first_year..Wedding.last_year).to_a), class: 'select-years',
+              id: 'year', data: {'select2-options' => {minimumResultsForSearch: -1}}
+
+            = hidden_field_tag 'sort', 'created_at', id: 'sv-search-sort-type'
+            = hidden_field_tag 'order', 'DESC', id: 'sv-search-order-type'
+          .sv-end-find-us.sv-r
+            = f.button :submit, 'Найти', class: 'link-style sv-l'
+
+        .clearfix
+    .title_nobg
+      = link_to 'По популярности', members_community_path(@community), class: 'sv-search-sort', sort: 'popular'
+      = link_to 'По дате регистрации', members_community_path(@community), class: 'active sv-search-sort', sort: 'created_at'
+
+    .clearfix
+    #sv-search-clients-result.sv-search-result
+      = render partial: 'communities/client', collection: @clients, as: 'client'
+
+    .sv-clients__nav
+      = paginate @clients
+

@@ -1,0 +1,23 @@
+clearEventContent();
+$('.sv-event').html("<%=j render 'events/event/body', event: @event %>");
+initJournalTabsSwitch();
+initVideoPreviews();
+history.pushState(null, '', '<%= request.path %>');
+
+<% if @event.with_service? && @event.service == :service_1%>
+    initCategories();
+<% end %>
+<% if @event.with_service? && @event.service == :service_2%>
+$(".table-sortable").dataTable({
+    aaSorting: [],
+    bPaginate: false,
+    bFilter: false,
+    bInfo: false
+});
+<% end %>
+
+<% if @event.have_firms? %>
+    $('#sv-event__firms').show();
+<% end %>
+
+$('#main_part select').select2();

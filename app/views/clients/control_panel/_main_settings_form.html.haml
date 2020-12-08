@@ -1,0 +1,21 @@
+#client-control-panel-main-settings.client-settings.sv-article.margintopotstp
+
+  = render 'clients/update_actions/main_settings/update_user_email', client: client
+  = render 'users/update_actions/main_settings/update_user_password', user: current_user
+  = render 'users/update_actions/main_settings/update_phone', user: current_user
+
+  .title_nobg.top-marg Мои учётные записи
+  / Блок ссылок на учетные записи
+  .sv-social
+    - Secrets.defined_providers.each do |provider|
+      = render '/authorizations/social_account', provider: provider, user: current_user
+
+  .title_nobg.top-marg Удаление аккаунта
+  .sv-end-form
+    .field-block
+      .notification
+        Данная процедура необратима!
+        Действительно удалить
+        аккаунт?
+        .link-style.input-big.sv-l Подтверждаю
+    = link_to 'Удалить аккаунт', client_path(@client), method: :delete, class: 'link-style-inner sv-l'

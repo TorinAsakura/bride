@@ -1,0 +1,13 @@
+.sv-home__users
+  .sv-home__title
+    = link_to 'Женихи и невесты', clients_path, class: 'sv-home__title-link'
+  - clients.each do |client|
+    .sv-home__user
+      = link_to client, class: 'sv-home__user-link' do
+        = image_tag client.avatar.usual
+      .sv-home__user-info
+        %b= client.full_name
+        %ul
+          - if client.city
+            %li= client.city.name
+  .clear

@@ -1,0 +1,7 @@
+#access-form
+  %h1.title= t('.title')
+  %p.access-info= t('.info')
+  = simple_form_for(site, url: minisite_code_path, method: :post) do |f|
+    .form-group
+      = f.input :code, as: :password, label: false, input_html: { class: 'form-control', placeholder: t('.password') }
+    = f.submit class: 'link-style', value: t('.submit')

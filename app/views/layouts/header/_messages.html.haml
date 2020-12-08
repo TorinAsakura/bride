@@ -1,0 +1,14 @@
+- unread_messages = current_user.unread_messages
+%li.m1.messages
+  = link_to messages_url, title: t('.messages'), class: 'm1 messages' do
+    %i.sv-icon.msg
+    - if unread_messages.present?
+      .notification= current_user.unread_messages.count
+
+  - if unread_messages.present?
+    %i.arr
+    .drop.sv-drop-messages
+      .title= t('.title')
+      .anchor
+        %table
+          %tbody= render partial: 'messages/header_message', collection: unread_messages.decorate, as: :message

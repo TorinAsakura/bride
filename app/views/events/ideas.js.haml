@@ -1,0 +1,8 @@
+- if params[:ideas_page].to_i > 1 && params[:show] == 'all'
+  $('#sv-ideas-list').append('#{ render 'events/shared/ideas', ideas: @ideas }');
+- elsif params[:show] == 'all'
+  clearEventContent(); 
+  $('#sv-show-ideas').html('#{j render 'events/show_only/ideas', ideas: @ideas }');
+  infinitescrollEventIdeas();
+- else
+  $('#sv-show-ideas').html('#{j render 'events/event/ideas', ideas: @ideas }');

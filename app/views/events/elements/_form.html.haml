@@ -1,0 +1,19 @@
+= simple_form_for [:wedding, :timetable, @event] do |e|
+  .to_add_new_task
+    = title
+  .plus_the_task
+    .titles_challenge.sv-l
+      = e.input :name, label: 'Название задачи:', class: 'inp-style'
+    .chois_of_the_week.sv-l
+      = e.input :timetable_id, as: :select, 
+                collection: wedding_timetables.map{ |t| [t.info_format, t.id] }, 
+                selected: timetable.id, 
+                input_html: { class: 'sel-style-compact-mini' }, 
+                label: false, include_blank: false
+  .description_tex
+    = e.input :description, as: :text
+  .tags_tasks
+    %p Теги:
+    = render 'tags/input', f:e
+  .tegs_shrone
+    = e.submit 'Сохранить', class: 'link-style sv-l'

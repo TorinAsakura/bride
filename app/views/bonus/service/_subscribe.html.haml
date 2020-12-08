@@ -1,0 +1,11 @@
+= simple_form_for subscription, url: bonus_service_subscriptions_path(subscription.service), html: { remote: true, id: 'message_form', class: 'modal hide' } do |f|
+  .modal-header
+    .title_nobg= subscription.signing_service.decorate.title
+  .modal-body
+    - if subscription.service.pro?
+      = f.hidden_field :package_id, value: subscription.service.packages.first.id
+    = simple_format(subscription.decorate.description, class: 'text-justify')
+    %p.error.main-color-text
+
+  .modal-footer.text-center
+    %button.link-style= subscription.target.has_pro? ? 'Подключить' : "Подключить БЕСПЛАТНО на #{I18n.t("misc.days", count: subscription.service.trial_duration)}".html_safe

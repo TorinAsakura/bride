@@ -1,0 +1,39 @@
+#sv-client-avatar-editor.modal
+  %div
+    %ul.sv-modal-tabs.clearfix
+      %li.active{ 'data-js' => 'client-avatar-upload-tab' }
+        = link_to 'Загрузка новой аватарки', '#tab-upload', 'data-toggle' => 'tab'
+      %li{ style: 'float:right', 'data-js' => 'client-avatar-edit-tab' }
+        = link_to 'Редактирование миниатюры', '#tab-edit', 'data-toggle' => 'tab'
+    .tab-content
+      .tab-pane#tab-upload.active
+        %p Пожалуйста, загрузите свою фотографию, чтобы ваши друзья и гости на свадьбе смогли узнать вас. Им будет легче узнать вас, если Вы загрузите свою настоящую фотографию. Вы можете загрузить изображение в формате JPG, PNG или GIF.
+        = simple_form_for @client, html: { class: 'sv-client-avatar-editor-form', id: 'fileupload_avatar', remote: true } do |f|
+          .sv-client-avatar-editor-input
+            = f.hidden_field :avatar_x, value: '0', id: 'avatar_x'
+            = f.hidden_field :avatar_y, value: '0', id: 'avatar_y'
+            = f.hidden_field :avatar_x2, value: '280', id: 'avatar_x2'
+            = f.hidden_field :avatar_y2, value: '300', id: 'avatar_y2'
+            = f.hidden_field :avatar_scale, value: '1', id: 'avatar_scale'
+            = f.input_field :avatar, as: :file
+            %button.link-style{ type: 'button' } Выбрать файл фотографии
+        %p Если у вас возникают проблемы с загрузкой, попробуйте выбрать фотографию меньшего размера.
+      .tab-pane#tab-edit
+        %p Пожалуйста, создайте вариант маленьких фотографий. Выбранная миниатюра будет отображаться в новостях, журнале, комментариях, на стене и т.д.
+        .sv-client-avatar-jcrop-wrapper
+          .sv-client-avatar-jcrop
+            %img{ 'data-js' => 'client-avatar-jcrop-image' }
+        %button.link-style.sv-client-avatar-editor-save{ 'data-js' => 'client-avatar-save' } Сохранить
+        .clear
+
+#sv-remove-client-avatar
+  .title_nobg Удаление фотографии
+  %p
+    Вы действительно хотите удалить аватарку?
+    %br
+    После удаления, ее нельзя будет восстановить.
+  .button-line
+    = link_to 'Удалить', destroy_avatar_client_path(@client), class: 'link-style',
+                                                              method: :delete,
+                                                              remote: true,
+                                                              'data-js' => 'client-avatar-destroy-confirm'

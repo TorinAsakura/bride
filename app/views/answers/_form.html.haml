@@ -1,0 +1,3 @@
+= simple_form_for answer, :url => answer.new_record? ? question_answers_path(question_id) : question_answer_path(question_id, answer) do |f|
+  = f.input :body, :input_html => {:style => "width: 500px;", :rows => 6}
+  %button.btn.btn-primary Отправить

@@ -1,0 +1,27 @@
+.sv-admin-subnavigation
+  %ul
+    %li
+      = link_to 'Настройка задач', admin_task_categories_path
+    %li
+      Нaстройка сценариев
+
+.sv-admin-content
+  .sv-admin-contents.sv-admin-scripts-box
+    .sv-aside
+      .title-browns
+        .sv-choice.sv-l
+          %ul
+            %li
+              %span.center Сценарии
+        =link_to '', new_admin_script_path, remote: true, class: 'sv-task-title-new sv-r'
+      
+      .sv-admin-box
+        - @scripts.each do |script|
+          %li
+            .borders
+              .vis
+                .check
+                = link_to script.name, edit_admin_script_plan_path(script, script.plans.last), remote: true, class: 'name'
+                = link_to '', edit_admin_script_path(script), remote: true, class: 'sv-r sv-admin-title-edit'
+
+    .sv-admin-script__maker

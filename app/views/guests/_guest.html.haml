@@ -1,0 +1,8 @@
+%tr{id: dom_id(guest)}
+  %td= t("#{guest.group}_guests", scope: 'minisite.guests.index')
+  %td= guest.name
+  %td= to_gender(guest.gender)
+  %td= guest.email
+  %td.center
+    = link_to(t('static.edit'), edit_minisite_guest_url(guest, subdomain: site.name), class: 'sv-edit-icon')
+    = link_to(t('static.remove'), minisite_guest_url(guest, subdomain: site.name), class: 'sv-delete-icon', method:  :delete, data: { confirm: t('static.are_you_sure') })

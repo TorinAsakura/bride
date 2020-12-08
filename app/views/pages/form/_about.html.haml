@@ -1,0 +1,11 @@
+#mini-site-page-settings.sv-article
+  = simple_form_for [site, page], html: {class: 'about-form'} do |f|
+
+    .title_nobg.top-marg
+      = page.title || 'Новая страница'
+
+    = f.input :content, label: false
+    = f.submit 'Сохранить', class: 'link-style'
+
+    - if page.persisted? && !page.system
+      = link_to 'Удалить', site_page_path(site.id, page.id), method: :delete, confirm: 'Точно удалить?', class: 'link-style'

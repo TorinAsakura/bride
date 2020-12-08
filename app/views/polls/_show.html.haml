@@ -1,0 +1,33 @@
+.sv-poll-wrapper
+  .sv-poll-header
+    .sv-l
+      %span.sv-poll-author
+        - if @poll.client
+          = link_to @poll.client do
+            = image_tag @poll.client.avatar.thumb
+        - else
+          %span
+            = image_tag 'thumb_avatar.gif'
+    .sv-poll-about
+      - if @poll.client
+        = link_to @poll.client.full_name, @poll.client
+      - else
+        %span Страница удалена
+      %span.sv-poll-about-timeago #{time_ago_in_words(@poll.created_at)} назад
+      %span.wa-option
+        = link_to '#', remote: true do
+          %i.wa-icon.wa-comment
+          = @comments.count
+        = link_to '#', remote: true do
+          %i.wa-icon.wa-like
+          = @poll.total_votes
+    .sv-poll-question= @poll.title
+
+  .sv-poll-x
+    = render @poll
+
+  - for_moderator_of @poll.client do
+    .sv-poll-actions
+      = link_to 'Удалить', poll_path(@poll), method: :delete
+
+  = render 'comments/comments_section', resource: @poll, comments: @comments, modal: true

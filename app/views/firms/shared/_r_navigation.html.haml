@@ -1,0 +1,14 @@
+#sv-firm-side-navigation
+  .title.clearfix
+    %span Навигация
+    - if @firm.user.is? current_user
+      = link_to 'Настройки', edit_firm_url(firm)
+    %i.arr
+
+  %ul
+    %li{ class: current_page?(firm_link @firm) ? 'active' : '' }
+      = link_to root_path do
+        %span Главная
+        %i.arr
+    - @firm_pages.each do |firm_page|
+      = link_to_firm_page(@firm, firm_page) unless firm_page.name == 'firm-services'

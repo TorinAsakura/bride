@@ -1,0 +1,47 @@
+#sv-community-avatar-editor.modal
+  %div
+    %ul.sv-modal-tabs.clearfix
+      %li.active{ 'data-js' => 'community-avatar-upload-tab' }
+        = link_to 'Загрузка новой аватарки', '#tab-upload', 'data-toggle' => 'tab'
+      %li{ style: 'float:right', 'data-js' => 'community-avatar-edit-tab' }
+        = link_to 'Редактирование миниатюры', '#tab-edit', 'data-toggle' => 'tab'
+    .tab-content
+      .tab-pane#tab-upload.active
+        %p Пожалуйста, загрузите свою фотографию, чтобы ваши друзья и гости на свадьбе смогли узнать вас. Им будет легче узнать вас, если Вы загрузите свою настоящую фотографию. Вы можете загрузить изображение в формате JPG, PNG или GIF.
+        = simple_form_for community, html: { class: 'sv-community-avatar-editor-form', id: 'fileupload_avatar', remote: true } do |f|
+          .sv-community-avatar-editor-input
+            = f.hidden_field :avatar_x, value: '0', id: 'avatar_x'
+            = f.hidden_field :avatar_y, value: '0', id: 'avatar_y'
+            = f.hidden_field :avatar_x2, value: '280', id: 'avatar_x2'
+            = f.hidden_field :avatar_y2, value: '300', id: 'avatar_y2'
+            = f.hidden_field :avatar_scale, value: '1', id: 'avatar_scale'
+            = f.input_field :avatar, as: :file
+            %button.link-style{ type: 'button' } Выбрать файл фотографии
+        %p Если у вас возникают проблемы с загрузкой, попробуйте выбрать фотографию меньшего размера.
+      .tab-pane#tab-edit
+        %p Пожалуйста, создайте вариант маленьких фотографий.
+        .sv-community-avatar-jcrop-wrapper
+          .sv-community-avatar-jcrop
+            %img{ 'data-js' => 'community-avatar-jcrop-image' }
+        .sv-community-avatar-previews
+          .sv-community-avatar-preview.big.sv-l
+            = image_tag(community.avatar, class: "sv-community-avatar-preview-img big")
+          .sv-community-avatar-preview.medium.sv-l
+            = image_tag(community.avatar, class: "sv-community-avatar-preview-img medium")
+          .sv-community-avatar-preview.small.sv-l
+            = image_tag(community.avatar, class: "sv-community-avatar-preview-img small")
+          .clear
+        %button.link-style.sv-community-avatar-editor-save{ 'data-js' => 'community-avatar-save' } Сохранить
+        .clear
+
+#sv-remove-community-avatar
+  .title_nobg Удаление фотографии
+  %p
+    Вы действительно хотите удалить аватарку?
+    %br
+    После удаления, ее нельзя будет восстановить.
+  .button-line
+    = link_to 'Удалить', destroy_avatar_community_path(community), class: 'link-style',
+                                                              method: :delete,
+                                                              remote: true,
+                                                              'data-js' => 'community-avatar-destroy-confirm'

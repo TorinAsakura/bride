@@ -1,0 +1,15 @@
+.sv-aside
+  .sv-navigation_all
+    / Независимая навигация
+    %ul
+      - pages.each do |page|
+        %li= link_to page.title, site_page_path(site.id, page.id), 'data-js' => page.name
+
+      %li= link_to 'Сервис свадебный калькулятор', site_wedding_calc_path(site) unless site.wedding_calc.blank?
+      %li= link_to 'Сервис список гостей', site_guest_list_path(site) unless site.guests.blank?
+      %li= link_to 'Сервис рассадки гостей', site_seating_plan_path(site) unless site.seating_plan.blank?
+      %li= link_to 'Сервис подарков', site_wish_list_path(site) unless site.wishlists.blank?
+      %li= link_to 'Сервис День свадьбы', site_wedding_program_path(site) unless site.programms.wedding_day.blank?
+      %li= link_to 'Сервис День после свадьбы', site_second_day_program_path(site) unless site.programms.second_day.blank?
+
+      /%li= link_to 'Мои идеи', minisite_myideas_path, 'data-js' => 'myideas'

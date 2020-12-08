@@ -1,0 +1,24 @@
+.sv-wrapper
+  = render 'firms/shared/sidebar'
+
+  .sv-article.left
+    = render 'firms/shared/header'
+
+    = render 'firms/posts', link_to_back: true, expand: false
+
+    .sv-posts-hidden-nav
+      = rel_next_prev_link_tags @posts
+
+= render 'firms/shared/add_friends_modal'
+
+- if session[:post]
+  :javascript
+    $(document).ready(function () {
+      $.getScript('#{session.delete :post}');
+    });
+
+- if session.delete :new
+  :javascript
+    $(document).ready(function () {
+      $.getScript('#{new_firm_post_path(@firm)}');
+    });

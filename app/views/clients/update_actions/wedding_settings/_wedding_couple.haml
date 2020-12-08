@@ -1,0 +1,49 @@
+.ws-couple-form
+  - unless client.has_couple_or_invite? 
+    .search-select-radio.clearfix
+      .sv-l.radio-find-couple
+        = radio_button_tag :select, :site_user, true, id: :site_user, class: 'radio-style-circle'
+        = label_tag :site_user do
+          %span Найти пользователя
+      .sv-l.radio-find-couple
+        = radio_button_tag :select, :handly_type, false, id: :handly_type, class: 'radio-style-circle'
+        = label_tag :handly_type do
+          %span Добавить пару вручную
+
+  .select-site-user
+    - unless client.has_couple_or_invite?
+      .set_name
+        = simple_form_for(:search_params, url: search_couple_client_path, html: { method: :get, class: 'form-ovrfl', remote: true }) do |f|
+          .enter_the_name
+            = f.input :couple_id,
+                      label: false,
+                      input_html: { class: 'inp-style sv-l inp-style-left-compact',
+                      placeholder: 'Введите ссылку на страницу или ID пользователя' }
+            = f.submit class: 'link-style sv-l', value: 'Найти'
+    .menu_match_personal
+      = render 'clients/search_couple', client: client.couple_or_invite
+
+  - unless client.has_couple_or_invite?
+    .select-handly-type{style: 'display:none;'}
+      = simple_form_for(:invite, url: invite_couple_wedding_path, html: { id: 'invite-couple-form' }) do |f|
+        .base-client-settings
+          = f.input_field :firstname,
+                          required: true,
+                          class: 'inp-style sv-invite-firstname',
+                          placeholder: 'Введите имя вашей пары',
+                          label: false
+          = f.input_field :email,
+                          required: true,
+                          class: 'inp-style sv-invite-email',
+                          placeholder: 'E-mail пары для приглашения',
+                          label: false
+          #invite-couple-info
+            .sv-end-form
+              .field-block
+                .notification
+                  Вы действительно хотите пригласить этого человека?
+                  %br
+                  После этого вы сможете вместе выполнять задачи для подготовке
+                  к вашей незабываемой свадьбе.
+                  = submit_tag 'Подтвердить', class: 'link-style sv-l'
+              = link_to 'Добавить', '', class: 'sv-confirm-button link-style sv-l'

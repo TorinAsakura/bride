@@ -1,0 +1,4 @@
+- if @firm
+  $('#thumbnail_block').append('#{j(render( :partial => "user_photos/thumbnail", :locals => {:firm_id => params[:firm_id], :photo => @photo}))}');
+- else
+  $('#thumbnail_block').append('#{j(render( :partial => "user_photos/thumbnail", :locals => {:user_id => params[:user_id], :photo => @photo}))}');

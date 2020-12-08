@@ -1,0 +1,22 @@
+.sv-ideas
+  .sv-ideas__search
+    .sv-ideas__search-title
+      Свадебные идеи
+      .sv-ideas__search-magnifier
+        .sv-ideas__search-magnifier-icon
+    = render 'idea/search_form'
+
+  - if @categories.present?
+    = render @categories
+  - else
+    .sv-ideas-excuse
+      Извините, по данному запросу не найдено ни одной свадебной идеи
+
+  .sv-ideas__nav
+    = rel_next_prev_link_tags @categories, params: { idea_section: @section }
+
+- if session[:idea]
+  :javascript
+    $(document).ready(function () {
+      $.getScript('#{session.delete :idea}');
+    });

@@ -1,0 +1,29 @@
+#sv-navigation
+  .sv-wrapper
+    %ul.sv-navigation.clearfix
+      - if user_signed_in? && current_user.client?
+        %li{class: ('active' if params[:controller] == 'tasks')}
+          = link_to 'Моя Свадьба', wedding_url
+
+      %li{class: ('active' if params[:controller] == 'interesting')}
+        = link_to 'Интересное', interesting_url
+
+      %li{class: ('active' if ['idea_sections', 'idea_categories', 'ideas'].include? params[:controller])}
+        = link_to 'Свадебные идеи', idea_sections_url
+
+      - if user_signed_in?
+        %li{class: ('active' if params[:controller] == 'sites')}
+          = link_to 'Свадебные сайты', all_minisites_url
+
+      %li{class: ('active' if params[:controller] == 'firms')}
+        = link_to 'Компании', firms_url
+
+      - if user_signed_in?
+        %li{class: ('active' if params[:controller] == 'clients' && params[:action] == 'index')}
+          = link_to 'Люди', clients_url
+
+      %li{class: ('active' if params[:controller] == 'polls')}
+        = link_to 'Опросы', polls_url
+
+      %li{class: ('active' if params[:controller] == 'communities')}
+        = link_to 'Клубы', communities_url

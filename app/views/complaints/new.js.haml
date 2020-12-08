@@ -1,0 +1,5 @@
+- if @count > 0
+  alert("Вы уже оформили жалобу");
+- else
+  $('#edit').html('#{j(render 'form')}');
+  $.fancybox.open($('#edit'), { 'fitToView': false, 'scrolling': 'no', 'padding': 0 });

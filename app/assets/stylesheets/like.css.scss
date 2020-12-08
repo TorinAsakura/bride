@@ -1,0 +1,55 @@
+div.sv-i-like {
+  display:block;
+  width:26px;
+  height:26px;
+  overflow:hidden;
+  cursor:pointer;
+  background: image-url('sorted/sv-loveit.png') 0 0 no-repeat;
+  &:hover {
+    background-position:0 -26px;
+  }
+  &.active {
+    background-position:0 -52px;
+  }
+  &.cnt {
+    width:74px;
+    height:26px;
+    overflow:hidden;
+    background: image-url('sorted/sv-loveit-cnt.png') 0 0 no-repeat;
+    span, a {
+      display: block !important;
+      font-size: 12px;
+      color: #999;
+      line-height: 23px;
+      margin: 2px 0px 0px 33px;
+      text-align: center;
+      font-weight: bold;
+    }
+    &.active {
+      background-position:0 -52px;
+    }
+    &:hover {
+      background-position:0 -26px;
+      span, a {
+        display: none !important;
+      }
+    }
+    &.sv-i-like-active {
+      span, a {
+        color:#fff;
+        display:block!important;
+        text-decoration: none;
+      }
+    }
+  }
+  a {
+    text-decoration:none;
+    display:none!important;
+  }
+}
+
+.sv-i-like-wrapper {
+  &, &:hover {
+    text-decoration: none;
+  }
+}

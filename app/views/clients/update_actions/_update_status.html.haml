@@ -1,0 +1,17 @@
+.sv-client-status
+  - if @client.text_status.present?
+    - if for_moderator_of client
+      = link_to simple_format(client.text_status), '#', 'data-js' => 'client-status'
+    - else
+      = simple_format(client.text_status)
+  - else
+    %p
+      - if for_moderator_of @client
+        = link_to 'изменить статус...', '#', 'data-js' => 'client-status', class: 'sv-change-status'
+- for_moderator_of client do
+  .sv-client-status-edit.sv-client-status-edit_hidden
+    = form_for client, url: update_status_client_path(client), remote: true do |f|
+      = f.text_area :text_status, class: 'textarea-style', 'data-js' => 'client-status'
+      = f.submit 'Сохранить', class: 'link-style'
+  :javascript
+    $(document).ready(function() { new ClientStatusEditor() });

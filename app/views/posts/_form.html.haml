@@ -1,0 +1,167 @@
+.title_nobg.sv-post-form-title
+  = post_form_title @post_form
+
+.sv-post-form-wrapper{ class: random_class = "c#{rand(99999)}" }
+  .sv-post-form-loading.sv-post-form-loading_hidden
+  = simple_form_for @post_form, url: polymorphic_path([@journal, @post_form.post]),
+                                remote: true,
+                                multipart: true,
+                                method: @post_form.method,
+                                html: { id: 'post_form', 'data-js' => 'post-form' } do |f|
+    .hide{ 'data-js' => 'post-form-file-wrapper' }
+      = file_field_tag :image, multiple: true, 'data-js' => 'post-images-field'
+
+    .sv-post-form-body
+      .sv-l
+        - unless @post_form.post.is_resource? 'Community'
+          .sv-post-illustration-wrap
+            #post-illustration{ 'data-js' => 'post-illustration' }
+              - if @post_form.illustration.present?
+                = image_tag @post_form.illustration.image.medium, alt: 'illustration', 'data-js' => 'post-illustration-image'
+              - else
+                = image_tag 'sorted/sv-illustration-placeholder.png', alt: 'illustration', 'data-js' => 'post-illustration-image'
+            = f.simple_fields_for :illustration do |i|
+              = i.hidden_field :x, value: '0', id: 'illustration_x'
+              = i.hidden_field :y, value: '0', id: 'illustration_y'
+              = i.hidden_field :x2, value: '323', id: 'illustration_x2'
+              = i.hidden_field :y2, value: '160', id: 'illustration_y2'
+              = i.hidden_field :scale, value: '1', id: 'illustration_scale'
+              = i.input_field :image, as: :file,
+                                      id: 'illustration_upload',
+                                      'data-js' => 'post-form-file'
+            %button.link-style.sv-post-upload-poster{ type: 'button' }
+              Загрузить постер
+
+            #illustration-popup
+              .title_nobg Редактирование постера
+              #illustration-on-upload
+                %img{ 'data-js' => 'post-illustration-jcrop-image' }
+              %div{ style: 'text-align:center;' }
+                = link_to 'Сохранить', '#', class: 'link-style', 'data-js' => 'post-illustration-close'
+
+      .sv-r{ style: "#{@post_form.post.is_resource?('Community') ? 'width:750px;' : 'width:560px;'}" }
+        = f.input_field :title, placeholder: 'Название записи',
+                                class: 'inp-style',
+                                label: false,
+                                wrapper: :none,
+                                required: true,
+                                'data-js' => 'post-title-field'
+
+        .clear
+        - if @post_form.post.is_resource? 'Community'
+          = f.input :category_id,
+                    as: :select,
+                    collection: @post_form.journal.post_categories,
+                    label: 'Категория',
+                    selected: @post_form.journal.post_categories.first
+        - else
+          .tags-field
+            %label Введите теги
+            = render 'tags/input',  f: f, tags: @post_form.tags
+
+      = f.input :body, as: :text, label: false, input_html: { placeholder: 'Введите текст',
+                                                              class: 'textarea-style',
+                                                              required: true,
+                                                              'data-js' => 'post-body-field' }
+
+    .sv-post-form__controls
+      = f.submit 'Отправить', { class: 'link-style sv-l', 'data-js' => 'post-form-submit' }
+
+
+      - unless @post_form.post.is_resource? 'Community'
+        .sv-post-form-status
+          = check_box_tag 'post[status]', true,
+                                          @post_form.status > 0,
+                                          class: 'sv-post-form-status__checkbox'
+          = label_tag 'post[status]', 'Сделать статью «Рекомендованной»', class: 'sv-post-form-status__label'
+          .sv-post-form-status-popup
+            %ul
+              %li
+                После проверки администратором
+                %br
+                ваша статья будет доступна в
+                %br
+                разделе «Интересно читать»
+
+      .sv-post-form__buttons{ 'data-js' => 'post-form-buttons' }
+        .sv-post-form__button.sv-post-form__button_video{ 'data-js' => 'post-video-button' }
+          = image_tag 'sorted/sv-post-attach-video.png'
+        .sv-post-form__button.sv-post-form__button_photo{ 'data-js' => 'post-photo-button' }
+          = image_tag 'sorted/sv-post-attach-photo.png'
+
+    .clear
+
+    .sv-post-form__images{ class: @post_form.images.present? ? '' : 'sv-post-form__images_empty',
+                           'data-js' => 'post-form-images' }
+      - @post_form.images.each do |image|
+        .sv-post-form__image{ id: dom_id(image) }
+          = image_tag image.image
+          .sv-post-form__image-destroy
+            = link_to 'удалить', post_image_path(@post_form.post, image), class: 'sv-post-form__image-destroy-btn',
+                                                                          method: :delete,
+                                                                          remote: true
+
+    .sv-post-form__videos{ class: @post_form.videos.present? ? '' : 'sv-post-form__videos_empty',
+                           'data-js' => 'post-form-videos' }
+      - @post_form.videos.each do |video|
+        = render 'videos/video', video: video
+      .sv-post-form__video.sv-post-form__video_template{ data: { js: 'video-player', width: 300, height: 150 } }
+        = hidden_field_tag 'post[videos][][content]', nil, 'data-js' => 'post-video-url'
+
+  .sv-post-form__video-popover{ 'data-js' => 'post-form-video-popover' }
+    = form_tag nil, url: '#',
+                    remote: true,
+                    class: 'sv-post-form__video-form',
+                    'data-js' => 'post-form-video-form' do
+      = text_field_tag :url, nil, class: 'inp-style sv-post-form__video-form-input', 'data-js' => 'post-form-video-input'
+      = submit_tag 'Прикрепить видео-файл', class: 'link-style sv-post-form__video-form-button'
+
+  .sv-post-form__progress.sv-post-form__progress_template
+    .sv-post-form__progress-bar{ 'data-js' => 'progress-bar' }
+
+.hide{ 'data-js' => 'post-form-warning' }
+  .sv-album-form-warning
+    .sv-album-form-warning__text Вы действительно хотите закрыть окно? Все несохраненные данные пропадут.
+    = link_to 'OK', '#', class: 'link-style sv-album-form-warning__button sv-album-form-warning__button_ok',
+                         'data-js' => 'post-form-warning-ok'
+    = link_to 'Отмена', '#', class: 'link-style sv-album-form-warning__button sv-album-form-warning__button_cancel',
+                              'data-js' => 'post-form-warning-cancel'
+
+%script{ id: 'post-image-template', type: 'text/x-tmpl' }
+  {% for (var i=0, file; file=o.files[i]; i++) { %}
+  .template-upload.sv-post-form__image
+    .preview
+      %span.in
+    .cancel.sv-post-form__image-destroy
+      %button Удалить изображение
+  {% } %}
+
+:javascript
+  $(document).ready(function() {
+    window.postPhotoUploader = new AttachmentPhotoUploader({
+      'wrapper': '.#{random_class}',
+      'fileWrapper': '[data-js=post-form-file-wrapper]',
+      'fileField': '[data-js=post-images-field]',
+      'button': '[data-js=post-photo-button]',
+      'images': '[data-js=post-form-images]',
+      'imagesEmptyClass': 'sv-post-form__images_empty',
+      'progressTemplate': '.sv-post-form__progress_template',
+      'progressTemplateClass': 'sv-post-form__progress_template',
+      'image': '.sv-post-form__image',
+      'imageTemplate': 'post-image-template'
+    });
+
+    window.postVideoUploader = new AttachmentVideoUploader({
+      'wrapper': '.#{random_class}',
+      'button': '[data-js=post-video-button]',
+      'template': '.sv-post-form__video_template',
+      'templateClass': 'sv-post-form__video_template',
+      'videos': '[data-js=post-form-videos]',
+      'popover': '[data-js=post-form-video-popover]',
+      'popoverInput': '[data-js=post-form-video-input]',
+      'videoForm': '[data-js=post-form-video-form]',
+      'videoInput': '[data-js=post-video-url]',
+      'videosEmptyClass': 'sv-post-form__videos_empty',
+      'video': '.sv-post-form__video'
+    });
+  });

@@ -1,0 +1,104 @@
+- if comment.level < comment.class::DEPTH
+  .sv-comment{ id: dom_id(comment),
+               'data-url' => comment_path(comment),
+               'data-body' => comment.body,
+               class: ('sv-comment_answer' unless comment.level.zero?) }
+    - if comment.user && comment.user.client?
+      .sv-comment__avatar.sv-comment__avatar_client
+        = link_to client_url comment.user.client do
+          = image_tag comment.user.client.avatar.thumb, class: 'sv-comment__avatar-image_client'
+    - elsif comment.user && comment.user.firm?
+      .sv-comment__avatar.sv-comment__avatar_firm
+        = link_to firm_link (comment.user.firm) do
+          = image_tag comment.user.firm.logo.thumb, class: 'sv-comment__avatar-image_firm'
+    - else
+      .sv-comment__avatar.sv-comment__avatar_client
+        = image_tag 'thumb_avatar.gif'
+
+    - if comment.user && comment.user.client?
+      = link_to comment.user.client.full_name, client_url(comment.user.client), class: 'sv-comment__author'
+    - elsif comment.user && comment.user.firm?
+      = link_to comment.user.firm.name, firm_link(comment.user.firm), class: 'sv-comment__author'
+    - else
+      .sv-comment__author Страница удалена
+
+    - for_moderator_of(comment, current_user) do
+      = link_to 'Редактировать', '#', class: 'sv-comment__pen',
+                                      'data-js' => 'comment-edit-btn',
+                                      title: 'Редактировать'
+    - if comment.can_moderate?(current_user)
+      = link_to 'Удалить', comment_path(comment), remote: true,
+                                                  method: :delete,
+                                                  class: 'sv-comment__cross',
+                                                  'data-js' => 'comment-destroy',
+                                                  title: 'Удалить'
+    - elsif user_signed_in? 
+      = link_to 'Пожаловаться', new_complaint_path(resource_id: comment.id, resource_type: comment.class.to_s),
+                                remote: true,
+                                class: 'sv-comment__cross',
+                                title: 'Пожаловаться'
+
+    .sv-comment__body
+      - if comment.parent
+        %span>= link_to_parent_author comment
+        ,
+      %span{ id: "comment_body_#{comment.id}" }
+        = auto_link_substr comment.body
+      - if comment.body.present? && comment.body.length > 500
+        %div
+          = link_to 'Показать полностью', '#', id: "show_comment_#{comment.id}"
+
+    - if modal
+      .sv-comment__images.sv-comment__images_modal{ 'data-js' => 'comment-images-first' }
+        - if comment.videos.present?
+          - comment.videos.reject(&:new_record?).each do |video|
+            .sv-comment__video.sv-comment__video_modal{ data: { js: 'video-player',
+                                                                title: video.title,
+                                                                youtube: video.content,
+                                                                width: 300,
+                                                                height: 150 } }
+    - else
+      .sv-comment__images.sv-comment__images_wall{ 'data-js' => 'comment-images-first' }
+      .sv-comment__images.sv-comment__images_wall.sv-comment__images_second{ 'data-js' => 'comment-images-second' }
+
+    - unless modal
+      - if comment.videos.present?
+        - comment.videos.reject(&:new_record?).each do |video|
+          .sv-comment__video.sv-comment__video_wall{ data: { js: 'video-player',
+                                                             title: video.title,
+                                                             youtube: video.content,
+                                                             width: 534,
+                                                             height: 267 } }
+
+    .sv-comment__actions
+      .sv-comment__action.sv-comment__action_date
+        = I18n.l comment.updated_at, format: :comment
+
+      - if comment.can_comment?
+        .sv-comment__action.sv-comment__action_reply
+          = link_to 'Ответить', '#', class: 'sv-comment-reply',
+                                     'data-name' => author_name(comment) + ',',
+                                     'data-url' => comments_path(commentable_type: comment.commentable.class.name,
+                                                                 commentable_id: comment.commentable.id,
+                                                                 parent_id: comment.id)
+
+      .sv-comment__action.sv-comment__action_like{ id: "vote_managment_#{comment.id}_#{comment.class.name}" }
+        = render 'votes/like', resource: comment, resource_class_name: comment.class.name
+
+  = content_for :javascript do
+    :javascript
+      $(document).ready(function () {
+        var comment = new Comment({
+          'element': '##{dom_id(comment)}',
+          'parent': '##{parent}',
+          'imageClass': '#{modal ? 'sv-comment__image_modal' : 'sv-comment__image_wall'}',
+          'images': [#{comment.images.reorder(:id).first(6).map { |i| "'#{i.image}'"}.join(',') }],
+          'hrefs': [#{comment.images.reorder(:id).first(6).map { |i| "'#{comment_image_path(comment, i)}'"}.join(',') }]
+        });
+
+        $('a#show_comment_#{comment.id}').on('click', function (e) {
+          e.preventDefault();
+          $('#comment_body_#{comment.id}').html('#{j comment.body}');
+          $(this).hide();
+        })
+      });

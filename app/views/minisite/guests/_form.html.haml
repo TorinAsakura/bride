@@ -1,0 +1,14 @@
+.row[guest]
+  = simple_form_for [:minisite, guest], remote: true, html: {class: 'form-inline guest-form'} do |f|
+    = f.input :group, as: :hidden
+    .form-group.guest-gender
+      = label_tag 'female' do
+        = f.radio_button :gender, false, id: 'female', class: 'radio-female'
+      = label_tag 'male' do
+        = f.radio_button :gender, true, id: 'male', class: 'radio-male'
+    .form-group= f.input :name,  label: false, placeholder: f.object.class.human_attribute_name(:name), input_html: {class: 'form-control', size: 30}
+    - if guest.new_record?
+      .form-group= f.input :email, label: false, placeholder: f.object.class.human_attribute_name(:email), input_html: {class: 'form-control', size: 30}
+    .form-group
+      = f.submit(t('static.save'), class: 'btn btn-sm btn-success')
+      = guest.decorate.remove_link

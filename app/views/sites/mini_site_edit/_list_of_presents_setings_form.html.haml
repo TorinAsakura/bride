@@ -1,0 +1,69 @@
+#mini-site-list-of-presents-settings.mini-site-settings.sv-article.margintopotstp{style: 'display:none;'}
+  .mini-site
+    .title_nobg.top-marg Желаемые подарки
+
+    .row.present.clearfix
+      .image= image_tag 'i/sv_tel.jpg'
+
+      .description
+        .title= 'Apple iPhone 5 16Gb'
+        .text
+          \- смартфон на платформе iOS
+          %br
+          \- сенсорный экран мультитач (емкостной)
+          %br
+          \- диагональ экрана 4", разрешение 640х1136
+          %br
+          \- камера 8МП, светодиодная выспышка, автофокус
+          %br
+          \- память 16 Гб, без слота для карт памяти
+          %br
+          \- поддержка Bluetooth, Wi-Fi, 3G, LTE, GPS, ГЛОНАСС
+          %br
+          \- вес 112 г, ШхВхЕ 58.60х123.80х7.60 мм, акк. 1400 мАч
+          %br
+
+          = link_to 'Редактировать', '#', class: 'link-style sv-l'
+          = link_to 'Удалить', '#', class: 'link-style-inner sv-l'
+
+    .row.present.clearfix
+      .image= image_tag 'i/sv_tel2.png'
+
+      .description
+        .title= 'Apple iPhone 5 16Gb'
+        .text
+          \- смартфон на платформе iOS
+          %br
+          \- сенсорный экран мультитач (емкостной)
+          %br
+          \- диагональ экрана 4", разрешение 640х1136
+          %br
+          \- камера 8МП, светодиодная выспышка, автофокус
+          %br
+          \- память 16 Гб, без слота для карт памяти
+          %br
+          \- поддержка Bluetooth, Wi-Fi, 3G, LTE, GPS, ГЛОНАСС
+          %br
+          \- вес 112 г, ШхВхЕ 58.60х123.80х7.60 мм, акк. 1400 мАч
+          %br
+
+          = link_to 'Редактировать', '#', class: 'link-style sv-l'
+          = link_to 'Удалить', '#', class: 'link-style-inner sv-l'
+
+    = link_to 'Добавить подарок', '#', class: 'add-present'
+
+    .title_nobg.top-marg Черный список подарков
+    .row.black-list-present.clearfix
+      %p.sv-l.index= '1.'
+      %p.sv-l.present= text_field_tag :present, nil, class: 'sv-l inp-style', placeholder: 'Нежелательный подарок'
+      = link_to 'Удалить', '#', class: 'link-style-close sv-l'
+
+    .row.black-list-present.clearfix
+      %p.sv-l.index= '2.'
+      %p.sv-l.present= text_field_tag :present, nil, class: 'sv-l inp-style', placeholder: 'Нежелательный подарок'
+      = link_to 'Удалить', '#', class: 'link-style-close sv-l'
+
+    = link_to 'Добавить подарок', '#', class: 'add-present'
+
+    .result.clear
+      = link_to 'Сохранить', '#', class: 'link-style sv-l'

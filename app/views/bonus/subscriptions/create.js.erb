@@ -1,0 +1,83 @@
+<%- signing_object = @subscription.signing_object%>
+<%- if signing_object.present?%>
+    var itemBlock = $('#subscription-<%= @subscription.service.signing_object_name.underscore.tr('_', '-')%>-items').find('#<%= dom_id(signing_object)%>');
+<%end%>
+var modalForm = $('form.modal');
+$('p.error').html('');
+<%if @subscription.present? && (errors = @subscription.errors.full_messages).present?%>
+    if (modalForm.length > 0) {
+        modalForm.find('p.error').html('<%= j errors.join('<br/>').html_safe%>').append("<%= j link_to('Пополнить баланс?', edit_firm_url(current_firm, anchor: 'monetize-purse'), class: "btn-link under")%>");
+    }
+    <%- if signing_object.present?%>
+        if (itemBlock.length > 0) { itemBlock.find('p.error').html('<%= j errors.join('<br/>')%>'); }
+    <%end%>
+<%else%>
+    <%- amount = current_firm.purse.available_amount.format(html: true).html_safe%>
+
+    <%- if params[:item_block].present?%>
+        itemBlock.find('form input.link-style').fadeOut(1000, function (){
+            itemBlock.find('.form').html('<p class="main-color-text">Оплачено</p>');
+        });
+        <%- if @service.class.name.demodulize.eql?('AddCity')%>
+            <%- @items.each do |item|%>
+                $('#<%= dom_id(item)%>').find('.price').html('<%= j @subscription.service.price(@subscription.target, item).format(html: true).html_safe%>');
+            <%end%>
+        <%else%>
+            <%- @items.each do |item|%>
+                <%item.children.each do |firm_catalog|%>
+                    $('#<%= dom_id(firm_catalog)%>').find('.price').html('<%= j @subscription.service.price(@subscription.target, firm_catalog).format(html: true).html_safe%>');
+                <%end%>
+            <%end%>
+        <%end%>
+        $('div.balance').find('span').html('<%= j amount%>');
+    <%else%>
+        <%if @has_pro%>
+            <%unless @service.uniq_form?%>
+                $('#<%= dom_id(@service)%>').addClass('success');
+            <%end%>
+            $('#<%= dom_id(@service)%>').find('#service-subscribe').html('<%= j @service.decorate.subscribe(@firm) %>');
+        <%else%>
+            <%- @subscription.target.all_city_firms.each do |city_firm|%>
+                $('#<%= dom_id(city_firm)%>').find('.sv-city-firm-select-wrapper__input').html('<%= j text_field_tag(:name, city_firm.city.name, class: 'inp-style', disabled: :disabled)%>');
+            <%end%>
+            <%- if (add_city = Bonus::Service::AddCity.find('add-city')).present?%>
+                $('.sv-firm-add-city-popup-wrapper').html('<%= j render 'city_firms/add_city', firm: @firm%>');
+            <%end%>
+            $('.spheres-list').find('select').each(function(){
+                $(this).select2('disable')
+            });
+            <%- if (add_category = Bonus::Service::AddSphere.find('add-category')).present?%>
+                $('.add-sphere').html('<%= j render 'spheres/add_firm_catalog', firm: @firm%>');
+            <%end%>
+            $('#monetize-services').html('<%= j render 'bonus/services/services', services: @services, firm: @firm%>');
+        <%end%>
+
+        $('#edit').find('.modal').modal('hide');
+        $('#header_<%= dom_id(@service)%>').find('a').html('продлить');
+
+        <%if @service.pro?%>
+            $('.pro-service').html("<%= @service.decorate.link_text%> Pro аккаунт");
+        <%end%>
+
+        <%if params[:list].present?%>
+            <%if @service.identifier.eql?('add-city')%>
+                $('.sv-firm-cities').html('<%= j render partial: 'city_firms/city_firm', collection: @firm.city_firms%>');
+                $('.sv-firm-cities-address').html('<%= j render partial: 'city_firms/city_firm_address', collection: @firm.city_firms, as: :city_firm, locals: {firm: @firm, id: nil}%>');
+                <%unless @has_pro%>
+                    $('#add-form-city').remove();
+                <%end%>
+                window.firmCityList = new FirmCityList();
+            <%elsif @service.identifier.eql?('add-category')%>
+                <%= simple_fields_for @firm do |f|%>
+                    $('.sv-firm-services-selector').find('.spheres-list').html('<%= j render 'firms/control_panel/firm_spheres_form', f: f %>').find('select').select2();
+                <%end%>
+                <%unless @has_pro%>
+                    $('#add-form-category').remove();
+                <%end%>
+            <%end%>
+        <%end%>
+        $('.sv-navigation_all').find('span.purse').html('<%= j amount%>');
+        $('.firm-settings').find('span.rur').html('<%= j amount%>');
+    <%end%>
+    $('.sv-drop-balance').find('span.cash').html('<%= j amount%>');
+<%end%>

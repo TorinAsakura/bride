@@ -1,0 +1,15 @@
+/ Модальное окно - добавить в друзья
+#friendship.modal.fade.hide{ style: "width:600px" }
+  .modal-header
+    %h4
+      Заявки
+    = button_tag '×',:class=>'close','data-dismiss'=>"modal",'aria-hidden'=>"true"
+  .modal-body
+    - if @firms_requests
+      Фирмы
+      %hr
+      = render @firms_requests
+    - if @clients_requests
+      Клиенты
+      %hr
+      = render @clients_requests

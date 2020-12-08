@@ -1,0 +1,18 @@
+%tr.resource{id: dom_id(firm)}
+  %td.attr.name= firm.name
+  %td.attr= firm.base_city.try(:name)
+  %td.attr
+    %i{class: (firm.dealer? ? 'icon-ok text-green' : 'icon-remove text-red')}
+  - deleted = firm.deleted?
+  %td.attr.deleted-status
+    %i{class: (deleted ? 'icon-ok text-green' : 'icon-remove text-red')}
+  %td.attr.actions
+    = link_to(edit_admin_firm_path(firm), title: "Редактировать", class: 'label critical') do
+      %i.icon-pencil
+    - new_dealer = firm.dealer? && !firm.has_children_firms?
+    = link_to(dealer_admin_firm_path(firm), title: "#{new_dealer  ? 'Убрать диллера' : 'Сделать диллером'}", class: "label #{new_dealer  ? 'overdue' : 'success'}") do
+      %i.icon-users
+    = link_to(admin_purse_path(firm.purse), title: 'Кошелек') do
+      %i.icon-money
+    = link_to(admin_firm_path(firm), method: :delete, title: "#{deleted ? 'Восстановить' : 'Удалить'}", remote: true) do
+      %i.icon-remove{class: ('text-green' if deleted)}

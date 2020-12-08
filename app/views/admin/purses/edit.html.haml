@@ -1,0 +1,4 @@
+= render 'menu'
+= simple_form_for [:admin, @purse] do |f|
+  = f.input :deposit_course
+  = f.submit('Сохранить', class: 'btn')

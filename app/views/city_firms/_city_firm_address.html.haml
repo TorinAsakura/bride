@@ -1,0 +1,70 @@
+.city-firm-fields{ id: dom_id(city_firm), data: {js: 'city-firm-fields', id: id}, style: (city_firm.new_record? ? 'display:none;' : '') }
+  = simple_form_for [firm, city_firm], html: { class: 'form-horizontal', remote: true } do |f|
+    = f.hidden_field :city_id
+    - if city_firm.new_record?
+      %h4{ 'data-js' => 'firm-city-address-title' }
+    - else
+      %h4= city_firm.city.full_name
+    = hidden_field_tag :name, city_firm.new_record? ? nil : city_firm.city.name, 'data-js' => 'firm-city-name'
+    .cap_company
+      = simple_fields_for(:address, city_firm.base_address || Address.new(name: city_firm.firm.name)) do |ba|
+        = ba.hidden_field :coordinates, 'data-js' => 'firm-base-address-coordinates'
+        = ba.input :name, label: 'Название главного филиала', input_html: { class: 'input-block-level'}
+        = ba.input :address, label: 'Адрес (видят посетители сайта)', input_html: { class: 'input-block-level autoResize', rows: 2, placeholder: 'Например: ул. Раскольникова, д. 35' }
+        = ba.input :explanation, as: :text, label: 'Пояснение адреса', input_html: { class: 'input-block-level autoResize', rows: 2, placeholder: 'Например: ТЦ "Торговый квартал", 1 этаж, остановка "Электротехников"' }
+        .clear
+        %div{ style: 'float:left; width:48%;' }
+          = ba.input :mobile_phone, label: 'Телефон (мобильный)', input_html: { class: 'input-block-level' }
+          = ba.input :email, label: 'E-mail', input_html: { class: 'input-block-level', type: 'text'}
+          = ba.input :site, label: 'Сайт', input_html: { class: 'input-block-level'} 
+        %div{ style: 'float:right; width:48%;' }
+          = ba.input :phone, label: 'Телефон (городской)', input_html: { class: 'input-block-level'}
+          = ba.input :skype, input_html: { class: 'input-block-level'}
+          .sv-l(style='width:48%;')
+            = ba.input :working_time_start, as: :string, label: 'Время роботы', input_html: { value: ba.object.working_time_start.to_s(:time), class: 'input-block-level clockpicker' }
+          .sv-r(style='width:48%;')
+            = ba.input :working_time_end, as: :string, label: '&nbsp;'.html_safe, input_html: { value: ba.object.working_time_end.to_s(:time), class: 'input-block-level clockpicker' }
+          .clear
+        .clear
+
+      = f.submit 'Сохранить', class: 'sv-l link-style sv-city-firm__save-button'
+      .sv-firm-add-address-popup-wrapper
+        - if firm.addresses.present?
+          = link_to 'Добавить филиал', new_firm_address_url(firm), class: 'sv-l sv-add_item', 'data-js' => 'new-address-link', remote: true
+      .clear
+
+      - if city_firm.persisted? && city_firm.base_address.present?
+        - map_id = "map#{rand(99999)}"
+        .sv-firm-city-map{ id: map_id, 'data-js' => 'firm-city-map' }
+        .sv-firm-city-map-note
+          %p *- переместите маркеры на карте для установки точных координат
+          :javascript
+            var showMap = function() {
+              initMap({ id: '#{map_id}', addresses: '#{j city_firm.addresses_for_map}', zoomControl: true, draggable: true });
+            }
+            $(window).load(showMap);
+
+
+
+      - unless city_firm.new_record?
+        - addresses = city_firm.addresses.ordered
+        .sv-firm-addresses{data: { url: sort_firm_city_firm_addresses_path(firm, city_firm)}, class: ('sorted' if addresses.count > 1) }
+          = f.simple_fields_for :addresses, addresses do |sf|
+            - id = "#{city_firm.id}_#{sf.object.id}"
+            = render 'city_firms/marker', address: sf.object, editable: !sf.object.eql?(addresses.first)
+
+            = sf.hidden_field :coordinates, data: {js: 'firm-address-coordinates', id: id}
+            = sf.hidden_field :location, data: {js: 'firm-address-address', id: id}
+            = sf.hidden_field :_destroy, data: {js: 'firm-address-_destroy', id: id}
+
+
+        -#TODO add payments
+        -#.sv-firm-add-address-popup
+        -#  %ul
+        -#    %li
+        -#      Для вас доступна возможность добавить 5 филиалов в каждом городе.
+        -#      %br
+        -#      Хотите увеличить количество филиалов вашей компании?
+        -#    %li.sv-popup-button
+        -#      = link_to 'Увеличить', '#', class: 'link-style', 'data-js' => 'firm-change-status-link'
+      .clear

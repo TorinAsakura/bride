@@ -1,0 +1,92 @@
+.sv-comment-form-wrapper{ class: random_class = "c#{rand(99999)}" }
+  .sv-message-contact.sv-message-contact_form.sv-l{class: (current_user.firm ? 'sv-message-contact_firm' : 'sv-message-contact_client')}
+    .sv-message-contact__avatar
+      = link_to user_link_page(current_user.profileable), class: 'sv-message-contact__avatar-border' do
+        = image_tag current_user.avatar.thumb, class: 'sv-message-contact__avatar-image'
+
+  .sv-message-contact.sv-message-contact_form.sv-r{class: (@recipient.firm ? 'sv-message-contact_firm' : 'sv-message-contact_client')}
+    .sv-message-contact__avatar
+      = link_to user_link_page(@recipient.profileable), class: 'sv-message-contact__avatar-border' do
+        = image_tag @recipient.avatar.thumb, class: 'sv-message-contact__avatar-image'
+
+  = simple_form_for Message.new, remote: true,
+                                 url: messages_path,
+                                 multipart: true,
+                                 html: { class: 'sv-comment-form sv-comment-form_message', 'data-js' => 'message-form' } do |f|
+    = hidden_field_tag 'message[recipient_id]', @recipient.id
+    .hide{ 'data-js' => 'message-form-file-wrapper' }
+      = file_field_tag :image, multiple: true, 'data-js' => 'message-images-field'
+
+    .sv-comment-form__body-wrapper
+      = f.input :body, label: false, input_html: { placeholder: 'Что вы хотите написать?',
+                                                   maxlength: 1300,
+                                                   class: 'sv-comment-form__body',
+                                                   'data-js' => 'message-body' }
+
+    .clearfix
+      %button.sv-comment-form__submit{ type: 'submut' } Отправить
+      .sv-comment-form__buttons
+        = link_to 'Фото', '#', class: 'sv-comment-form__button sv-comment-form__button_photo',
+                               'data-js' => 'message-photo-button'
+        = link_to 'Видео', '#', class: 'sv-comment-form__button sv-comment-form__button_video',
+                                'data-js' => 'message-video-button'
+        = link_to 'Ссылка', '#', class: 'sv-comment-form__button sv-comment-form__button_link',
+                                'data-js' => 'message-link-button'
+
+    .sv-comment-form__images.sv-comment-form__images_empty{ 'data-js' => 'message-form-images' }
+
+    .sv-comment-form__link.sv-comment-form__link_empty{ 'data-js' => 'message-form-link' }
+
+    .sv-comment-form__videos.sv-comment-form__videos_empty{ 'data-js' => 'message-form-videos' }
+      .sv-comment-form__video.sv-comment-form__video_template{ data: { js: 'video-player', width: 300, height: 150 } }
+        = hidden_field_tag 'comment[videos][][content]', nil, 'data-js' => 'message-video-url'
+
+  .sv-comment-form__video-popover{ 'data-js' => 'message-form-video-popover' }
+    = form_tag nil, url: '#', remote: true, class: 'sv-comment-form__video-form', 'data-js' => 'message-form-video-form' do
+      = text_field_tag :url, nil, class: 'inp-style sv-comment-form__video-form-input', 'data-js' => 'message-form-video-input'
+      = submit_tag 'Прикрепить видео-файл', class: 'link-style sv-comment-form__video-form-button'
+
+  .sv-comment-form__progress.sv-comment-form__progress_template
+    .sv-comment-form__progress-bar{ 'data-js' => 'progress-bar' }
+
+%script{ id: 'comment-image-template', type: 'text/x-tmpl' }
+  {% for (var i=0, file; file=o.files[i]; i++) { %}
+  .template-upload.sv-comment-form__image
+    .preview
+      %span.in
+    .cancel.sv-comment-form__image-destroy
+      %button Удалить изображение
+  {% } %}
+
+:javascript
+  $(document).ready(function () {
+    var messageForm = new MessageForm('.#{random_class}');
+
+    messageForm.messagePhotoUploader = new AttachmentPhotoUploader({
+      'wrapper': '.#{random_class}',
+      'fileWrapper': '[data-js=message-form-file-wrapper]',
+      'fileField': '[data-js=message-images-field]',
+      'button': '[data-js=message-photo-button]',
+      'images': '[data-js=message-form-images]',
+      'imagesEmptyClass': 'sv-comment-form__images_empty',
+      'progressTemplate': '.sv-comment-form__progress_template',
+      'progressTemplateClass': 'sv-comment-form__progress_template',
+      'image': '.sv-comment-form__image',
+      'imageTemplate': 'comment-image-template',
+      'imagesCountInput': '[data-js=message-images-count]'
+    });
+
+    messageForm.messageVideoUploader = new AttachmentVideoUploader({
+      'wrapper': '.#{random_class}',
+      'popover': '[data-js=message-form-video-popover]',
+      'popoverInput': '[data-js=message-form-video-input]',
+      'videoForm': '[data-js=message-form-video-form]',
+      'videoInput': '[data-js=message-video-url]',
+      'button': '[data-js=message-video-button]',
+      'template': '.sv-comment-form__video_template',
+      'templateClass': 'sv-comment-form__video_template',
+      'videos': '[data-js=message-form-videos]',
+      'videosEmptyClass': 'sv-comment-form__videos_empty',
+      'video': '.sv-comment-form__video'
+    });
+  });

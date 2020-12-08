@@ -1,0 +1,45 @@
+.aside-content
+  background: none
+  width: 30%
+  display: inline-block
+  vertical-align: top
+  padding: 0 $main-margin
+  &:empty
+    display: none
+    &+.main-contents
+      width: 100%
+      padding-left: $main-margin
+
+  .aside-item
+    margin-top: $layout-margin
+    &.small
+      padding-right: 20%
+     
+    .icon
+      text-align: center
+    
+    p, .list
+      padding: 0 0 $main-padding - 2*$border-width
+      line-height: 1
+      font-size: 1.05em
+    
+    p:last-child
+      padding: 0
+    
+    .btn
+      width: 100%
+      margin-bottom: $main-margin
+      &:last-child
+        margin-bottom: 0
+      
+    
+    &:first-child
+      margin-top: 0
+
+.full-main-content
+  .bottom
+    .aside-item
+      position: absolute
+      bottom: 0
+    
+  

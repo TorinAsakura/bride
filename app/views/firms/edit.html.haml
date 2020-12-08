@@ -1,0 +1,13 @@
+.sv-wrapper.firms-edit
+  = render 'control_panel', firm: @firm
+
+  = render 'firms/control_panel/account_settings_form', firm: @firm, firm_before_change: @firm_before_change
+  = render 'firms/control_panel/firm_settings_form'
+  = render 'firms/control_panel/business_card_settings_form'
+
+  = render 'firms/control_panel/monetize'
+  = render 'firms/control_panel/firm_services_settings'
+  = render 'firms/control_panel/addresses_settings'
+  - @firm_pages.each do |firm_page|
+    = render 'firms/control_panel/firm_page_settings', firm: @firm, firm_page: firm_page
+  = render 'firms/control_panel/firm_pages_settings', firm: @firm

@@ -1,0 +1,32 @@
+.sv-article
+  #sv-firms-list-title
+    .title
+      - child = firm_catalog.present? && firm_catalog.child?
+      - link = child ? city_firm_catalog_firms_path(@city.try(:id).to_i, firm_catalog.parent_id.to_i) : firms_url
+      = link_to link, class: 'sv-a-back sv-l', remote: child do
+        = image_tag 'sv-icon-arrow_l.png', alt: 'Назад'
+      %span= firm_catalog.try(:name) || 'Все разделы'
+      %ul
+        %li.search
+          = link_to '#', 'data-js' => 'firms-search-link' do
+            %i
+
+  .sv-firms-search-form{ 'data-js' => 'firms-search-form' }
+    -#TODO Сделать поиск фирм через searchlight и оставить только simple_form_for
+    - if current_page?(controller: :firms)
+      = form_tag nil, method: :get, remote: true do
+        = text_field_tag :firms_search, nil, placeholder: 'Поиск компаний', class: 'inp-style sv-firm-search-form__name'
+        = button_tag 'Искать', name: nil, class: 'find-button'
+    - else 
+      = simple_form_for @search, url: '', html: { method: :get, id: 'firm-search-form', remote: true, class: 'clearfix' } do |f|
+        .sv-l
+          = f.input :fragment, required: true, placeholder: 'Поиск компаний', label: false, input_html: { class: 'sv-firm-search-form__name' }
+        .sv-l
+          = f.button :submit, 'Искать', class: 'link-style'
+
+  #sv-firms-list
+    #sv-firm-search-result.sv-search-result{data: {'max-page' => firms.total_pages}}
+      = render 'firms/shared/firms', firms: firms
+
+      #sv-firms-paginate.hide
+        = paginate firms

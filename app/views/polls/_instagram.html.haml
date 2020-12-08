@@ -1,0 +1,70 @@
+.sv-album-form__buttons
+  %p.choose_photos Выберите фотографии
+  - @images.each do |image|
+    .instagram_photo{id: "photo_#{image.media_id}"}
+      = image_tag image.thumb_url
+      = image_tag "galka.png", class: "galka", style: "visibility: hidden"
+  .clear
+  = link_to "Выбрать отмеченные фото", "#", class: "input-big link-style", id: "select_instagram_photos_btn"
+
+:javascript
+  $.cookie.json = true;
+
+  var instagram_photo_ids = [];
+  var divs = $("div[id*=photo][class*=instagram_photo]");
+  var reg_exp = /[0-9]+[^a-z+]+[0-9]$/i;
+
+  var album_form = $("[data-js=album-photos-form]");
+  var upload_to_album_id = album_form[0].action.match(/[0-9]+$/)[0];
+
+  $.each(divs, function(index, elem){
+      $(elem).click(function() {
+          var full_id = this.id;
+          var id = full_id.match(reg_exp)[0];
+
+          if($(this).hasClass("checked")) {
+              img = $(this).find('img')[0];
+              galka_img = $(this).find('img')[1];
+
+              $(galka_img).css('visibility', 'hidden');
+              $(img).removeClass("thumb_selected");
+              $(this).removeClass("checked");
+
+              instagram_photo_ids = $.cookie("instagram_photo_ids");
+              index = instagram_photo_ids.indexOf(id);
+              instagram_photo_ids.splice(index, 1);
+
+              $.cookie("instagram_photo_ids", instagram_photo_ids);
+          } else {
+              $(this).addClass("checked");
+              img = $(this).find('img')[0];
+              galka_img = $(this).find('img')[1];
+
+              $(img).addClass("thumb_selected");
+              $(galka_img).css('visibility', 'visible');
+
+              instagram_photo_ids.push(id);
+              $.cookie("instagram_photo_ids", instagram_photo_ids);
+          }
+      });
+  });
+
+  $("#select_instagram_photos_btn").on('click', function(){
+
+    show_loader();
+
+    $.get(
+      "/instagram_media/download",
+      {
+        instagram_photo_ids: $.cookie("instagram_photo_ids"),
+        album_id: upload_to_album_id
+      }
+    ).done(function(data) {
+        $.cookie("instagram_photo_ids", null);
+    });
+  });
+
+  function show_loader(){
+    $(".sv-album-form__buttons").css('opacity', '0.6');
+    $(".sv-album-form__buttons").append("<img src=/assets/loading.gif class=loading>");
+  }

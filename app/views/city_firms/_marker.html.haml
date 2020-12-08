@@ -1,0 +1,16 @@
+.sv-firm-address{ data: { js: 'firm-address', id: "#{address.city_firm_id}_#{address.id}", item_id: address.id } }
+  - if editable
+    = link_to('Удалить', '#', class: 'sv-r close-button', data: { js: 'firm-address-remove', id: "#{address.city_firm_id}_#{address.id}"})
+
+  .sv-firm-address-marker
+    .sv-firm-address-marker-number
+    .sv-firm-address-marker-triangle
+  .sv-firm-address-info
+    .sv-firm-address-address
+      = address.name
+      - if editable
+        = link_to 'Редактировать', edit_firm_address_path(@firm, address), remote: true
+    .sv-firm-address-explanation
+      = address.explanation.presence || address.address
+      = address.all_phones
+    .clear

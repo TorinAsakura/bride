@@ -1,0 +1,3 @@
+$('[data-js=message-list]').html('#{j(render 'show')}');
+$('.sv-message-contact').removeClass('sv-message-contact_active');
+$('#message-recipient-#{@recipient.id}').addClass('sv-message-contact_active');

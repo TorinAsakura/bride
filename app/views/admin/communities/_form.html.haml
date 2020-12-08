@@ -1,0 +1,73 @@
+.sv-admin-community
+  .sv-admin-community__title
+    Клуб
+
+  - form_url = @community.new_record? ? admin_communities_path : admin_community_path(@community) 
+
+  = simple_form_for @community, url: form_url,
+                    method: "#{@community.new_record? ? :post : :put}", 
+                    html: { multipart: true, id: 'firm_post_form', class: 'form-horizontal' }  do |f|
+    .inline-table
+      %h5 Наименование клуба
+    .inline-table
+      = f.input :name, label: false
+    .inline-table
+      = link_to 'Профиль клуба', community_path(@community) unless @community.new_record?
+      %br
+    .inline-table
+      %h5 Категория
+    .inline-table
+      = f.input :community_category_id, as: :select, collection: CommunityCategory.all, include_blank: false, class: 'sv-half', label: false
+    .inline-table
+      %h5 Логотип 
+    .inline-table
+      = f.input :logo, as: :file, label: false
+    .inline-table
+      #sv-admin-community__logo
+        = image_tag @community.logo.preview
+        = link_to 'Удалить лого', remove_logo_admin_community_path(@community),
+                                  class: 'link-style',
+                                  'data-js' => 'community-remove-logo',
+                                  method: :delete,
+                                  remote: true unless @community.new_record?
+    .inline-table
+      %h5 Аватар
+    .inline-table
+      = f.input :avatar, as: :file, label: false
+    .inline-table
+      = image_tag @community.avatar.preview
+
+    .inline-table
+      Описание
+    .inline-table
+      = f.input :description, label: false, input_html: { style: 'width: 500px; height:100px;' }
+    .inline-table
+      Правила клуба
+    .inline-table
+      = f.input :rules, label: false, input_html: { style: 'width: 500px; height:100px;' }
+    %br
+    = f.button :submit, 'Сохранить клуб', class: 'link-style'
+    - unless @community.new_record?
+      = link_to 'Удалить клуб', admin_community_path(@community),
+        confirm: 'Точно удалить?',
+        method: :delete,
+        class: 'link-style sv-r'
+
+    %br
+    - unless @community.new_record?
+      .inline-table
+        %h5 Модераторы:
+      .inline-table
+        = text_field_tag :moderator_email
+        = link_to '+', add_moderator_admin_community_path(@community), class: 'link-style', 'data-js' => 'community__add-moderator'
+        #moderators
+          = render 'moderators', moderators: @moderators
+      %br
+      .inline-table
+        %h5 Категории постов:
+      .inline-table
+        = text_field_tag :post_category_name
+        = link_to '+', add_post_category_admin_community_path(@community), class: 'link-style', 'data-js' => 'community__add-post-category'
+        #post_categories
+          = render 'post_categories', post_categories: @post_categories
+

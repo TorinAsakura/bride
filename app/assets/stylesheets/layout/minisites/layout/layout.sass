@@ -1,0 +1,185 @@
+
+*
+  margin: 0
+  padding: 0
+
+.r
+  float: right
+
+
+.l
+  float: left
+
+ul > li
+  list-style: none
+
+\:focus
+  outline: none
+
+img
+  max-width: 100%
+
+.str-removed, .red, .diffmod
+  color: $red!important
+  text-decoration: line-through
+
+
+.str-added, .green, .diffins
+  color: $green!important
+
+.no-padding
+  padding: 0 !important
+
+[class^="icon-"]:before, [class*=" icon-"]:before
+  width: auto
+
+.no-data
+  text-align: center
+  color: $sub-gray
+
+
+.wrapper
+  padding: 0 $main-padding
+
+
+h1, h2, h3, h4
+  font-weight: normal
+
+
+h1
+  font-size: 1.6em
+  color: white
+
+body
+  background: $base-content-bg
+  font-family: 'Open Sans', sans-serif
+  font-weight: 400
+  font-size: $font-size
+  line-height: 22px
+  min-width: 1024px
+  color: $black
+
+.comma
+  &:after
+    content: ','
+.r
+  float: right!important
+img
+  color: transparent
+
+
+html, body
+  height: 100%
+
+
+.wrap
+  min-height: 100%
+  position: relative
+  &:before
+    content: ''
+    position: absolute
+    opacity: 0
+    @include transition (opacity 4.0s ease-in-out)
+  &.black
+    &:before
+      content: ''
+      position: absolute
+      z-index: 100000
+      background: black
+      bottom: 0
+      opacity: .8
+      top: 0
+      width: 100%
+    .player
+      position: relative
+      z-index: 100001
+
+
+.clearfix
+  @include clearfix
+
+
+a, .file > label
+  cursor: pointer
+  color: $a-blue
+  // @include transition(all .1s ease-in-out)
+  text-decoration: none
+  // box-shadow: $link-box-shadow
+  behavior: asset-url('PIE.htc')
+  //&:visited
+  //  color: $a-visited
+  &:hover
+    color: $a-hover
+    // box-shadow: $link-hover-box-shadow
+    text-decoration: none!important
+    i
+      text-decoration: none
+
+  
+
+.sub-gray
+  color: $sub-gray
+
+.no-paddin
+  margin: -20px
+
+
+h1, h2, h3, h4, h5, h6
+  small, .small
+    font-size: .8em
+    color: #666
+    font-weight: normal
+
+label,
+input,
+button,
+select,
+textarea
+  font-size: 14px
+  font-weight: normal
+  line-height: 20px
+
+input:not(.btn).input-big
+  font-size: .94em
+
+.main
+  padding: $main-margin+$real-header-height+$real-header-height/2 0 $footer-height
+  background: rgba(white, .75)
+  +outer-container
+  z-index: 1
+  position: absolute
+  bottom: 0
+  left: 0
+  right: 0
+  top: 0
+
+  .main-contents
+    width: 69.4%
+    display: inline-block
+    vertical-align: top
+    padding-right: $main-margin
+
+  .main-full-content, .main-right-content
+    background: #FFFFFF
+    margin: 0
+    padding: 12px
+    +border
+    margin-bottom: $footer-height
+
+
+.control-panel
+  padding: 0 !important
+  background: none !important
+  margin-top: $input-text-padding !important
+  .simple_form .input
+    margin: 0
+
+
+.hide
+  display: none!important
+
+.in_archive
+  color: red
+
+i:before
+  text-shadow: none

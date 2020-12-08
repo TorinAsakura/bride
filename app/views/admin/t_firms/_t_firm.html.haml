@@ -1,0 +1,12 @@
+%tr.resource{id: dom_id(t_firm)}
+  %td.attr.name= best_in_place(t_firm, :name, path: admin_t_firm_path(t_firm))
+  %td.attr= t_firm.firm_catalog.name
+  %td.attr= t_firm.city.name
+  %td.attr= best_in_place(t_firm, :phone, path: admin_t_firm_path(t_firm))
+  %td.attr
+    %small= best_in_place(t_firm, :address, path: admin_t_firm_path(t_firm), type: :textarea)
+  %td.attr
+    %small= best_in_place(t_firm, :extended_name, path: admin_t_firm_path(t_firm), type: :textarea)
+  %td.attr.actions
+    = link_to( admin_t_firm_path(t_firm), title: "Удалить", method: :delete, remote: true ) do
+      %i.icon-remove>

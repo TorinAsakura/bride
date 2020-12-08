@@ -1,0 +1,4 @@
+.background-property.index{id: dom_id(background_property)}
+  = image_tag(background_property.image.url(:preview))
+  = link_to substr(background_property.title, 50), edit_admin_background_property_path(background_property)
+  = link_to 'удалить', admin_background_property_path(background_property), method: :delete, confirm: 'Вы уверенны?'

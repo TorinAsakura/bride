@@ -1,0 +1,11 @@
+<%- if (errors = @guest.errors).present?%>
+  var form = $('#new_guest');
+  <%- errors.messages.each do |field, message|%>
+    form.find('#guest_<%= field%>').parents('.form-group').addClass('has-error');
+  <%-end %>
+<%- else%>
+  $('#guest_new').remove();
+  var list = $('#<%= @guest.group%>-guests');
+  list.append('<%= j(render @guest)%>');
+  list.parent().find('.add-item').show();
+<%- end%>

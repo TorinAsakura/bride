@@ -1,0 +1,13 @@
+(function () {
+var comment = $('#{j(render 'comments/comment', comment: @comment, modal: @modal, parent: @parent)}');
+
+- if @parent_id.present?
+  comment.insertAfter($('##{dom_id(@comment.parent)}'));
+- elsif params[:sort_order] == 'desc'
+  window.commentForm.$elem.find('.sv-comments-box').prepend(comment);
+- else
+  window.commentForm.$elem.find('.sv-comments-box').append(comment);
+
+$('.fancybox-overlay').trigger('scroll');
+$('.fancybox-overlay').animate({ scrollTop: window.commentForm.getCommentOffset(comment) }, 600);
+})();

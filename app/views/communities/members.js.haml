@@ -1,0 +1,3 @@
+$("#sv-search-clients-result").html('#{ j render partial: 'communities/client', collection: @clients, as: :client }');
+removeInfinitescroll();
+infinitescrollClients('#{search_params_to_path(@search_params)}');

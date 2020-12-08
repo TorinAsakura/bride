@@ -1,0 +1,25 @@
+.filter-resource
+  = form_tag( admin_t_firms_path, method: :get, remote: true) do
+    .filter-text.search_firm_catalog_id= grouped_collection_select(:search, :firm_catalog_id, FirmCatalog.roots, :children, :name, :id, :name, pleaceholder: 'Выберите категорию')
+    .filter-text= text_field :search, :name, placeholder: 'Название'
+    .filter-text= text_field :search, :city, placeholder: 'Город'
+    .submit= submit_tag "Поиск", name: nil, class: 'link-style'
+
+.page-action
+  .current-page.t-firms-paginate= paginate @t_firms, window: 3, outer_window: 3, remote: true
+
+%table.index_table
+  %thead
+    %tr
+      %th Название
+      %th Категория
+      %th Город
+      %th Телефон
+      %th Адресс
+      %th Описание
+      %th Действия
+    %tbody#t-firms-list
+      = render @t_firms
+
+.page-action
+  .current-page.t-firms-paginate= paginate @t_firms, window: 3, outer_window: 3, remote: true

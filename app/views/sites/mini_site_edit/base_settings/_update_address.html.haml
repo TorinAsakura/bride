@@ -1,0 +1,17 @@
+/ Адрес электронной почты блок
+#mini-site-address.sv-article
+  .title_nobg Адрес свадебного мини-сайта
+  .sv-profile-site
+    = form_for site, url: update_address_site_path(site),  method: :put, html: {remote: true} do |f|
+      = render 'errors', site: site
+
+      .mini-logo.sv-l
+      .sv-l.inp-a-description
+        = f.text_field :name, class: 'sv-l inp-style inp-style-mini-compact', placeholder: 'dima-i-polina'
+        %span.yes-green.address-avaliable{style: 'display: none'}  адрес доступен
+        %span.yes-green.updated{style: 'display: none'}  адрес успешно изменен
+        %span.no-red.address-dont-avaliable{style: 'display: none'}  адрес не доступен
+        %span.no-red.not-valid{style: 'display: none'} Используйте только цифры, латиницу и знаки &laquo;-&raquo; и &laquo;_&raquo;
+
+      = label_tag :name, '.svadba.org', class: 'sv-l individual-site'
+      = f.submit 'Сохранить', class: 'link-style sv-r', style: 'display: none;'

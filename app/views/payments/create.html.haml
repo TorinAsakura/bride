@@ -1,0 +1,13 @@
+%h2 Подтверждение платежа
+
+%p Фирма: #{@firm.name}
+%p Сумма: #{@payment.amount}
+= ChelnySvadba.config.robokassa_secret
+= ChelnySvadba.config.robokassa_login
+= @payment.errors.inspect
+= payment_service_for @payment.id, 'mikevb',
+                      amount: @payment.amount,
+                      service: :robokassa,
+                      secret: 'razdva12' do |s|
+
+  = submit_tag 'Подтвердить платеж'

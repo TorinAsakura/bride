@@ -1,0 +1,23 @@
+%ul.nav.nav-list
+  %li{:class => params[:action] == 'newlyweds' ? 'active' : ''}
+    = link_to "Личная страница", user_page_path(current_user)
+  -#if current_user.my_wedding
+    %li{:class => params[:action] == 'calendar' ? 'active' : ''}
+      = link_to('Управление свадьбой', wedding_events_path(current_user.my_wedding))
+  %li
+    %a Гости
+
+  %li.divider
+
+  %li
+    %a Сообщения
+  %li
+    %a Друзья
+  %li
+    %a Фотографии
+  %li
+    %a Новости
+  %li
+    %a Закладки
+
+

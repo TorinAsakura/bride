@@ -1,0 +1,121 @@
+#albums {
+  @include clearfix;
+  .album {
+    position: relative;
+    padding-top: $grid-gutter-width/4;
+    padding-bottom: $grid-gutter-width/4;
+    a {
+      box-shadow: none;
+      display: block;
+    }
+    > a {
+      text-align: center;
+      img {
+        display: inline-block;
+      }
+    }
+    .descr {
+      background: rgba(0,0,0,0.4);
+      bottom: $grid-gutter-width/4;
+      left: 0;
+      right: 0;
+      line-height: 40px;
+      position: absolute;
+      margin: 0 15px;
+      &:hover {
+        background: rgba(0,0,0,0.6);
+      }
+      a {
+        padding: 0 10px;
+        > span {
+          float: right;
+          > *:last-child {
+            margin-left: 6px;
+          }
+        }
+      }
+      &, a {
+        color: #fff;
+      }
+    }
+  }
+}
+#show-all-albums {
+  display: block;
+  height: $layout-margin - $main-margin-small/2;
+  line-height: $layout-margin - $main-margin-small/2;
+  text-align: center;
+  margin: $text-padding 0 0 0;
+  background: $main-menu-color;
+  color: white;
+  &:hover {
+    background: $main-color;
+  }
+}
+#photos {
+  @include clearfix;
+  .photo {
+    padding-top: $grid-gutter-width/4;
+    padding-bottom: $grid-gutter-width/4;
+    text-align: center;
+    img {
+      display: inline-block;
+    }
+  }
+  #infscr-loading {
+    text-align: center;
+  }
+}
+
+.sv-album-form {
+  .cntrls {
+    .bootstrap-select {
+      input {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  #albums {
+    .album {
+      .descr {
+        font-size: 85%;
+        line-height: 30px;
+        a {
+          > span {
+            > *:last-child {
+              margin-left: 3px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $screen-xs - 1) {
+  #albums {
+    .album {
+      width: 100%;
+      .descr {
+        bottom: 0;
+        position: relative;
+        margin: 5px 0 0;
+        > a {
+          white-space: nowrap;
+          > span {
+            float: none;
+          }
+        }
+      }
+    }
+  }
+  #photos {
+    .photo {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+.sv-event
+  = render 'events/event/body', event: event
+
+#sv-timetable__setting
+#sv-show-ideas
+#sv-read-it.sv-read-it-style
+#sv-view-it
+
+#sv-event__firms{ style: ('display: none' if !@event.have_firms? || @event.with_service?) }
+  #sv-company-search
+    = render('events/event/company_search', event: @event)
+  #sv-firms-list
+    #sv-firm-search-result.sv-search-result

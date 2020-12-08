@@ -1,0 +1,51 @@
+.wish-edit-form
+  $wish-img: 152px
+  ul
+    margin: 0
+  li
+    list-style: none
+
+  .preview
+    width: $wish-img
+    height: $wish-img
+    overflow: hidden
+    display: block
+    +border
+    img
+      min-width: 100%
+      min-height: 100%
+
+  .wish-list li
+    font-size: 14px
+    line-height: 22px
+    text-align: left
+    display: table
+    margin-bottom: $layout-margin
+    &:last-child
+      margin-bottom: 0
+    > *
+      vertical-align: top
+      display: table-cell
+      &:last-child
+        padding-left: $main-margin-big
+
+  .wish-content
+    width: 460px
+    .present-name
+      color: #C84563
+    .text
+      margin-bottom: $main-padding
+      font-size: 12px
+
+  .un-wish-list
+    margin: 0
+    li
+      line-height: $input-height
+      margin-bottom: $main-margin
+      &:last-child
+        margin-bottom: 0
+    input
+      margin: 0 10px
+      width: 550px
+    +inline-block
+

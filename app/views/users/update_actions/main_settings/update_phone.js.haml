@@ -1,0 +1,12 @@
+$('#user-phone').find('.alert').remove();
+
+- if @phone_changed
+  var popup = $('.sv-firm-phone-popup');
+  var number = $('legend.tel_number');
+  var hidePopup = function() { popup.fadeOut(500); }
+
+  number.html('#{format_phone @user.phone }');
+  popup.show();
+  setTimeout(hidePopup, 1000);
+- else
+  $('#user-phone').find('.title_nobg').after('#{j(render 'users/errors', user: @user)}')

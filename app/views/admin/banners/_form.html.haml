@@ -1,0 +1,20 @@
+= simple_form_for banner, url: banner.new_record? ? admin_banners_path : admin_banner_path(banner),
+                          html: {class: 'sv-admin-banner-form'} do |f|
+  = f.input :title, label: 'Заголовок', input_html: {class: 'inp-style inp-style-longing'}
+  = f.input :description, label: 'Описание', input_html: {class: 'textarea-style'}
+  = f.input :link, label: 'Ссылка', input_html: {class: 'inp-style inp-style-longing'}
+  = f.input :image, label: false
+  = f.input :banner_type, as: :radio_buttons,
+                          label: 'Тип баннера',
+                          collection: [['Системный', 0], ['Рекламный', 1]],
+                          input_html: {'data-js' => 'admin-banner-type'}
+  .sv-admin-banner-form__visibility
+    .sv-admin-banner-form__checkbox
+      = f.input :for_guests, as: :boolean, label: 'Показывать гостям'
+    .sv-admin-banner-form__checkbox
+      = f.input :for_users, as: :boolean, label: 'Показывать пользователям'
+    .sv-admin-banner-form__checkbox
+      = f.input :for_firms, as: :boolean, label: 'Показывать компаниям'
+
+  .clear
+  = f.submit 'Сохранить', class: 'link-style'

@@ -1,0 +1,4 @@
+$('#purse-payments-scopes').html('#{j(render 'purse_payments/scopes', scope: @scope)}');
+$('#purse-payments').html('#{j(render partial: 'purse_payments/purse_payment', collection: @purse_payments, as: :purse_payment)}');
+$('#purse-payments-paginate').html('#{j(paginate @purse_payments, theme: 'purse-payments-mini', remote: true)}');
+$('#purse-payments-per-pages').html('#{j(render 'purse_payments/per_pages', per: @per, scope: @scope)}');

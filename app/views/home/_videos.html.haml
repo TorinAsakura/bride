@@ -1,0 +1,33 @@
+.title.clearfix
+  = link_to interesting_path do
+    %span Интересно смотреть
+  %ul
+    %li.prev
+      = link_to_previous_page videos, '<i>предыдущая</i>'.html_safe, remote: true, params: {resource: :videos}
+    %li.number
+      = videos.current_page if (videos.current_page > 1) && (videos.current_page != videos.total_pages)
+    %li.next
+      = link_to_next_page videos, '<i>следующая</i>'.html_safe, remote: true, params: {resource: :videos}
+%ul.sv-video-list-wrap.two-large-columns
+  - videos.each do |video|
+    %li.sv-video-list-block{ 'data-js' => 'video' }
+      - if video.content.match(/vk/) || video.content.match(/vimeo/)
+        = link_to polymorphic_path([video.multimedia.profileable, video]), remote: true, class: 'video_link_preview' do
+          .video-container
+            .sv-home-videos__play-button
+            %img.video_image_preview{src: "#{video.media_preview}"}
+            %span.video-info
+              %span.video-play
+                %span.video-play-icon
+                %span.video-title #{video.title}
+              %span.video-duration 
+                #{video.duration.present? ? video.duration : "??:??:??"}
+      -else
+        .youtube[video]
+          = link_to polymorphic_path([video.multimedia.profileable, video]),
+                    class: 'video sv-firm-video-link',
+                    data: { title: truncate(video.title, length: 20), youtube: video.content },
+                    remote: true do
+            .sv-home-videos__play-button
+          .sv-firm-video-link-bg
+.clear

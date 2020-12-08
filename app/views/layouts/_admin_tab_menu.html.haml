@@ -1,0 +1,42 @@
+%ul.nav.nav-tabs
+  %li{class: (select == 'firm_catalog' ? "active" : '')}
+    = link_to 'Каталог категорий', admin_firm_catalogs_path
+
+  %li{class: (select == 'firm' ? "active" : '')}
+    = link_to 'Каталог компаний', admin_firms_path
+
+  %li{class: (select == 'task' ? "active" : '')}
+    = link_to 'Группы Задач', admin_task_categories_path
+
+  %li{class: (select == 'tag' ? "active" : '')}
+    = link_to 'Теги', admin_tags_path
+
+  %li{class: (select == 'script' ? "active" : '')}
+    = link_to 'Сценарии Свадеб', admin_scripts_path
+
+  %li{class: (select == 'post' ? "active" : '')}
+    = link_to 'Посты', admin_posts_path
+
+  %li{class: (select == 'complaint' ? "active" : '')}
+    = link_to 'Жалобы', admin_complaints_path
+
+  %li{class: (select == 'community' ? "active" : '')}
+    = link_to 'Клубы', admin_community_categories_path
+
+  %li{class: (select == 'question' ? "active" : '')}
+    = link_to 'Вопрос - ответ', admin_questions_path
+
+  %li{class: (select == "idea_sections" ? "active" : '')}
+    = link_to 'Свадебные идеи', admin_idea_sections_path
+
+  %li{class: (select == 'photo_album' ? "active" : '')}
+    = link_to 'Фотоальбом', admin_photos_path
+
+  %li{class: (select == 'static_pages' ? 'active' : '')}
+    = link_to 'Статические страницы', admin_static_pages_path
+
+  %li{class: (select == 'background_properties' ? 'active' : '')}
+    = link_to 'Настройка фона', admin_background_properties_path
+
+  %li{class: ('active' if 'cities' === controller_name)}
+    = link_to 'Города', admin_cities_path

@@ -1,0 +1,8 @@
+$('.sv-site__create-form').find('.cntrl-group').removeClass('error').find('.help-inline').remove();
+- if (errors = @site.errors).present?
+  - errors.messages.each do |attr, messages|
+    $('.sv-site__create-form').find('.cntrl-group.site_#{attr}').addClass('error').find('#site_#{attr}').after("<span class=\"help-inline\">#{j messages.join('<br/>').html_safe}</span>");
+- elsif params[:first_visit].present?
+  window.location.replace('/');
+- else
+  window.location.replace('#{edit_site_path(@site)}');

@@ -1,0 +1,33 @@
+.modal {
+//  padding: $main-margin-big !important;
+
+  h1 {
+    font-weight: 300;
+    font-size: 22px;
+    color: $main-color;
+    line-height: 1;
+    margin: 0 0 $layout-margin;
+  }
+
+  .upload-poster {
+    @include inline-block;
+    position: relative;
+    + span {
+      margin-left: $main-padding;
+      line-height: $input-height;
+    }
+  }
+
+  .actions {
+    margin-bottom: $modal-padding;
+  }
+
+  .cntrls {
+    input, textarea {
+      width: 100%;
+      margin-bottom: $main-margin-big;
+      box-sizing: border-box;
+      background: #fafafa;
+    }
+  }
+}

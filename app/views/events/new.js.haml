@@ -1,0 +1,4 @@
+$('#edit').html('#{j(render 'events/elements/form', title: 'Добавление новой задачи', wedding_timetables: current_wedding.timetables.reverse, timetable: @timetable)}');
+$.fancybox.open($('#edit'), { fitToView: false, scrolling: 'no' });
+$('select').select2();
+searchTags();

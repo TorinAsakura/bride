@@ -1,0 +1,7 @@
+var sphere = $('#<%= dom_id @sphere%>');
+var deleteLink = sphere.find('a.delete-button');
+<%- if @sphere.deleted?%>
+deleteLink.addClass('deleted');
+<%else%>
+deleteLink.removeClass('deleted');
+<%end%>

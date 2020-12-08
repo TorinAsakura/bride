@@ -1,0 +1,9 @@
+- if user_signed_in?
+  - if current_firm
+    = render 'layouts/clients_site/footer/firm'
+  - else
+    = render 'layouts/clients_site/footer/client'
+- else
+  = link_to(new_user_session_url, class: 'btn btn-ion btn-default btn-extend btn-i be-left') do
+    %i.ion-log-in
+    = t('static.login')

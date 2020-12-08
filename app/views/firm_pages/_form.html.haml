@@ -1,0 +1,104 @@
+- dom_id = "page#{rand(99999)}"
+%div{ 'data-js' => dom_id, style: 'position:relative;' }
+  = simple_form_for firm_page, url: polymorphic_path([@firm, firm_page]),
+                               html: { multipart:  true,
+                                       class: 'sv-firm-page-form',
+                                       'data-js' => 'firm-page-form' } do |f|
+    .sv-firm-page-form-body
+      = f.input :title, label: false, input_html: { class: 'inp-style', placeholder: 'Введите название раздела' }
+      = f.input :body, as: :text, label: false, input_html: { placeholder: 'Что вы хотите написать?', class: 'textarea-style', style: 'min-height: 100px' }, required: true
+      .hide{ 'data-js' => 'firm-page-form-file-wrapper' }
+        = file_field_tag :image, multiple: true, 'data-js' => 'firm-page-images-field'
+
+    .sv-post-form__controls
+      = f.submit 'Сохранить', class: 'link-style sv-l', 'data-js' => 'firm-page-form-submit'
+      = link_to 'Удалить', '#', class: 'link-style-inner sv-l', 'data-js' => 'firm-page-remove-button', style: 'margin-left: 10px;'
+      .sv-firm-page-remove-popup
+        %ul
+          %li Вы действительно хотите удалить этот раздел?
+          %li=link_to 'Удалить', firm_firm_page_path(@firm, firm_page), class: 'link-style', method: :delete
+
+      .sv-post-form__buttons{ 'data-js' => 'firm-page-form-buttons' }
+        .sv-post-form__button.sv-post-form__button_video{ 'data-js' => 'firm-page-video-button' }
+          = image_tag 'sorted/sv-post-attach-video.png'
+        .sv-post-form__button.sv-post-form__button_photo{ 'data-js' => 'firm-page-photo-button' }
+          = image_tag 'sorted/sv-post-attach-photo.png'
+
+    .clear
+
+    .sv-post-form__images{ class: firm_page.images.present? ? '' : 'sv-post-form__images_empty',
+                           'data-js' => 'firm-page-form-images' }
+      - firm_page.images.each do |image|
+        .sv-post-form__image{ id: dom_id(image) }
+          = image_tag image.image
+          .sv-post-form__image-destroy
+            = link_to 'удалить', firm_firm_page_image_path(@firm, firm_page, image), class: 'sv-post-form__image-destroy-btn',
+                                                                                     method: :delete,
+                                                                                     remote: true
+
+    .sv-post-form__videos{ class: firm_page.videos.present? ? '' : 'sv-post-form__videos_empty',
+                           'data-js' => 'firm-page-form-videos' }
+      - firm_page.videos.each do |video|
+        = render 'videos/video', video: video
+      .sv-post-form__video.sv-post-form__video_template{ data: { js: 'video-player', width: 300, height: 150 } }
+        = hidden_field_tag 'firm_page[videos][][content]', nil, 'data-js' => 'firm-page-video-url'
+
+  .sv-post-form__video-popover{ 'data-js' => 'firm-page-form-video-popover' }
+    = form_tag nil, url: '#',
+                    remote: true,
+                    class: 'sv-post-form__video-form',
+                    'data-js' => "firm-page-form-video-form-#{dom_id}" do
+      = text_field_tag :url, nil, class: 'inp-style sv-post-form__video-form-input', 'data-js' => 'firm-page-form-video-input'
+      = submit_tag 'Прикрепить видео-файл', class: 'link-style sv-post-form__video-form-button'
+
+  .sv-post-form__progress.sv-post-form__progress_template
+    .sv-post-form__progress-bar{ 'data-js' => 'progress-bar' }
+
+%script{ id: 'firm-page-image-template', type: 'text/x-tmpl' }
+  {% for (var i=0, file; file=o.files[i]; i++) { %}
+  .template-upload.sv-post-form__image
+    .preview
+      %span.in
+    .cancel.sv-post-form__image-destroy
+      %button Удалить изображение
+  {% } %}
+
+:javascript
+  $(document).ready(function() {
+    $('.sv-firm-page-form').find('textarea').redactor(
+        { buttons:
+            ['formatting', '|', 'bold', 'italic', 'deleted', '|', 'unorderedlist', 'orderedlist', '|', 'table', 'link', '|', 'alignment', '|', 'horizontalrule'],
+          lang: "ru",
+          minHeight: 300
+        }
+      )
+
+    var firmPageForm = new FirmPageForm('[data-js=#{dom_id}]');
+
+    firmPageForm.firmPagePhotoUploader = new AttachmentPhotoUploader({
+      'wrapper': '[data-js=#{dom_id}]',
+      'fileWrapper': '[data-js=firm-page-form-file-wrapper]',
+      'fileField': '[data-js=firm-page-images-field]',
+      'button': '[data-js=firm-page-photo-button]',
+      'images': '[data-js=firm-page-form-images]',
+      'imagesEmptyClass': 'sv-post-form__images_empty',
+      'progressTemplate': '.sv-post-form__progress_template',
+      'progressTemplateClass': 'sv-post-form__progress_template',
+      'image': '.sv-post-form__image',
+      'imageTemplate': 'firm-page-image-template'
+    });
+
+    firmPageForm.firmPageVideoUploader = new AttachmentVideoUploader({
+      'wrapper': '[data-js=#{dom_id}]',
+      'button': '[data-js=firm-page-video-button]',
+      'template': '.sv-post-form__video_template',
+      'templateClass': 'sv-post-form__video_template',
+      'videos': '[data-js=firm-page-form-videos]',
+      'popover': '[data-js=firm-page-form-video-popover]',
+      'popoverInput': '[data-js=firm-page-form-video-input]',
+      'videoForm': '[data-js=firm-page-form-video-form-#{dom_id}]',
+      'videoInput': '[data-js=firm-page-video-url]',
+      'videosEmptyClass': 'sv-post-form__videos_empty',
+      'video': '.sv-post-form__video'
+    });
+  });

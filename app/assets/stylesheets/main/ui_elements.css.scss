@@ -1,0 +1,65 @@
+/*UI Elements*/
+a.link-style-inner {
+  background: #c84563;
+  border: 1px solid #c84563;
+  color: #fff;
+  padding: 2px 21px;
+  @include inline-block();
+}
+
+a.link-style-inner:hover {
+  background: #f1849d;
+  color: #fff;
+  text-decoration: none;
+  padding: 2px 21px;
+}
+
+.link-style_wide-fix {
+  width: 94px;
+  text-align: center;
+}
+
+.link-style_wide-fix-border {
+  width: 92px;
+  text-align: center;
+}
+
+/* Вставлять куда угодно как дополнительный класс прижатия влево */
+.sv-l {
+  float: left;
+}
+
+/* Вставлять куда угодно как дополнительный класс прижатия вправо */
+.sv-r {
+  float: right;
+}
+
+.no-red,
+.yes-green-noclear,
+.yes-green {
+  color: #009944;
+  font-size: 12px;
+  clear: both;
+  padding: 2px 0 0 0;
+}
+
+.no-red {
+  color: #cf0000;
+}
+
+.yes-green-noclear {
+  clear: none;
+  padding: 8px 0 0 10px;
+}
+
+.description-row {
+  color: #b2b2b2;
+  font-size: 12px;
+  width: 280px;
+  margin:  30px 0 0 15px;
+  line-height:  15px;
+}
+
+.cfix {
+  clear: both;
+}

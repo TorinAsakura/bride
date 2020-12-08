@@ -1,0 +1,36 @@
+.sv-admin-subnavigation
+  %ul
+    %li
+      Настройка задач
+    %li
+      = link_to 'Нaстройка сценариев', admin_scripts_path
+
+.sv-admin-content
+  .sv-aside
+    .title-browns
+      .sv-choice.sv-l
+        %ul
+          %li
+            %span.center Категории задач
+      =link_to '', new_admin_task_category_path, remote: true, class: 'sv-task-title-new sv-r'
+    
+    .sv-admin-box.sv-task-categories-box
+      %ol
+        - @task_categories.each do |category|
+          %li
+            .borders
+              .vis
+                .check
+                = link_to category.name, admin_task_category_path(category), remote: true, class: 'name'
+                = link_to '', edit_admin_task_category_path(category), remote: true, class: 'sv-r sv-admin-title-edit'
+  #sv-admin-tasks-list-box
+    - if @task_category.present?
+      = render 'show', tasks: @tasks, task_category: @task_category
+  #sv-admin-task-info-box
+
+-if params[:task_id]
+  :javascript
+    $(document).ready(function () {
+      $.getScript('#{edit_admin_task_path(params[:task_id])}');
+    });     
+

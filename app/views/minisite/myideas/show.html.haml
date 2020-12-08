@@ -1,0 +1,12 @@
+.main-right-content
+  %article
+    %section
+      %h1.page-title= @idea_category.name
+
+      .page-content.sv-minisite-ideas
+        .sv-minisite-ideas__grid
+          - @ideas.each do |user_idea|
+            .sv-minisite-idea
+              .sv-minisite-idea__image
+                = link_to minisite_myidea_idea_path(@idea_section, @idea_category, user_idea.idea) do
+                  = image_tag user_idea.idea.image.image_url :thumb

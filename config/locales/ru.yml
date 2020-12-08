@@ -1,0 +1,747 @@
+ru:
+  static:
+    login: Вход
+    logout: Выйти
+    all: Все
+    back: Назад
+    actions: Действия
+    show_all: Показать все
+    confirm: Подтвердить
+    save: Сохранить
+    edit: Редактировать
+    remove: Удалить
+    reject: Отклонить
+    hide: Скрыть
+    accept: Одобрить
+    resufe: Отказать
+    reaccept: Удалить из одобренных
+
+    are_you_sure: 'Вы уверены?'
+
+  genders:
+    male: Мужской
+    female: Женский
+
+  socials:
+    fromVkontakte: "Загрузка фотографий из Vkontakte"
+    fromInstagram: "Загрузка фотографий из Instagram"
+  wedding_steps:
+    step1: "ШАГ 1. Выберите свою пару"
+    step2: "ШАГ 2. Выберите дату свадьбы"
+    step3: "ШАГ 3. Настройки свадебного сайта"
+  notice:
+    edit_successful: 'Настройки успешно сохранены'
+    social_auth_successful: 'Вы авторизованны! Окно закроется автоматически.'
+  error:
+    few: ! '%{count} ошибки обнаружена при сохранении формы'
+    many: ! '%{count} ошибок обнаружено при сохранении формы'
+    one: ! '%{count} ошибка обнаружена при сохранении формы'
+    other: ! '%{count} ошибки обнаружено при сохранении формы'
+
+  datepicker:
+    button_text: Календарь
+
+  misc:
+    days:
+      one: ! '%{count}&nbsp;день'
+      few: ! '%{count}&nbsp;дня'
+      many: ! '%{count}&nbsp;дней'
+      other: ! '%{count}&nbsp;дня'
+    weeks:
+      one: ! 'одна неделя'
+      few: ! '%{count} недели'
+      many: ! '%{count} недель'
+      other: ! '%{count} недели'
+    months:
+      one: ! 'один месяц'
+      few: ! '%{count} месяца'
+      many: ! '%{count} месяцев'
+      other: ! '%{count} месяца'
+    years:
+      one: ! 'один год'
+      few: ! '%{count} года'
+      many: ! '%{count} лет'
+      other: ! '%{count} лет'
+  time:
+      formats:
+        default: "%d.%m.%Y"
+        long: "%B %d %Y"
+        short: "%b %d %H:%M"
+        wed_date: '%d %b %Y'
+        long_time: "%H:%M:%S"
+        short_time: "%H:%M"
+        full: "%d %B %Y"
+        comment: "%d %b %Y в %H:%M"
+        full_comment: "%H:%M %d %B %Y"
+  date:
+    formats:
+      default: "%d.%m.%Y"
+      long: "%B %d %Y"
+      short: "%b %d"
+      wed_date: '%d %b %Y'
+      full: "%d %B %Y"
+      comment: "%d %b %Y в %H:%M"
+      full_comment: "%H:%M %d %B %Y"
+    month_names:
+      - ~
+      - Января
+      - Февраля
+      - Марта
+      - Апреля
+      - Мая
+      - Июня
+      - Июля
+      - Августа
+      - Сентября
+      - Октября
+      - Ноября
+      - Декабря
+    abbr_month_names:
+      - ~
+      - Янв
+      - Фев
+      - Мар
+      - Апр
+      - Май
+      - Июн
+      - Июл
+      - Авг
+      - Сен
+      - Окт
+      - Нояб
+      - Дек
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        few: около %{count} часов
+        many: около %{count} часов
+        one: около %{count} часа
+        other: около %{count} часа
+      about_x_months:
+        few: около %{count} месяцев
+        many: около %{count} месяцев
+        one: около %{count} месяца
+        other: около %{count} месяца
+      about_x_years:
+        few: около %{count} лет
+        many: около %{count} лет
+        one: около %{count} года
+        other: около %{count} лет
+      almost_x_years:
+        one: почти 1 год
+        few: почти %{count} года
+        many: почти %{count} лет
+        other: почти %{count} лет
+      half_a_minute: меньше минуты
+      less_than_x_minutes:
+        few: меньше %{count} минут
+        many: меньше %{count} минут
+        one: меньше %{count} минуты
+        other: меньше %{count} минуты
+      less_than_x_seconds:
+        few: меньше %{count} секунд
+        many: меньше %{count} секунд
+        one: меньше %{count} секунды
+        other: меньше %{count} секунды
+      over_x_years:
+        few: больше %{count} лет
+        many: больше %{count} лет
+        one: больше %{count} года
+        other: больше %{count} лет
+      x_days:
+        few: ! '%{count} дня'
+        many: ! '%{count} дней'
+        one: ! '%{count} день'
+        other: ! '%{count} дня'
+      x_minutes:
+        few: ! '%{count} минуты'
+        many: ! '%{count} минут'
+        one: ! '%{count} минуту'
+        other: ! '%{count} минуты'
+      x_months:
+        few: ! '%{count} месяца'
+        many: ! '%{count} месяцев'
+        one: ! '%{count} месяц'
+        other: ! '%{count} месяца'
+      x_seconds:
+        few: ! '%{count} секунды'
+        many: ! '%{count} секунд'
+        one: ! '%{count} секундy'
+        other: ! '%{count} секунды'
+  simple_form:
+    labels:
+      address:
+        name: 'Наименование'
+        address: 'Адрес'
+        phone: 'Телефон'
+        contact_name: 'Контактное лицо'
+        city_firm_id: "Город"
+      user:
+        name: 'Имя'
+        surname: 'Фамилия'
+        email: 'Е-майл'
+        login: 'Логин'
+        password: 'Пароль'
+        password_confirmation: 'Повторить пароль'
+        remember_me: 'запомнить меня'
+        gender: 'Пол'
+        birthday: "Дата рождения"
+        phone: "Телефон"
+        vk: "Вконтакте"
+        city: "Город"
+        read: "Я ознакомился"
+        text_status: "Статус"
+      firm_service:
+        name: "Наименование"
+        cost: "Минимальная стоимость услуги"
+        unit: "Единица измерения"
+      firm:
+        name: "Наименование компании"
+        extended_name: "Расширенное название"
+        email: "Email"
+        address: "Адрес"
+        city_id: "Город"
+        region: "Регион"
+        country: "Страна"
+        logo: "Логотип"
+        phone: "Телефон"
+        contact_name: "Контактное лицо"
+        skype: "Аккаунт в skype"
+        website: "Адрес сайта"
+        firm_catalogs: ""
+        description: "Описание"
+        status: "Статус"
+        administrator: "Администратор"
+        user_id: "Администратор"
+        moderators: "Модераторы"
+        moderator_ids: "Модераторы"
+        text_status: "Статус"
+        base_sphere_id: "Основная категория"
+      city_firm:
+        addresses:
+          name: 'Наименование'
+          address: 'Адрес'
+        address:
+          name: 'Наименование'
+          address: 'Адрес'
+          phone: 'Телефон'
+          contact_name: 'Контактное лицо'
+          city_firm_id: "Город"
+      banner:
+        path: "Баннер"
+      pp:
+        surname: 'Фамилия'
+        name: 'Имя'
+        middlename: 'Отчество'
+        passport: 'Паспорт (серия номер)'
+        passport_issued: 'Кем выдан'
+      ie:
+        brand: 'Юридическое название'
+        inn: 'ИНН'
+        ogrnip: 'ОГРНИП'
+        legal_address: 'Адрес регистрации'
+        bank: 'Банк'
+        bik: 'БИК'
+        rs: 'р/с'
+        ks: 'к/с'
+      company:
+        brand: 'Юридическое название'
+        inn: 'ИНН'
+        ogrn: 'ОГРН'
+        legal_address: 'Юридический адрес'
+        bank: 'Банк'
+        bik: 'БИК'
+        rs: 'р/с'
+        ks: 'к/с'
+      tag_category:
+        name: "Название категории"
+      tag:
+        name: "Название тега"
+        tag_category: "Категория"
+        description: "Описание"
+      task_category:
+        name: "Название категории"
+      task:
+        name: "Название задачи"
+        description: "Описание"
+        firm_catalog: "Раздел фирм"
+        task_category: "Категория"
+        type_task: "Тип задачи"
+        tags: "Теги статей"
+        tag_ids: "Теги"
+        depend_task_checked: "Зависит от"
+      script_category:
+        name: "Название категории"
+      script:
+        name: "Название сценария"
+        description: "Описание"
+        weeks: "Кол-во недель"
+        script_category: "Категория"
+      plan:
+        tasks: "Задачи недели"
+        description: "Описание"
+      message:
+        subject: "Тема"
+        body: "Cообщение"
+      media_content:
+        title: "Заголовок"
+        description: "Описание"
+        tag_ids: "Теги"
+      album:
+        name: "Название альбома"
+        description: "Описание"
+      photo:
+        description: "Описание"
+      event:
+        task_category: "Категория"
+        name: "Название"
+        description: "Описание"
+      post:
+        title: 'Заголовок'
+        body: 'Текст'
+        tags: 'Теги'
+        tag_ids: 'Теги'
+        recommend: 'Отправить статью на проверку'
+      wedding:
+        script: "Сценарий свадьбы"
+      wishlist:
+        name: "Название"
+        description: "Описание"
+        wish: "Мы были бы рады получить/Пожалуйста не дарите нам"
+        url: "Ссылка"
+      question:
+        body: "Описание вопрос"
+        user_id: 'Пользователь'
+        answer_id: 'Лучший ответ'
+        title: "Вопрос"
+        question_category_id: "Категория"
+        question_category: "Категория"
+      answer:
+        body: "Ответ"
+      guestbook:
+        name: "Имя"
+        content: "Сообщение"
+      community:
+        name: "Название"
+      question_category:
+        name: "Название категории"
+        community: "Сообщество"
+      admin_photo:
+        path: "Фотография"
+        description: "Описание"
+        tags: "Теги"
+      idea_category:
+        common_description: "Общее для всех описание"
+        common_tags:  "Общие для всех теги"
+        common_colors: "Общие для всех цвета"
+        common_name: "Общие для всех названия"
+      idea_idea:
+        tags: "Теги"
+        colors: "Цвета"
+        name: "Название"
+        description: "Описание"
+#    hints:
+#      user:
+#        username: 'User name to sign in.'
+#        password: 'No special characters, please.'
+#    placeholders:
+#      user:
+#        username: 'Your username'
+#        password: '****'
+  helpers:
+    submit:
+      user:
+        create: 'Создать'
+        update: 'Сохранить'
+    label:
+      plan:
+        tasks_selected: "Каталог задач"
+        task_ids: "Задачи недели"
+      user:
+        read: "Я ознакомился"
+      task:
+        tags: "Тэги"
+        depend_task_checked: "Зависит от"
+    subscription_services:
+      periods:
+        days: Дни
+        weeks: Недели
+        months: Месяцы
+        years: Годы
+  simply: "Простая"
+  with_firm: "С фирмой"
+  with_service: "С сервисом"
+  advice: "Совет"
+  country: "Страна"
+  region: "Регион"
+  city: "Город"
+  planning: "Планирование"
+  week: "Неделя"
+  day: "День"
+  wedding_day: "День свадьбы"
+  second_day: "Вт.день"
+  honeymoon: "Мед.месяц"
+
+  User:     "Пользователь"
+  Firm:     "Фирма"
+  Community: "Сообщество"
+  Photo:    "Фотография"
+  Post:     "Статья"
+  UserComment:  "Комментарий"
+  Comment:  "Комментарий"
+  Audio:    "Аудио"
+  Video:    "Видео"
+  MediaContent: "Медиа-контент"
+  request_moderator: "Хочет стать модератором"
+  moderator: "Модератор"
+  Competition: "Конкурс"
+
+  i18n:
+    transliterate:
+      rule:
+        Ґ: "G"
+        Ё: "YO"
+        Є: "E"
+        Ї: "YI"
+        І: "I"
+        А: "A"
+        Б: "B"
+        В: "V"
+        Г: "G"
+        Д: "D"
+        Е: "E"
+        Ж: "ZH"
+        З: "Z"
+        И: "I"
+        Й: "Y"
+        К: "K"
+        Л: "L"
+        М: "M"
+        Н: "N"
+        О: "O"
+        П: "P"
+        Р: "R"
+        С: "S"
+        Т: "T"
+        У: "U"
+        Ф: "F"
+        Х: "H"
+        Ц: "TS"
+        Ч: "CH"
+        Ш: "SH"
+        Щ: "SCH"
+        Ъ: "'"
+        Ы: "Y"
+        Ь: ""
+        Э: "E"
+        Ю: "YU"
+        Я: "YA"
+        і: "i"
+        ґ: "g"
+        ё: "yo"
+        №: "#"
+        є: "e"
+        ї: "yi"
+        а: "a"
+        б: "b"
+        в: "v"
+        г: "g"
+        д: "d"
+        е: "e"
+        ж: "zh"
+        з: "z"
+        и: "i"
+        й: "y"
+        к: "k"
+        л: "l"
+        м: "m"
+        н: "n"
+        о: "o"
+        п: "p"
+        р: "r"
+        с: "s"
+        т: "t"
+        у: "u"
+        ф: "f"
+        х: "h"
+        ц: "ts"
+        ч: "ch"
+        ш: "sh"
+        щ: "sch"
+        ъ: "'"
+        ы: "y"
+        ь: ""
+        э: "e"
+        ю: "yu"
+        я: "ya"
+  firm_page_names:
+    detail: "О нас"
+    journal: "Журнал"
+    albums: "Фотографии"
+    videos: "Видеозаписи"
+    comments: "Отзывы"
+    addresses: "Контакты"
+    firm-services: "Услуги компании"
+  client_info:
+    marital_status: "Семейное положение"
+    about: "О себе"
+    children: "Дети"
+    alcohol_attitude: "Отношение к алкоголю"
+    smoking_attitude: "Отношение к курению"
+    thing_in_life: "Главное в жизни"
+    thing_in_humans: "Главное в людях"
+    favorite_music: "Любимая музыка"
+    favorite_films: "Любимые фильмы"
+    favorite_shows: "Любимые телешоу"
+    favorite_books: "Любимые книги"
+    favorite_games: "Любимые игры"
+
+  friendship:
+    notification:
+      title: друзья
+      common_friends: Общие друзья %{count}
+
+  wedding_invite:
+    notification:
+      title: предложения
+
+  layouts:
+    sv-search-box:
+      idea: Идеи
+      article: Статьи
+      people: Люди
+      company: Компании
+    header:
+      messages:
+        messages: сообщения
+        title: Сообщения
+      client:
+        minisite:
+          title: 'Мини-сайт'
+          site: 'Мини-сайт'
+          create_site: 'Создать мини-сайт'
+        friends:
+          title: друзья
+          friends: Заявки в друзья
+          common_friends: Общие друзья
+          invited: Предложения руки и сердца
+        settings:
+          title: настройки
+          edit: Настройки аккаунта
+          site: 'Мини-сайт'
+          create_site: 'Создать мини-сайт'
+          privacy: Конфиденциальность
+          rules: Правила сайта
+          help: Помощь
+          logout: Выйти
+
+      firm:
+        friends:
+          title: Наши клиенты
+        money:
+          money: баланс
+          title: Ваш балланс
+          balance: Пополнить баланс
+          statistic: Статистика
+        settings:
+          title: настройки
+          edit: Настройки аккаунта
+          privacy: Конфиденциальность
+          contract: Договор оферты
+          help: Помощь
+          logout: Выйти
+    clients_site:
+      navigation:
+        home: Главная
+        ideas: Свадебные идеи
+        wedding_calc: Свадебный калькулятор
+        guests: Список гостей <span class='badge'>%{count}</span>
+        seating_plan: Рассадка гостей
+        wishlists: Список подарков
+        events: План мероприятий
+
+      sidebar:
+        menu:
+          ideas: Свадебные идеи
+          wedding_calc: Свадебный калькулятор
+          guests: Список гостей
+          seating_plan: Рассадка гостей
+          wishlists: Список подарков
+          events: План мероприятий
+        access:
+          title: Авторизация
+          info: Доступ запрещен, введите гостевой пароль
+          password: Пароль
+          submit: Войти
+
+      header:
+        before: До свадьбы
+        after: Прошло со свадьбы
+        wedding_date: Дата свадьбы
+      footer:
+        search:
+          idea:
+            name: Идеи
+            placeholder: Красное, платье, торт
+          article:
+            name: Статьи
+            placeholder: Название, фраза
+          people:
+            name: Люди
+            placeholder: Имя пользователя
+          company:
+            name: Компании
+            placeholder: Название компании
+        messages:
+          messages: сообщения
+          all_messages: Прочесть все сообщения
+          title: У вас %{count} новых сообщений
+
+        client:
+          settings:
+            title: настройки
+            edit: Настройки аккаунта
+            site: 'Мини-сайт'
+            create_site: 'Создать мини-сайт'
+            logout: Выйти
+          friends:
+            friends: Заявки в друзья
+            invited: Предложения руки и сердца
+
+        firm:
+          clients:
+            clients: Наши клиенты
+          money:
+            title: Ваш балланс
+            balance: Пополнить баланс
+            statistic: Статистика
+          settings:
+            edit: Настройки аккаунта
+            logout: Выйти
+
+  firms:
+    control_panel:
+      business_card_settings_form:
+        title: Визитка в разных режимах
+        description: В&nbsp;данном разделе&nbsp;Вы можете настроить отображение &laquo;Визитки&raquo; вашей компании в
+                     каталоге компаний на&nbsp;сайте Svadba. org. Именно так будут видеть информацию о&nbsp;вашей
+                     компании молодожены которые ищут тех, кто сможет удовлетворить потребности при
+                     организации свадьбы.
+        edit: Настроить визитку
+        pro: '%{action} Pro аккаунт'
+        cutaways:
+          vip: VIP размещение
+          pro: Pro аккаунт
+          base: По умолчанию
+
+  firm_services:
+    firm_service:
+      notification:
+        name: Введите название услуги или товара
+        cost: 'Введите стоимость, например: "от 100" или "1000"'
+        unit: 'Введите единицу измерения услуги, например: "руб. в час" или "$ за штуку"'
+
+  purse_payments:
+    scopes:
+      all: Все
+      deposit: Приходы
+      withdrawal: Расходы
+
+  cities:
+    wedding_cities_filters:
+      all_countries: Все
+    side_city_select:
+      select_all: Выбрать все города
+
+  guests:
+    edit:
+      title: Список гостей
+      to_guests: Перейти к полному списку
+      role: Роль
+      name: Имя
+      email: Электроная почта
+      gender: Пол
+
+  static_pages:
+    page_404:
+      title: Страница не найдена
+      head: Всё пропало!
+      text: Страницы, которую Вы искали, не существует или она была удалена
+
+  minisite:
+    minisites:
+      about:
+        title: О нас
+      page_404:
+        title: Страница не найдена
+        head: Нееееееееет!
+        text: Страницы, которую Вы искали, не существует или она была удалена
+    guests:
+      index:
+        title: Список гостей
+        groom_bride: Жених и Невеста
+        groom_guests: Гости жениха
+        bride_guests: Гости невесты
+        all: Все гости
+        fields:
+          id: '№'
+          name: Имя
+          email: Электроная почта
+          gender: Пол
+          dowry: Выкуп
+          ceremony: Царемония
+          banquet: Банкет
+        statuses:
+          'yes': Да
+          'no': Нет
+      add:
+        add_guest: Добавить гостя
+    seating_plans:
+      index:
+        title: 'Сервис &laquo;Рассадка гостей&raquo;'
+
+    albums:
+      albums:
+        title: Фотографии
+        show_all: Показать все %{albums}
+        last_photos: Последние загруженные фотографии
+        albums:
+          one:   альбом
+          few:   '%{count} альбома'
+          many:  '%{count} альбомов'
+          other: '%{count} альбомы'
+      photos:
+        no_photos: 'Пока нету фотографий в альбоме "%{album}"'
+        photos_empty: 'Пока нету фотографий'
+        infinitescroll:
+          finish: "<em>Поздравляем, все фотографии загружены.</em>"
+          load: "<em>Загрузка следующих фотографий ...</em>"
+
+    my_ideas:
+      ideas:
+        index:
+          title: Свадебные идеи
+          all_ideas: Все выбранные идеи
+      categories:
+        show:
+          title: "Свадебные идеи - %{category}"
+          add: Выбрать еще идеи
+
+  comments:
+    bs3:
+      wall:
+        header:
+          title: Стена
+  bonus:
+    service:
+      add_sphere:
+        item:
+          pay: Добавить
+      add_city:
+        items:
+          pay: Добавить
+    certificates:
+      form:
+        title: Если у вас есть промо-код, введите его в поле ниже и средства зачислятся на ваш счет.
+  messages:
+    title: сообщения

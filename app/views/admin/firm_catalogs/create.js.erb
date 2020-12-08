@@ -1,0 +1,13 @@
+var newFirmCatalog = "<%= j expandable_tree(@firm_catalog, {namespace: :admin, title: :name, render_module: RenderSortableTreeFirmCatalogHelper})%>";
+<%- if @parent %>
+var nodeItem = $('#node_<%= dom_id @parent%>');
+var nodeTree = nodeItem.find('ol.sortable_tree');
+if (nodeTree.length > 0) {
+    nodeTree.append(newFirmCatalog);
+} else {
+    nodeItem.append('<ol class=\"sortable_tree\">'+newFirmCatalog+'<\/ol>')
+}
+<%-else%>
+$('#sv-firm-catalogs').append(newFirmCatalog);
+<%-end%>
+$.fancybox.close();

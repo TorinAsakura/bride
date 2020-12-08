@@ -1,0 +1,9 @@
+.wedding-appearance
+  .wapp-steplast
+    = simple_form_for @client do |f|
+      = label_tag 'Вы можете загрузить свой фон. Используйте большие изображения'
+      = f.input :bg_remote_url, as: :file, label:'Загрузить', id: 'load', label_html:{ class: 'wapp-btn link-style input-big'}
+  .label-img
+    = label_tag 'Текущее изображение:'
+    = image_tag 'caps/anna.png', alt:"new-image"
+

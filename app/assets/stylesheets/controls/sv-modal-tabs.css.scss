@@ -1,0 +1,30 @@
+ul.sv-modal-tabs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+ul.sv-modal-tabs li, .sv-album-photos-form .title_nobg {
+  margin: 0 28px 0 0;
+  padding: 0;
+  display: block;
+  float: left;
+  font-size: 22px;
+  line-height: 1em;
+}
+
+.sv-album-photos-form .title_nobg {
+  float: none;
+  margin-bottom: 28px;
+}
+
+ul.sv-modal-tabs li a {
+  color: #b2b2b2;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+ul.sv-modal-tabs li.active a {
+  color: #c84563;
+}

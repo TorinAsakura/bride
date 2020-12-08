@@ -1,0 +1,19 @@
+#firm-control-panel-monetize-purse.firm-settings{ style: 'display:none;' }
+  .sv-article
+    = render 'firms/control_panel/monetize/balance_top', without_monetize: true
+
+    .title_nobg Пополнение баланса
+    -# TODO add change payment system
+    - payment = Payment::InterkassaDeposit.new
+    .sv-profile-site{id: payment.payment_name}
+      = render 'payment/interkassa_deposits/form', payment: payment
+    .sv-profile-site{id: "#{payment.payment_name}_info"}
+      .logo
+      .pay-systems
+        - %w(visa mastercard yandex webmoney alfabank euroset sberbank).each do |p|
+          = image_tag("payments/interkassa/pay_systems/#{p}.jpg")
+  .sv-article
+    .title_nobg Пополнение с помощью промо-кода
+    - certificate = Bonus::Certificate.new
+    .sv-profile-site{id: dom_id(certificate)}
+      = render 'bonus/certificates/form', certificate: certificate

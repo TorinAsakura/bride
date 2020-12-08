@@ -1,0 +1,10 @@
+#sv-search-minisites-result.sv-search-result
+  = render sites
+
+.sv-minisites__nav.hide
+  = paginate sites
+
+:javascript
+  $(document).ready(function () {
+    infinitescrollMiniSites();
+  }); 

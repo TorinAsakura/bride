@@ -1,0 +1,5 @@
+.favorite{ id: "favorite_#{favoriteable.class.to_s.downcase}_#{favoriteable.id}" }
+  - if favorite = favoriteable.favorites.where(user_id: current_user.id).first
+    = link_to "Убрать из избранного", favorite_path(favorite, resource_type: favoriteable.class.name, resource_id: favoriteable.id), { method: :delete, remote: true }
+  - else
+    = link_to "Добавить в избранное", favorites_path(favorite, resource_type: favoriteable.class.name, resource_id: favoriteable.id), { method: :post, remote: true }

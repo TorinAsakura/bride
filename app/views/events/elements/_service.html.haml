@@ -1,0 +1,20 @@
+- if current_client.site.blank?
+  %p Пожалуйста, #{link_to 'создайте мини-сайт', new_site_path}, чтобы пользоваться сервисами.
+- else
+  #sv-event__service
+    - site = current_client.site
+    - case service
+    - when :service_1
+      = render 'wedding_calcs/edit', wedding_calc: WeddingCalc.where(site_id: site.id).first_or_create
+    - when :service_2
+      = render 'guests/edit', site: site, guests: site.guests
+    - when :service_3
+      = link_to 'Спланировать рассадку', site_edit_seating_plan_path(current_client.site)
+    - when :service_4
+      - white_list = WishlistDecorator.decorate_collection(site.wishlists.includes(:image).white_list.created_asc)
+      - black_list = WishlistDecorator.decorate_collection(site.wishlists.black_list.created_asc)
+      = render 'wishlists/edit', site: site, white_list: white_list, black_list: black_list
+    - when :service_5
+      = render 'programms/edit', site: site, programs: site.programms.wedding_day, second_day: false
+    - when :service_6
+      = render 'programms/edit', site: site, programs: site.programms.second_day, second_day: true

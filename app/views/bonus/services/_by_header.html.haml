@@ -1,0 +1,1 @@
+= %w(pro vip color).map{|identifier| (service = Bonus::Service.find_by_slug(identifier)).present? ? service.decorate.by_header : ''}.join.html_safe

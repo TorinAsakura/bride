@@ -1,0 +1,42 @@
+.sv-aside.mini-site-edit.margintopotstp
+  .sv-navigation_all
+    .title.clearfix
+      %span Профиль пользователя
+      %i.arr
+    %ul
+      %li= link_to 'Мой профиль', edit_client_path(client, anchor: 'base-settings'),
+                                  class: 'client-control-panel-link base-settings',
+                                  'data-part' => 'client-control-panel-base-settings'
+      %li= link_to 'Мой аккаунт', edit_client_path(client, anchor: 'main-settings'),
+                                  class: 'client-control-panel-link main-settings',
+                                  'data-part' => 'client-control-panel-main-settings'
+      %li= link_to 'Моя свадьба', edit_client_path(client, anchor: 'wedding-settings'),
+                                  class: 'client-control-panel-link wedding-settings',
+                                  'data-part' => 'client-control-panel-wedding-settings'
+      - if site.blank? || site.new_record?
+        %li= link_to 'Мой Свадебный сайт', new_site_path, class: 'client-control-panel-link'
+      - else
+        %li{class: tab_active?(edit_site_path(site))}
+          = link_to 'Мой Свадебный сайт', edit_site_path(site), class: 'mini-site-control-panel-link'
+  - if site.present? && !site.new_record?
+    .sv-navigation_all
+      .title.clearfix
+        %span Мини-сайт
+        %i.arr
+      %ul.sv-firm-pages-list
+        - unless pages.blank?
+          - pages.each do |page|
+            - unless page.name == 'albums'
+              = render partial: 'clients/shared/link_with_controls', locals: {title: page.title, url: edit_site_page_path(site, page)}
+
+        - unless Rails.configuration.skip_minisite_services
+          = render 'clients/shared/link_with_controls', title: 'Cвадебный калькулятор', url: site_edit_wedding_calc_path(site), js: 'site_edit_wedding_calc_path'
+        - unless Rails.configuration.skip_minisite_services
+          = render 'clients/shared/link_with_controls', title: 'Список подарков', url: site_edit_wish_list_path(site), js: 'site_edit_wish_list_path'
+        -#%li.dropdown-menu-activate{class: ('active' if [minisite_plan_of_measures_path, minisite_plan_of_measures_path, minisite_wedding_program_path, minisite_second_day_program_path].include? request.fullpath )}
+        -#  = link_to 'План мероприятий', '#', class: tab_active?(minisite_plan_of_measures_path(type: :man)) || tab_active?(minisite_plan_of_measures_path(type: :woman)) || action?('seating_plan') || action?('second_day_program')
+        -#  %ul.dropdown-menu-active{class: tab_active?(minisite_plan_of_measures_path(type: :man)) || tab_active?(minisite_plan_of_measures_path(type: :woman)) || action?('seating_plan') || action?('second_day_program')}
+        -#    %li= link_to 'Мальчишник', minisite_plan_of_measures_path(type: :man), class: tab_active?(minisite_plan_of_measures_path(type: :man))
+        -#    %li= link_to 'Девишник', minisite_plan_of_measures_path(type: :woman), class: tab_active?(minisite_plan_of_measures_path(type: :woman))
+        -#    %li= render partial: 'clients/shared/link_with_controls', locals: {title: 'Сервис День свадьбы', url:  site_edit_wedding_program_path(site) , js: 'site_edit_wedding_program_path'}
+        -#    %li= render partial: 'clients/shared/link_with_controls', locals: {title: 'Сервис День после свадьбы', url:  site_edit_second_day_program_path(site), js: 'site_edit_second_day_program_path'}

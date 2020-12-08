@@ -1,0 +1,20 @@
+- if defined?(guest_counter) && guest.eql?(@guest)
+  = render 'form', guest: guest
+- else
+  .row[guest]
+    - guest = guest.decorate
+    .col-xs-6
+      - for_moderator_of(@site) do
+        .btn-group
+          %i.icon-up-dir
+          %i.icon-down-dir
+      .btn-group= guest.gender_icon
+      .btn-group
+        .name= guest.name
+        - for_moderator_of(@site) do
+          .actions
+            = guest.edit_link
+            = guest.remove_link(true)
+    .col-xs-6.statuses
+      - Guest::STATUSES.each do |status|
+        .btn-group.confirm-status.col-xs-4= guest.status(status, for_moderator_of(@site))

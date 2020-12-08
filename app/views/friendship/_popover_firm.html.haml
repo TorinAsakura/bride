@@ -1,0 +1,15 @@
+.sv-friendship-popover{ 'data-js' => "friend-action-#{user.id}" }
+  = link_to 'Я клиент', '#', class: 'link-style-active', 'data-js' => 'remove-friendship'
+  .hide{ 'data-js' => 'friendship-popover' }
+    Вы действительно хотите перестать числиться клиентом этой компании?
+    = link_to 'Уйти из клиентов', remove_friendship_path(user.id), class: 'link-style', remote: true, method: :post
+:javascript
+  $(document).ready(function () {
+    $('[data-js=remove-friendship]').on('click', function (e) {
+      e.preventDefault();
+    }).popover({
+      'html': true,
+      'placement': 'bottom',
+      'content': $('[data-js=friendship-popover]').html()
+    });
+  });

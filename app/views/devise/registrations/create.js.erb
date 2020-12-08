@@ -1,0 +1,26 @@
+<%- if (errors = resource.errors).present?%>
+    <%- if resource.is_a?(FirmRegistrationForm)%>
+      var form = $('.new_firm');
+    <%-else-%>
+      var form = $('.new_client');
+    <%-end-%>
+    <%- errors.messages.each do |field, error_msg|%>
+      <%- if field.to_s.eql?('firm_catalog_ids')%>
+        var userField = form.find('.firm_catalog_id');
+      <%-else %>
+        var userField = form.find('.user_<%= field%>');
+      <%-end %>
+      $(".<%= field%>").on('mouseover', function(){
+          userField.find(".help-inline").remove();
+          userField.removeClass('error');
+      });
+
+      if(userField.hasClass('error')){
+          userField.removeClass('error');
+          userField.find('.help-inline').remove();
+      }
+      userField.addClass('error').append("<div class=\"help-inline\"><%= j error_msg.first%></div>");
+    <%-end%>
+<%-else%>
+$.fancybox.close();
+<%-end%>

@@ -1,0 +1,2 @@
+class PollTmpImagesController < ApplicationController
+end

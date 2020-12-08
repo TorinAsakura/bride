@@ -1,0 +1,29 @@
+.sv-admin-content
+  .sv-aside
+    .title-browns
+      .sv-choice.sv-l
+        %ul
+          %li
+            %span.center Категории клубов
+      =link_to '', new_admin_community_category_path, remote: true, class: 'sv-task-title-new sv-r'
+    
+    .sv-admin-box.sv-community-categories-box
+      %ol#sv-admin-community-categories__list{'data-url' => order_categories_admin_community_categories_path}
+        - @community_categories.each do |category|
+          %li{'data-id' => category.id}
+            .borders
+              .vis
+                .check
+                = link_to category.title, admin_community_category_path(category), remote: true, class: 'name'
+                = link_to '', edit_admin_community_category_path(category), remote: true, class: 'sv-r sv-admin-title-edit'
+
+  #sv-admin-communities-list-box
+    - if @community_category.present?
+      = render 'show', communities: @communities, community_category: @community_category
+  #sv-admin-community-info-box
+
+-if params[:community_id]
+  :javascript
+    $(document).ready(function () {
+      $.getScript('#{edit_admin_community_path(params[:commuity_id])}');
+    });     

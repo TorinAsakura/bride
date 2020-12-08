@@ -1,0 +1,2 @@
+$('#payments-list').html('#{j(render partial: 'purse_payment', collection: @purse_payments, as: :purse_payment)}')
+$('#payments-paginate').html('#{j(paginate @purse_payments, window: 3, outer_window: 3)}')

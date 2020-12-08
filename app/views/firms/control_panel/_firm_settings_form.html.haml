@@ -1,0 +1,47 @@
+#firm-control-panel-company-settings.firm-settings{ style: 'display:none;' }
+  = simple_form_for @firm, html: { class: "form-horizontal background-form" } do |f|
+    = hidden_field_tag :anchor, 'company-settings'
+
+    = render "settings/notice_block"
+    .sv-article
+      .title_nobg Основные настройки
+      .sv-firm-name-and-description
+        .cap_company
+          = f.label :name, 'Название компании:'
+          = f.text_field :name, class: 'inp-style-long-supr inp-style', required: true
+          %span Например &laquo;Конкор-Оптика&raquo;
+        .cap_company
+          = f.label :extended_name, 'Специализация:'
+          = f.text_field :extended_name, class: 'inp-style-long-supr inp-style'
+          %span Например &laquo;Сеть салонов оптики&raquo;
+        .cap_company
+          = f.label :description, 'Кратко о компании:'
+          = f.input_field :description, as: :text, class: 'textarea-style autoResize', maxlength: 2000, rows: 4
+
+      .title_nobg Категория в каталоге
+      .cap_company.sv-firm-services-selector
+        .spheres-list= render 'firms/control_panel/firm_spheres_form', f: f
+        .add-sphere= render 'spheres/add_firm_catalog', firm: @firm
+
+      .title_nobg.margintopotstp Оформление сайта
+      .firm-site-background.form-inline
+        .background-form-row
+          = f.label :background_image
+          = f.input :background_image_id, as: :hidden, label: false
+          = link_to('Выбрать из шаблона', '#', class: 'select-background-image link-style',
+            data: {input: '#firm_background_image_id',
+            url: select_background_properties_path(type: 'backgrounds', format: :json),
+            title: 'Выбор фонового изображения для сайта вашей компании',
+            text: 'Выберите один из предложеных шаблонов фона для сайта вашей компании:'})
+        - if (background_image = @firm.background_image).present?
+          - data = {tag: 'body', style: background_image.decorate.style}
+        = link_to('#', class: "preview-background#{' hidden' if data.blank?}", data: data.presence) do
+          %i.icon-search
+
+      .cap_company.finish_button
+        = f.submit 'Сохранить', class: "link-style sv-l"
+        .sv-firm-settings-saved Сохранено
+
+  - if !@firm.has_spheres?
+    = simple_form_for([@firm, @firm.spheres.build], remote: true) do |f|
+      = f.input :firm_catalog_id, as: :hidden
